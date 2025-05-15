@@ -3,7 +3,7 @@
 const DB_INFOS = [
 	'host'     => 'localhost',
 	'port'     => '3306',
-	'dbname'   => 'testfloma',
+	'dbname'   => 'sys',
 	'username' => 'dev',
 	'password' => 'devdevdev'
 ];
