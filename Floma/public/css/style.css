@@ -1,6 +1,58 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
     /* Colors */
     --primary-color: #005BB5;
-    --secondary-color: #FF6F20;
+    --dark-blue-color: #1E3A8A;
+    --pink-color: #EB4671;
+    --dark-grey-color: #424656;
     --background-color: #FAF5F7;
+
+    /* Fonts size*/
+    --title-size: 1.5rem;
+    --subtitle-size: 1.25rem;
+    --text-size: 1rem;
+    --small-text-size: 0.75rem;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Fromat Intermédiaire (768px) */
+@media (width >= 48rem) {
+    :root {
+        --title-size: 1.75rem;
+        --subtitle-size: 1.375rem;
+        --text-size: 1.063rem;
+        --small-text-size: 0.813rem;
+    }
+}
+
+/* Format Ordinateur/Tablette (1440px) */
+@media (width >= 90rem) {
+    :root {
+        --title-size: 2rem;
+        --subtitle-size: 1.625rem;
+        --text-size: 1.125rem;
+        --small-text-size: 0.875rem;
+    }
+}
+
+h1 {
+    font-family: 'Raleway', sans-serif;
+    font-size: var(--title-size);
+    font-weight: bold;
+    color: black;
+}
+
+header {
+    background-color: var(--dark-blue-color);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    width: 100%;
 }
