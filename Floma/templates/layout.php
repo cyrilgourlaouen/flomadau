@@ -7,11 +7,11 @@
 		<link rel="stylesheet" href="/css/layout.css">
 		<title>Floma</title>
 	</head>
-	<body>
 		<?php include '_header.php'; ?>
+	<body>
 		<main>
 			<?php require $templatePath ?>
 		</main>
-		<?php include '_footer.php'; ?>
 	</body>
+	<?php include '_footer.php'; ?>
 </html>

@@ -67,3 +67,76 @@ header {
     text-align: center;
     width: 100%;
 }
+
+/* Footer format téléphone */
+@media (width <= 26.75rem) {
+    footer {
+        background-color: #424656;
+        padding: 1.25rem;
+    }
+
+    footer div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.938rem;
+    }
+
+    footer div nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.625rem;
+    }
+
+    footer div nav img {
+        width: 50%;
+        max-width: 15.625rem;
+    }
+
+    footer div nav p {
+        margin-top: 0;
+        color: #FFFFFF;
+
+    }
+
+    footer div nav :any-link {
+        color: #FFFFFF;
+    }
+}
+
+/* Footer format tablette */
+@media (width > 26.75rem) {
+    footer {
+        background-color: #424656;
+        padding: 2.188rem;
+    }
+
+    footer div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.938rem;
+    }
+
+    footer div nav {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 2.188rem;
+    }
+
+    footer div nav img {
+        width: 50%;
+        max-width: 15.625rem;
+    }
+
+    footer div nav p {
+        color: #FFFFFF;
+
+    }
+
+    footer div nav :any-link {
+        color: #FFFFFF;
+    }
+}
