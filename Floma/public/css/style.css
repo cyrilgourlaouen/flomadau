@@ -21,6 +21,8 @@
 }
 
 body {
+    font-family: 'Noto Sans', sans-serif;
+    background-color: var(--background-color);
     margin: 0;
     padding: 0;
 }
@@ -53,7 +55,6 @@ h1 {
 }
 
 p {
-    font-family: 'Roboto', sans-serif;
     font-size: var(--text-size);
     font-weight: normal;
     color: black;
