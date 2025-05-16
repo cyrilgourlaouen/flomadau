@@ -4,19 +4,22 @@ namespace Floma\Router;
 
 require dirname(__DIR__, 2) . '/config/routes.php';
 
-class Router {
+class Router
+{
 	private $routes;
 	private $availablePaths;
 	private $requestedPath;
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->routes = ROUTES;
 		$this->availablePaths = array_keys($this->routes);
 		$this->requestedPath = isset($_GET['path']) ? $_GET['path'] : '/';
 		$this->parseRoutes();
 	}
 
-	private function parseRoutes(): void {
+	private function parseRoutes(): void
+	{
 		$explodedRequestedPath = $this->explodePath($this->requestedPath);
 		$params = [];
 		$route = null;
@@ -50,7 +53,7 @@ class Router {
 				(isset($route['view']) && $route['view'] === false)
 			) {
 				http_response_code(404);
-				echo "Cette route n'est pas accessible directement.";
+				print("Cette route n'est pas accessible directement.");
 				exit;
 			}
 
@@ -58,16 +61,18 @@ class Router {
 			$controller->{$route['method']}(...$params);
 		} else {
 			http_response_code(404);
-			echo "Page non trouvée.";
+			print("Page non trouvée.");
 			exit;
 		}
 	}
 
-	private function explodePath(string $path): array {
+	private function explodePath(string $path): array
+	{
 		return explode("/", rtrim(ltrim($path, '/'), '/'));
 	}
 
-	private function isParam(string $candidatePathPart): bool {
+	private function isParam(string $candidatePathPart): bool
+	{
 		return str_contains($candidatePathPart, '{') && str_contains($candidatePathPart, '}');
 	}
 }

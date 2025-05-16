@@ -12,12 +12,13 @@ require dirname(__DIR__, 2) . '/config/database.php';
  *
  * @package Floma\Manager
  */
-abstract class AbstractManager {
-
-    /**
-     * @return PDO
-     */
-    private function connect(): PDO {
+abstract class AbstractManager
+{
+	/**
+	 * @return PDO
+	 */
+	private function connect(): PDO
+	{
 		$db = new PDO(
 			"mysql:host=" . DB_INFOS['host'] . ";port=" . DB_INFOS['port'] . ";dbname=" . DB_INFOS['dbname'],
 			DB_INFOS['username'],
@@ -28,24 +29,27 @@ abstract class AbstractManager {
 		return $db;
 	}
 
-    /**
-     * @param string $query
-     * @param array $params
-     * @return PDOStatement
-     */
-    private function executeQuery(string $query, array $params = []): PDOStatement {
+	/**
+	 * @param string $query
+	 * @param array $params
+	 * @return PDOStatement
+	 */
+	private function executeQuery(string $query, array $params = []): PDOStatement
+	{
 		$db = $this->connect();
 		$stmt = $db->prepare($query);
-		foreach ($params as $key => $param) $stmt->bindValue($key, $param);
+		foreach ($params as $key => $param)
+			$stmt->bindValue($key, $param);
 		$stmt->execute();
 		return $stmt;
 	}
 
-    /**
-     * @param string $class
-     * @return string
-     */
-    private function getTableName(string $class): string {
+	/**
+	 * @param string $class
+	 * @return string
+	 */
+	private function getTableName(string $class): string
+	{
 		if (defined($class . '::TABLE_NAME')) {
 			$table = $class::TABLE_NAME;
 		} else {
@@ -55,44 +59,49 @@ abstract class AbstractManager {
 		return $table;
 	}
 
-    /**
-     * @param string $class
-     * @param array $filters
-     * @return mixed
-     */
-    protected function readOne(string $class, array $filters): mixed {
+	/**
+	 * @param string $class
+	 * @param array $filters
+	 * @return mixed
+	 */
+	protected function readOne(string $class, array $filters): mixed
+	{
 		$query = 'SELECT * FROM ' . $this->getTableName($class) . ' WHERE ';
 		foreach (array_keys($filters) as $filter) {
 			$query .= $filter . " = :" . $filter;
-			if ($filter != array_key_last($filters)) $query .= ' AND ';
+			if ($filter != array_key_last($filters))
+				$query .= ' AND ';
 		}
 		$stmt = $this->executeQuery($query, $filters);
 		$stmt->setFetchMode(PDO::FETCH_CLASS, $class);
 		return $stmt->fetch();
 	}
 
-    /**
-     * @param string $class
-     * @param array $filters
-     * @param array $order
-     * @param int|null $limit
-     * @param int|null $offset
-     * @return mixed
-     */
-    protected function readMany(string $class, array $filters = [], array $order = [], int $limit = null, int $offset = null): mixed {
+	/**
+	 * @param string $class
+	 * @param array $filters
+	 * @param array $order
+	 * @param int|null $limit
+	 * @param int|null $offset
+	 * @return mixed
+	 */
+	protected function readMany(string $class, array $filters = [], array $order = [], int $limit = null, int $offset = null): mixed
+	{
 		$query = 'SELECT * FROM ' . $this->getTableName($class);
 		if (!empty($filters)) {
 			$query .= ' WHERE ';
 			foreach (array_keys($filters) as $filter) {
 				$query .= $filter . " = :" . $filter;
-				if ($filter != array_key_last($filters)) $query .= ' AND ';
+				if ($filter != array_key_last($filters))
+					$query .= ' AND ';
 			}
 		}
 		if (!empty($order)) {
 			$query .= ' ORDER BY ';
 			foreach ($order as $key => $val) {
 				$query .= $key . ' ' . $val;
-				if ($key != array_key_last($order)) $query .= ', ';
+				if ($key != array_key_last($order))
+					$query .= ', ';
 			}
 		}
 		if (isset($limit)) {
@@ -106,51 +115,57 @@ abstract class AbstractManager {
 		return $stmt->fetchAll();
 	}
 
-    /**
-     * @param string $class
-     * @param array $fields
-     * @return PDOStatement
-     */
-    protected function create(string $class, array $fields): PDOStatement {
+	/**
+	 * @param string $class
+	 * @param array $fields
+	 * @return PDOStatement
+	 */
+	protected function create(string $class, array $fields): PDOStatement
+	{
 		$query = "INSERT INTO " . $this->getTableName($class) . " (";
 		foreach (array_keys($fields) as $field) {
 			$query .= $field;
-			if ($field != array_key_last($fields)) $query .= ', ';
+			if ($field != array_key_last($fields))
+				$query .= ', ';
 		}
 		$query .= ') VALUES (';
 		foreach (array_keys($fields) as $field) {
 			$query .= ':' . $field;
-			if ($field != array_key_last($fields)) $query .= ', ';
+			if ($field != array_key_last($fields))
+				$query .= ', ';
 		}
 		$query .= ')';
 		return $this->executeQuery($query, $fields);
 	}
 
-    /**
-     * @param string $class
-     * @param array $fields
-     * @param int $id
-     * @return PDOStatement
-     */
-    protected function update(string $class, array $fields, int $id): PDOStatement {
+	/**
+	 * @param string $class
+	 * @param array $fields
+	 * @param int $id
+	 * @return PDOStatement
+	 */
+	protected function update(string $class, array $fields, int $id): PDOStatement
+	{
 		$query = "UPDATE " . $this->getTableName($class) . " SET ";
 		foreach (array_keys($fields) as $field) {
 			$query .= $field . " = :" . $field;
-			if ($field != array_key_last($fields)) $query .= ', ';
+			if ($field != array_key_last($fields))
+				$query .= ', ';
 		}
 		$query .= ' WHERE id = :id';
 		$fields['id'] = $id;
 		return $this->executeQuery($query, $fields);
 	}
 
-    /**
-     * @param string $class
-     * @param int $id
-     * @return PDOStatement
-     */
-    protected function remove(string $class, int $id): PDOStatement {
+	/**
+	 * @param string $class
+	 * @param int $id
+	 * @return PDOStatement
+	 */
+	protected function remove(string $class, int $id): PDOStatement
+	{
 		$query = "DELETE FROM " . $this->getTableName($class) . " WHERE id = :id";
-		return $this->executeQuery($query, [ 'id' => $id ]);
+		return $this->executeQuery($query, ['id' => $id]);
 	}
 
 }
