@@ -39,21 +39,6 @@
 			<img src="/assets/images/logo_entier_blanc.svg" alt="logo">
 		</nav>
 	</div>
+	<script src="./js/_js-header.js"></script>
 </header>
 
-<script>
-	var sidenav = document.getElementById("mySidenav");
-	var openBtn = document.getElementById("BtnOpen");
-	var closeBtn = document.getElementById("BtnClose");
-
-	openBtn.onclick = openNav;
-	closeBtn.onclick = closeNav;
-
-	function openNav() {
-		sidenav.classList.remove("hidden");
-	}
-
-	function closeNav() {
-		sidenav.classList.add("hidden");
-	}
-</script>
