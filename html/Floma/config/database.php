@@ -1,9 +1,11 @@
 <?php
 
+require_once __DIR__ . '/load_env.php';
+
 const DB_INFOS = [
-	'host' => 'localhost',
-	'port' => '3306',
-	'dbname' => 'sys',
-	'username' => 'dev',
-	'password' => 'devdevdev'
+	'host' => $_ENV['DB_HOST'],
+	'port' => $_ENV['DB_PORT'],
+	'dbname' => $_ENV['DB_NAME'],
+	'username' => $_ENV['DB_USERNAME'],
+	'password' => $_ENV['DB_PASSWORD']
 ];
