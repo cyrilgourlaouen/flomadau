@@ -35,8 +35,12 @@
 			</a>
 		</div>
 		<nav>
-			<h3>Mentions légales</h3>
-			<h3>Politique de confidentialité</h3>
+			<a href="https://entreprendre.service-public.fr/vosdroits/F31228">
+				<h3>Mentions légales</h3>
+			</a>
+			<a href="https://www.economie.gouv.fr/politique-confidentialite">
+				<h3>Politique de confidentialité</h3>
+			</a>
 			<img src="/assets/images/logo_entier_blanc.svg" alt="logo">
 		</nav>
 	</div>
