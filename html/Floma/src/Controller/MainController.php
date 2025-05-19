@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Manager\OfferManager;
 use Floma\Controller\AbstractController;
 
 /**
@@ -16,14 +17,19 @@ class MainController extends AbstractController
      */
     public function home()
     {
+        $offerManager = new OfferManager();
+
         return $this->renderView(
-            'main/home.php', 
-            [
+            'main/home.php',
+            [ 
+                'title' => 'Accueil',
+                'offers' => $offerManager->findAll(),
                 'seo' => [
                     'title' => 'Accueil',
                     'descriptions'=> 'Page d\'accueil du PACT, parcourez nos offres, partagez vos expériences.'
                 ]
-            ]);
+            ]
+        );
     }
 
     /**
