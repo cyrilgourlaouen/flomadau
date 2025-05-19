@@ -1,7 +1,7 @@
 <header>
 	<div class="top_header">
 		<a href="#" id="BtnOpen" class="btnBurger"><img src="/assets/icons/menu_burger_white.svg" alt="Icone de menu burger"></a>
-		<img class="logo" src="/assets/images/logo_entier_blanc.svg" alt="logo">
+		<a href="/"><img class="logo" src="/assets/images/logo_entier_blanc.svg" alt="logo"></a>
 		<div class="menu_nav">
 			<a href="#" class="PostOffer">
 				<h3>Publier une offre</h3>
@@ -20,7 +20,7 @@
 				<img src="/assets/icons/discover_white.svg" alt="Icone boussole">
 				<h2>Découvrez nos offres</h2>
 			</a>
-			<a href="#">
+			<a href="#"> 
 				<img src="/assets/icons/diamond_white.svg" alt="Icone de diamant">
 				<h2>Sélection du moment</h2>
 			</a>
