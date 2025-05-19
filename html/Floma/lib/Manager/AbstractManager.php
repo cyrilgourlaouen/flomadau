@@ -19,15 +19,20 @@ abstract class AbstractManager
 	 */
 	private function connect(): PDO
 	{
-		$db = new PDO(
-			"mysql:host=" . DB_INFOS['host'] . ";port=" . DB_INFOS['port'] . ";dbname=" . DB_INFOS['dbname'],
-			DB_INFOS['username'],
-			DB_INFOS['password']
+		$dsn = sprintf(
+			"pgsql:host=%s;port=%s;dbname=%s;options='--search_path=%s'",
+			DB_INFOS['host'],
+			DB_INFOS['port'],
+			DB_INFOS['dbname'],
+			DB_INFOS['schema']
 		);
+
+		$db = new PDO($dsn, DB_INFOS['username'], DB_INFOS['password']);
 		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$db->exec("SET NAMES utf8");
+
 		return $db;
 	}
+
 
 	/**
 	 * @param string $query
