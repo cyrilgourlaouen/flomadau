@@ -117,7 +117,7 @@ $Stars = new MetricStarsCalculator();
                 </div>
             </section>
 
-            <section class="hideTab">
+            <section class="hideTel">
                 <div class="contact">
                     <p class="subtitle">
                         Contact
