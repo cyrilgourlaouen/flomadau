@@ -4,8 +4,13 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="/css/style.css">
-		<link rel="stylesheet" href="/css/layout.css">
-		<title>Floma</title>
+		<title>
+			<?php if (isset($data['seo']['title'])) echo $data['seo']['title'] . ' - '; ?>
+			PACT
+		</title>
+		<?php if (isset($data['seo']['description'])) { ?>
+			<meta name="description" content="<?= $data['seo']['description'] ?>">
+		<?php } ?>
 	</head>
 	<body>
 		<?php include '_header.php'; ?>
