@@ -1,19 +1,19 @@
-let map; // variable globale pour la carte
+let map;
 
-async function getCoordonnees(ville) {
-const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(ville)}`;
+async function getCoordonnees(city) {
+const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city)}`;
 const response = await fetch(url);
 const data = await response.json();
-if (data.length === 0) throw new Error("Ville introuvable");
+if (data.length === 0) throw new Error("city introuvable");
 return {
     lat: parseFloat(data[0].lat),
     lon: parseFloat(data[0].lon)
 };
 }
 
-async function afficherCarteVille(ville) {
+async function displayCityMap(city) {
 try {
-    const coords = await getCoordonnees(ville);
+    const coords = await getCoordonnees(city);
 
     if (map) {
     map.remove();
@@ -37,6 +37,6 @@ try {
 
 window.addEventListener("DOMContentLoaded", () => {
   const mapDiv = document.getElementById("map");
-  const ville = mapDiv.getAttribute("city") || "Paris";
-  afficherCarteVille(ville);
+  const city = mapDiv.getAttribute("city") || "Paris";
+  displayCityMap(city);
 });
