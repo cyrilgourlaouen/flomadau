@@ -30,37 +30,42 @@
                 <div class="lines">
                     <h3>Prénom*</h3>
                     <div class="input-container">
-                        <input type="text" name="firstname" value="<?= htmlspecialchars($user['firstname']) ?>" disabled required>
-                        <a href="#"><img src="/assets/icons/pencil_black.svg" alt="pencil"></a> 
+                        <input type="text" name="firstname" value="<?= htmlspecialchars($user['firstname']) ?>" disabled
+                            required>
                     </div>
                     <h3>Nom*</h3>
                     <div class="input-container">
                         <input type="text" name="name" value="<?= htmlspecialchars($user['name']) ?>" disabled required>
-                        <a href="#"><img src="/assets/icons/pencil_black.svg" alt="pencil"></a> 
                     </div>
                 </div>
                 <div class="lines">
-                    <h3>Pseudonyme*</h3>
-                    <div class="input-container">
-                        <input type="text" name="pseudo" value="<?= htmlspecialchars($user['pseudo']) ?>"  disabled required>
-                        <a href="#"><img src="/assets/icons/pencil_black.svg" alt="pencil"></a> 
+                    <div>
+                        <h3>Pseudonyme*</h3>
+                        <div class="input-container">
+                            <input type="text" name="pseudo" value="<?= htmlspecialchars($user['pseudo']) ?>" disabled
+                                required>
+                        </div>
                     </div>
-                    <h3>Numéro de téléphone*</h3>
-                    <div class="input-container">
-                        <input type="text" name="num" value="<?= htmlspecialchars($user['num'])  ?>" disabled required >
-                        <a href="#"><img src="/assets/icons/pencil_black.svg" alt="pencil"></a> 
+                    <div>
+                        <div class="">
+                            <h3>Numéro de téléphone*</h3>
+                            <div class="input-container">
+                                <input type="text" name="num" value="<?= htmlspecialchars($user['num']) ?>" disabled
+                                    required>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="lines">
-                    <h3>Adresse e-mail*</h3>
-                    <div class="input-container">
-                        <input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" disabled required>
-                        <a href="#"><img src="/assets/icons/pencil_black.svg" alt="pencil"></a> 
+                    <div class="lines">
+                        <h3>Adresse e-mail*</h3>
+                        <div class="input-container">
+                            <input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" disabled
+                                required>
+
+                        </div>
                     </div>
-                </div>
-                <button class="submit-button" type="submit">
-                    <p>Valider</p>
-                </button>
+                    <button class="submit-button" type="submit">
+                        <p>Valider</p>
+                    </button>
             </form>
             <form method="POST" class="personal-data">
                 <div class="title">
@@ -68,7 +73,7 @@
                 </div>
                 <div class="lines mdp">
                     <h3>Mot de passe actuel*</h3>
-                    <input type="password" name="mdp" required >
+                    <input type="password" name="mdp" required>
                     <h3>Nouveau mot de passe*</h3>
                     <input type="password" name="mdp_confirm" required disabled>
                 </div>

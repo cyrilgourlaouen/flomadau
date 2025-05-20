@@ -268,6 +268,8 @@ footer div nav :any-link {
   box-sizing: border-box;
 } 
 
+
+
 /* Format tablette */
 @media (min-width: 35rem) {
   :root {
@@ -324,7 +326,6 @@ footer div nav :any-link {
     gap: 2.188rem;
   }
 
-
   .information .personal-data {
     justify-content: flex-start;
     
@@ -336,12 +337,17 @@ footer div nav :any-link {
     display: flex;
   }
 
-  .information .lines {
-    flex-direction: row;
+  .information .form-update {
+    width: 50%;
   }
 
-  .picture-consultation {
+  .information .picture-consultation{
     display: block;
+    width: 50%;
+  }
+
+  .information .lines {
+    flex-direction: row;
   }
 
   .information .mdp {
