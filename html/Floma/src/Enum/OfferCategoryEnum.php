@@ -1,6 +1,8 @@
 <?php
 
-enum OfferCategory: string
+namespace App\Enum;
+
+enum OfferCategoryEnum: string
 {
     case Restauration = "Restauration";
     case Activity = "Activité";
@@ -9,30 +11,30 @@ enum OfferCategory: string
     case Show = "Spectacle";
 }
 
-function getCategoryIcon(OfferCategory $category)
+function getCategoryIcon(OfferCategoryEnum $category)
 {
     switch ($category) {
-        case OfferCategory::Restauration:
+        case OfferCategoryEnum::Restauration:
             return [
                 "path" => "/assets/icons/restaurant_black.svg",
                 "alt" => "Icone de restauration"
             ];
-        case OfferCategory::Activity:
+        case OfferCategoryEnum::Activity:
             return [
                 "path" => "/assets/icons/sprint_black.svg",
                 "alt" => "Icone d'activité"
             ];
-        case OfferCategory::Visite:
+        case OfferCategoryEnum::Visite:
             return [
                 "path" => "/assets/icons/map_black.svg",
                 "alt" => "Icone de visite"
             ];
-        case OfferCategory::AmusementPark:
+        case OfferCategoryEnum::AmusementPark:
             return [
                 "path" => "/assets/icons/attractions_black.svg",
                 "alt" => "Icone de parc d'attraction"
             ];
-        case OfferCategory::Show:
+        case OfferCategoryEnum::Show:
             return [
                 "path" => "/assets/icons/show_black.svg",
                 "alt" => "Icone de spectacle"

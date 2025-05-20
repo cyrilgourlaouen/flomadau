@@ -1,5 +1,7 @@
 <?php
     use App\Service\MetricStarsCalculator;
+    use App\Enum\OfferCategoryEnum;
+    use function App\Enum\getCategoryIcon;
 
     $metric = new MetricStarsCalculator();
 ?>
@@ -7,8 +9,9 @@
     <h2>Découvrez nos offres</h2>
     <?php
         foreach ($data["offers"] as $offer) { ?>
+            <img src="<?= getCategoryIcon(OfferCategoryEnum::Show) ?>" alt="">
             <article class="offer-card">
-                <div>
+                <div class="offer-card-img">
                     <img src="/uploads/offers/chateau-de-lannion.jpg" alt="" class="offer-card-main-img">
                 </div>
                 <h3><?= htmlspecialchars($offer->getTitre()) ?></h3>
