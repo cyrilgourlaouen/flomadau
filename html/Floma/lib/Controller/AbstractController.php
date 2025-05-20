@@ -2,6 +2,8 @@
 
 namespace Floma\Controller;
 
+use Floma\View\Layout;
+
 /**
  * Class AbstractController
  *
@@ -9,15 +11,22 @@ namespace Floma\Controller;
  */
 abstract class AbstractController
 {
-	/**
-	 * @param string $template
-	 * @param array $data
-	 * @return string
-	 */
-	protected function renderView(string $template, array $data = []): string
+	private Layout $layout = Layout::FRONT;
+
+	public function setLayout(Layout $layout): void
 	{
+		$this->layout = $layout;
+	}
+
+	protected function renderView(string $template, array $data = []): void
+	{
+		global $templatePath;
 		$templatePath = dirname(__DIR__, 2) . '/templates/' . $template;
-		return require_once dirname(__DIR__, 2) . '/templates/layout.php';
+
+		$GLOBALS['data'] = $data;
+
+		require dirname(__DIR__, 2) . '/templates/' . $this->layout->value;
+		exit;
 	}
 
 	/**
