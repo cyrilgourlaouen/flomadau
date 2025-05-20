@@ -19,6 +19,10 @@ class MainController extends AbstractController
     {
         $offerManager = new OfferManager();
 
+        $offers = $offerManager->findAll()
+
+        $offerManager->getCategoryInfo($offers['category']);
+
         return $this->renderView(
             'main/home.php',
             [ 

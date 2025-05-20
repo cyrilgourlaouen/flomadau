@@ -48,4 +48,9 @@ class OfferManager extends AbstractManager
     {
         return $this->readMany(Offer::class, $filters, $order, $limit, $offset);
     }
+
+    public function getCategoryInfo(string $category, int $id)
+    {
+        return $this->readOne(Offer::class, ['id_offre' => $id]);
+    }
 }
