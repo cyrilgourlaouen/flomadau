@@ -1,3 +1,8 @@
+<?php
+    use App\Service\MetricStarsCalculator;
+
+    $metric = new MetricStarsCalculator();
+?>
 <section>
     <h2>Découvrez nos offres</h2>
     <?php
@@ -11,9 +16,16 @@
                 <div class="offer-card-price-note">
                     <!-- Note -->
                      <div class="offer-card-note">
-                        
+                        <div class="offer-card-note-stars">
+                            <?= $metric->calculStars($offer->getNoteMoyenne()); ?> 
+                        </div>
+                        <p>(<?= htmlspecialchars($offer->getNombreAvis()) ?>)</p>
                      </div>
                     <!-- Prix -->
+                     <div>
+                        <img src="/assets/icons/pr" alt="">
+                        <p>(<?= htmlspecialchars($offer->getNombreAvis()) ?>)</p>
+                     </div>
                 </div>
                 <div class="offer-card-city-author">
                     <!-- Ville -->
