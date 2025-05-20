@@ -189,7 +189,7 @@ footer div nav :any-link {
 }
 
 /* Consultation Modification*/
-.information header {
+.information header , .picture-consultation{
   display: none;
 }
 
@@ -210,8 +210,6 @@ footer div nav :any-link {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  box-shadow: 0 0.25rem 0.5rem 0.188rem rgba(0, 0, 0, 0.15),
-    0 0.063rem 0.188rem rgba(0, 0, 0, 0.3);
   padding: 0.625rem;
   border-radius: 0.375rem;
 }
@@ -241,26 +239,34 @@ footer div nav :any-link {
   color: var(--white-color);
   display: flex;
   align-items: center;
-  padding: 1.875rem;
+  padding: 0.625rem 0.938rem; 
   width: fit-content;
-  height: 3.375rem;
+  height: fit-content;
   border: none;
-  border-radius: 1.563rem;
+  border-radius: 0.625rem;  
   margin: 0 auto;
+  box-shadow: 0 0.25rem 0.5rem 0.188rem rgba(0, 0, 0, 0.15),0 0.063rem 0.188rem rgba(0, 0, 0, 0.3);
 }
 
-.information button:hover {
-  background-color: var(--primary-color);
-  color: var(--white-color);
-  display: flex;
-  align-items: center;
-  padding: 1.875rem;
-  width: fit-content;
-  height: 3.375rem;
-  border: none;
-  border-radius: 1.563rem;
-  margin: 0 auto;
+.information button:active {
+  background-color: var(--white-color);
+  color: var(--primary-color);
+  border: 0.063rem solid var(--primary-color);
 }
+
+.information .title {
+  padding-bottom: 0.625rem;
+  border-bottom: 0.063rem solid #000;
+
+}
+
+.information input {
+  font-size: var(--text-size);
+  font-family: var(--noto);
+  width: 100%;
+  padding-right: 2.188rem;
+  box-sizing: border-box;
+} 
 
 /* Format tablette */
 @media (min-width: 35rem) {
@@ -318,8 +324,12 @@ footer div nav :any-link {
     gap: 2.188rem;
   }
 
+
   .information .personal-data {
-    align-items: center;
+    justify-content: flex-start;
+    
+    box-shadow: 0 0.25rem 0.5rem 0.188rem rgba(0, 0, 0, 0.15),
+    0 0.063rem 0.188rem rgba(0, 0, 0, 0.3);
   }
 
   .information .consultation {
@@ -329,9 +339,13 @@ footer div nav :any-link {
   .information .lines {
     flex-direction: row;
   }
+
   .picture-consultation {
     display: block;
-    width: 50%;
+  }
+
+  .information .mdp {
+    flex-direction: column;
   }
 }
 

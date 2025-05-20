@@ -26,38 +26,54 @@
             <form method="POST" class="personal-data">
                 <div class="title">
                     <h2>Informations personnelles</h2>
-                    <hr>
                 </div>
                 <div class="lines">
                     <h3>Prénom*</h3>
-                    <input type="text" name="firstname" value="<?= htmlspecialchars($user['firstname']) ?>" required>
+                    <div class="input-container">
+                        <input type="text" name="firstname" value="<?= htmlspecialchars($user['firstname']) ?>" disabled required>
+                        <a href="#"><img src="/assets/icons/pencil_black.svg" alt="pencil"></a> 
+                    </div>
                     <h3>Nom*</h3>
-                    <input type="text" name="name" value="<?= htmlspecialchars($user['name']) ?>" required>
+                    <div class="input-container">
+                        <input type="text" name="name" value="<?= htmlspecialchars($user['name']) ?>" disabled required>
+                        <a href="#"><img src="/assets/icons/pencil_black.svg" alt="pencil"></a> 
+                    </div>
                 </div>
                 <div class="lines">
                     <h3>Pseudonyme*</h3>
-                    <input type="text" name="pseudo" value="<?= htmlspecialchars($user['pseudo']) ?>" required>
+                    <div class="input-container">
+                        <input type="text" name="pseudo" value="<?= htmlspecialchars($user['pseudo']) ?>"  disabled required>
+                        <a href="#"><img src="/assets/icons/pencil_black.svg" alt="pencil"></a> 
+                    </div>
                     <h3>Numéro de téléphone*</h3>
-                    <input type="text" name="num" value="<?= htmlspecialchars($user['num']) ?>" required>
+                    <div class="input-container">
+                        <input type="text" name="num" value="<?= htmlspecialchars($user['num'])  ?>" disabled required >
+                        <a href="#"><img src="/assets/icons/pencil_black.svg" alt="pencil"></a> 
+                    </div>
                 </div>
                 <div class="lines">
                     <h3>Adresse e-mail*</h3>
-                    <input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" required>
+                    <div class="input-container">
+                        <input type="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" disabled required>
+                        <a href="#"><img src="/assets/icons/pencil_black.svg" alt="pencil"></a> 
+                    </div>
                 </div>
                 <button class="submit-button" type="submit">
                     <p>Valider</p>
                 </button>
             </form>
-            <form method="POST" class="mdp personal-data">
-                <h2>Changer de mot de passe</h2>
-                <div class="lines">
+            <form method="POST" class="personal-data">
+                <div class="title">
+                    <h2>Changer de mot de passe</h2>
+                </div>
+                <div class="lines mdp">
                     <h3>Mot de passe actuel*</h3>
-                    <input type="password" name="mdp" required>
+                    <input type="password" name="mdp" required >
                     <h3>Nouveau mot de passe*</h3>
-                    <input type="password" name="mdp_confirm" required>
+                    <input type="password" name="mdp_confirm" required disabled>
                 </div>
                 <button class="submit-button" type="submit">
-                    <p>Valider</p>
+                    <p>Changement de mot de passe</p>
                 </button>
             </form>
         </div>
