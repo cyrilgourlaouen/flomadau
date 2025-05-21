@@ -90,7 +90,7 @@ abstract class AbstractManager
 	 * @param int|null $offset
 	 * @return mixed
 	 */
-	protected function readMany(string $class, array $filters = [], array $order = [], int $limit = null, int $offset = null): mixed
+	protected function readMany(string $class, array $filters = [], array $order = [], ?int $limit = null, ?int $offset = null): mixed
 	{
 		$query = 'SELECT * FROM ' . $this->getTableName($class);
 		if (!empty($filters)) {
