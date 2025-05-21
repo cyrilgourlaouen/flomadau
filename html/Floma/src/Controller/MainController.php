@@ -27,7 +27,7 @@ class MainController extends AbstractController
         ]);
 
         return $this->renderView(
-            'main/home.php',
+            'front/main/home.php',
             [ 
                 'title' => 'Accueil',
                 'offers' => $enrichedOffers,
