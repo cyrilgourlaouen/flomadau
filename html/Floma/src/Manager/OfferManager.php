@@ -3,6 +3,7 @@ namespace App\Manager;
 
 use Floma\Manager\AbstractManager;
 use App\Entity\Offer;
+use App\Enum\OfferCategoryEnum;
 
 /**
  * Class OfferManager
@@ -51,6 +52,12 @@ class OfferManager extends AbstractManager
 
     public function getCategoryInfo(string $category, int $id)
     {
-        return $this->readOne(Offer::class, ['id_offre' => $id]);
+        $enum = OfferCategoryEnum::tryFrom($category);
+        if (!$enum) {
+            return null;
+        }
+
+        $entity = $enum->getEntity();
+        return $this->readOne($entity, ['id_offre' => $id]);
     }
 }
