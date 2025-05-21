@@ -379,3 +379,17 @@ footer div nav :any-link {
     justify-content: center;
   }
 }
+
+@media (width < 43.75rem) {
+  .information .lines-container {
+    flex-direction: column;
+  }
+}
+
+@media (width < 56.25rem) {
+  .information .UpdateBtn {
+      position: relative;
+      left: 0%;
+  }
+
+}
