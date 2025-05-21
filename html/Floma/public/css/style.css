@@ -666,6 +666,17 @@ footer div nav :any-link {
   }
 
   header .txtPostOffer:active {
+    background-color: #334f9f ;
+    color: var(--white-color);
+
+  }
+
+  header .txtPostOffer:hover {
+    background-color: var(--white-color);
+    color: var(--primary-color);
+  }
+
+  header .txtPostOffer:active {
     background-color: #334f9f;
     color: var(--white-color);
   }
