@@ -34,4 +34,20 @@ class MainController extends AbstractController
         // Imaginons ici traiter la soumission d'un formulaire de contact et envoyer un mail...
         return $this->redirectToRoute('home', ['state' => 'success']);
     }
+
+    /**
+     * @return void
+     */
+    public function inscription_front()
+    {
+        return $this->renderView(
+            'front/inscription/home.php', 
+            [
+                'seo' => [
+                    'title' => 'Accueil',
+                    'descriptions'=> 'Page d\'accueil du PACT, parcourez nos offres, partagez vos expériences.'
+                ]
+            ]);
+    }
+
 }
