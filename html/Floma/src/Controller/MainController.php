@@ -26,13 +26,11 @@ class MainController extends AbstractController
             'option' => ['isMultiple' => true],
         ]);
 
-        $offerManager->getCategoryInfo($offers['category']);
-
         return $this->renderView(
             'main/home.php',
             [ 
                 'title' => 'Accueil',
-                'offers' => $offerManager->findAll(),
+                'offers' => $enrichedOffers,
                 'seo' => [
                     'title' => 'Accueil',
                     'descriptions'=> 'Page d\'accueil du PACT, parcourez nos offres, partagez vos expériences.'
