@@ -12,11 +12,18 @@ use Floma\Controller\AbstractController;
 class MainController extends AbstractController
 {
     /**
-     * @return string
+     * @return void
      */
     public function home()
     {
-        return $this->renderView('main/home.php', ['title' => 'Accueil']);
+        return $this->renderView(
+            'main/home.php', 
+            [
+                'seo' => [
+                    'title' => 'Accueil',
+                    'descriptions'=> 'Page d\'accueil du PACT, parcourez nos offres, partagez vos expériences.'
+                ]
+            ]);
     }
 
     /**
