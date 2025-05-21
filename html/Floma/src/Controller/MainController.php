@@ -29,7 +29,6 @@ class MainController extends AbstractController
         return $this->renderView(
             'front/main/home.php',
             [ 
-                'title' => 'Accueil',
                 'offers' => $enrichedOffers,
                 'seo' => [
                     'title' => 'Accueil',
