@@ -9,19 +9,19 @@ use Floma\Controller\AbstractController;
  *
  * @package App\Controller
  */
-class MainController extends AbstractController
+class InscriptionMembreController extends AbstractController
 {
     /**
-     * @return void
+     * @return string
      */
-    public function home()
+    public function inscription_front()
     {
         return $this->renderView(
-            'main/home.php', 
+            'front/inscription/create_member.php', 
             [
                 'seo' => [
-                    'title' => 'Accueil',
-                    'descriptions'=> 'Page d\'accueil du PACT, parcourez nos offres, partagez vos expériences.'
+                    'title' => 'Création d\'un compte membre',
+                    'descriptions'=> 'Page pour crée un compte membre'
                 ]
             ]);
     }
