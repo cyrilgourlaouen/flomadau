@@ -1,0 +1,304 @@
+/* CSS file for the back office */
+/* General styles */
+:root {
+  /* Colors */
+  --primary-color: #005bb5;
+  --background-color: #fcfcfc;
+  --menu-background-color: #f5f6fa;
+  --light-grey-color: #637381;
+  --dark-grey-color: #424656;
+  --white-color: #ffffff;
+  --black-color: #000000;
+
+  /* Fonts */
+  --raleway: "Raleway", sans-serif;
+  --noto: "Noto Sans", sans-serif;
+
+  /* Menu size */
+  --menu-width: 16.875rem;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: row;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--menu-width);
+  height: 100vh;
+  margin: 0;
+  padding: 1.875rem 0rem 0rem 1.875rem;
+  box-sizing: border-box; /* This adds the padding to the width */
+  background-color: var(--menu-background-color);
+  border-right: 1px solid var(--light-grey-color);
+}
+
+main {
+  flex: 1;
+  flex-direction: column;
+  margin-left: var(--menu-width);
+  width: calc(100vw - 21.875rem);
+  height: 100vh;
+  overflow-y: auto;
+}
+
+h1 {
+  font-family: var(--raleway);
+  font-weight: bold;
+  font-size: 1.688rem;
+  color: var(--dark-grey-color);
+  margin: 0rem;
+}
+
+h2 {
+  font-family: var(--raleway);
+  font-weight: bold;
+  font-size: 1.375rem;
+  color: var(--light-grey-color);
+  margin: 0rem;
+}
+
+h3 {
+  font-family: var(--raleway);
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: var(--black-color);
+
+  /* For the horizontal line */
+  margin-bottom: 0.3em;
+}
+
+.h3-section {
+  display: inline-block;
+}
+
+.h3-section hr {
+  width: 25rem;
+  margin: 0.2em 0 1em 0;
+  border: 1px solid #000000;
+}
+
+p {
+  font-family: var(--noto);
+  font-weight: normal;
+  font-size: 1rem;
+  color: var(--black-color);
+}
+
+p.placeholder {
+  font-family: var(--noto);
+  font-size: 16rem;
+  font-weight: normal;
+  color: var(--light-grey-color);
+}
+
+/* Menu */
+.menuContent {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 3.125rem;
+  padding: 0rem;
+  margin: 0rem;
+}
+
+.menuTextContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 0rem;
+  margin: 0rem;
+  gap: 1.875rem;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.875rem;
+}
+
+.sidebar-menu li a {
+  text-decoration: none;
+}
+
+.sidebar-menu li {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.sidebar-menu li::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1.563rem;
+  height: 1.563rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.menu-home::before {
+  background-image: url("../assets/icons/home_grey.svg");
+}
+
+.menu-info::before {
+  background-image: url("../assets/icons/account_grey.svg");
+}
+.menu-offers::before {
+  background-image: url("../assets/icons/offer_grey.svg");
+}
+.menu-avis::before {
+  background-image: url("../assets/icons/avis_grey.svg");
+}
+.menu-factures::before {
+  background-image: url("../assets/icons/facture_grey.svg");
+}
+
+/* head_title */
+.headContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.25rem 0rem 1.25rem 1.25rem;
+  margin: 1.875rem 1.875rem 0rem 1.875rem;
+
+  box-sizing: border-box;
+  background: #ffffff;
+
+  /* M3/Elevation Light/3 */
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+    0px 1px 3px rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+}
+
+.headContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.boxIcon {
+  width: 3.875rem;
+  height: 3.875rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem;
+  gap: 0.625rem;
+  background: #005bb5;
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+    0px 1px 3px rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+}
+
+.icon {
+  width: 1.875rem;
+  height: 1.875rem;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0rem;
+  margin: 0rem;
+  gap: 0rem;
+}
+
+/* FORMULAIRE */
+/* Global container */
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0rem 1.875rem;
+  padding-bottom: 1.875rem;
+}
+
+/* Section container */
+.formSectionContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 1.25rem;
+  gap: 1.25rem;
+}
+
+/* Form line when two inputs are on the same line */
+.formInline {
+  display: flex;
+  flex-direction: row;
+  gap: 3.125rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.875rem;
+}
+
+label {
+  font-family: var(--noto);
+  font-weight: normal;
+  font-size: 1.25rem;
+  color: var(--black-color);
+}
+
+input {
+  width: 18.75rem;
+  padding: 0.5em;
+  border-radius: 6px;
+  border: 1px solid var(--light-grey-color);
+}
+
+input::placeholder {
+  font-family: var(--noto);
+  font-size: 16rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+/* Black button */
+.button-black {
+  background: var(--black-color);
+  color: var(--white-color);
+  padding: 0.625rem 0.938rem;
+  border: none;
+  border-radius: 0.625rem;
+  font-family: var(--noto);
+  font-size: 1.25rem;
+  font-weight: normal;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  /* M3/Elevation Light/3 */
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+    0px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.button-black:hover {
+  background: #222;
+}
+
+.buttonContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
