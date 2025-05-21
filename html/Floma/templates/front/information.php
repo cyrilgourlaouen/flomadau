@@ -69,7 +69,7 @@
                     <div class="lines">
                         <h3>Mot de passe actuel*</h3>
                         <div class="password">
-                            <input class="inputPassword" id="Password" type="password" name="mdp" required>
+                            <input class="inputPassword" id="inputPassword" type="password" name="mdp" required>
                             <button id="CheckPassword" type="button"><p>Valider</p></button>
                         </div>
 

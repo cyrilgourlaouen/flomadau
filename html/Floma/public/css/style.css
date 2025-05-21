@@ -356,8 +356,8 @@ footer div nav :any-link {
 
   .information .UpdateBtn {
     position: absolute;
-    right: 12.5rem;
-    top: 3.125rem;
+    right: 13%;
+    top: 6%;
   }
 
   .information .email {
