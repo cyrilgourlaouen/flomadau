@@ -275,7 +275,8 @@ footer div nav :any-link {
 }
 
 .offer-card-city,
-.offer-card-note {
+.offer-card-note,
+.offer-card-price {
   flex-direction: row;
   display: flex;
   align-items: center;
@@ -283,9 +284,11 @@ footer div nav :any-link {
   gap: 0.313rem;
 }
 
-.offer-card-note-stars {
+.offer-card-note-stars, .offer-card-price-euros {
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Format tablette */
