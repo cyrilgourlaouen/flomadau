@@ -12,6 +12,7 @@
   --primary-color: #005bb5;
   --dark-blue-color: #1e3a8a;
   --pink-color: #eb4671;
+  --green-color: #03AD23;
   --dark-grey-color: #424656;
   --background-color: #f5f7fa;
   --white-color: #ffffff;
@@ -22,6 +23,7 @@
   --subtitle-size: 1.25rem;
   --text-size: 1rem;
   --small-text-size: 0.875rem;
+  --very-small-text-size: 0.75rem;
 
   --bold: bold;
   --semi_bold: 600;
@@ -80,6 +82,10 @@ p {
   font-size: var(--small-text-size);
   font-weight: var(--normal);
   font-style: italic;
+}
+
+.very-small-text {
+  font-size: var(--very-small-text-size);
 }
 
 .sr-only {
@@ -237,6 +243,48 @@ footer div nav :any-link {
 
 .offer-card-img {
   position: relative;
+}
+
+.offer-card-img-badges {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  position: absolute;
+  margin: 0.938rem;
+  top: 0;
+  left: 0;
+  align-items: top;
+  justify-content: baseline;
+  width: fit-content;
+  height: fit-content;
+}
+
+.offer-card-img-badge-pink, .offer-card-img-badge-green {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  text-wrap: nowrap;
+  gap: 0.313rem;
+  border-radius: 100px;
+  width: fit-content;
+  padding: 0.313rem 0.625rem;
+  color: var(--white-color);
+  align-items: center;
+  justify-content: center;
+}
+
+.offer-card-img-badge-pink img, .offer-card-img-badge-green img {
+  width: auto;
+  height: 15px;
+}
+
+.offer-card-img-badge-pink {
+  background-color: var(--pink-color);
+}
+
+.offer-card-img-badge-green {
+  background-color: var(--green-color);
 }
 
 .offer-card-img-category-icon {

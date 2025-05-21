@@ -2,14 +2,14 @@
 namespace App\Manager;
 
 use Floma\Manager\AbstractManager;
-use App\Entity\Visite;
+use App\Entity\Activite;
 
 /**
- * Class VisiteManager
+ * Class ActiviteManager
  *
  * @package App\Manager
  */
-class VisiteManager extends AbstractManager
+class ActiviteManager extends AbstractManager
 {
     /**
      * @param int $id
@@ -17,7 +17,7 @@ class VisiteManager extends AbstractManager
      */
     public function find(int $id)
     {
-        return $this->readOne(Visite::class, ['id' => $id]);
+        return $this->readOne(Activite::class, ['id' => $id]);
     }
 
     /**
@@ -26,7 +26,7 @@ class VisiteManager extends AbstractManager
      */
     public function findOneBy(array $filters)
     {
-        return $this->readOne(Visite::class, $filters);
+        return $this->readOne(Activite::class, $filters);
     }
 
     /**
@@ -34,6 +34,6 @@ class VisiteManager extends AbstractManager
      */
     public function findAll()
     {
-        return $this->readMany(Visite::class);
+        return $this->readMany(Activite::class);
     }
 }

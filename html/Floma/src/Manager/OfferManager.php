@@ -49,15 +49,4 @@ class OfferManager extends AbstractManager
     {
         return $this->readMany(Offer::class, $filters, $order, $limit, $offset);
     }
-
-    public function getCategoryInfo(string $category, int $id)
-    {
-        $enum = OfferCategoryEnum::tryFrom($category);
-        if (!$enum) {
-            return null;
-        }
-
-        $entity = $enum->getEntity();
-        return $this->readOne($entity, ['id_offre' => $id]);
-    }
 }

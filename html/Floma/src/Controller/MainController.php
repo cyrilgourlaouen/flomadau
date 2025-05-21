@@ -21,7 +21,9 @@ class MainController extends AbstractController
         $offerManager = new OfferManager();
 
         $enrichedOffers = OfferResource::buildAll($offerManager->findAll(), [
-            'offerManager' => $offerManager
+            'categorie' => ['isMultiple' => false],
+            'professionnel' => ['isMultiple' => false],
+            'option' => ['isMultiple' => true],
         ]);
 
         $offerManager->getCategoryInfo($offers['category']);

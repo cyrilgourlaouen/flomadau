@@ -1,16 +1,21 @@
 <?php
 namespace App\Enum;
 
-use App\Entity\Activite;
-use App\Entity\ParcAttraction;
-use App\Entity\Restaurant;
-use App\Entity\Spectacle;
-use App\Entity\Visite;
+use App\Manager\ActiviteManager;
+use App\Manager\ParcAttractionManager;
+use App\Manager\RestaurantManager;
+use App\Manager\SpectacleManager;
+use App\Manager\VisiteManager;
+use App\Resource\ActiviteResource;
+use App\Resource\ParcAttractionResource;
+use App\Resource\RestaurantResource;
+use App\Resource\SpectacleResource;
+use App\Resource\VisiteResource;
 
 enum OfferCategoryEnum: string
 {
-    case Restauration = 'Restauration';
-    case Activity = 'Activité';
+    case Restauration = 'Restaurant';
+    case Activity = 'Activite';
     case Visite = 'Visite';
     case AmusementPark = 'Parc d\'attraction';
     case Show = 'Spectacle';
@@ -26,14 +31,25 @@ enum OfferCategoryEnum: string
         };
     }
 
-    public function getEntity(): string
+    public function getManager()
     {
         return match ($this) {
-            self::Activity => Activite::class,
-            self::Show => Spectacle::class,
-            self::Visite => Visite::class,
-            self::AmusementPark => ParcAttraction::class,
-            self::Restauration => Restaurant::class,
+            self::Activity => new ActiviteManager(),
+            self::Show => new SpectacleManager(),
+            self::Visite => new VisiteManager(),
+            self::AmusementPark => new ParcAttractionManager(),
+            self::Restauration => new RestaurantManager(),
+        };
+    }
+
+    public function getResource()
+    {
+        return match ($this) {
+            self::Activity => ActiviteResource::class,
+            self::Show => SpectacleResource::class,
+            self::Visite => VisiteResource::class,
+            self::AmusementPark => ParcAttractionResource::class,
+            self::Restauration => RestaurantResource::class,
         };
     }
 }
