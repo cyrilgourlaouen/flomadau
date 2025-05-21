@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Manager\OfferManager;
+use App\Resource\OfferResource;
 use Floma\Controller\AbstractController;
 
 /**
@@ -19,7 +20,9 @@ class MainController extends AbstractController
     {
         $offerManager = new OfferManager();
 
-        $offers = $offerManager->findAll()
+        $enrichedOffers = OfferResource::buildAll($offerManager->findAll(), [
+            'offerManager' => $offerManager
+        ]);
 
         $offerManager->getCategoryInfo($offers['category']);
 
