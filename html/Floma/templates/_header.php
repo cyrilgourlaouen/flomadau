@@ -7,11 +7,15 @@
 				<h3 class="txtPostOffer">Publier une offre</h3>
 			</a>
 			<a href="#" class="search"><img src="/assets/icons/search_white.svg" alt="loupe" class="ImgSearch"></a>
-			<a href="#" class="logIn"><img src="/assets/icons/login_white.svg" alt="Icon de connexion" class="ImgLogIn"></a>
+			<?php if(!isset($_SESSION['email'])){?>
+				<a href="?path=/connexion" class="logBtn"><img src="/assets/icons/login_white.svg" alt="Icon de connexion"></a>
+			<?php } else { ?>
+				<a href="?path=/connexion/logOut" class="logBtn"><img src="/assets/icons/login_black.svg" alt="Icon de déconnexion"></a>
+			<?php } ?>
 		</div>
 	</div>
 
-	<!-- TODO: Ajouter les liens dur les pages -->
+	<!-- TODO: Ajouter les liens dur les pages -->	
 	<div id="mySidenav" class="sidenav hidden">
 		<div class="menu">
 			<a id="BtnClose" href="#" class="close"><img src="/assets/icons/chevron_left_white.svg" alt="Chevron vers la gauche"></a>
@@ -29,10 +33,17 @@
 				<h2>Consulté récement</h2>
 			</a>
 			<hr>	
-			<a href="#" class="action">
-				<img src="/assets/icons/login_white.svg" alt="Icone de connexion">
-				<h2>Connexion / Inscription</h2>
-			</a>
+			<?php if(!isset($_SESSION['email'])){?>
+				<a href="?path=/connexion" class="action">
+					<img src="/assets/icons/login_white.svg" alt="Icone de connexion">
+					<h2>Connexion / Inscription</h2>
+				</a>
+			<?php } else {?>
+				<a href="?path=/connexion/logOut" class="action">
+					<img src="/assets/icons/login_white.svg" alt="Icone de connexion">
+					<h2>Déconnexion</h2>
+				</a></h3>
+			<?php } ?>
 		</div>
 		<nav>
 			<a href="https://entreprendre.service-public.fr/vosdroits/F31228" class="nav-hover">

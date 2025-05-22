@@ -12,9 +12,19 @@ const ROUTES = [
         'method' => 'home',
         'layout' => Layout::BACK,
     ],
-    'connexion'=> [
+    '/connexion' => [
+        'controller' => App\Controller\ConnexionController::class,
+        'method' => 'connection',
+        'layout' => Layout::LOG,
+    ],
+    '/connexion/logIn' => [
         'controller' => App\Controller\ConnexionController::class,
         'method' => 'logIn',
+        'view' => false,
+    ],
+    '/connexion/logOut' => [
+        'controller' => App\Controller\ConnexionController::class,
+        'method' => 'logOut',
     ]
 ];
 
