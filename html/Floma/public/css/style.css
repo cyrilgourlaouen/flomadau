@@ -465,6 +465,92 @@ footer div nav :any-link {
   justify-content: center;
 }
 
+.logMember {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logMember .form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.connection .logMember .logInLines {
+  gap: 0.625rem;
+}
+
+.connection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.875rem;
+  align-items: center;
+  padding: 6.25rem;
+}
+
+.connection img {
+  width: 100%;
+}
+
+.connection p {
+  width: max-content;
+}
+
+.connection hr {
+  width: 100%;
+  border: 0.063rem solid #424656;
+}
+
+.connection .logInPro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.connection input {
+  border: 0.063rem solid #637381;
+  padding: 0 0.625rem 0 2.25rem;
+  margin: 0.313rem 0 0.313rem 0;
+  border-radius: 0.375rem;
+  height: 2.813rem;
+}
+
+.connection button {
+  border: 0.125rem solid #000;
+  width: fit-content;
+  height: 3.375rem;
+  border-radius: 1.875rem;
+  background-color: var(--white-color);
+  padding: 0.438rem 0.938rem 0.438rem 0.938rem;
+}
+
+.connection .logInLines {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.connection a {
+  color: #000;
+}
+
+.connection .logInLines input[type="text"] {
+  background: url("/assets/icons/login_black.svg") no-repeat 0.5rem center;
+  background-size: 1.25rem;
+}
+
+.logInLines input[type="password"] {
+  background: url("/assets/icons/shield_black.svg") no-repeat 0.5rem center;
+  background-size: 1.25rem;
+}
+
+.connection-page header {
+  display: none;
+}
+
 /* Format tablette */
 @media (min-width: 35rem) {
   :root {
@@ -520,7 +606,6 @@ footer div nav :any-link {
   header .txtPostOffer:active {
     background-color: #334f9f;
     color: var(--white-color);
-
   }
 
   header .ImgLogIn,
@@ -537,6 +622,10 @@ footer div nav :any-link {
   footer div nav {
     flex-direction: row;
     gap: 2.188rem;
+  }
+
+  .connection-page footer {
+    display: none;
   }
 
   .offer-section {

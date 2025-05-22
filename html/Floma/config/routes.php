@@ -42,4 +42,8 @@ const ROUTES = [
         'method' => 'submit',
         'show' => false,
     ],
+    'connexion'=> [
+        'controller' => App\Controller\ConnexionController::class,
+        'method' => 'logIn',
+    ]
 ];
