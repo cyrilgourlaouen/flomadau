@@ -51,9 +51,16 @@ class CompteManager extends AbstractManager
 
     public function add(Compte $compte) {
 		return $this->create(Compte::class, [
-				'pseudo' => $compte->getPseudo(),
-				'id_compte' => $compte->id_compte(),
-				'content' => $compte->getContent()
+				'nom' => $compte->getNom(),
+				'prenom' => $compte->getPrenom(),
+				'email' => $compte->getEmail(),
+                'telephone' => $compte->getTelephone(),
+                'mot_de_passe' => $compte->getMotDePasse(),
+                'ville' => $compte->getVille(),
+                'code_postal' => $compte->getCodePostal(),
+                'nom_rue' => $compte->getNomRue(),
+                'numero_rue' => $compte->getNumeroRue(),
+                'complement_adresse' => $compte->getComplementAdresse()
 			]
 		);
 	}

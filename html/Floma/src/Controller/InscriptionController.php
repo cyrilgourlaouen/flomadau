@@ -33,9 +33,29 @@ class InscriptionController extends AbstractController
     {
         // Imaginons ici traiter la soumission d'un formulaire de contact et envoyer un mail...
         if (isset($_POST)) {
+            $compte = new Compte();
+            $compte->setNom($_POST['nom']);
+			$compte->setPrenom($_POST['prenom']);
+			$compte->setEmail($_POST['email']);
+            $compte->setTelephone($_POST['tel']);
+            $compte->setMotDePasse($_POST['password']);
+            $compte->setVille($_POST['city']);
+            $compte->setCodePostal($_POST['zip_code']);
+            $compte->setNomRue($_POST['name_street']);
+            $compte->setNumeroRue($_POST['num_street']);
+            if (isset($_POST['adress_comp'])){
+                $compte->setComplementAdresse($_POST['adress_comp']);
+            }
+
+            $compteManager = new CompteManager();
+            $compteManager->add($compte);
+
+            $id_compte = $compte.getId();
+
             $membre = new Membre();
             $membre->setPseudo($_POST['pseudo']);
-            $membre->setIdCompte();
+            $membre->setIdCompte($id_compte);
+
 
             $membreManager = new MembreManager();
             $membreManager->add($membre);
