@@ -387,3 +387,99 @@ input::placeholder {
 #little_subtittle{
   font-family: var(--noto);
 }
+
+#title_searchbar_btn{
+  display: flex;
+  flex-direction: column;
+  gap: 0.938rem;
+  padding: 1.875rem;
+  padding-top: 0;
+}
+
+#searchbar_all_btn{
+  display: flex;
+  justify-content: space-between;
+}
+
+#searchbar_white_btn{
+  display: flex;
+  gap: 1.875rem;
+}
+
+#input_recherche{
+  background-image: url('/assets/icons/search_primary.svg');
+  background-repeat: no-repeat;
+  background-position: 2% center;
+  background-size: 10%;
+  width: 25rem;
+  height: 2.75rem;
+  padding-left: 4rem;
+  border: 3px solid var(--black-color);
+  border-radius: 0.625rem;
+}
+
+#input_recherche:focus{
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+#input_recherche::placeholder{
+  font-family: var(--raleway);
+  font-size: var(--larger-text-size);
+  color: var(--light-grey-color);
+  font-weight: bold;
+}
+
+#all_offer{
+  font-size: var(--subtitle-size);
+}
+
+#btn_filtrer, #btn_trier{
+  width: 8.125rem;
+  height: 2.75rem;
+  background-color: var(--background-color);
+  font-size: var(--text-size);
+  border: 3px solid var(--black-color);
+  border-radius: 0.625rem;
+}
+
+#btn_ajouter{
+  width: 8.125rem;
+  height: 2.75rem;
+  background-color: var(--primary-color);
+  font-size: var(--text-size);
+  color: var(--background-color);
+  border-radius: 0.625rem;
+  border: none;
+}
+
+/*#btn_filtrer:hover, #btn_trier:hover{
+  background-color: var(--black-color);
+  color: var(--background-color);
+}*/
+
+#btn_filtrer:active, #btn_trier:active{
+  background-color: var(--dark-grey-color);
+  color: var(--black-color);
+}
+
+/*#btn_ajouter:hover{
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  border: 3px solid var(--primary-color);
+}*/
+
+#btn_ajouter:active{
+  background-color: #003e7d;
+  color: var(--black-color);
+  border-color: #003e7d;
+}
+
+input:disabled,
+button:disabled {
+  background-color: #eeeeee;
+  color: #aaaaaa;
+  border-color: #dddddd;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
