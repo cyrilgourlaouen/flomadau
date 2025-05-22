@@ -2,278 +2,195 @@
 
 namespace App\Entity;
 
-/**
- * Class Offer
- *
- * @package App\Entity
- */
 class Offer
 {
-    /** @var int */
+    public const TABLE_NAME = 'offre';
+
     private int $id;
-
-    /** @var string */
     private string $titre;
-
-    /** @var string */
     private string $resume;
-
-    /** @var string */
     private string $ville;
+    private int $code_postal;
+    private ?float $note_moyenne = null;
+    private ?int $nombre_avis = null;
+    private string $categorie;
+    private string $conditions_accessibilite;
+    private ?string $description_detaillee = null;
+    private ?string $telephone = null;
+    private ?string $nom_rue = null;
+    private ?int $numero_rue = null;
+    private ?string $complement_adresse = null;
+    private ?string $site_web = null;
+    private bool $en_ligne = true;
+    private int $code_professionnel;
 
-    /** @var int|null */
-    private ?int $noteMoyenne;
-
-    /** @var int|null */
-    private ?int $nombreAvis;
-
-    /** @var string */
-    private string $category;
-
-    /** @var string */
-    private string $conditionAccessibilite;
-
-    /** @var string|null */
-    private ?string $descriptionDetaillee;
-
-    /** @var string|null */
-    private ?string $telephone;
-
-    /** @var string|null */
-    private ?string $adressePostale;
-
-    /** @var string|null */
-    private ?string $siteWeb;
-
-    /** @var bool */
-    private bool $enLigne;
-
-    /** @var float */
-    private float $prixMinimal;
-
-    const TABLE_NAME = 'Offre';
-
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @param int $id
-     */
     public function setId(int $id): void
     {
         $this->id = $id;
     }
 
-    /**
-     * @return string
-     */
     public function getTitre(): string
     {
         return $this->titre;
     }
 
-    /**
-     * @param string $titre
-     */
     public function setTitre(string $titre): void
     {
         $this->titre = $titre;
     }
 
-    /**
-     * @return string
-     */
     public function getResume(): string
     {
         return $this->resume;
     }
 
-    /**
-     * @param string $resume
-     */
     public function setResume(string $resume): void
     {
         $this->resume = $resume;
     }
 
-    /**
-     * @return string
-     */
     public function getVille(): string
     {
         return $this->ville;
     }
 
-    /**
-     * @param string $ville
-     */
     public function setVille(string $ville): void
     {
         $this->ville = $ville;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getNoteMoyenne(): ?int
+    public function getCodePostal(): int
     {
-        return $this->noteMoyenne;
+        return $this->code_postal;
     }
 
-    /**
-     * @param int|null $noteMoyenne
-     */
-    public function setNoteMoyenne(?int $noteMoyenne): void
+    public function setCodePostal(int $code_postal): void
     {
-        $this->noteMoyenne = $noteMoyenne;
+        $this->code_postal = $code_postal;
     }
 
-    /**
-     * @return int|null
-     */
+    public function getNoteMoyenne(): ?float
+    {
+        return $this->note_moyenne;
+    }
+
+    public function setNoteMoyenne(?float $note_moyenne): void
+    {
+        $this->note_moyenne = $note_moyenne;
+    }
+
     public function getNombreAvis(): ?int
     {
-        return $this->nombreAvis;
+        return $this->nombre_avis;
     }
 
-    /**
-     * @param int|null $nombreAvis
-     */
-    public function setNombreAvis(?int $nombreAvis): void
+    public function setNombreAvis(?int $nombre_avis): void
     {
-        $this->nombreAvis = $nombreAvis;
+        $this->nombre_avis = $nombre_avis;
     }
 
-    /**
-     * @return string
-     */
-    public function getCategory(): string
+    public function getCategorie(): string
     {
-        return $this->category;
+        return $this->categorie;
     }
 
-    /**
-     * @param string $category
-     */
-    public function setCategory(string $category): void
+    public function setCategorie(string $categorie): void
     {
-        $this->category = $category;
+        $this->categorie = $categorie;
     }
 
-    /**
-     * @return string
-     */
-    public function getConditionAccessibilite(): string
+    public function getConditionsAccessibilite(): string
     {
-        return $this->conditionAccessibilite;
+        return $this->conditions_accessibilite;
     }
 
-    /**
-     * @param string $conditionAccessibilite
-     */
-    public function setConditionAccessibilite(string $conditionAccessibilite): void
+    public function setConditionsAccessibilite(string $conditions_accessibilite): void
     {
-        $this->conditionAccessibilite = $conditionAccessibilite;
+        $this->conditions_accessibilite = $conditions_accessibilite;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescriptionDetaillee(): ?string
     {
-        return $this->descriptionDetaillee;
+        return $this->description_detaillee;
     }
 
-    /**
-     * @param string|null $descriptionDetaillee
-     */
-    public function setDescriptionDetaillee(?string $descriptionDetaillee): void
+    public function setDescriptionDetaillee(?string $description_detaillee): void
     {
-        $this->descriptionDetaillee = $descriptionDetaillee;
+        $this->description_detaillee = $description_detaillee;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTelephone(): ?string
     {
         return $this->telephone;
     }
 
-    /**
-     * @param string|null $telephone
-     */
     public function setTelephone(?string $telephone): void
     {
         $this->telephone = $telephone;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getAdressePostale(): ?string
+    public function getNomRue(): ?string
     {
-        return $this->adressePostale;
+        return $this->nom_rue;
     }
 
-    /**
-     * @param string|null $adressePostale
-     */
-    public function setAdressePostale(?string $adressePostale): void
+    public function setNomRue(?string $nom_rue): void
     {
-        $this->adressePostale = $adressePostale;
+        $this->nom_rue = $nom_rue;
     }
 
-    /**
-     * @return string|null
-     */
+    public function getNumeroRue(): ?int
+    {
+        return $this->numero_rue;
+    }
+
+    public function setNumeroRue(?int $numero_rue): void
+    {
+        $this->numero_rue = $numero_rue;
+    }
+
+    public function getComplementAdresse(): ?string
+    {
+        return $this->complement_adresse;
+    }
+
+    public function setComplementAdresse(?string $complement_adresse): void
+    {
+        $this->complement_adresse = $complement_adresse;
+    }
+
     public function getSiteWeb(): ?string
     {
-        return $this->siteWeb;
+        return $this->site_web;
     }
 
-    /**
-     * @param string|null $siteWeb
-     */
-    public function setSiteWeb(?string $siteWeb): void
+    public function setSiteWeb(?string $site_web): void
     {
-        $this->siteWeb = $siteWeb;
+        $this->site_web = $site_web;
     }
 
-    /**
-     * @return bool
-     */
     public function isEnLigne(): bool
     {
-        return $this->enLigne;
+        return $this->en_ligne;
     }
 
-    /**
-     * @param bool $enLigne
-     */
-    public function setEnLigne(bool $enLigne): void
+    public function setEnLigne(bool $en_ligne): void
     {
-        $this->enLigne = $enLigne;
+        $this->en_ligne = $en_ligne;
     }
 
-    /**
-     * @return float
-     */
-    public function getPrixMinimal(): float
+    public function getCodeProfessionnel(): int
     {
-        return $this->prixMinimal;
+        return $this->code_professionnel;
     }
 
-    /**
-     * @param float $prixMinimal
-     */
-    public function setPrixMinimal(float $prixMinimal): void
+    public function setCodeProfessionnel(int $code_professionnel): void
     {
-        $this->prixMinimal = $prixMinimal;
+        $this->code_professionnel = $code_professionnel;
     }
 }

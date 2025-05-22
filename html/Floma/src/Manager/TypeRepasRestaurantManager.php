@@ -1,24 +1,24 @@
 <?php
 namespace App\Manager;
 
+use App\Entity\LangueGuideVisite;
+use App\Entity\TypeRepasRestaurant;
 use Floma\Manager\AbstractManager;
-use App\Entity\Offer;
-use App\Enum\OfferCategoryEnum;
 
 /**
- * Class OfferManager
+ * Class TagManager
  *
  * @package App\Manager
  */
-class OfferManager extends AbstractManager
+class TypeRepasRestaurantManager extends AbstractManager
 {
-    /**
+       /**
      * @param int $id
      * @return mixed
      */
     public function find(int $id)
     {
-        return $this->readOne(Offer::class, ['id' => $id]);
+        return $this->readOne(TypeRepasRestaurant::class, ['id_tag' => $id]);
     }
 
     /**
@@ -27,7 +27,7 @@ class OfferManager extends AbstractManager
      */
     public function findOneBy(array $filters)
     {
-        return $this->readOne(Offer::class, $filters);
+        return $this->readOne(TypeRepasRestaurant::class, $filters);
     }
 
     /**
@@ -35,7 +35,7 @@ class OfferManager extends AbstractManager
      */
     public function findAll()
     {
-        return $this->readMany(Offer::class);
+        return $this->readMany(TypeRepasRestaurant::class);
     }
 
     /**
@@ -47,6 +47,6 @@ class OfferManager extends AbstractManager
      */
     public function findBy(array $filters, array $order = [], ?int $limit = null, ?int $offset = null)
     {
-        return $this->readMany(Offer::class, $filters, $order, $limit, $offset);
+        return $this->readMany(TypeRepasRestaurant  ::class, $filters, $order, $limit, $offset);
     }
 }

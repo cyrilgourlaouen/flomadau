@@ -9,6 +9,5 @@ const ROUTES = [
     '/offer/{id}' => [
         'controller' => App\Controller\OfferController::class,
         'method' => 'show',
-        'view' => true
     ],
 ];
