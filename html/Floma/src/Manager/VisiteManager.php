@@ -30,6 +30,18 @@ class VisiteManager extends AbstractManager
     }
 
     /**
+     * @param array $filters
+     * @param array $order
+     * @param int|null $limit
+     * @param int|null $offset
+     * @return mixed
+     */
+    public function findBy(array $filters, array $order = [], ?int $limit = null, ?int $offset = null)
+    {
+        return $this->readMany(Visite::class, $filters, $order, $limit, $offset);
+    }
+
+    /**
      * @return mixed
      */
     public function findAll()

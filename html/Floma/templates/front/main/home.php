@@ -73,9 +73,30 @@ $euroCalculator = new RestaurantPriceRangeCalculator();
                             <img src="<?= $icon['path'] ?>" alt="<?= $icon['alt'] ?>">
                         </div>
                     <?php } ?>
-    
+
                     <!-- Image de fond de l'offre -->
-                    <img src="/uploads/offers/chateau-de-lannion.jpg" alt="" class="offer-card-img-main">
+                    <?php
+                    $imageUrl = null;
+
+                    if (!empty($offer['imageData']) && is_array($offer['imageData'])) {
+                        // Cherche l'image principale en priorité
+                        foreach ($offer['imageData'] as $img) {
+                            if (!empty($img['principale'])) {
+                                $imageUrl = $img['url_img'] ?? null;
+                                break;
+                            }
+                        }
+
+                        // Sinon prend la première image disponible
+                        if (!$imageUrl && isset($offer['imageData'][0]['url_img'])) {
+                            $imageUrl = $offer['imageData'][0]['url_img'];
+                        }
+                    }
+                    ?>
+                    <?php if ($imageUrl) { ?>
+                        <img src="/uploads/offers/<?= htmlspecialchars($imageUrl) ?>" alt="Image de l'offre" class="offer-card-img-main">
+                    <?php }?>
+
                 </div>
     
                 <!-- Description -->

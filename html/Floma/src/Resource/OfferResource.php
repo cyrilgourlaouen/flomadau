@@ -6,6 +6,7 @@ use App\Entity\Offer;
 use App\Entity\OptionSouscrite;
 use App\Entity\OptionVisibilite;
 use App\Enum\OfferCategoryEnum;
+use App\Manager\ImageManager;
 use App\Manager\OfferManager;
 use App\Manager\OptionSouscriteManager;
 use App\Manager\OptionVisibiliteManager;
@@ -86,6 +87,14 @@ class OfferResource extends AbstractResource
             if ($visibiliteResources) {
                 $this->add('optionVisibiliteData', $visibiliteResources);
             }
+        }
+
+        if (isset($context['image'])) {
+            $imageManager = new ImageManager();
+
+            $images = ImageResource::buildAll($imageManager->findBy(['id_offre' => $this->offer->getId()]));
+
+            $this->add('imageData', $images);
         }
 
     }
