@@ -13,11 +13,17 @@ const ROUTES = [
         'controller' => App\Controller\InscriptionController::class,
         'method' => 'home',
         'layout' => Layout::FRONT,
-    ]
+    ],
 
     '/inscription/membre/sign-up' => [
         'controller' => App\Controller\InscriptionController::class,
         'method' => 'signUp',
         'view' => false,
-    ]
+    ],
+    
+    '/pro' => [
+        'controller' => App\Controller\MainProController::class,
+        'method' => 'home',
+        'layout' => Layout::BACK,
+    ],
 ];

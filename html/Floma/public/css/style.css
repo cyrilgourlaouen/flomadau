@@ -83,7 +83,7 @@ p {
 /** header Format téléphone **/
 header .hidden,
 .logIn,
-.PostOffer {
+.postOffer {
   display: none;
 }
 
@@ -149,6 +149,15 @@ header nav {
 
 header h1, header h2, header h3 {
   color: var(--white-color);
+}
+
+header .action:active {
+  transform: scale(0.97);
+  box-shadow: inset 0 0 0.625rem rgba(0, 0, 0, 0.2);
+}
+
+header .nav-hover:hover {
+  text-decoration:underline var(--white-color);
 }
 
 /** Footer Format téléphone **/
@@ -260,7 +269,7 @@ li {
     display: none;
   }
 
-  header .logIn {
+  header .logIn , header .postOffer{
     display: block;
   }
 
@@ -276,15 +285,29 @@ li {
     gap: 1.25rem;
   }
 
-  header .PostOffer {
+  header .postOffer {
+    text-decoration: none;
+  }
+  
+  header .txtPostOffer {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0.313rem 0.625rem;
-    text-decoration: none;
     color: var(--white-color);
     border: 0.125rem solid var(--white-color);
     border-radius: 0.625rem;
+  }
+
+  header .txtPostOffer:hover {
+    background-color: var(--white-color);
+    color: var(--primary-color);
+  }
+
+  header .txtPostOffer:active {
+    background-color: #334f9f ;
+    color: var(--white-color);
+
   }
 
   header .ImgLogIn, header .ImgSearch {

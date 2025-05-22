@@ -1,0 +1,1 @@
+<p>Page d'accueil d'un professionnel</p>
