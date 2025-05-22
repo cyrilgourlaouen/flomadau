@@ -269,6 +269,14 @@ header .nav-hover:hover {
   text-decoration: underline var(--white-color);
 }
 
+header .imgLog {
+  width: 2.5rem;
+}
+
+header .checkBtn {
+  width: 1.938rem;
+}
+
 /** Footer Format téléphone **/
 footer {
   padding: 1.25rem;
@@ -465,9 +473,10 @@ footer div nav :any-link {
   justify-content: center;
 }
 
-.connection .close {
+.undoBtn {
   position: absolute;
-  right: 0;
+  left: 30px;
+  top: 30px;
 }
 
 .connection .logMember {
