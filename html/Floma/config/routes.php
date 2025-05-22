@@ -9,9 +9,15 @@ const ROUTES = [
         'layout' => Layout::FRONT,
     ],
 
-    '/inscriptionM' => [
-        'controller' => App\Controller\InscriptionMembreController::class,
+    '/inscription/membre' => [
+        'controller' => App\Controller\InscriptionController::class,
         'method' => 'home',
         'layout' => Layout::FRONT,
+    ]
+
+    '/inscription/membre/sign-up' => [
+        'controller' => App\Controller\InscriptionController::class,
+        'method' => 'signUp',
+        'view' => false,
     ]
 ];

@@ -9,7 +9,7 @@ use Floma\Controller\AbstractController;
  *
  * @package App\Controller
  */
-class InscriptionMembreController extends AbstractController
+class InscriptionController extends AbstractController
 {
     /**
      * @return string
@@ -29,7 +29,7 @@ class InscriptionMembreController extends AbstractController
     /**
      * @return null
      */
-    public function contact()
+    public function signUp()
     {
         // Imaginons ici traiter la soumission d'un formulaire de contact et envoyer un mail...
         return $this->redirectToRoute('home', ['state' => 'success']);
