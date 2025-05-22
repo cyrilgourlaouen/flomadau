@@ -23,3 +23,19 @@ function closeMenu() {
   }
 }
   
+document.addEventListener("DOMContentLoaded", function () {
+		const logBtn = document.getElementById("logBtn");
+		const logMenu = document.getElementById("logMenu");
+
+		logBtn.addEventListener("click", function (e) {
+			e.preventDefault();
+			logMenu.classList.toggle("hidden");
+		});
+
+		// Optionnel : Fermer le menu si on clique ailleurs
+		document.addEventListener("click", function (e) {
+			if (!logBtn.contains(e.target) && !logMenu.contains(e.target)) {
+				logMenu.classList.add("hidden");
+			}
+		});
+	});
