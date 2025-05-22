@@ -242,7 +242,6 @@ footer div nav :any-link {
   display: flex;
   flex-direction: column;
   gap: 0.938rem;
-
   background-color: var(--white-color);
   border-radius: 0.938rem;
   word-wrap: break-word;
@@ -330,7 +329,6 @@ footer div nav :any-link {
   border: 1px solid var(--black-color);
   width: 2.5rem;
   height: 2.5rem;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -382,7 +380,7 @@ footer div nav :any-link {
     --small-text-size: 1.094rem;
     --very-small-text-size: 0.75rem;
 
-    --page-padding : 2.188rem
+    --page-padding: 2.188rem
   }
 
   header .btnBurger {
