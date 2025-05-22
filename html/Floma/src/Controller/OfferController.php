@@ -23,6 +23,10 @@ class OfferController extends AbstractController
         return $this->renderView('front/offer/DetailedOffer.php', [
             "offer" => $enrichedOffer,
             'id' => $id,
+            'seo' => [
+                'title' => $enrichedOffer['titre'],
+                'description'=> $enrichedOffer['resume'],
+            ]
         ]);
     }
 }
