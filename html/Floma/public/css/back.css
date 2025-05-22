@@ -343,6 +343,23 @@ p.placeholder {
   width: 2.406rem;
 }
 
+.formGrid label{
+  display: inline-block;
+  width: 6.9375rem;
+}
+
+.formGrid input{
+  width: 5rem;
+}
+
+.formGrid .debutHoraire{
+  width: 4.3125rem;
+}
+
+.formGrid .finHoraire{
+  width: 2.406rem;
+}
+
 form {
   display: flex;
   flex-direction: column;
