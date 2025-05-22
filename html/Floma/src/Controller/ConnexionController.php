@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Manager\CompteManager;
 use Floma\Controller\AbstractController;
 use Floma\View\Layout;
 
@@ -17,13 +18,58 @@ class ConnexionController extends AbstractController
      */
     public function logIn()
     {
+        if (!empty($_POST)) {
+            $compteManager = new CompteManager();
+            $log = $compteManager->findBy([
+                "email" => $_POST["email"],
+                "mot_de_passe" => $_POST["password"],
+            ]);
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            if (!empty($log)) {
+                $_SESSION['email'] = $_POST['email'];
+                session_regenerate_id();
+                return $this->redirectToRoute('/');
+            } else {
+                return $this->redirectToRoute('/connexion', ["state" => "failure"]);
+            }
+        }
+    }
+    public function logOut()
+    {
+        // Clear session data
+        session_unset();
+
+        if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(
+                session_name(),
+                '',
+                time() - 42000,
+                $params["path"],
+                $params["domain"],
+                $params["secure"],
+                $params["httponly"]
+            );
+        }
+        session_destroy();
+
+        return $this->redirectToRoute('/');
+
+    }
+
+
+    public function connection()
+    {
         return $this->renderView(
-            'front/connexion.php', 
+            'front/connection/connection.php',
             [
                 'seo' => [
                     'title' => 'LogIn',
                 ]
-            ]);
+            ]
+        );
     }
 
     /**

@@ -18,7 +18,6 @@
 session_start();
 ?>
 <body>
-	<?php include '_header.php'; ?>
 	<main>
 		<?php require $templatePath ?>
 	</main>
