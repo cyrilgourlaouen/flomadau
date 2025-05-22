@@ -2,7 +2,7 @@
 
 namespace Floma\Controller;
 
-use Floma\View\Layout;
+use Floma\Enum\Layout;
 
 /**
  * Class AbstractController
