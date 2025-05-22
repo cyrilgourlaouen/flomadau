@@ -24,19 +24,19 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
     <title>Document</title>
 </head>
 <body>
-    <div class="contentMob hideMob">
-        <div class="images">
-            <img src="./uploads/offers/croisiere.jpg" alt="croisiere">
+    <div class="contentMob hideMob flex-col align-start gap-lg">
+        <div>
+            <img src="./uploads/offers/<?= $offer["imageData"][0]["url_img"] ?>" alt="image" class="full-height full-width">
         </div>
-        <div class="content">
-            <section class="tabMainHead">
-                <div class="rightPart">
+        <div class="content pad-top flex-col align-start gap-sm full-width">
+            <section class="flex-row align-start gap-lg">
+                <div class="rightPart flex-col align-start gap-sm">
                     <h1>
                         <?= htmlspecialchars($offer["titre"]) ?>
                     </h1>
-                    <div class="tags">
+                    <div class="tags flex-row align-center gap-sm">
                         <?php foreach($offer["tagData"] as $tag) {?>
-                            <div class="tag">
+                            <div class="tag flex-row align-center">
                                 <?= $tag["nom_tag"]?>
                             </div>
                         <?php } ?>
@@ -44,7 +44,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
                     <p>
                         <?= htmlspecialchars($offer["resume"]) ?>
                     </p>
-                    <div class="category">
+                    <div class="flex-row align-start">
                         <?= $stars->calculStars($offer["note_moyenne"]) ?>
                         <p>
                             <?=  "(" .  htmlspecialchars($offer["nombre_avis"]) . ")" . " - " .  htmlspecialchars($offer["categorie"]); ?>
@@ -53,7 +53,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
                 </div>
             </section>
             <section>
-                <div class="info">
+                <div>
                     <h3>
                         Informations sur l'offre
                     </h3>
@@ -63,7 +63,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
             </section>
             <?php if ($offer["description_detaillee"]) {?>
             <section>
-                <div class="description">
+                <div class="description flex-col align-start gap-sm">
                     <h3>
                         Description
                     </h3>
@@ -80,7 +80,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
                 <?php if ($fullAdresse) { ?>
                     <div id="map" city="<?= $fullAdresse ?>" style="width: 100%; height: 300px;"></div>
                 <?php } ?>
-                <div class="location">
+                <div class="align">
                     <?php if ($offer["code_postal"]) { ?>
                         <img src="./assets/icons/location_primary.svg" alt="location">
                         <p>
@@ -90,7 +90,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
                 </div>
             </section>
             <section>
-                <div class="contact">
+                <div class="flex-col align-start gap-md">
                     <?php if ($offer["telephone"] || $offer["site_web"]) {?>
                     <h3>
                         Contact
@@ -125,17 +125,17 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
     </div>
 
     <div class="contentTab hideTab">
-        <div class="accueil">
+        <div class="accueil flex-row align-center">
             <img src="./assets/icons/chevron_left_black.svg" alt="chevron-left">
             <h3>Accueil</h3>
         </div>
-        <div class="content">
-            <section class="tabMainHead">
+        <div class="content flex-col align-start gap-md">
+            <section class="flex-row align-start gap-lg">
                 <div class="images">
-                    <img src="./uploads/offers/croisiere.jpg" alt="croisiere">
+                    <img src="./uploads/offers/<?= $offer["imageData"][0]["url_img"] ?>" alt="croisiere">
                 </div>
-                <div class="rightPart">
-                    <div class="category">
+                <div class="rightPart flex-col align-start gap-sm">
+                    <div class="flex-row align-start">
                         <?= $stars->calculStars($offer["note_moyenne"]) ?>
                         <p>
                             <?=  "(" .  htmlspecialchars($offer["nombre_avis"]) . ")" . " - " .  htmlspecialchars($offer["categorie"]); ?>
@@ -144,7 +144,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
                     <h1>
                         <?= htmlspecialchars($offer["titre"]) ?>
                     </h1>
-                    <div class="summary">
+                    <div class="flex-col align-start gap-sm">
                         <h3>
                             Résumé
                         </h3>
@@ -152,7 +152,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
                             <?= htmlspecialchars($offer["resume"]) ?>
                         </p>
                     </div>
-                    <div class="contact">
+                    <div class="flex-col align-start gap-md">
                         <?php if ($offer["telephone"] || $offer["site_web"]) {?>
                         <h3>
                             Contact
@@ -184,10 +184,10 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
                     </div>
                 </div>
             </section>
-            <div class="infoTab">
-                <section class="leftPart">
+            <div class="infoTab flex-row align-start gap-lg">
+                <section>
                     <?php if ($offer["description_detaillee"]) {?>
-                    <div class="description">
+                    <div class="description flex-col align-start gap-sm">
                         <h3>
                             Description
                         </h3>
@@ -196,16 +196,16 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
                         </p>
                     </div>
                     <?php } ?>
-                    <div class="tags">
+                    <div class="tags flex-row align-center gap-sm">
                         <?php foreach($offer["tagData"] as $tag) {?>
-                            <div class="tag">
+                            <div class="tag flex-row align-center">
                                 <?= $tag["nom_tag"]?>
                             </div>
                         <?php } ?>
                     </div>
                 </section>
                 <section>
-                <div class="info">
+                <div class="flex-col align-start gap-md">
                     <h3>
                         Informations sur l'offre
                     </h3>
@@ -219,7 +219,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
                     Comment nous rejoindre ?
                 </h3>
                     <div id="mapTab" city="<?= $fullAdresse ?>" style="width: 100%; height: 300px;"></div>
-                <div class="location">
+                <div class="align">
                     <?php if ($offer["code_postal"]) { ?>
                         <img src="./assets/icons/location_primary.svg" alt="location">
                         <p>

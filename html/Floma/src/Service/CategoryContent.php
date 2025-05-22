@@ -13,7 +13,7 @@ class CategoryContent
             "<div class='align'><img src='./assets/icons/family_primary.svg' alt='family'><p>" . $cate["capacite"] .  " ans minimum</p></div>";
         }
         elseif ($nameCate === "Activite") {
-            $content .= "<div class='bigAlign'><div class='presta'><p class='semi-bold'>Prestation incluse</p>" . $this->getStringPresta($cate["prestations_incluses"]) . "</div>" .
+            $content .= "<div class='flex-row align-start gap-md'><div class='presta'><p class='semi-bold'>Prestation incluse</p>" . $this->getStringPresta($cate["prestations_incluses"]) . "</div>" .
             "<div class='presta'><p class='semi-bold'>Prestation non incluse</p>" . $this->getStringPresta($cate["prestations_non_incluses"]) . "</div></div>" .
             "<div class='align'><img src='./assets/icons/euro_symbol_primary.svg' alt='euro'><p>" . $cate["prix_minimal"] .  " euro</p></div>" .
             "<div class='align'><img src='./assets/icons/schedule_primary.svg' alt='horloge'><p>" . $cate["duree"] .  " heures</p></div>" .
@@ -26,7 +26,7 @@ class CategoryContent
             "<div class='align'><img src='./assets/icons/family_primary.svg' alt='famille'><p>Dès " . $cate["prix_minimal"] .  " euros</p></div>";
             if ($cate["url_plan"]) {
                 $content .= "<h3>Plan du parc d'attraction</h3>" .
-                "<a class='carteRestau' href='./uploads/parcAttraction/" . $cate["url_plan"] . "'download='./uploads/parcAttraction/" . $cate["url_plan"] . "' alt='carte'>Télécharger la carte du restaurant</a>";
+                "<a class='carteRestau' href='./uploads/parcAttraction/" . $cate["url_plan"] . "'download='./uploads/parcAttraction/" . $cate["url_plan"] . "' alt='carte'>Télécharger le plan du parc d'attraction</a>";
             }
         }
         elseif ($nameCate === "Restaurant") {

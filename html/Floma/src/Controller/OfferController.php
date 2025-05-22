@@ -18,6 +18,7 @@ class OfferController extends AbstractController
             'tagOffre' => ['isMultiple' => true],
             'langueGuideVisite' => ['isMultiple' => true], 
             'typeRepasRestaurant' => ['isMultiple' => true], 
+            'image' => ['isMultiple' => false],
         ]);
         return $this->renderView('front/offer/DetailedOffer.php', [
             "offer" => $enrichedOffer,

@@ -8,6 +8,7 @@ use App\Entity\Tag;
 use App\Entity\TagOffre;
 use App\Entity\TypeRepasRestaurant;
 use App\Enum\OfferCategoryEnum;
+use App\Manager\ImageManager;
 use App\Manager\LangueGuideManager;
 use App\Manager\LangueGuideVisiteManager;
 use App\Manager\OfferManager;
@@ -152,6 +153,14 @@ class OfferResource extends AbstractResource
             if ($typeRepasResources) {
                 $this->add('typeRepasData', $typeRepasResources);
             }
+        }
+
+        if (isset($context['image'])) {
+            $imageManager = new ImageManager();
+
+            $images = ImageResource::buildAll($imageManager->findBy(['id_offre' => $this->offer->getId()]));
+
+            $this->add('imageData', $images);
         }
     }
 
