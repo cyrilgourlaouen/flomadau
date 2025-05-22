@@ -155,6 +155,8 @@ class OfferResource extends AbstractResource
 
             if ($typeRepasResources) {
                 $this->add('typeRepasData', $typeRepasResources);
+            }
+        }
               
         if (isset($context['option'])) {
             $isMultiple = (bool) ($context['option']['isMultiple'] ?? false);

@@ -105,6 +105,7 @@ p {
 .no-pad-top { padding-top: 0 !important; }
 .no-pad-side { padding-left: 0 !important; padding-right: 0 !important; }
 .margin-left-md { margin-left:15px ;}
+.fit-content { width: fit-content; }
 
 .content {
   padding: 1.25rem;
@@ -148,7 +149,7 @@ body {
 .align {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.313rem;
 }
 
