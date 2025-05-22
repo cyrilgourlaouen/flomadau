@@ -23,7 +23,6 @@ class RestaurantResource extends AbstractResource
      */
     private function hydrate(array $context): void
     {
-        
     }
 
     /**

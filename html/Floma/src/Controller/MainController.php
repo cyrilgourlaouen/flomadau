@@ -23,12 +23,20 @@ class MainController extends AbstractController
         $enrichedOffers = OfferResource::buildAll($offerManager->findAll(), [
             'categorie' => ['isMultiple' => false],
             'professionnel' => ['isMultiple' => false],
+            'option' => ['isMultiple' => true],
+            'image' => ['isMultiple' => true],
         ]);
-
-        return $this->renderView('main/home.php', [
-            'title' => 'Accueil',
-            'offers' => $enrichedOffers
-        ]);
+            
+        return $this->renderView(
+            'front/main/home.php',
+            [ 
+                'offers' => $enrichedOffers,
+                'seo' => [
+                    'title' => 'Accueil',
+                    'descriptions'=> 'Page d\'accueil du PACT, parcourez nos offres, partagez vos expériences.'
+                ]
+            ]
+        );
     }
 
     /**

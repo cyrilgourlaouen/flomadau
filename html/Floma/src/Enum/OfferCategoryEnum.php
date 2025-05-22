@@ -1,11 +1,5 @@
 <?php
 namespace App\Enum;
-
-use App\Entity\Activite;
-use App\Entity\ParcAttraction;
-use App\Entity\Restaurant;
-use App\Entity\Spectacle;
-use App\Entity\Visite;
 use App\Manager\ActiviteManager;
 use App\Manager\ParcAttractionManager;
 use App\Manager\RestaurantManager;

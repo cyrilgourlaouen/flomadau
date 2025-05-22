@@ -2,14 +2,14 @@
 namespace App\Manager;
 
 use Floma\Manager\AbstractManager;
-use App\Entity\Visite;
+use App\Entity\OptionSouscrite;
 
 /**
- * Class VisiteManager
+ * Class OptionSouscriteManager
  *
  * @package App\Manager
  */
-class VisiteManager extends AbstractManager
+class OptionSouscriteManager extends AbstractManager
 {
     /**
      * @param int $id
@@ -17,7 +17,7 @@ class VisiteManager extends AbstractManager
      */
     public function find(int $id)
     {
-        return $this->readOne(Visite::class, ['id' => $id]);
+        return $this->readOne(OptionSouscrite::class, ['id' => $id]);
     }
 
     /**
@@ -26,9 +26,9 @@ class VisiteManager extends AbstractManager
      */
     public function findOneBy(array $filters)
     {
-        return $this->readOne(Visite::class, $filters);
+        return $this->readOne(OptionSouscrite::class, $filters);
     }
-
+    
     /**
      * @param array $filters
      * @param array $order
@@ -38,7 +38,7 @@ class VisiteManager extends AbstractManager
      */
     public function findBy(array $filters, array $order = [], ?int $limit = null, ?int $offset = null)
     {
-        return $this->readMany(Visite::class, $filters, $order, $limit, $offset);
+        return $this->readMany(OptionSouscrite::class, $filters, $order, $limit, $offset);
     }
 
     /**
@@ -46,6 +46,6 @@ class VisiteManager extends AbstractManager
      */
     public function findAll()
     {
-        return $this->readMany(Visite::class);
+        return $this->readMany(OptionSouscrite::class);
     }
 }

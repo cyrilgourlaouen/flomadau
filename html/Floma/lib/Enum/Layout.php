@@ -1,5 +1,5 @@
 <?php
-namespace Floma\View;
+namespace Floma\Enum;
 
 enum Layout: string
 {

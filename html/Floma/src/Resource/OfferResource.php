@@ -17,6 +17,10 @@ use App\Manager\TagManager;
 use App\Manager\TagOffreManager;
 use App\Manager\TypeRepasManager;
 use App\Manager\TypeRepasRestaurantManager;
+use App\Manager\OptionSouscriteManager;
+use App\Manager\OptionVisibiliteManager;
+use App\Entity\OptionSouscrite;
+use App\Entity\OptionVisibilite;
 use Floma\Resource\AbstractResource;
 
 class OfferResource extends AbstractResource
@@ -47,8 +51,7 @@ class OfferResource extends AbstractResource
                 $categoryData = $isMultiple
                     ? $resource::buildAll($manager->findBy(['id_offre' => $this->offer->getId()]))
                     : $resource::build($manager->findOneBy(['id_offre' => $this->offer->getId()]));
-                
-    
+              
                 $this->add('categoryData', $categoryData);
             }
         }
@@ -64,7 +67,7 @@ class OfferResource extends AbstractResource
 
             $this->add('professionnelData', $professionnelResource);
         }
-
+      
         if (isset($context['tagOffre'])) {
             $isMultiple = (bool) ($context['tagOffre']['isMultiple'] ?? false);
 
@@ -152,6 +155,33 @@ class OfferResource extends AbstractResource
 
             if ($typeRepasResources) {
                 $this->add('typeRepasData', $typeRepasResources);
+              
+        if (isset($context['option'])) {
+            $isMultiple = (bool) ($context['option']['isMultiple'] ?? false);
+
+            $optionSouscriteManager = new OptionSouscriteManager();
+            $optionVisibiliteManager = new OptionVisibiliteManager();
+
+            $optionSouscrites = $optionSouscriteManager->findBy([
+                'id_offre' => $this->offer->getId(),
+            ]);
+
+            if ($isMultiple) {
+                $visibiliteResources = array_values(array_filter(array_map(
+                    function (OptionSouscrite $optSouscrite) use ($optionVisibiliteManager) {
+                        $visibilite = $optionVisibiliteManager->find($optSouscrite->getIdOption());
+                        return $visibilite ? OptionVisibiliteResource::build($visibilite) : null;
+                    },
+                    $optionSouscrites
+                )));
+            } else {
+                $firstOpt = $optionSouscrites[0] ?? null;
+                $visibilite = $firstOpt ? $optionVisibiliteManager->find($firstOpt->getIdOption()) : null;
+                $visibiliteResources = $visibilite ? OptionVisibiliteResource::build($visibilite) : null;
+            }
+
+            if ($visibiliteResources) {
+                $this->add('optionVisibiliteData', $visibiliteResources);
             }
         }
 
