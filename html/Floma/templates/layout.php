@@ -23,7 +23,6 @@
 <?php
 session_start();
 ?>
-
 <body>
 	<?php include '_header.php'; ?>
 	<main>
