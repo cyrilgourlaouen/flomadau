@@ -20,13 +20,9 @@ const ROUTES = [
         'controller' => App\Controller\ConnexionProController::class,
         'method' => 'connexionPro',
     ],
-    '/offer/{id}' => [
-        'controller' => App\Controller\OfferController::class,
-        'method' => 'show',
-    ],
-    '/pro' => [
-        'controller' => App\Controller\MainProController::class,
-        'method' => 'home',
+    '/pro/connexion/login' => [
+        'controller' => App\Controller\ConnexionProController::class,
+        'method' => 'logIn',
         'layout' => Layout::BACK,
     ],
 ];
