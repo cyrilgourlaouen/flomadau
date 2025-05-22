@@ -638,13 +638,6 @@ footer div nav :any-link {
   padding: 6.25rem;
 }
 
-<<<<<<< HEAD
-=======
-.connection img {
-  width: 100%;
-}
-
->>>>>>> 9e80653 (Feat: Tel)
 .connection p {
   width: max-content;
 }
@@ -702,7 +695,6 @@ footer div nav :any-link {
   display: none;
 }
 
-<<<<<<< HEAD
 .connection-page .right-img {
   display: none;
 }
@@ -720,8 +712,6 @@ footer div nav :any-link {
   color: #000;
 }
 
-=======
->>>>>>> 9e80653 (Feat: Tel)
 /* Format tablette */
 @media (min-width: 35rem) {
   :root {
@@ -874,7 +864,6 @@ footer div nav :any-link {
   .connection-page footer {
     display: none;
   }
-<<<<<<< HEAD
 
   .main {
     display: flex;
@@ -915,8 +904,6 @@ footer div nav :any-link {
     background-color: #000;
     color: var(--white-color);
   }
-=======
->>>>>>> 9e80653 (Feat: Tel)
 }
 
 @media (max-width: 61.875rem) {
