@@ -32,7 +32,16 @@ class InscriptionController extends AbstractController
     public function signUp()
     {
         // Imaginons ici traiter la soumission d'un formulaire de contact et envoyer un mail...
-        return $this->redirectToRoute('home', ['state' => 'success']);
+        if (isset($_POST)) {
+            $membre = new Membre();
+            $membre->setPseudo($_POST['pseudo']);
+            $membre->setIdCompte();
+
+            $membreManager = new MembreManager();
+            $membreManager->add($membre);
+            return $this->redirectToRoute('/');
+        }
+        return $this->redirectToRoute('/inscription/membre', ['state' => 'failure']);
     }
 
 }

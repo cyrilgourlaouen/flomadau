@@ -343,13 +343,6 @@ li {
     gap: 1.875rem;
   }
   
-  #background_image{
-      display: block;
-      position: sticky;
-      right: 0;
-      top: 0;
-  }
-  
   #liste_mobile {
       display: none;
   }
@@ -397,14 +390,19 @@ li {
       width: 50%;
   }
   
-  #background{
+  #background_image_block{
+      position: sticky;
       width: 50%;
       height: 100vh;
+      top: 0;
       margin: 0;
   }
   
   #background_image{
-      display: initial;
+      display: block;
+      position: sticky;
+      right: 0;
+      top: 0;
       width: 100%;
       height: 100vh;
       object-fit: cover;
@@ -419,10 +417,6 @@ li {
 
   footer div {
     justify-content: center;
-  }
-
-  #inscription_main {
-    padding: 1.25rem;
   }
   
   #inscription_membre, #inscription_membre > div {
@@ -442,6 +436,7 @@ li {
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding: 1.25rem;
   }
 
   .groupe > div, .solo{

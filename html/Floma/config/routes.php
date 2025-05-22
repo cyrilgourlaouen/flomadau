@@ -12,7 +12,7 @@ const ROUTES = [
     '/inscription/membre' => [
         'controller' => App\Controller\InscriptionController::class,
         'method' => 'home',
-        'layout' => Layout::FRONT,
+        'layout' => Layout::FRONT_INSCRIPTION,
     ],
 
     '/inscription/membre/sign-up' => [
@@ -20,7 +20,7 @@ const ROUTES = [
         'method' => 'signUp',
         'view' => false,
     ],
-    
+
     '/pro' => [
         'controller' => App\Controller\MainProController::class,
         'method' => 'home',
