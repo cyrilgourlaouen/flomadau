@@ -44,7 +44,7 @@ document.getElementById('inscription_membre').addEventListener('submit',function
 
     // Le mot de passe dans le champ confirmation est différent de celui du champ principale
     const password_conf = document.getElementById('conf_password').value.trim();
-    if (password_conf == "") {
+    if (password_conf !== password) {
         isValid = false;
         document.getElementById('error-password-conf').textContent = "Les mots de passe ne correspondent pas";
     }
