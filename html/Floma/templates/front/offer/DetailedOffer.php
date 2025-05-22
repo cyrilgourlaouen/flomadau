@@ -215,7 +215,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
                 </div>
             </section>
             </div>
-            <section class="sectionOffreDetaille">
+            <section class="sectionOffreDetaille gap-sm">
                 <?php if ($fullAdresse) { ?>
                 <h3>
                     Comment nous rejoindre ?
