@@ -11,7 +11,7 @@ const ROUTES = [
 
     '/inscriptionM' => [
         'controller' => App\Controller\InscriptionMembreController::class,
-        'method' => 'creation_membre',
-        'layout' => Layout::INSCRIPTION_FRONT,
+        'method' => 'home',
+        'layout' => Layout::FRONT,
     ]
 ];

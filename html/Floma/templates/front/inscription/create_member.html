@@ -6,12 +6,12 @@
         <meta name="keywords" content="Member account creation">
         <meta name="description" content="Page to create a member account">
         <title>Création d'un compte membre</title>
-        <link rel="stylesheet" type="text/css" href="../../../public/css/style.css">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
     </head>
     <body class="inscription">
         <main id="inscription_main"> 
             <div id="form_main">
-                <a href=""><img src="../../../public/assets/icons/logo_complet_bleu.svg" alt="Logo de PACT en bleu" id="logo"></a>
+                <a href=""><img src="/assets/icons/logo_complet_bleu.svg" alt="Logo de PACT en bleu" id="logo"></a>
                 <h1> Créer un compte </h1>
                 <hr id="transition_bar">
                 <form method="post" enctype="multipart/form-data" action="inscription_membre.php" id="inscription_membre">
@@ -50,7 +50,6 @@
                     <div class="solo">
                         <label for="photo"> Photo de profil </label>
                         <input type="file" id="photo" name="photo" accept="image/png, image/jpeg" required></input>
-                        <!-- Drag and drop window of the picture -->
                     </div>
 
                     <div class="groupe">
@@ -116,14 +115,14 @@
                     </ul>
                 </form>
 
-                <h4>Si vous avez déjà un compte <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.youtube.com/watch%3Fv%3DdQw4w9WgXcQ&ved=2ahUKEwjroem03KeNAxXhRaQEHWjSHfwQwqsBegQIDRAG&usg=AOvVaw0aHtehaphMhOCAkCydRLZU">connectez-vous</a></h3>
+                <h4>Si vous avez déjà un compte <a href="#">connectez-vous</a></h3>
                 <button type="submit" form="inscription_membre" value="Submit" id="signup_button"> <h3>S'inscrire</h3> </button>
             </div>
             <figure id="background_image_block">
-                <img src="../../../public/assets/images/bg_inscription.png" alt="Vue de haut sur une plage de la côte d'azur" id="background_image">
+                <img src="/assets/images/bg_inscription.png" alt="Vue de haut sur une plage de la côte d'azur" id="background_image">
             </figure>
         </main>
         <footer></footer>
-        <script src="../../../public/js/error-message.js"></script>
+        <script src="/js/error-message.js"></script>
     </body>
 </html>

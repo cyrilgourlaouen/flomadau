@@ -14,7 +14,7 @@ class InscriptionMembreController extends AbstractController
     /**
      * @return string
      */
-    public function inscription_front()
+    public function home()
     {
         return $this->renderView(
             'front/inscription/create_member.php', 

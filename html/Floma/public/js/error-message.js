@@ -16,7 +16,7 @@ document.getElementById('inscription_membre').addEventListener('submit',function
 
     //Pseudo existe déjà en BDD
     const pseudo = document.getElementById('pseudo').value.trim();
-    if (pseudo == "a") {
+    if (pseudo == "") {
         isValid = false;
         document.getElementById('error-pseudo').textContent = "Pseudo déjà existant";
     }
