@@ -91,6 +91,7 @@ p {
 .full-height { height: 100%; }
 .no-pad-top { padding-top: 0 !important; }
 .no-pad-side { padding-left: 0 !important; padding-right: 0 !important; }
+.margin-left-md { margin-left:15px ;}
 
 .content {
   padding: 1.25rem;
@@ -118,11 +119,15 @@ body {
   font-family: var(--noto);
 }
 
+.chevronLeft {
+  width: 2.5rem;
+  height: auto;
+}
+
 .sectionOffreDetaille {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.625rem;
   width: 100%;
   height:100%;
 }
@@ -363,12 +368,6 @@ footer div nav :any-link {
 }
 
 @media (width >= 65rem) {
-  .accueil {
-    padding: 0;
-    gap: 0.188rem;
-    margin-left: 1.25rem;
-  }
-
   .hideTab {
     display: block;
   }
@@ -382,9 +381,13 @@ footer div nav :any-link {
   }
 
   .images img {
-    width:39.875rem;
-    height:24.563rem;
+    width:100%;
+    height:auto;
     border-radius: 0.938rem;
+  }
+
+  .images{
+    width: 100%;
   }
 
   .infoTab {

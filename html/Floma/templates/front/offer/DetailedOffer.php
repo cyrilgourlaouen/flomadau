@@ -125,11 +125,13 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
     </div>
 
     <div class="contentTab hideTab">
-        <div class="accueil flex-row align-center">
-            <img src="./assets/icons/chevron_left_black.svg" alt="chevron-left">
-            <h3>Accueil</h3>
-        </div>
-        <div class="content no-pad-side flex-col align-start gap-md">
+        <a href="/">
+            <div class="accueil flex-row align-center">
+                <img src="./assets/icons/chevron_left_black.svg" alt="chevron-left" class="chevronLeft">
+                <h3>Accueil</h3>
+            </div>
+        </a>
+        <div class="content no-pad-side flex-col align-start gap-lg">
             <section class="sectionOffreDetaille flex-row gap-lg">
                 <div class="images">
                     <img src="./uploads/offers/<?= $offer["imageData"][0]["url_img"] ?>" alt="croisiere">
