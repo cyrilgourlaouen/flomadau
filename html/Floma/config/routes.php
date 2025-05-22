@@ -12,4 +12,9 @@ const ROUTES = [
         'method' => 'home',
         'layout' => Layout::BACK,
     ],
+    '/offre/creation' => [
+        'controller' => App\Controller\CreationOffreController::class,
+        'method' => 'home',
+        'layout' => Layout::BACK,
+    ],
 ];
