@@ -427,54 +427,6 @@ footer div nav :any-link {
 
 .offer-card-img-category-icon {
   margin: 0.938rem;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background-color: var(--background-color);
-  border-radius: 100%;
-  border: 1px solid var(--black-color);
-  width: 2.5rem;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.offer-card-img-category-icon img {
-  width: 1.5rem;
-  height: auto;
-}
-
-.offer-card .offer-card-img-main {
-  width: 100%;
-  height: auto;
-  border-radius: 0.938rem;
-}
-
-.offer-card-price-note,
-.offer-card-city-author {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.offer-card-city,
-.offer-card-note,
-.offer-card-price {
-  flex-direction: row;
-  display: flex;
-  align-items: center;
-  justify-items: center;
-  gap: 0.313rem;
-}
-
-.offer-card-note-stars,
-.offer-card-price-euros {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
 }
 
 .undoBtn {
