@@ -1,6 +1,6 @@
 <header>
     <div class="menuContent">
-        <img src="/assets/icons/logo.png" alt="Logo" class="logo">
+        <img src="/assets/images/logo_blue.png" alt="Logo" class="logo">
         <div class="menuTextContainer">
             <h2>MENU</h2>
             <ul class="sidebar-menu">

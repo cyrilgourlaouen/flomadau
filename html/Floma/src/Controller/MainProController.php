@@ -9,8 +9,6 @@ class MainProController extends AbstractController
 {
     public function home()
     {
-        $this->setLayout(Layout::BACK);
-        
         return $this->renderView(
             'backoffice/home.php',
             [

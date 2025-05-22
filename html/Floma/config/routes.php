@@ -7,8 +7,9 @@ const ROUTES = [
         'controller' => App\Controller\MainController::class,
         'method' => 'home',
     ],
-    '/pro'=> [
+    '/pro' => [
         'controller' => App\Controller\MainProController::class,
-        'method'=> 'home',
+        'method' => 'home',
+        'layout' => Layout::BACK,
     ],
 ];
