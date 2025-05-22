@@ -54,7 +54,12 @@ const ROUTES = [
     '/connexion/logOut' => [
         'controller' => App\Controller\ConnexionController::class,
         'method' => 'logOut',
-    ]
+    ],
+    '/offre/creation' => [
+        'controller' => App\Controller\CreationOffreController::class,
+        'method' => 'home',
+        'layout' => Layout::BACK,
+    ],
 ];
 
 ?>
