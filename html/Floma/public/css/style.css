@@ -32,7 +32,7 @@
   --raleway: "Raleway", sans-serif;
   --noto: "Noto Sans", sans-serif;
 
-  --padding: 1.563rem;
+  --page-padding: 1.563rem;
 }
 
 body {
@@ -223,7 +223,7 @@ footer div nav :any-link {
   display: flex;
   flex-direction: column;
   align-items: self-start;
-  padding: 1.25rem;
+  padding: var(--page-padding);
   width: 100%;
   height: fit-content;
   gap: 1.25rem;
@@ -376,10 +376,13 @@ footer div nav :any-link {
 /* Format tablette */
 @media (min-width: 35rem) {
   :root {
-    --title-size: 2rem;
-    --subtitle-size: 1.625rem;
-    --text-size: 1.125rem;
-    --small-text-size: 0.875rem;
+    --title-size: 1.875rem;
+    --subtitle-size: 1.563rem;
+    --text-size: 1.25rem;
+    --small-text-size: 1.094rem;
+    --very-small-text-size: 0.75rem;
+
+    --page-padding : 2.188rem
   }
 
   header .btnBurger {
@@ -454,13 +457,16 @@ footer div nav :any-link {
     gap: 1.25rem;
     width: 100%;
     justify-content: center;
-    /* centre les colonnes si pas assez pour les aligner à gauche */
     align-items: stretch;
   }
 
   .offer-card {
     height: 100%;
-    /* occupe toute la cellule grid */
+  }
+
+  .offer-card-img-badge-pink img,
+  .offer-card-img-badge-green img {
+    height: 18px;
   }
 }
 
