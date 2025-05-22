@@ -276,6 +276,11 @@ input::placeholder {
   gap: 0.3rem;
 }
 
+.error-message {
+    color: red;
+    font-size: 0.9em;
+}
+
 /* Black button */
 .button-black {
   background: var(--black-color);

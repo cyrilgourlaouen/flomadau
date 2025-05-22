@@ -12,4 +12,8 @@ const ROUTES = [
         'method' => 'home',
         'layout' => Layout::BACK,
     ],
+    '/pro/signup' => [
+        'controller' => App\Controller\SignupProController::class,
+        'method'=> 'show',
+    ],
 ];
