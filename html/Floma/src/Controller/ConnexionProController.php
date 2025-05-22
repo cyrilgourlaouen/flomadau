@@ -7,7 +7,7 @@ use Floma\View\Layout;
 
 class ConnexionProController extends AbstractController
 {
-    public function home()
+    public function connexionPro()
     {
         return $this->renderView(
             'backoffice/connexion_pro.php',

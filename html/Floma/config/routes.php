@@ -17,8 +17,8 @@ const ROUTES = [
         'layout' => Layout::BACK,
     ],
     '/pro/connexion' => [
-        'controller' => App\Controller\MainProController::class,
-        'method' => 'home',
+        'controller' => App\Controller\ConnexionProController::class,
+        'method' => 'connexionPro',
         'layout' => Layout::BACK,
     ],
 ];
