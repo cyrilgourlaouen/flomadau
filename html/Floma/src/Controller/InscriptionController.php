@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Compte;
+use App\Entity\Membre;
+use App\Manager\CompteManager;
+use App\Manager\MembreManager;
 use Floma\Controller\AbstractController;
 
 /**

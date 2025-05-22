@@ -444,12 +444,6 @@ li {
     background-color: black;
   }
 
-  #transition_bar {
-    width: 50%;
-    color: black;
-    background-color: black;
-  }
-
   header .btnBurger {
     display: none;
   }
@@ -533,14 +527,8 @@ li {
   .offer-card-img-badge-green img {
     height: 18px;
   }
-
-  main {
-    display: flex;
-    flex-direction: row;
-    padding: 0;
-  }
   
-  input {
+  #inscription_main input {
     width: 100%;
   }
   
@@ -566,6 +554,13 @@ li {
       align-self: center;
   }
   
+  #inscription_main {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    width: 100%;
+  }
+
   #form_main {
       width: 50%;
       display: flex;
