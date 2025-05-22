@@ -138,7 +138,7 @@ $starCalculator = new MetricStarsCalculator();
                         <div class="offer-card-city-author">
                             <!-- Ville -->
                             <div class="offer-card-city">
-                                <img src="/assets/icons/location_on_primary.svg" alt="">
+                                <img src="/assets/icons/location_primary.svg" alt="Icone de localisation">
                                 <p><?= htmlspecialchars($offer['ville']) ?></p>
                             </div>
 
