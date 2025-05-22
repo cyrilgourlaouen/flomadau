@@ -63,7 +63,7 @@ const ROUTES = [
     '/consultationMembre' => [
         'controller' => App\Controller\ConsultationMController::class,
         'method' => 'consultation',
-    ]
+    ],
     '/offre/creation' => [
         'controller' => App\Controller\CreationOffreController::class,
         'method' => 'home',
