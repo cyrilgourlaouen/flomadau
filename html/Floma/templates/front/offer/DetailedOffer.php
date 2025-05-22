@@ -28,7 +28,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
         <div>
             <img src="./uploads/offers/<?= $offer["imageData"][0]["url_img"] ?>" alt="image" class="full-height full-width">
         </div>
-        <div class="content pad-top flex-col align-start gap-sm full-width">
+        <div class="content no-pad-top flex-col align-start gap-sm full-width">
             <section class="flex-row align-start gap-lg">
                 <div class="rightPart flex-col align-start gap-sm">
                     <h1>
@@ -129,7 +129,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
             <img src="./assets/icons/chevron_left_black.svg" alt="chevron-left">
             <h3>Accueil</h3>
         </div>
-        <div class="content flex-col align-start gap-md">
+        <div class="content no-pad-side flex-col align-start gap-md">
             <section class="flex-row align-start gap-lg">
                 <div class="images">
                     <img src="./uploads/offers/<?= $offer["imageData"][0]["url_img"] ?>" alt="croisiere">

@@ -290,15 +290,16 @@ footer div nav :any-link {
 .gap-lg { gap: 1.563rem; }
 .full-width { width: 100%; }
 .full-height { height: 100%; }
-.pad-top { padding-top: 0 !important; }
+.no-pad-top { padding-top: 0 !important; }
+.no-pad-side { padding-left: 0 !important; padding-right: 0 !important; }
 
-@media (width >= 26.75rem) {
+@media (width >= 0rem) {
   .hideTab {
     display: none;
   }
 
   .description {
-    margin: 0.625rem -1.25rem 0.625rem -1.25rem;
+    margin: 0 -1.25rem 0.625rem -1.25rem;
     width: calc(100% + 2.5rem);
     padding: 0.938rem 1.25rem;
     isolation: isolate;
@@ -306,7 +307,7 @@ footer div nav :any-link {
   }
 }
 
-@media (width >= 90rem) {
+@media (width >= 65rem) {
   .accueil {
     padding: 0;
     gap: 0.188rem;
