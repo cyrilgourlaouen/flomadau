@@ -49,4 +49,16 @@ class OfferManager extends AbstractManager
     {
         return $this->readMany(Offer::class, $filters, $order, $limit, $offset);
     }
+
+    public function add(Offer $offer) {
+		return $this->create(Offer::class, [
+				'titre' => $offer->getTitre(),
+                'resume' => $offer->getResume(),
+                'ville' => $offer->getVille(),
+                'code_postal' => $offer->getCodePostal(),
+                'categorie' => $offer->getCategorie(),
+                'conditions_accessibilite' => $offer->getConditionAccessibilite()
+			]
+		);
+	}
 }
