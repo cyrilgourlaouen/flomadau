@@ -2,7 +2,7 @@
 
 namespace Floma\Router;
 
-use Floma\View\Layout;
+use Floma\Enum\Layout;
 
 require dirname(__DIR__, 2) . '/config/routes.php';
 

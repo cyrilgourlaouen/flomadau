@@ -1,6 +1,6 @@
 <?php
 
-use Floma\View\Layout;
+use Floma\Enum\Layout;
 
 const ROUTES = [
     '/' => [
