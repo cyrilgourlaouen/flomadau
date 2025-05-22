@@ -79,6 +79,11 @@ const ROUTES = [
     '/check/email' => [
         'controller' => App\Controller\ModificationMembreController::class,
         'method' => 'checkEmail',
+    ]
+    '/offre/creation' => [
+        'controller' => App\Controller\CreationOffreController::class,
+        'method' => 'home',
+        'layout' => Layout::BACK,
     ],
 ];
 
