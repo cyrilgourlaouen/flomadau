@@ -826,6 +826,132 @@ footer div nav :any-link {
   justify-content: center;
 }
 
+.undoBtn {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+}
+
+.connection .logMember {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.connection .logMember .form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.connection .logMember .logLines {
+  gap: 0.625rem;
+}
+
+.connection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.875rem;
+  align-items: center;
+  padding: 6.25rem;
+}
+
+.connection p {
+  width: max-content;
+}
+
+.connection hr {
+  width: 100%;
+  border: 0.063rem solid #424656;
+}
+
+.connection .logPro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.connection input {
+  border: 0.063rem solid #637381;
+  padding: 0 0.625rem 0 2.25rem;
+  margin: 0.313rem 0 0.313rem 0;
+  border-radius: 0.375rem;
+  height: 2.813rem;
+}
+
+.connection button {
+  border: 0.125rem solid #000;
+  width: fit-content;
+  height: 3.375rem;
+  border-radius: 1.875rem;
+  background-color: var(--white-color);
+  padding: 0.438rem 0.938rem 0.438rem 0.938rem;
+}
+
+.connection .logLines {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.connection a {
+  color: #000;
+}
+
+.connection .formBtnEmail {
+  background: url("/assets/icons/login_black.svg") no-repeat 0.5rem center;
+  background-size: 1.25rem;
+  font-size: var(--text-size);
+}
+
+.connection .formBtnPassword {
+  background: url("/assets/icons/shield_black.svg") no-repeat 0.5rem center;
+  background-size: 1.25rem;
+}
+
+.connection-page header , .right-img , .title-connexion {
+  display: none;
+}
+
+.connection input:focus {
+  outline-color: var(--primary-color);
+}
+
+.connection button:active {
+  background-color: #444444;
+  color: #000;
+}
+
+.logMenu {
+	position: absolute;
+	top: 4.4rem; 
+	right: 0.625rem;
+	background: white;
+	border: 0.063rem solid #ccc;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+	padding: 0.625rem;
+}
+
+.logMenu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.logMenu ul li {
+	margin: 0.5rem 0;
+}
+
+.logMenu ul li a {
+	color: #333;
+	text-decoration: none;
+	font-weight: 500;
+}
+
 /* Format tablette */
 @media (min-width: 35rem) {
   :root {
