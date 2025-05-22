@@ -7,29 +7,38 @@
 </head>
 
 <body class="connection-page">
-    <div class="connection">
-        <img src="/assets/images/logo_entier_bleu.svg" alt="logo">
-        <div class="logMember">
-            <form method="POST" class="form">
-                <div class="logInLines">
-                    <h2>Pseudonyme</h2>
-                    <input type="text">
-                </div>
-                <div class="logInLines">
-                    <h2>Mot de passe</h2>
-                    <input type="password">
-                </div>
-                <p>Si vous n'avez pas de compte <a href="">inscrivez-vous</a></p>
-                <button type="submit">
-                    <p>Se connecter</p>
-                </button>
-            </form>
+    <div class="main">
+        <div class="connection">
+            <img src="/assets/images/logo_entier_bleu.svg" alt="logo">
+            <div class="title-connexion">
+                <h2>Connexion</h2>
+                <hr>
+            </div>
+            <div class="logMember">
+                <form method="POST" class="form">
+                    <div class="logInLines">
+                        <h2>Pseudonyme</h2>
+                        <input type="text">
+                    </div>
+                    <div class="logInLines">
+                        <h2>Mot de passe</h2>
+                        <input type="password">
+                    </div>
+                    <p>Si vous n'avez pas de compte <a href="">inscrivez-vous</a></p>
+                    <nav class="submit-container">
+                        <button type="submit">
+                            <p>Se connecter</p>
+                        </button>
+                    </nav>
+                </form>
+            </div>
+            <div class="logInPro">
+                <h2 class="pro">Professionnel</h2>
+                <hr>
+                <p>Si vous êtes professionnel <a href="">connectez-vous</a></p>
+            </div>
         </div>
-        <div class="logInPro">
-            <h2 class="pro">Professionnel</h2>
-            <hr>
-            <p>Si vous êtes professionnel <a href="">connectez-vous</a></p>
-        </div>
+        <img class="right-img"src="/assets/images/monaco.png" alt="monaco">
     </div>
 </body>
 
