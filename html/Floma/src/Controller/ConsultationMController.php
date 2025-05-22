@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Manager\CompteManager;
 use Floma\Controller\AbstractController;
 
 /**
@@ -9,14 +10,17 @@ use Floma\Controller\AbstractController;
  *
  * @package App\Controller
  */
-class InformationMController extends AbstractController
+class ConsultationMController extends AbstractController
 {
+    
     /**
      * @return string
      */
-    public function information()
+    public function consultation()
     {
-        return $this->renderView('front/information.php', ['title' => 'Information Membre']);
+        $compteManager = new CompteManager();
+        $account = $compteManager->findBy(["email" => $_SESSION['user']['email']]);
+        return $this->renderView('front/consultation.php', ['title' => 'Information Membre', 'account' => $account] );
     }
 
     /**

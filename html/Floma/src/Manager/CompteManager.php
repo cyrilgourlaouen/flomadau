@@ -2,14 +2,14 @@
 namespace App\Manager;
 
 use Floma\Manager\AbstractManager;
-use App\Entity\Image;
+use App\Entity\Compte;
 
 /**
- * Class ImageManager
+ * Class CompteManager
  *
  * @package App\Manager
  */
-class ImageManager extends AbstractManager
+class CompteManager extends AbstractManager
 {
     /**
      * @param int $id
@@ -17,7 +17,7 @@ class ImageManager extends AbstractManager
      */
     public function find(int $id)
     {
-        return $this->readOne(Image::class, ['id' => $id]);
+        return $this->readOne(Compte::class, ['id' => $id]);
     }
 
     /**
@@ -26,7 +26,7 @@ class ImageManager extends AbstractManager
      */
     public function findOneBy(array $filters)
     {
-        return $this->readOne(Image::class, $filters);
+        return $this->readOne(Compte::class, $filters);
     }
 
     /**
@@ -38,7 +38,7 @@ class ImageManager extends AbstractManager
      */
     public function findBy(array $filters, array $order = [], ?int $limit = null, ?int $offset = null)
     {
-        return $this->readMany(Image::class, $filters, $order, $limit, $offset);
+        return $this->readMany(Compte::class, $filters, $order, $limit, $offset);
     }
 
     /**
@@ -46,6 +46,6 @@ class ImageManager extends AbstractManager
      */
     public function findAll()
     {
-        return $this->readMany(Image::class);
+        return $this->readMany(Compte::class);
     }
 }

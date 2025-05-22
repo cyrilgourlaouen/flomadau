@@ -18,7 +18,6 @@ let message = document.getElementById("message");
 
 updateBtn.onclick = displayText;
 submitPasswordInput.onclick = checkPasswordMatch;
-password.onclick = accesNewPassword;
 
 function displayText() {
     submitBtn.classList.remove("hidden");
@@ -32,14 +31,5 @@ function checkPasswordMatch() {
         message.textContent = "Les mots de passe ne correspondent pas";
     } else {
         message.textContent = "";
-    }
-}
-
-function accesNewPassword(){
-    const test = "dorian"
-    if(txtPassword.value === test){
-        
-    } else {
-
     }
 }

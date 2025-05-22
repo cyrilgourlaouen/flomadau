@@ -1,13 +1,17 @@
 <?php
+//$user = $data['account']; 
+?>
+
+<?php
 $user = [
-    'firstname' => 'Jean',
-    'name' => 'Dupont',
-    'pseudo' => 'jdup',
-    'num' => '06 12 34 56 78',
+    'prenom' => 'Jean',
+    'nom' => 'Dupont',
+    'pseudo' => 'jdupont',
+    'telephone' => '0612345678',
     'email' => 'jean.dupont@example.com',
-    'mdp' => 'dorian',
-]
-    ?>
+    'mot_de_passe' => password_hash('monMotDePasse123', PASSWORD_DEFAULT) // mot de passe hashé
+];
+?>
 
 <div class="information-data-container">
     <form method="POST" class="personal-data">
@@ -17,12 +21,12 @@ $user = [
         <div class="lines-container">
             <div class="lines">
                 <h3>Prénom*</h3>
-                <input class="input" type="text" name="firstname" value="<?= htmlspecialchars($user['firstname']) ?>"
+                <input class="input" type="text" name="firstname" value="<?= htmlspecialchars($user['prenom']) ?>"
                     disabled required>
             </div>
             <div class="lines">
                 <h3>Nom*</h3>
-                <input class="input" type="text" name="name" value="<?= htmlspecialchars($user['name']) ?>" disabled
+                <input class="input" type="text" name="name" value="<?= htmlspecialchars($user['nom']) ?>" disabled
                     required>
             </div>
         </div>
@@ -34,7 +38,7 @@ $user = [
             </div>
             <div class="lines">
                 <h3>Numéro de téléphone*</h3>
-                <input class="input" type="text" name="num" value="<?= htmlspecialchars($user['num']) ?>" disabled
+                <input class="input" type="text" name="num" value="<?= htmlspecialchars($user['telephone']) ?>" disabled
                     required>
             </div>
         </div>
@@ -52,23 +56,22 @@ $user = [
             <p>Valider</p>
         </button>
     </form>
-    <form method="POST" class="personal-data">
+    <div class="personal-data">
         <div class="title">
             <h2>Changer de mot de passe</h2>
         </div>
-        <div class="lines-container">
+        <form method="POST" class="lines-container">
             <div class="lines">
                 <h3>Mot de passe actuel*</h3>
                 <div class="password">
                     <input class="inputPassword" id="inputPassword" type="password" name="mdp" required>
-                    <button id="CheckPassword" type="button">
+                    <button id="CheckPassword" type="submit">
                         <p>Valider</p>
                     </button>
                 </div>
-
             </div>
-        </div>
-        <div class="lines-container">
+        </form>
+        <form method="POST" class="lines-container">
             <div class="lines">
                 <h3>Nouveau mot de passe</h3>
                 <input id="newPassword" type="password" name="mdp_confirm" required disabled>
@@ -78,10 +81,21 @@ $user = [
                 <input id="confirmPassword" type="password" name="mdp_confirm" required disabled>
             </div>
             <p id="message"></p>
-        </div>
-        <button id="submitPasswordBtn" type="submit">
-            <p>Changement de mot de passe</p>
-        </button>
-    </form>
+            <button id="submitPasswordBtn" type="submit">
+                <p>Changement de mot de passe</p>
+            </button>
+        </form>
+    </div>
+
+    <?php
+    if ($_SERVER["REQUEST_METHOD"] === "POST") {
+        $motDePasseSaisi = $_POST["mdp"];
+        if (password_verify($motDePasseSaisi, $user['mot_de_passe'])) {
+            echo "Mot de passe correct.";
+        } else {
+            echo "Mot de passe incorrect.";
+        }
+    }
+    ?>
 </div>
 <script src="./js/_js-ConsultationMembre.js"></script>

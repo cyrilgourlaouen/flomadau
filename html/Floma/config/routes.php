@@ -13,7 +13,7 @@ const ROUTES = [
         'layout' => Layout::BACK,
     ],
     'informationM' => [
-        'controller' => App\Controller\InformationMController::class,
-        'method' => 'information',
+        'controller' => App\Controller\ConsultationMController::class,
+        'method' => 'consultation',
     ]
 ];
