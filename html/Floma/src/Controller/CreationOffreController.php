@@ -18,4 +18,26 @@ class MainProController extends AbstractController
                 ]
             ]);
     }
+
+    /**
+     * @return null
+     */
+    public function newOffer()
+    {
+        // Imaginons ici traiter la soumission d'un formulaire de contact et envoyer un mail...
+        if (isset($_POST)) {
+            $offer = new Offer();
+            $offer->setTitre($_POST['offer_name']);
+            $offer->setResume($_POST['resume']);
+            $offer->setVille($_POST['ville']);
+            $offer->setCodePostal($_POST['code_postal']);
+            $offer->setCategorie($_POST['categorie']);
+            $offer->setCategorie($_POST['categorie']);
+
+            $offerManager = new OfferManager();
+            $offerManager->add($offer);
+            return $this->redirectToRoute('/');
+        }
+        return $this->redirectToRoute('/offre/creation', ['state' => 'failure']);
+    }
 }

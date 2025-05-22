@@ -5,7 +5,7 @@ $head_subtitle = "INFORMATIONS ENTREPRISE";
 $head_svg = "/assets/icons/account_white.svg";
 include 'head_title.php';
 ?>
-<form class=".formContainer">
+<form class=".formContainer" action="?path=/offre/creation/new">
     <section class="formSectionContainer">
 
         <div class="h3-section">
