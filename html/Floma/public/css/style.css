@@ -638,10 +638,6 @@ footer div nav :any-link {
   padding: 6.25rem;
 }
 
-.connection img {
-  width: 100%;
-}
-
 .connection p {
   width: max-content;
 }
@@ -697,6 +693,23 @@ footer div nav :any-link {
 
 .connection-page header {
   display: none;
+}
+
+.connection-page .right-img {
+  display: none;
+}
+
+.connection input:hover {
+  transform: scale(1.02);
+}
+
+.connection input:focus {
+  outline-color: var(--primary-color);
+}
+
+.connection button:active {
+  background-color: #444444;
+  color: #000;
 }
 
 /* Format tablette */
@@ -850,6 +863,46 @@ footer div nav :any-link {
 
   .connection-page footer {
     display: none;
+  }
+
+  .main {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .connection-page .right-img {
+    display: block;
+    flex: 1;
+  }
+
+  .connection {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .connection .title-connexion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 0.313rem;
+  }
+
+  .connection .title-connexion hr {
+    max-width: 28.125rem;
+  }
+
+  .connection .submit-container {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    padding: 1.25rem 0 1.25rem 1.25rem;
+  }
+
+  .connection button:hover {
+    background-color: #000;
+    color: var(--white-color);
   }
 }
 
