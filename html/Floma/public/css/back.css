@@ -299,6 +299,23 @@ p.placeholder {
   gap: 3.125rem;
 }
 
+.formGrid label{
+  display: inline-block;
+  width: 6.9375rem;
+}
+
+.formGrid input{
+  width: 5rem;
+}
+
+.formGrid .debutHoraire{
+  width: 4.3125rem;
+}
+
+.formGrid .finHoraire{
+  width: 2.406rem;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -312,12 +329,12 @@ label {
   color: var(--black-color);
 }
 
-input,
-select {
+input, textarea, select{
   width: 18.75rem;
   padding: 0.5em;
   border-radius: 6px;
   border: 1px solid var(--light-grey-color);
+  resize: none;
 }
 
 select {
@@ -327,7 +344,7 @@ select {
   color: var(--black-color);
 }
 
-input::placeholder {
+input::placeholder, textarea::placeholder, textarea::content {
   font-family: var(--noto);
   font-size: var(--text-size);
   color: var(--light-grey-color);
@@ -366,6 +383,27 @@ input::placeholder {
 
 .button-black:hover {
   background: #222;
+}
+
+.button-blue {
+  background: var(--primary-color);
+  color: var(--white-color);
+  padding: 0.625rem 0.938rem;
+  border: none;
+  border-radius: 0.625rem;
+  font-family: var(--noto);
+  font-size: var(--larger-text-size);
+  font-weight: normal;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  /* M3/Elevation Light/3 */
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+    0px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.button-blue:hover {
+  background: #227dd7;
 }
 
 .buttonContainer {
@@ -686,4 +724,13 @@ input::placeholder {
 
 #check-num-card{
   font-size: var(--larger-text-size);
+}
+.bigField  { /* On an input that take almost all the width like images or big input */
+  height: 12.125rem;
+  width: 95%;
+}
+
+.midField {
+  height: 4.9375rem;
+  width: 60%;
 }
