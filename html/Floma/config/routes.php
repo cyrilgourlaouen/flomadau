@@ -11,7 +11,6 @@ const ROUTES = [
     '/offer/{id}' => [
         'controller' => App\Controller\OfferController::class,
         'method' => 'show',
-        'view' => true
     ],
     '/pro' => [
         'controller' => App\Controller\MainProController::class,

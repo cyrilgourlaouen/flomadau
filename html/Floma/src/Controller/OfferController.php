@@ -4,15 +4,23 @@ namespace App\Controller;
 
 use Floma\Controller\AbstractController;
 use App\Manager\OfferManager;
+use App\Resource\OfferResource;
 
 class OfferController extends AbstractController
 {
-    public function show($id)
+    public function show(int $id)
     {
         $offerManager = new OfferManager();
-        $offer = $offerManager->find($id);
-        return $this->renderView('offer/DetailedOffer.php', [
-            'offer' => $offer,
+
+        $enrichedOffer = OfferResource::build($offerManager->find($id), [
+            'categorie' => ['isMultiple' => false],
+            'professionnel' => ['isMultiple' => false],
+            'tagOffre' => ['isMultiple' => true],
+            'langueGuideVisite' => ['isMultiple' => true], 
+            'typeRepasRestaurant' => ['isMultiple' => true], 
+        ]);
+        return $this->renderView('front/offer/DetailedOffer.php', [
+            "offer" => $enrichedOffer,
             'id' => $id,
         ]);
     }
