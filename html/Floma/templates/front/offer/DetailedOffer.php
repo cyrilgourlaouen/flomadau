@@ -29,7 +29,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
             <img src="./uploads/offers/<?= $offer["imageData"][0]["url_img"] ?>" alt="image" class="full-height full-width">
         </div>
         <div class="content no-pad-top flex-col align-start gap-sm full-width">
-            <section class="flex-row align-start gap-lg">
+            <section class="sectionOffreDetaille">
                 <div class="rightPart flex-col align-start gap-sm">
                     <h1>
                         <?= htmlspecialchars($offer["titre"]) ?>
@@ -52,7 +52,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
                     </div>
                 </div>
             </section>
-            <section>
+            <section class="sectionOffreDetaille">
                 <div>
                     <h3>
                         Informations sur l'offre
@@ -62,7 +62,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
                 </div>
             </section>
             <?php if ($offer["description_detaillee"]) {?>
-            <section>
+            <section class="sectionOffreDetaille">
                 <div class="description flex-col align-start gap-sm">
                     <h3>
                         Description
@@ -73,7 +73,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
                 </div>
             </section>
             <?php } ?>
-            <section>
+            <section class="sectionOffreDetaille">
                 <h3>
                     Comment nous rejoindre ?
                 </h3>
@@ -89,7 +89,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
                     <?php } ?>
                 </div>
             </section>
-            <section>
+            <section class="sectionOffreDetaille">
                 <div class="flex-col align-start gap-md">
                     <?php if ($offer["telephone"] || $offer["site_web"]) {?>
                     <h3>
@@ -130,7 +130,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
             <h3>Accueil</h3>
         </div>
         <div class="content no-pad-side flex-col align-start gap-md">
-            <section class="flex-row align-start gap-lg">
+            <section class="sectionOffreDetaille flex-row gap-lg">
                 <div class="images">
                     <img src="./uploads/offers/<?= $offer["imageData"][0]["url_img"] ?>" alt="croisiere">
                 </div>
@@ -185,7 +185,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
                 </div>
             </section>
             <div class="infoTab flex-row align-start gap-lg">
-                <section>
+                <section class="sectionOffreDetaille">
                     <?php if ($offer["description_detaillee"]) {?>
                     <div class="description flex-col align-start gap-sm">
                         <h3>
@@ -204,7 +204,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
                         <?php } ?>
                     </div>
                 </section>
-                <section>
+                <section class="sectionOffreDetaille">
                 <div class="flex-col align-start gap-md">
                     <h3>
                         Informations sur l'offre
@@ -213,7 +213,7 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
                 </div>
             </section>
             </div>
-            <section>
+            <section class="sectionOffreDetaille">
                 <?php if ($fullAdresse) { ?>
                 <h3>
                     Comment nous rejoindre ?

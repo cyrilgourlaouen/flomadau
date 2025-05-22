@@ -2,17 +2,19 @@
 
 namespace App\Service;
 
+use App\Enum\OfferCategoryEnum;
+
 class CategoryContent 
 {
     public function getContentCategory(mixed $cate, string $nameCate, string $accessibility, ?array $more = null): string 
     {
         $content = "";
-        if ($nameCate === "Spectacle") {
+        if ($nameCate === OfferCategoryEnum::Show->value) {
             $content .= "<div class='align'><img src='./assets/icons/schedule_primary.svg' alt='horloge'><p>" . $cate["duree"] .  " heures</p></div>" .
             "<div class='align'><img src='./assets/icons/accessibility_primary.svg' alt='accessibility'><p>$accessibility</p></div>" .
             "<div class='align'><img src='./assets/icons/family_primary.svg' alt='family'><p>" . $cate["capacite"] .  " ans minimum</p></div>";
         }
-        elseif ($nameCate === "Activite") {
+        elseif ($nameCate === OfferCategoryEnum::Activity->value) {
             $content .= "<div class='flex-row align-start gap-md'><div class='presta'><p class='semi-bold'>Prestation incluse</p>" . $this->getStringPresta($cate["prestations_incluses"]) . "</div>" .
             "<div class='presta'><p class='semi-bold'>Prestation non incluse</p>" . $this->getStringPresta($cate["prestations_non_incluses"]) . "</div></div>" .
             "<div class='align'><img src='./assets/icons/euro_symbol_primary.svg' alt='euro'><p>" . $cate["prix_minimal"] .  " euro</p></div>" .
@@ -20,7 +22,7 @@ class CategoryContent
             "<div class='align'><img src='./assets/icons/accessibility_primary.svg' alt='accessibility'><p>$accessibility</p></div>" .
             "<div class='align'><img src='./assets/icons/family_primary.svg' alt='famille'><p>Dès " . $cate["age_requis"] .  " ans minimum</p></div>";
         }
-        elseif ($nameCate === "Parc d'attraction") {
+        elseif ($nameCate === OfferCategoryEnum::AmusementPark->value) {
             $content .= "<div class='align'><img src='./assets/icons/accessibility_primary.svg' alt='accessibility'><p>$accessibility</p></div>" .
             "<div class='align'><img src='./assets/icons/attractions_primary.svg' alt='family'><p>" . $cate["nombre_attraction"] .  " attractions</p></div>" .
             "<div class='align'><img src='./assets/icons/family_primary.svg' alt='famille'><p>Dès " . $cate["prix_minimal"] .  " euros</p></div>";
@@ -29,7 +31,7 @@ class CategoryContent
                 "<a class='carteRestau' href='./uploads/parcAttraction/" . $cate["url_plan"] . "'download='./uploads/parcAttraction/" . $cate["url_plan"] . "' alt='carte'>Télécharger le plan du parc d'attraction</a>";
             }
         }
-        elseif ($nameCate === "Restaurant") {
+        elseif ($nameCate === OfferCategoryEnum::Restauration->value) {
             $content .= "<div class='align'><img src='./assets/icons/accessibility_primary.svg' alt='accessibility'><p>$accessibility</p></div>" .
             "<div class='align'><img src='./assets/icons/restaurant_primary.svg' alt='restaurant'><p>" . $this->getStringMoments($more) .  "</p></div>" .
             "<div class='align'>" . str_repeat("<img src='/assets/icons/euro_symbol_primary.svg' alt='Icone d'euro'>", $cate["gamme_de_prix"]) .  "</div>";
@@ -39,7 +41,7 @@ class CategoryContent
             }
             
         }
-        elseif ($nameCate === "Visite") {
+        elseif ($nameCate === OfferCategoryEnum::Visite->value) {
             $content .= "<div class='align'><img src='./assets/icons/schedule_primary.svg' alt='horloge'><p>" . $cate["duree"] .  " heures</p></div>" .
             "<div class='align'><img src='./assets/icons/accessibility_primary.svg' alt='accessibility'><p>$accessibility</p></div>" .
             "<div class='align'><img src='./assets/icons/translate_primary.svg' alt='translate'><p>" . $this->getStringLanguages($more) .  " </p></div>";
@@ -77,6 +79,6 @@ class CategoryContent
         foreach($momentArray as $moment) {
             $ret .= $moment['nom_langue'] . ", ";
         }
-        return $ret;
+        return substr($ret, 0, -2);
     }
 }
