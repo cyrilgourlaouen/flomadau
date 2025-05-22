@@ -47,3 +47,5 @@ const ROUTES = [
         'method' => 'logIn',
     ]
 ];
+
+?>
