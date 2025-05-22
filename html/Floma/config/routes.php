@@ -14,6 +14,12 @@ const ROUTES = [
     ],
     '/pro/signup' => [
         'controller' => App\Controller\SignupProController::class,
-        'method'=> 'show',
+        'method' => 'page',
+        'layout' => Layout::BACK,
+    ],
+    '/pro/signup/submit' => [
+        'controller' => App\Controller\SignupProController::class,
+        'method' => 'submit',
+        'show' => false,
     ],
 ];
