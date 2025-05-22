@@ -1,4 +1,5 @@
 <div class="main">
+     <a href="/" class="undoBtn"><img src="/assets/icons/chevron_left_black.svg" alt="logo"></a>
     <div class="connection">
         <a href="/"><img src="/assets/images/logo_entier_bleu.svg" alt="logo"></a>
         <div class="title-connexion">
