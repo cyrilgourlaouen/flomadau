@@ -42,6 +42,7 @@
                 <div class="field">
                     <label for="mdp">Mot de passe</label><br>
                     <input type="password" id="mdp" name="mdp" required>
+                    <div class="error-message"></div>
                 </div>
                 <div class="field">
                     <label for="conf_mdp">Confirmation du mot de passe</label><br>
@@ -127,11 +128,11 @@
             const rules = [
                 { field: 'prenom', valid: val => val !== '', message: 'Veuillez entrer un prénom.' },
                 { field: 'nom', valid: val => val !== '', message: 'Veuillez entrer un nom.' },
-                { field: 'num', valid: val => /^(?:(?:\+33|0033)\s?|0)[1-9](?:[\s.-]?\d{2}){4}$/.test(val), message: 'Veuillez entrer un numéro de téléphone valide.' },
+                { field: 'num', valid: val => /^(?:(?:\+33|0033)\s?|0)[1-9](?:[\s.-]?\d{2}){4}$/.test(val), message: 'Veuillez entrer un numéro valide.' },
                 { field: 'mail', valid: val => /^\S+@\S+\.\S+$/.test(val), message: 'Veuillez entrer une adresse email valide.' },
                 { field: 'denomination', valid: val => val !== '', message: 'Veuillez entrer la dénomination.' },
                 { field: 'siren', valid: val => /^\d{3}( \d{3}){2}$/.test(val), message: 'Veuillez entrer un SIREN valide.' },
-                { field: 'mdp', valid: val => val.length >= 6, message: 'Le mot de passe doit contenir au moins 6 caractères.' },
+                { field: 'mdp', valid: val => val.length >= 6, message: 'Le mot de passe est trop court.' },
                 { field: 'conf_mdp', valid: val => val === values.mdp, message: 'Les mots de passe ne correspondent pas.' },
                 { field: 'rue', valid: val => val !== '', message: 'Veuillez entrer la rue.' },
                 { field: 'numero', valid: val => val !== '', message: 'Veuillez entrer le numéro.' },
