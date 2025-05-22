@@ -30,7 +30,7 @@
 		</div>
 	</div>
 
-	<!-- TODO: Ajouter les liens dur les pages -->
+	<!-- TODO: Ajouter les liens dur les pages -->	
 	<div id="mySidenav" class="sidenav hidden">
 		<div class="menu">
 			<a id="BtnClose" href="#" class="close"><img src="/assets/icons/chevron_left_white.svg"

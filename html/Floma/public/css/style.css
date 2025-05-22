@@ -619,14 +619,14 @@ footer div nav :any-link {
   align-items: center;
 }
 
-.logMember .form {
+.connection .logMember .form {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
 }
 
-.connection .logMember .logInLines {
+.connection .logMember .logLines {
   gap: 0.625rem;
 }
 
@@ -671,7 +671,7 @@ footer div nav :any-link {
   padding: 0.438rem 0.938rem 0.438rem 0.938rem;
 }
 
-.connection .logInLines {
+.connection .logLines {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -681,12 +681,13 @@ footer div nav :any-link {
   color: #000;
 }
 
-.connection .logInLines input[type="text"] {
+.connection .formBtnEmail {
   background: url("/assets/icons/login_black.svg") no-repeat 0.5rem center;
   background-size: 1.25rem;
+  font-size: var(--text-size);
 }
 
-.logInLines input[type="password"] {
+.connection .formBtnPassword {
   background: url("/assets/icons/shield_black.svg") no-repeat 0.5rem center;
   background-size: 1.25rem;
 }
@@ -870,7 +871,7 @@ footer div nav :any-link {
     flex-direction: row;
   }
 
-  .connection-page .right-img {
+  .main .right-img {
     display: block;
     flex: 1;
   }
