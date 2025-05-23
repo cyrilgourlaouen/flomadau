@@ -3,9 +3,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
 
 * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
@@ -316,107 +316,6 @@ footer div nav p {
 
 footer div nav :any-link {
   color: var(--white-color);
-}
-
-.undoBtn {
-  position: absolute;
-  left: 30px;
-  top: 30px;
-}
-
-.connection .logMember {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.connection .logMember .form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-}
-
-.connection .logMember .logLines {
-  gap: 0.625rem;
-}
-
-.connection {
-  display: flex;
-  flex-direction: column;
-  gap: 1.875rem;
-  align-items: center;
-  padding: 6.25rem;
-}
-
-.connection p {
-  width: max-content;
-}
-
-.connection hr {
-  width: 100%;
-  border: 0.063rem solid #424656;
-}
-
-.connection .logPro {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.625rem;
-}
-
-.connection input {
-  border: 0.063rem solid #637381;
-  padding: 0 0.625rem 0 2.25rem;
-  margin: 0.313rem 0 0.313rem 0;
-  border-radius: 0.375rem;
-  height: 2.813rem;
-}
-
-.connection button {
-  border: 0.125rem solid #000;
-  width: fit-content;
-  height: 3.375rem;
-  border-radius: 1.875rem;
-  background-color: var(--white-color);
-  padding: 0.438rem 0.938rem 0.438rem 0.938rem;
-}
-
-.connection .logLines {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.connection a {
-  color: #000;
-}
-
-.connection .formBtnEmail {
-  background: url("/assets/icons/login_black.svg") no-repeat 0.5rem center;
-  background-size: 1.25rem;
-}
-
-.connection .formBtnPassword {
-  background: url("/assets/icons/shield_black.svg") no-repeat 0.5rem center;
-  background-size: 1.25rem;
-}
-
-.connection-page header , .right-img , .title-connexion {
-  display: none;
-}
-
-.connection input:hover {
-  transform: scale(1.02);
-}
-
-.connection input:focus {
-  outline-color: var(--primary-color);
-}
-
-.connection button:active {
-  background-color: #444444;
-  color: #000;
 }
 
 /* Other */
@@ -787,6 +686,28 @@ footer div nav :any-link {
     gap: 2.188rem;
   }
 
+  .offer-section {
+    align-items: center;
+  }
+
+  .offer-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(0, 27rem));
+    gap: 1.25rem;
+    width: 100%;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  .offer-card {
+    height: 100%;
+  }
+
+  .offer-card-img-badge-pink img,
+  .offer-card-img-badge-green img {
+    height: 18px;
+  }
+
   .main footer {
     display: none;
   }
@@ -831,28 +752,6 @@ footer div nav :any-link {
     background-color: #000;
     color: var(--white-color);
   }
-
-  .offer-section {
-    align-items: center;
-  }
-
-  .offer-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(0, 27rem));
-    gap: 1.25rem;
-    width: 100%;
-    justify-content: center;
-    align-items: stretch;
-  }
-
-  .offer-card {
-    height: 100%;
-  }
-
-  .offer-card-img-badge-pink img,
-  .offer-card-img-badge-green img {
-    height: 18px;
-  }
 }
 
 @media (max-width: 61.875rem) {
@@ -868,13 +767,6 @@ footer div nav :any-link {
     display: none;
   }
 }
-
-@media (max-width: 62.5rem) {
-  .main .right-img {
-    display: none;
-  }
-}
-
 
 @media (width >= 65rem) {
   .hideTab {
