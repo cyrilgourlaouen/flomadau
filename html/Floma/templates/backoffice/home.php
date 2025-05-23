@@ -12,13 +12,8 @@
         $mois = "MAI";
 
         //En-tête
-        $head_title = "ACCUEIL";
-        $raison_sociale = null;//$data['offers'][0]['professionnelData']['raison_sociale'];
-        if($raison_sociale === null){
-            $head_subtitle = "";
-        }else{
-            $head_subtitle = $raison_sociale;
-        }
+        $head_title = "ACCEUIL";
+        $head_subtitle = "LEGO$nom_entreprise";
         $head_svg = "/assets/icons/account_white.svg";
         include 'head_title.php';
     ?>
