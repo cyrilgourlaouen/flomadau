@@ -18,6 +18,10 @@ class Compte
     private int $numero_rue;
     private ?string $complement_adresse = null;
 
+    private ?string $url_photo_profil = null;
+
+    private bool $est_pro = false;
+
     public function getId(): int
     {
         return $this->id;
@@ -126,5 +130,20 @@ class Compte
     public function setComplementAdresse(?string $complement_adresse): void
     {
         $this->complement_adresse = $complement_adresse;
+    }
+
+    public function getUrlPhotoProfil(): ?string
+    {
+        return $this->url_photo_profil;
+    }
+
+    public function setUrlPhotoProfil(?string $url_photo_profil): void
+    {
+        $this->url_photo_profil = $url_photo_profil;
+    }
+
+    public function isPro()
+    {
+        return $this->est_pro;
     }
 }
