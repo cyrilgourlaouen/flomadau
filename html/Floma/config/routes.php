@@ -16,4 +16,9 @@ const ROUTES = [
         'method' => 'home',
         'layout' => Layout::BACK,
     ],
+    '/pro/profil' => [
+        'controller' => App\Controller\ProfilProController::class,
+        'method' => 'home',
+        'layout' => Layout::BACK,
+    ],
 ];
