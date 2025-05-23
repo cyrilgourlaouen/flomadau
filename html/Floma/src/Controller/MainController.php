@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Manager\OfferManager;
 use App\Resource\OfferResource;
+use App\Service\OfferVisibilitySort;
 use Floma\Controller\AbstractController;
 
 /**
@@ -20,18 +21,21 @@ class MainController extends AbstractController
     {
         $offerManager = new OfferManager();
 
-        $enrichedOffers = OfferResource::buildAll($offerManager->findBy(['en_ligne' => true]), [
+        $enrichedOffers = OfferResource::buildAll($offerManager->findBy(['en_ligne' => true], ["date_creation" => "DESC"]), [
             'categorie' => ['isMultiple' => false],
             'professionnel' => ['isMultiple' => false],
             'option' => ['isMultiple' => true],
             'image' => ['isMultiple' => true],
         ]);
 
-            
+        
+        $offerVisibilitySort = new OfferVisibilitySort();
+        $sortedOffers = $offerVisibilitySort->sortVisibility($enrichedOffers);
+        
         return $this->renderView(
             'front/main/home.php',
             [ 
-                'offers' => $enrichedOffers,
+                'offers' => $sortedOffers,
                 'seo' => [
                     'title' => 'Accueil',
                     'descriptions'=> 'Page d\'accueil du PACT, parcourez nos offres, partagez vos expériences.'
