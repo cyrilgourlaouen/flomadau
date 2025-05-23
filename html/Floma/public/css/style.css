@@ -517,6 +517,10 @@ footer div nav :any-link {
   border: 0.063rem solid #424656;
 }
 
+.connection a {
+  text-decoration:underline;
+}
+
 .connection .logPro {
   display: flex;
   flex-direction: column;
