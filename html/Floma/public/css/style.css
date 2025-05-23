@@ -757,6 +757,10 @@ footer div nav :any-link {
   footer div {
     justify-content: center;
   }
+
+  .main .right-img {
+    display: none;
+  }
 }
 
 @media (max-width: 62.5rem) {
