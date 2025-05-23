@@ -22,7 +22,7 @@ include 'black_button.php'
                 <?php } ?>
             </div>
             <hr class="barCompte">
-            <p>Si vous n'avez pas de compte <a href="">inscrivez-vous</a></p>
+            <p>Si vous n'avez pas de compte <a href="index.php?path=/pro/signup">inscrivez-vous</a></p>
             <nav class="submit-container">
                 <div class="buttonContainer">
                     <div class="buttonSubmit">
