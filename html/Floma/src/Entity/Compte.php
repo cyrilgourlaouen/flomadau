@@ -21,6 +21,8 @@ class Compte
 
     private ?string $url_photo_profil = null;
 
+    private ?string $url_photo_profil = null;
+
     public function getId(): int
     {
         return $this->id;
