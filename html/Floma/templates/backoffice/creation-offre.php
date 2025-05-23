@@ -1,5 +1,9 @@
-<link rel="stylesheet" type="text/css" href="../../public/css/back.css">
 <?php
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
+}
 $head_title = "Création du compte";
 $head_subtitle = "INFORMATIONS ENTREPRISE";
 $head_svg = "/assets/icons/account_white.svg";
@@ -21,8 +25,88 @@ include 'head_title.php';
 
             <div class="field">
                 <label for="categorie">Catégorie</label>
-                <input name="categorie" type="text" placeholder="Catégorie">
+                <select name="categorie" id="categorie" onchange="afficherChamps()">
+                    <option value="Visite">Visite</option>
+                    <option value="Spectacle">Spectacle</option>
+                    <option value="Restaurant">Restaurant</option>
+                    <option value="Activite">Activite</option>
+                    <option value="Parc d'attraction">Parc d'attraction</option>
+                </select>
             </div>
+            <div class="formInline hidden" id="champs-visite">
+                <div>
+                    <label for="Duree">Duree *</label>
+                    <input type="text" name="Duree" id="Duree">
+                </div>
+                <div>
+                    <label for="guide">guide</label>
+                    <input type="text" name="guide" id="guide">
+                </div>
+                <div >
+                    <label for="prix_minimal">prix minimal *</label>
+                    <input type="text" name="prix_minimal" id="prix_minimal">
+                </div>
+            </div>
+            <div class="formInline hidden" id="champs-spectacle">
+                <div>
+                    <label for="duree">duree *</label>
+                    <input type="text" name="duree" id="duree">
+                </div>
+
+                <div>
+                    <label for="prix_minimal">prix minimal *</label>
+                    <input type="text" name="prix_minimal" id="prix_minimal">
+                </div>
+
+                <div>
+                    <label for="capacite">capacite *</label>
+                    <input type="text" name="capacite" id="capacite">
+                </div>
+            </div>
+
+            
+
+            <div id="champs-restaurant" class="hidden">
+                <label for="type_cuisine">Type de cuisine :</label>
+                <input type="text" name="type_cuisine" id="type_cuisine">
+            </div>
+
+            <div id="champs-activite" class="hidden">
+                <label for="niveau_difficulte">Niveau de difficulté :</label>
+                <select name="niveau_difficulte" id="niveau_difficulte" >
+                    <option value="Facile">Facile</option>
+                    <option value="Moyen">Moyen</option>
+                    <option value="Difficile">Difficile</option>
+                </select>
+            </div>
+
+            <div id="champs-parc" class="hidden">
+                <label for="nombre_attractions">Nombre d’attractions :</label>
+                <input type="number" name="nombre_attractions" id="nombre_attractions" min="1">
+            </div>
+        </form>
+
+        <script>
+        function afficherChamps() {
+            const value = document.getElementById("categorie").value;
+
+            const champs = {
+                "Visite": "champs-visite",
+                "Spectacle": "champs-spectacle",
+                "Restaurant": "champs-restaurant",
+                "Activite": "champs-activite",
+                "Parc d'attraction": "champs-parc"
+            };
+
+            for (const id of Object.values(champs)) {
+                document.getElementById(id).classList.add("hidden");
+            }
+
+            if (champs[value]) {
+                document.getElementById(champs[value]).classList.remove("hidden");
+            }
+        }
+        </script>
         </div>
         
         <div class="formInline">
@@ -37,76 +121,7 @@ include 'head_title.php';
             </div>
         </div>
 
-        <div class="formInline">
-            <div>
-                <table class="formGrid">
-                    <tr>
-                        <td>
-                            <label>Lundi</label>
-                            <label for="lundi_debut" class="debutHoraire">Début :</label>
-                            <input type="text" name="lundi_debut">
-                            <label for="lundi_fin" class="finHoraire">Fin :</label>
-                            <input type="text" name="lundi_fin">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Mardi</label>
-                            <label for="mardi_debut" class="debutHoraire">Début :</label>
-                            <input type="text" name="mardi_debut">
-                            <label for="mardi_fin" class="finHoraire">Fin :</label>
-                            <input type="text" name="mardi_fin">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Mercredi</label>
-                            <label for="mercredi_debut" class="debutHoraire">Début :</label>
-                            <input type="text" name="mercredi_debut">
-                            <label for="mercredi_fin" class="finHoraire">Fin :</label>
-                            <input type="text" name="mercredi_fin">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Jeudi</label>
-                            <label for="jeudi_debut" class="debutHoraire">Début :</label>
-                            <input type="text" name="jeudi_debut">
-                            <label for="jeudi_fin" class="finHoraire">Fin :</label>
-                            <input type="text" name="jeudi_fin">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Vendredi</label>
-                            <label for="vendredi_debut" class="debutHoraire">Début :</label>
-                            <input type="text" name="vendredi_debut">
-                            <label for="vendredi_fin" class="finHoraire">Fin :</label>
-                            <input type="text" name="vendredi_fin">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Samedi</label>
-                            <label for="samedi_debut" class="debutHoraire">Début :</label>
-                            <input type="text" name="samedi_debut">
-                            <label for="samedi_fin" class="finHoraire">Fin :</label>
-                            <input type="text" name="samedi_fin">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Dimanche</label>
-                            <label for="dimanche_debut" class="debutHoraire">Début :</label>
-                            <input type="text" name="dimanche_debut">
-                            <label for="dimanche_fin" class="finHoraire">Fin :</label>
-                            <input type="text" name="dimanche_fin">
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <!-- Add price grid here -->
-        </div>
+        
     </section>
 
     <section class="formSectionContainer">
@@ -128,12 +143,12 @@ include 'head_title.php';
 
         <div class="formInline">
             <div class="field">
-                <label for="ville">Ville</label>
+                <label for="ville">Ville *</label>
                 <input name="ville" type="text" placeholder="Paris">
             </div>
 
             <div class="field">
-                <label for="code_postal">Code Postal</label>
+                <label for="code_postal">Code Postal *</label>
                 <input name="code_postal" type="text" placeholder="75000">
             </div>
         </div>
@@ -146,7 +161,7 @@ include 'head_title.php';
         </div>
 
         <div class="field">
-            <label for="tel">Téléphone</label>
+            <label for="tel">Téléphone *</label>
             <input name="tel" type="text" placeholder="00 00 00 00 00">
         </div>
 
@@ -161,7 +176,7 @@ include 'head_title.php';
         </div>
 
         <div class="field">
-            <label for="detail">Description détaillée</label>
+            <label for="detail">Description détaillée *</label>
             <textarea name="detail" class="bigField" type="text" placeholder="Description détaillée qui sera affichée sur la page de votre offre." ></textarea>
         </div>
 
