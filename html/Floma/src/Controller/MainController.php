@@ -26,7 +26,7 @@ class MainController extends AbstractController
             'option' => ['isMultiple' => true],
             'image' => ['isMultiple' => true],
         ]);
-
+            
         return $this->renderView(
             'front/main/home.php',
             [ 
