@@ -480,8 +480,8 @@ input::placeholder {
   border-color: #003e7d;
 }
 
-input:disabled,
-button:disabled {
+input:disabled/*,
+button:disabled*/ {
   background-color: #eeeeee;
   color: #aaaaaa;
   border-color: #dddddd;
