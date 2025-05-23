@@ -17,6 +17,7 @@ class Compte
     private string $nom_rue;
     private int $numero_rue;
     private ?string $complement_adresse = null;
+    private bool $est_pro; 
 
     public function getId(): int
     {
@@ -126,5 +127,10 @@ class Compte
     public function setComplementAdresse(?string $complement_adresse): void
     {
         $this->complement_adresse = $complement_adresse;
+    }
+
+    public function isPro(): bool
+    {
+        return $this->est_pro;
     }
 }
