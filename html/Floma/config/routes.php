@@ -26,4 +26,19 @@ const ROUTES = [
         'method' => 'logIn',
         'layout' => Layout::BACK,
     ],
+    '/pro/connexion/logout' => [
+        'controller' => App\Controller\ConnexionProController::class,
+        'method' => 'logOut',
+        'layout' => Layout::BACK,
+    ],
+    '/pro/signup' => [
+        'controller' => App\Controller\SignupProController::class,
+        'method' => 'page',
+        'layout' => Layout::BACK,
+    ],
+    '/pro/signup/submit' => [
+        'controller' => App\Controller\SignupProController::class,
+        'method' => 'submit',
+        'show' => false,
+    ],
 ];
