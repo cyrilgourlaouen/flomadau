@@ -219,6 +219,7 @@ class OfferResource extends AbstractResource
             'site_web' => $this->offer->getSiteWeb(),
             'en_ligne' => $this->offer->isEnLigne(),
             'code_professionnel' => $this->offer->getCodeProfessionnel(),
+            'date_creation' => $this->offer->getDateCreation(),
         ];
     }
 
