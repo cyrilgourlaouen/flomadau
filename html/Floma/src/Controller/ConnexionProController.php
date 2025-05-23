@@ -70,8 +70,8 @@ class ConnexionProController extends AbstractController
             'backoffice/connexion_pro.php',
             [
                 'seo' => [
-                    'title' => 'LogIn',
-                    'description' => 'Page de login'
+                    'title' => 'Connexion',
+                    'description' => 'Page de connexion'
                 ]
             ]
         );
