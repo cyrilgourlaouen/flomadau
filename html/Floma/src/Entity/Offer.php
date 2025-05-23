@@ -23,6 +23,7 @@ class Offer
     private ?string $site_web = null;
     private bool $en_ligne = true;
     private int $code_professionnel;
+
     private string $date_creation;
 
     public function getId(): int
@@ -202,6 +203,6 @@ class Offer
 
     public function setDateCreation(string $date_creation): void
     {
-        $this->date_createtion = $date_creation;
+        $this->date_creation = $date_creation;
     }
 }

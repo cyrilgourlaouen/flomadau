@@ -74,26 +74,27 @@
                     <span class="error-msg" id="error-adress-comp"></span>
                 </div>
             </div>
-            
-            <div class="groupe">
-                <div>
-                    <label for="password"> Mot de passe </label>
-                    <ul id="liste_mobile">
-                        <li> 12 caractère minimum </li> 
-                        <li> Majuscules </li> 
-                        <li> Minuscules </li> 
-                        <li> Chiffres </li> 
-                        <li> Caractères spéciaux </li> 
-                    </ul>
-                    <input name="password" type="password" id="password" required> </input>
-                    <span class="error-msg" id="error-password"></span>
-                </div>
+            <div class="align-row">
+                <div class="groupe">
+                    <div>
+                        <label for="password"> Mot de passe </label>
+                        <ul id="liste_mobile">
+                            <li> 12 caractère minimum </li> 
+                            <li> Majuscules </li> 
+                            <li> Minuscules </li> 
+                            <li> Chiffres </li> 
+                            <li> Caractères spéciaux </li> 
+                        </ul>
+                        <input name="password" type="password" id="password" required> </input>
+                        <span class="error-msg" id="error-password"></span>
+                    </div>
 
-                <div>
-                    <label for="conf_password"> Confirmation du mot de passe </label>
-                    <input name="conf_password" type="password" id="conf_password" required> </input>
-                    <span class="error-msg" id="error-password-conf"></span>
+                    <div>
+                        <label for="conf_password"> Confirmation du mot de passe </label>
+                        <input name="conf_password" type="password" id="conf_password" required> </input>
+                    </div>
                 </div>
+                <span class="error-msg" id="error-password-conf"></span>
             </div>
             <ul id="liste_tablette">
                 <li> 12 caractère minimum </li> 
