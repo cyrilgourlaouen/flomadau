@@ -924,6 +924,10 @@ footer div nav :any-link {
   color: #000;
 }
 
+.connection .error {
+  color: var(--pink-color);
+}
+
 .logMenu {
 	position: absolute;
 	top: 4.4rem; 
