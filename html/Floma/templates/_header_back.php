@@ -7,9 +7,9 @@
                 <li class="menu-home"><a href="index.php?path=/pro">
                         <h2>Accueil</h2>
                     </a></li>
-                <li class="menu-info"><a href="index.php?path=/pro/signup">
+                <!-- <li class="menu-info"><a href="index.php?path=/pro/signup">
                         <h2>Informations</h2>
-                    </a></li>
+                    </a></li> -->
                 <!-- <li class="menu-offers"><a href="#"> -->
                 <!--         <h2>Offres</h2> -->
                 <!--     </a></li> -->
