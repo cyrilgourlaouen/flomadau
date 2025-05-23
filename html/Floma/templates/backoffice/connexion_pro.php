@@ -26,7 +26,7 @@ include 'black_button.php'
             <nav class="submit-container">
                 <div class="buttonContainer">
                     <div class="buttonSubmit">
-                        <?php echo black_button('Suivant'); ?>
+                        <?php echo black_button('Se connecter'); ?>
                     </div>
                 </div>
             </nav>

@@ -36,7 +36,7 @@ class ConnexionProController extends AbstractController
             if ($isProExist) {
                 $_SESSION['raison_sociale'] = $_POST['raison_sociale'];
                 session_regenerate_id();
-                return $this->redirectToRoute('/');
+                return $this->redirectToRoute('/pro');
             } else {
                 return $this->redirectToRoute('/pro/connexion', ["state" => "failure"]);
             }
