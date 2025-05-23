@@ -2,21 +2,22 @@
 
 namespace App\Controller;
 
+use App\Entity\Offer;
+use App\Manager\OfferManager;
 use Floma\Controller\AbstractController;
-use Floma\View\Layout;
 
-class MainProController extends AbstractController
+class CreationOffreController extends AbstractController
 {
     public function home()
     {
         return $this->renderView(
-            'backoffice/creation-offre-gratuite.php',
+            'backoffice/creation-offre.php',
             [
                 'seo' => [
                     'title' => 'Création d\'une offre gratuite',
                     'descriptions'=> 'Page de création d\'une offre pour les professionnels du domaine public'
                 ]
-            ]);
+        ]);
     }
 
     /**
