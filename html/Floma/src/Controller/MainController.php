@@ -20,12 +20,13 @@ class MainController extends AbstractController
     {
         $offerManager = new OfferManager();
 
-        $enrichedOffers = OfferResource::buildAll($offerManager->findAll(), [
+        $enrichedOffers = OfferResource::buildAll($offerManager->findBy(['en_ligne' => true]), [
             'categorie' => ['isMultiple' => false],
             'professionnel' => ['isMultiple' => false],
             'option' => ['isMultiple' => true],
             'image' => ['isMultiple' => true],
         ]);
+
             
         return $this->renderView(
             'front/main/home.php',
