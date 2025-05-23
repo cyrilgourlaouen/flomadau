@@ -258,11 +258,19 @@ label {
   color: var(--black-color);
 }
 
-input {
+input,
+select {
   width: 18.75rem;
   padding: 0.5em;
   border-radius: 6px;
   border: 1px solid var(--light-grey-color);
+}
+
+select {
+  font-family: var(--noto);
+  font-size: var(--text-size);
+  background: var(--white-color);
+  color: var(--black-color);
 }
 
 input::placeholder {
@@ -274,6 +282,11 @@ input::placeholder {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
+}
+
+.error-message {
+    color: red;
+    font-size: var(--text-size);
 }
 
 /* Black button */
