@@ -11,7 +11,7 @@
   --light-grey-color: #637381;
   --dark-grey-color: #424656;
   --white-color: #ffffff;
-  --pink-color: #eb4671;
+  --red-color: #FF0101;
   --black-color: #000000;
 
   /* Font sizes */
@@ -132,7 +132,7 @@ p {
 }
 
 .error {
-  color: var(--pink-color);
+  color: var(--red-color);
 }
 
 p.placeholder {

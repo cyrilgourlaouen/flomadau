@@ -15,8 +15,8 @@ class ConnexionProController extends AbstractController
             'backoffice/connexion_pro.php',
             [
                 'seo' => [
-                    'title' => 'Connexion du compte professionnel',
-                    'descriptions'=> 'Page de connexion d\'un professionnel PACT afin d\'avoir accès à vos offres.'
+                    'title' => 'Connexion compte professionnel',
+                    'description'=> 'Page de connexion d\'un professionnel PACT afin d\'avoir accès à vos offres.'
                 ]
             ]);
     }
@@ -71,14 +71,9 @@ class ConnexionProController extends AbstractController
             [
                 'seo' => [
                     'title' => 'LogIn',
+                    'description' => 'Page de login'
                 ]
             ]
         );
-    }
-
-    public function contact()
-    {
-        // Imaginons ici traiter la soumission d'un formulaire de contact et envoyer un mail...
-        return $this->redirectToRoute('home', ['state' => 'success']);
     }
 }
