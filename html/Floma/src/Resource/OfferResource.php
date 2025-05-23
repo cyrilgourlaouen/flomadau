@@ -2,15 +2,25 @@
 
 namespace App\Resource;
 
+use App\Entity\LangueGuideVisite;
 use App\Entity\Offer;
-use App\Entity\OptionSouscrite;
-use App\Entity\OptionVisibilite;
+use App\Entity\Tag;
+use App\Entity\TagOffre;
+use App\Entity\TypeRepasRestaurant;
 use App\Enum\OfferCategoryEnum;
 use App\Manager\ImageManager;
+use App\Manager\LangueGuideManager;
+use App\Manager\LangueGuideVisiteManager;
 use App\Manager\OfferManager;
+use App\Manager\ProfessionnelManager;
+use App\Manager\TagManager;
+use App\Manager\TagOffreManager;
+use App\Manager\TypeRepasManager;
+use App\Manager\TypeRepasRestaurantManager;
 use App\Manager\OptionSouscriteManager;
 use App\Manager\OptionVisibiliteManager;
-use App\Manager\ProfessionnelManager;
+use App\Entity\OptionSouscrite;
+use App\Entity\OptionVisibilite;
 use Floma\Resource\AbstractResource;
 
 class OfferResource extends AbstractResource
@@ -34,16 +44,14 @@ class OfferResource extends AbstractResource
             $isMultiple = (bool) ($context['categorie']['isMultiple'] ?? false);
 
             $enum = OfferCategoryEnum::tryFrom($this->offer->getCategorie());
-
             if ($enum != null) {
                 $manager = $enum->getManager();
                 $resource = $enum->getResource();
-
+    
                 $categoryData = $isMultiple
                     ? $resource::buildAll($manager->findBy(['id_offre' => $this->offer->getId()]))
                     : $resource::build($manager->findOneBy(['id_offre' => $this->offer->getId()]));
-
-
+              
                 $this->add('categoryData', $categoryData);
             }
         }
@@ -59,7 +67,97 @@ class OfferResource extends AbstractResource
 
             $this->add('professionnelData', $professionnelResource);
         }
+      
+        if (isset($context['tagOffre'])) {
+            $isMultiple = (bool) ($context['tagOffre']['isMultiple'] ?? false);
 
+            $tagManager = new TagManager();
+            $tagOffreManager = new TagOffreManager();
+
+            $tagOffre = $tagOffreManager->findBy([
+                'id_offre' => $this->offer->getId(),
+            ]);
+
+            /** @var array|TagManager[]|TagOffreManager|null $tagResources */
+            if ($isMultiple) {
+                $tagResources = array_values(array_filter(array_map(
+                    function (TagOffre $tagOffre) use ($tagManager) {
+                        $tag = $tagManager->find($tagOffre->getIdTag());
+                        return $tag ? TagResource::build($tag) : null;
+                    },
+                    $tagOffre
+                )));
+            } else {
+                $firstTagOffre = $tagOffre[0] ?? null;
+                $tag = $firstTagOffre ? $tagManager->find($firstTagOffre->getId()) : null;
+                $tagResources = $tag ? TagResource::build($tag) : null;
+            }
+
+            if ($tagResources) {
+                $this->add('tagData', $tagResources);
+            }
+        }
+
+        if (isset($context['langueGuideVisite'])) {
+            $isMultiple = (bool) ($context['langueGuideVisite']['isMultiple'] ?? false);
+
+            $langueGuideManager = new LangueGuideManager();
+            $langueGuideVisiteManager = new LangueGuideVisiteManager();
+
+            $langueGuideVisite = $langueGuideVisiteManager->findBy([
+                'id_offre' => $this->offer->getId(),
+            ]);
+
+            /** @var array|LangueGuideManager[]|LangueGuideVisiteManager|null $langueGuideResources */
+            if ($isMultiple) {
+                $langueGuideResources = array_values(array_filter(array_map(
+                    function (LangueGuideVisite $langueGuideVisite) use ($langueGuideManager) {
+                        $langueGuide = $langueGuideManager->find($langueGuideVisite->getIdLangue());
+                        return $langueGuide ? LangueGuideResource::build($langueGuide) : null;
+                    },
+                    $langueGuideVisite
+                )));
+            } else {
+                $firstLangueGuideVisite = $langueGuideManager[0] ?? null;
+                $langueGuide = $firstLangueGuideVisite ? $langueGuideManager->find($firstLangueGuideVisite->getId()) : null;
+                $langueGuideResources = $langueGuide ? LangueGuideResource::build($langueGuide) : null;
+            }
+
+            if ($langueGuideResources) {
+                $this->add('langueGuideData', $langueGuideResources);
+            }
+        }
+
+        if (isset($context['typeRepasRestaurant'])) {
+            $isMultiple = (bool) ($context['typeRepasRestaurant']['isMultiple'] ?? false);
+
+            $typeRepasManager = new TypeRepasManager();
+            $typeRepasRestaurantManager = new TypeRepasRestaurantManager();
+
+            $typeRepasRestaurant = $typeRepasRestaurantManager->findBy([
+                'id_offre' => $this->offer->getId(),
+            ]);
+
+            /** @var array|TypeRepasManager[]|TypeRepasRestaurantManager|null $typeRepasResources */
+            if ($isMultiple) {
+                $typeRepasResources = array_values(array_filter(array_map(
+                    function (TypeRepasRestaurant $typeRepasRestaurant) use ($typeRepasManager) {
+                        $typeRepas = $typeRepasManager->find($typeRepasRestaurant->getIdType());
+                        return $typeRepas ? TypeRepasResource::build($typeRepas) : null;
+                    },
+                    $typeRepasRestaurant
+                )));
+            } else {
+                $firstTypeRepasRestaurant = $typeRepasManager[0] ?? null;
+                $typeRepas = $firstTypeRepasRestaurant ? $typeRepasManager->find($firstTypeRepasRestaurant->getId()) : null;
+                $typeRepasResources = $typeRepas ? TypeRepasResource::build($typeRepas) : null;
+            }
+
+            if ($typeRepasResources) {
+                $this->add('typeRepasData', $typeRepasResources);
+            }
+        }
+              
         if (isset($context['option'])) {
             $isMultiple = (bool) ($context['option']['isMultiple'] ?? false);
 
@@ -96,7 +194,6 @@ class OfferResource extends AbstractResource
 
             $this->add('imageData', $images);
         }
-
     }
 
     /**
