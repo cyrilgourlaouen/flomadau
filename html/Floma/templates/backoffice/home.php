@@ -7,218 +7,157 @@
 
         include 'button.php';
 
-        $nom_entreprise ="";
         $nb_offres = 0;
         $nb_avis = 0;
-        $mois = "";
+        $mois = "MAI";
 
         //En-tête
         $head_title = "ACCUEIL";
-        $head_subtitle = "LEGO$nom_entreprise";
+        $raison_sociale = $data['offers'][0]['professionnelData']['raison_sociale'];
+        if($raison_sociale === null){
+            $head_subtitle = "";
+        }else{
+            $head_subtitle = $raison_sociale;
+        }
         $head_svg = "/assets/icons/account_white.svg";
         include 'head_title.php';
     ?>
-    <div id="recap_menu">
-        <?php
-            //Sous-en-tête pour offre
-            $head_title = "OFFRES";
-            $head_subtitle = $nb_offres;
-            $head_svg = "/assets/icons/offer_white.svg";
-            include 'little_title.php';
-
-            //Sous-en-tête pour avis
-            $head_title = "AVIS";
-            $head_subtitle = $nb_avis;
-            $head_svg = "/assets/icons/avis_white.svg";
-            include 'little_title.php';
-
-            //Sous-en-tête pour facture
-            $head_title = "FACTURE : MAI$mois";
-            $head_subtitle = "0€";
-            $head_svg = "/assets/icons/facture_white.svg";
-            include 'little_title.php';
-        ?>
-    </div>
-    <div id="title_searchbar_btn">
-        <h2 id="all_offer">Toutes mes offres</h2>
-        <div id="searchbar_all_btn">
-            <div id="searchbar_white_btn">
-                <form action="" method="">
-                    <input type="search" id="input_search" name="recherche" placeholder="Rechercher" disabled>
-                </form>
-                <?php 
-                    echo button('Filtrer', 'btn_filtrer');    
-                ?>
-                <?php 
-                    echo button('Trier', 'btn_trier');    
-                ?>
-            </div>
-            <div id="blue_btn">
-                <?php 
-                    echo button('Ajouter', 'btn_ajouter');    
-                ?>
-            </div>
-        </div>
-    </div>
 </div>
 <div id="body_acceuil">
     <?php
         /*if(!isset($_SESSION['id'])){
             ?>
                 <div class="msg_offer">
-                    <p class="text_offer">Veuillez vous connectez pour avoir accès à vos offres</p>
-                    <?php
-                        echo button('Connexion', 'btn_connexion');
-                    ?>
+                    <p class="text_offer">Vous souhaitez bénéficier des options professionnelles ?</p>
+                    <div id="btn_co_inscription">
+                        <?php
+                            echo button('Connexion', 'btn_connexion');
+                            echo button('Inscription', 'btn_inscription');
+                        ?>
+                    </div>
                 </div>
             <?php
         }else if(!empty($data["offers"])){
             ?>
-                <div class="msg_offer">
-                    <p class="text_offer">Vous n'avez pas encore déposé d'offre</p>
+                <div>
+                    <div class="msg_offer">
+                        <p class="text_offer">Vous n'avez pas encore déposé d'offre</p>
+                    </div>
                 </div>
             <?php
         }else{*/
-            ?>
-                <div class="list_offer">
-                    <?php foreach ($data["offers"] as $offer) { ?>
-                        <article class="offer-card">
-                            <!-- Image -->
-                            <div class="offer-card-img">
-                                <?php
-                                $optionsData = $offer['optionVisibiliteData'] ?? null;
+        ?>
+</div>
+<div class="list_offer">
+    <?php foreach ($data["offers"] as $offer) { ?>
+        <article class="offer-card">
+            <!-- Image -->
+            <div class="offer-card-img">
 
-                                $une = false;
-                                $relief = false;
+                <!-- Image de fond de l'offre -->
+                <?php
+                    $imageUrl = null;
 
-                                if ($optionsData) {
-                                    if (array_key_exists('nom_option', $optionsData)) {
-                                        $optionsData = [$optionsData];
-                                    }
-
-                                    foreach ($optionsData as $option) {
-                                        $label = $option['nom_option'] ?? null;
-
-                                        if ($label === OptionVisibiliteEnum::ALaUne->value) {
-                                            $une = true;
-                                        }
-
-                                        if ($label === OptionVisibiliteEnum::EnRelief->value) {
-                                            $relief = true;
-                                        }
-                                    }
-                                }
-                                ?>
-
-                                <?php if ($une || $relief) { ?>
-                                    <div class="offer-card-img-badges">
-
-                                        <?php if ($showPink) { ?>
-                                            <div class="offer-card-img-badge-pink">
-                                                <img src="/assets/icons/diamond_white.svg" alt="Icône diamant">
-                                                <p class="very-small-text">Mis en avant</p>
-                                            </div>
-                                        <?php } ?>
-
-                                        <?php if ($showGreen) { ?>
-                                            <div class="offer-card-img-badge-green">
-                                                <img src="/assets/icons/editor_choice_white.svg" alt="Icône choix éditeurs">
-                                                <p class="very-small-text">Conseillé par nos équipes</p>
-                                            </div>
-                                        <?php } ?>
-
-                                    </div>
-                                <?php } ?>
-
-                                <!-- Icone de catégorie -->
-                                <?php
-                                $icon = OfferCategoryEnum::tryFrom($offer['categorie'])?->getIcon();
-                                if ($icon) { ?>
-                                    <div class="offer-card-img-category-icon">
-                                        <img src="<?= $icon['path'] ?>" alt="<?= $icon['alt'] ?>">
-                                    </div>
-                                <?php } ?>
-
-                                <!-- Image de fond de l'offre -->
-                                <?php
-                                $imageUrl = null;
-
-                                if (!empty($offer['imageData']) && is_array($offer['imageData'])) {
-                                    // Cherche l'image principale en priorité
-                                    foreach ($offer['imageData'] as $img) {
-                                        if (!empty($img['principale'])) {
-                                            $imageUrl = $img['url_img'] ?? null;
-                                            break;
-                                        }
-                                    }
-
-                                    // Sinon prend la première image disponible
-                                    if (!$imageUrl && isset($offer['imageData'][0]['url_img'])) {
-                                        $imageUrl = $offer['imageData'][0]['url_img'];
-                                    }
-                                }
-                                ?>
-                                <?php if ($imageUrl) { ?>
-                                    <img src="/uploads/offers/<?= htmlspecialchars($imageUrl) ?>" alt="Image de l'offre"
-                                        class="offer-card-img-main">
-                                <?php } ?>
-
-                            </div>
-
-                            <div class="offer-card-info-layout">
-                                <!-- Description -->
-                                <div class="offer-card-gap">
-                                    <h3><?= htmlspecialchars($offer['titre']) ?></h3>
-                                    <p><?= htmlspecialchars($offer['resume']) ?></p>
-                                </div>
-
-                                <div class="offer-card-gap">
-                                    <div class="offer-card-price-note">
-                                        <!-- Note -->
-                                        <div class="offer-card-note">
-                                            <div class="offer-card-note-stars">
-                                                <?= $starCalculator->calculStars($offer['note_moyenne']); ?>
-                                            </div>
-                                            <p>(<?= htmlspecialchars($offer['nombre_avis']) ?>)</p>
-                                        </div>
-
-                                        <!-- Prix -->
-                                        <?php if ($offer['categorie'] != OfferCategoryEnum::Restauration->value) {
-                                            if (isset($offer['categoryData'])) { ?>
-                                                <div class="offer-card-price">
-                                                    <p><?= $offer['categoryData']['prix_minimal'] == 0 ? "Gratuit" : $offer['categoryData']['prix_minimal'] ?>
-                                                    </p>
-                                                    <img src="/assets/icons/euro_symbol_primary.svg" alt="Icone d'euro">
-                                                </div>
-                                            <?php } else { ?>
-                                                <div class="offer-card-price">
-                                                    <p>Min. 0</p>
-                                                    <img src="/assets/icons/euro_symbol_primary.svg" alt="Icone d'euro">
-                                                </div>
-                                            <?php } ?>
-                                        <?php } else { ?>
-                                            <div class="offer-card-price-euros">
-                                                <?= str_repeat("<img src='/assets/icons/euro_symbol_primary.svg' alt='Icone d'euro'>", $offer["categoryData"]["gamme_de_prix"]) ?>
-                                            </div>
-                                        <?php } ?>
-                                    </div>
-
-                                    <div class="offer-card-city-author">
-                                        <!-- Ville -->
-                                        <div class="offer-card-city">
-                                            <img src="/assets/icons/location_primary.svg" alt="Icone de localisation">
-                                            <p><?= htmlspecialchars($offer['ville']) ?></p>
-                                        </div>
-
-                                        <!-- Auteur -->
-                                        <p class="italic"><?= $offer['professionnelData']['raison_sociale'] ?></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </article>
-                    <?php } ?>
+                    if (!empty($offer['imageData']) && is_array($offer['imageData'])) {
+                        // Cherche l'image principale en priorité
+                        foreach ($offer['imageData'] as $img) {
+                            if ($img['principale']) {
+                                $imageUrl = $img['url_img'] ?? null;
+                                break;
+                            }
+                        }
+                    }
+                ?>
+                <?php if ($imageUrl) { ?>
+                    <img src="/uploads/offers/<?= htmlspecialchars($imageUrl) ?>" alt="Image de l'offre" class="offer-card-img">
+                <?php } ?>
+            </div>
+            <div class="offer-card-info-layout">
+                <!-- Description -->
+                <div class="offer-card-gap">
+                    <h3><?= htmlspecialchars($offer['titre']) ?></h3>
+                    <p><?= htmlspecialchars($offer['resume']) ?></p>
                 </div>
-            <?php
-        //}
+
+                <div class="offer-card-category-prix-lieu">
+                    <!-- Catégorie -->
+                    <p>Catégorie : <?php echo $offer['categorie'];?></p>
+
+                    <!-- Prix -->
+                    <?php if ($offer['categorie'] != OfferCategoryEnum::Restauration->value) {
+                        if (isset($offer['categoryData'])) { ?>
+                            <div class="offer-card-price">
+                                <p><?= $offer['categoryData']['prix_minimal'] == 0 ? "Gratuit" : $offer['categoryData']['prix_minimal'] ?>
+                                </p>
+                                <img src="/assets/icons/euro_symbol_primary.svg" alt="Icone d'euro">
+                            </div>
+                        <?php } else { ?>
+                            <div class="offer-card-price">
+                                <p>Min. 0</p>
+                                <img src="/assets/icons/euro_symbol_primary.svg" alt="Icone d'euro">
+                            </div>
+                        <?php } ?>
+                    <?php } else { ?>
+                        <div class="offer-card-price-euros">
+                            <?= str_repeat("<img src='/assets/icons/euro_symbol_primary.svg' alt='Icone d'euro'>", $offer["categoryData"]["gamme_de_prix"]) ?>
+                        </div>
+                    <?php } ?>
+
+                    <!-- Ville -->
+                    <div class="offer-card-city">
+                        <img src="/assets/icons/location_primary.svg" alt="Icone de localisation">
+                        <p><?= htmlspecialchars($offer['ville']) ?></p>
+                    </div>
+                </div>
+
+                <div class="offer-card-price-note">
+                    <!-- Note -->
+                    <div class="offer-card-note">
+                        <div class="offer-card-note-stars">
+                            <?= $starCalculator->calculStars($offer['note_moyenne']); ?>
+                        </div>
+                        <p>(<?= htmlspecialchars($offer['nombre_avis']) ?>)</p>
+                    </div>
+                    <p>Aucun avis non consulté</p>
+                    <p>Aucun avis non répondu</p>
+                </div>
+            </div>
+            <div id="offer-card-right-layout">
+                <div id="offer-online-visibility">
+                    <!--Options de vibilité choisies-->
+                    <?php
+                        $optionsData = $offer['optionVisibiliteData'] ?? null;
+
+                        $une = false;
+                        $relief = false;
+
+                        if ($optionsData) {
+                            if (array_key_exists('nom_option', $optionsData)) {
+                                $optionsData = [$optionsData];
+                            }
+
+                            foreach ($optionsData as $option) {
+                                $label = $option['nom_option'] ?? null;
+
+                                if ($label === OptionVisibiliteEnum::ALaUne->value) {
+                                    ?>
+                                        <p>A la une</p>
+                                    <?php
+                                }
+
+                                if ($label === OptionVisibiliteEnum::EnRelief->value) {
+                                    ?>
+                                        <p>A la une</p>
+                                    <?php
+                                }
+                            }
+                        }
+                    ?>
+                </div>
+            </div>
+        </article>
+    <?php 
+        }
+    //}
     ?>
 </div>
