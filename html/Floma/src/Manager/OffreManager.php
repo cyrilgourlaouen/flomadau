@@ -1,15 +1,16 @@
 <?php
 namespace App\Manager;
 
-use App\Entity\Compte;
 use Floma\Manager\AbstractManager;
+use App\Entity\Offer;
+use App\Enum\OfferCategoryEnum;
 
 /**
  * Class OfferManager
  *
  * @package App\Manager
  */
-class CompteManager extends AbstractManager
+class OfferManager extends AbstractManager
 {
     /**
      * @param int $id
@@ -17,7 +18,7 @@ class CompteManager extends AbstractManager
      */
     public function find(int $id)
     {
-        return $this->readOne(Compte::class, ['id' => $id]);
+        return $this->readOne(Offer::class, ['id' => $id]);
     }
 
     /**
@@ -26,7 +27,7 @@ class CompteManager extends AbstractManager
      */
     public function findOneBy(array $filters)
     {
-        return $this->readOne(Compte::class, $filters);
+        return $this->readOne(Offer::class, $filters);
     }
 
     /**
@@ -34,7 +35,7 @@ class CompteManager extends AbstractManager
      */
     public function findAll()
     {
-        return $this->readMany(Compte::class);
+        return $this->readMany(Offer::class);
     }
 
     /**
@@ -46,6 +47,6 @@ class CompteManager extends AbstractManager
      */
     public function findBy(array $filters, array $order = [], ?int $limit = null, ?int $offset = null)
     {
-        return $this->readMany(Compte::class, $filters, $order, $limit, $offset);
+        return $this->readMany(Offer::class, $filters, $order, $limit, $offset);
     }
 }

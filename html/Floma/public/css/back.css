@@ -11,6 +11,7 @@
   --light-grey-color: #637381;
   --dark-grey-color: #424656;
   --white-color: #ffffff;
+  --red-color: #FF0101;
   --black-color: #000000;
 
   /* Font sizes */
@@ -101,6 +102,37 @@ p {
   font-weight: normal;
   font-size: var(--text-size);
   color: var(--black-color);
+}
+
+.logInLines {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.barCompte {
+  width:35%;
+}
+
+.connection {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin: 1.875rem 0 0 1.875rem;
+}
+
+.logMember {
+  width: 100%;
+}
+
+.buttonSubmit {
+  margin-right: 1.875rem;
+}
+
+.error {
+  color: var(--red-color);
 }
 
 p.placeholder {
