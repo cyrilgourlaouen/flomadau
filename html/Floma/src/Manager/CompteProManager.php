@@ -15,7 +15,7 @@ class CompteProManager extends AbstractManager
             'prenom' => $compte->getPrenom(),
             'email' => $compte->getEmail(),
             'telephone' => $compte->getTelephone(),
-            'mot_de_passe' => $compte->getMotDePasse(),
+            'mot_de_passe' => password_hash($compte->getMotDePasse(), PASSWORD_DEFAULT),
             'ville' => $compte->getVille(),
             'code_postal' => $compte->getCodePostal(),
             'nom_rue' => $compte->getNomRue(),
