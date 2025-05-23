@@ -2,17 +2,17 @@
 
 namespace App\Resource;
 
-use App\Entity\Professionnel;
+use App\Entity\LangueGuide;
 use Floma\Resource\AbstractResource;
 
-class ProfessionnelResource extends AbstractResource
+class LangueGuideResource extends AbstractResource
 {
     /**
      * Constructeur. Si un contexte (managers) est fourni, on enrichit aussitôt.
      */
-    public function __construct(private Professionnel $professionnel, array $context = [])
+    public function __construct(private LangueGuide $tag, array $context = [])
     {
-        parent::__construct($professionnel);
+        parent::__construct($tag);
         $this->hydrate($context);
     }
 
@@ -30,20 +30,17 @@ class ProfessionnelResource extends AbstractResource
     protected function baseData(): array
     {
         return [
-            'code'            => $this->professionnel->getCode(),
-            'raison_sociale'  => $this->professionnel->getRaisonSociale(),
-            'id_compte'       => $this->professionnel->getIdCompte(),
-            'est_prive'       => $this->professionnel->isPrive(),
+            'id'            => $this->tag->getId(),
+            'nom_langue'  => $this->tag->getNomLangue(),
         ];
     }
-
 
     /**
      * Construit une ressource enrichie pour UNE offre.
      */
-    public static function build(Professionnel $professionnel, array $context = []): array
+    public static function build(LangueGuide $tag, array $context = []): array
     {
-        return (new self($professionnel, $context))->toArray();
+        return (new self($tag, $context))->toArray();
     }
 
     /**
@@ -51,6 +48,6 @@ class ProfessionnelResource extends AbstractResource
      */
     public static function buildAll(array $entities, array $context = []): array
     {
-        return array_map(fn($professionnel) => self::build($professionnel, $context), $entities);
+        return array_map(fn($tag) => self::build($tag, $context), $entities);
     }
 }

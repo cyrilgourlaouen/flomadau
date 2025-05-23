@@ -2,17 +2,17 @@
 
 namespace App\Resource;
 
-use App\Entity\Professionnel;
+use App\Entity\Membre;
 use Floma\Resource\AbstractResource;
 
-class ProfessionnelResource extends AbstractResource
+class MembreResource extends AbstractResource
 {
     /**
      * Constructeur. Si un contexte (managers) est fourni, on enrichit aussitôt.
      */
-    public function __construct(private Professionnel $professionnel, array $context = [])
+    public function __construct(private Membre $membre, array $context = [])
     {
-        parent::__construct($professionnel);
+        parent::__construct($membre);
         $this->hydrate($context);
     }
 
@@ -30,10 +30,9 @@ class ProfessionnelResource extends AbstractResource
     protected function baseData(): array
     {
         return [
-            'code'            => $this->professionnel->getCode(),
-            'raison_sociale'  => $this->professionnel->getRaisonSociale(),
-            'id_compte'       => $this->professionnel->getIdCompte(),
-            'est_prive'       => $this->professionnel->isPrive(),
+            'code'            => $this->membre->getCode(),
+            'raison_sociale'  => $this->membre->getPseudo(),
+            'id_compte'       => $this->membre->getIdCompte(),
         ];
     }
 
@@ -41,9 +40,9 @@ class ProfessionnelResource extends AbstractResource
     /**
      * Construit une ressource enrichie pour UNE offre.
      */
-    public static function build(Professionnel $professionnel, array $context = []): array
+    public static function build(Membre $membre, array $context = []): array
     {
-        return (new self($professionnel, $context))->toArray();
+        return (new self($membre, $context))->toArray();
     }
 
     /**
@@ -51,6 +50,6 @@ class ProfessionnelResource extends AbstractResource
      */
     public static function buildAll(array $entities, array $context = []): array
     {
-        return array_map(fn($professionnel) => self::build($professionnel, $context), $entities);
+        return array_map(fn($membre) => self::build($membre, $context), $entities);
     }
 }

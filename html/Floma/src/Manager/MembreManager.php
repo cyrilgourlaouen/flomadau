@@ -1,15 +1,15 @@
 <?php
 namespace App\Manager;
 
+use App\Entity\Membre;
 use Floma\Manager\AbstractManager;
-use App\Entity\Image;
 
 /**
- * Class ImageManager
+ * Class ProfessionnelManager
  *
  * @package App\Manager
  */
-class ImageManager extends AbstractManager
+class MembreManager extends AbstractManager
 {
     /**
      * @param int $id
@@ -17,7 +17,7 @@ class ImageManager extends AbstractManager
      */
     public function find(int $id)
     {
-        return $this->readOne(Image::class, ['id' => $id]);
+        return $this->readOne(Membre::class, ['code' => $id]);
     }
 
     /**
@@ -26,7 +26,7 @@ class ImageManager extends AbstractManager
      */
     public function findOneBy(array $filters)
     {
-        return $this->readOne(Image::class, $filters);
+        return $this->readOne(Membre::class, $filters);
     }
 
     /**
@@ -38,7 +38,7 @@ class ImageManager extends AbstractManager
      */
     public function findBy(array $filters, array $order = [], ?int $limit = null, ?int $offset = null)
     {
-        return $this->readMany(Image::class, $filters, $order, $limit, $offset);
+        return $this->readMany(Membre::class, $filters, $order, $limit, $offset);
     }
 
     /**
@@ -46,6 +46,6 @@ class ImageManager extends AbstractManager
      */
     public function findAll()
     {
-        return $this->readMany(Image::class);
+        return $this->readMany(Membre::class);
     }
 }

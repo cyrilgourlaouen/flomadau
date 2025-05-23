@@ -4,7 +4,6 @@ namespace App\Service;
 
 class MetricStarsCalculator 
 {
-
     public function roundToHalf(float $x): float 
     {
         return round($x * 2) / 2;

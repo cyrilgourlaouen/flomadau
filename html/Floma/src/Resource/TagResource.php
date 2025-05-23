@@ -3,16 +3,18 @@
 namespace App\Resource;
 
 use App\Entity\Professionnel;
+use App\Entity\Tag;
+use App\Manager\ProfessionnelManager;
 use Floma\Resource\AbstractResource;
 
-class ProfessionnelResource extends AbstractResource
+class TagResource extends AbstractResource
 {
     /**
      * Constructeur. Si un contexte (managers) est fourni, on enrichit aussitôt.
      */
-    public function __construct(private Professionnel $professionnel, array $context = [])
+    public function __construct(private Tag $tag, array $context = [])
     {
-        parent::__construct($professionnel);
+        parent::__construct($tag);
         $this->hydrate($context);
     }
 
@@ -30,10 +32,9 @@ class ProfessionnelResource extends AbstractResource
     protected function baseData(): array
     {
         return [
-            'code'            => $this->professionnel->getCode(),
-            'raison_sociale'  => $this->professionnel->getRaisonSociale(),
-            'id_compte'       => $this->professionnel->getIdCompte(),
-            'est_prive'       => $this->professionnel->isPrive(),
+            'id'            => $this->tag->getId(),
+            'nom_tag'  => $this->tag->getNomTag(),
+            'tag_restaurant'       => $this->tag->isTagRestaurant(),
         ];
     }
 
@@ -41,9 +42,9 @@ class ProfessionnelResource extends AbstractResource
     /**
      * Construit une ressource enrichie pour UNE offre.
      */
-    public static function build(Professionnel $professionnel, array $context = []): array
+    public static function build(Tag $tag, array $context = []): array
     {
-        return (new self($professionnel, $context))->toArray();
+        return (new self($tag, $context))->toArray();
     }
 
     /**
@@ -51,6 +52,6 @@ class ProfessionnelResource extends AbstractResource
      */
     public static function buildAll(array $entities, array $context = []): array
     {
-        return array_map(fn($professionnel) => self::build($professionnel, $context), $entities);
+        return array_map(fn($tag) => self::build($tag, $context), $entities);
     }
 }
