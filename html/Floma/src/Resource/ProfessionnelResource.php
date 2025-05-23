@@ -34,6 +34,7 @@ class ProfessionnelResource extends AbstractResource
             'code'            => $this->professionnel->getCode(),
             'raison_sociale'  => $this->professionnel->getRaisonSociale(),
             'id_compte'       => $this->professionnel->getIdCompte(),
+            'est_prive'       => $this->professionnel->isPrive(),
         ];
     }
 
