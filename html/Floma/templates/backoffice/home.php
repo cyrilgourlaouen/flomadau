@@ -13,7 +13,7 @@
         $mois = "";
 
         //En-tête
-        $head_title = "ACCEUIL";
+        $head_title = "ACCUEIL";
         $head_subtitle = "LEGO$nom_entreprise";
         $head_svg = "/assets/icons/account_white.svg";
         include 'head_title.php';
@@ -88,8 +88,8 @@
                                 <?php
                                 $optionsData = $offer['optionVisibiliteData'] ?? null;
 
-                                $showPink = false;
-                                $showGreen = false;
+                                $une = false;
+                                $relief = false;
 
                                 if ($optionsData) {
                                     if (array_key_exists('nom_option', $optionsData)) {
@@ -100,19 +100,17 @@
                                         $label = $option['nom_option'] ?? null;
 
                                         if ($label === OptionVisibiliteEnum::ALaUne->value) {
-                                            $showPink = true;
-                                            $showGreen = true;
-                                            break;
+                                            $une = true;
                                         }
 
                                         if ($label === OptionVisibiliteEnum::EnRelief->value) {
-                                            $showGreen = true;
+                                            $relief = true;
                                         }
                                     }
                                 }
                                 ?>
 
-                                <?php if ($showPink || $showGreen) { ?>
+                                <?php if ($une || $relief) { ?>
                                     <div class="offer-card-img-badges">
 
                                         <?php if ($showPink) { ?>
