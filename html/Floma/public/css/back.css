@@ -319,7 +319,9 @@ input::placeholder {
 
 .error-message {
     color: red;
+    font-family: var(--noto);
     font-size: var(--text-size);
+    font-weight: normal;
 }
 
 /* Black button */
