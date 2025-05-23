@@ -43,14 +43,6 @@ class SignupProController extends AbstractController
             return $this->redirectToRoute('/pro');
         }
 
-        return $this->renderView(
-            'backoffice/signup_form.php',
-            [
-                'seo' => [
-                    'title' => 'Inscription professionnel',
-                    'descriptions' => 'Inscrivez-vous en tant que professionnel sur Floma.'
-                ]
-            ]
-        );
+            return $this->redirectToRoute('/pro/signup');
     }
 }

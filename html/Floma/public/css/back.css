@@ -286,7 +286,7 @@ input::placeholder {
 
 .error-message {
     color: red;
-    font-size: 0.9em;
+    font-size: var(--text-size);
 }
 
 /* Black button */
