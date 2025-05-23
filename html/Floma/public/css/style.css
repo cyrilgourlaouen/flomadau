@@ -38,6 +38,7 @@ box-sizing: border-box;
 body {
   font-family: var(--noto);
   background-color: var(--background-color);
+  overflow-x: hidden;
 }
 
 h1 {
@@ -1115,6 +1116,7 @@ footer div nav :any-link {
   .main {
     display: flex;
     flex-direction: row;
+    overflow-x: hidden;
   }
 
   .main .right-img {
