@@ -270,7 +270,7 @@ header .nav-hover:hover {
 }
 
 header .imgLog {
-  width: 2.5rem;
+  width: 2.6rem;
 }
 
 header .checkBtn {
@@ -570,6 +570,10 @@ footer div nav :any-link {
 .connection button:active {
   background-color: #444444;
   color: #000;
+}
+
+.connection .error {
+  color: var(--pink-color);
 }
 
 .logMenu {

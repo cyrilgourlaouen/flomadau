@@ -14,9 +14,6 @@
 		<meta name="description" content="<?= $data['seo']['description'] ?>">
 	<?php } ?>
 </head>
-<?php
-session_start();
-?>
 <body>
 	<main>
 		<?php require $templatePath ?>
