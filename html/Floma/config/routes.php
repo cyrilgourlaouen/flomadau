@@ -25,7 +25,7 @@ const ROUTES = [
         'controller' => App\Controller\ConnexionProController::class,
         'method' => 'logIn',
         'layout' => Layout::BACK,
-        'show' => false,
+        'view' => false,
     ],
     '/pro/connexion/logout' => [
         'controller' => App\Controller\ConnexionProController::class,
