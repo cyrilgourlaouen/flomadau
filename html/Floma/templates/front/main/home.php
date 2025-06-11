@@ -6,6 +6,94 @@ use App\Enum\OptionVisibiliteEnum;
 $starCalculator = new MetricStarsCalculator();
 ?>
 
+<!-- Selection du moment -->
+<section class="highlighted-offers-section">
+    <h2>Sélection du moment</h2>
+    <div class="highlighted-offers-list">
+        <?php
+        $highlightedOffers = array_filter($data["offers"], function($offer) {
+            return !empty($offer['optionVisibiliteData']) &&
+                in_array(
+                    OptionVisibiliteEnum::ALaUne->value,
+                    array_column($offer['optionVisibiliteData'], 'nom_option')
+                );
+        });
+
+        if (empty($highlightedOffers)) {
+            echo "<p>Aucune offre</p>";
+        } else {
+            foreach ($highlightedOffers as $offer) { ?>
+                <a href="?path=offer/<?= $offer['id'] ?>" class="highlighted-card">
+                    <!-- Image -->
+                    <div class="highlighted-card-img">
+                        <!-- Icone de catégorie -->
+                        <?php
+                        $icon = OfferCategoryEnum::tryFrom($offer['categorie'])?->getIcon();
+                        if ($icon) { ?>
+                            <div class="highlighted-card-img-category-icon">
+                                <img src="<?= $icon['path'] ?>" alt="<?= $icon['alt'] ?>">
+                            </div>
+                        <?php } ?>
+
+                        <!-- Image de fond de l'offre -->
+                        <?php
+                        $imageUrl = null;
+
+                        if (!empty($offer['imageData']) && is_array($offer['imageData'])) {
+                            
+                            foreach ($offer['imageData'] as $img) {
+                                if (!empty($img['principale'])) {
+                                    $imageUrl = $img['url_img'] ?? null;
+                                    break;
+                                }
+                            }
+
+                            if (!$imageUrl && isset($offer['imageData'][0]['url_img'])) {
+                                $imageUrl = $offer['imageData'][0]['url_img'];
+                            }
+                        }
+                        ?>
+                        <?php if ($imageUrl) { ?>
+                            <img src="/uploads/offers/<?= htmlspecialchars($imageUrl) ?>" alt="Image de l'offre"
+                                class="offer-card-img-main">
+                        <?php } ?>
+                    </div>
+                    <!-- Description -->
+                    <div>
+                        <h3><?= htmlspecialchars($offer['titre']) ?></h3>
+                        <!-- Note -->
+                        <div class="highlighted-card-note">
+                            <div class="highlighted-card-note-stars">
+                                <?= $starCalculator->calculStars($offer['note_moyenne']); ?>
+                            </div>
+                            <p>(<?= htmlspecialchars($offer['nombre_avis']) ?>)</p>
+                        </div>
+                        <!-- Prix -->
+                        <?php if ($offer['categorie'] != OfferCategoryEnum::Restauration->value) {
+                            if (isset($offer['categoryData'])) { ?>
+                                <div class="highlighted-card-price">
+                                    <p><?= $offer['categoryData']['prix_minimal'] == 0 ? "Gratuit" : $offer['categoryData']['prix_minimal'] ?>
+                                    </p>
+                                    <img src="/assets/icons/euro_symbol_primary.svg" alt="Icone d'euro">
+                                </div>
+                            <?php } else { ?>
+                                <div class="highlighted-card-price">
+                                    <p>Min. 0</p>
+                                    <img src="/assets/icons/euro_symbol_primary.svg" alt="Icone d'euro">
+                                </div>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <div class="highlighted-card-price-euros">
+                                <?= str_repeat("<img src='/assets/icons/euro_symbol_primary.svg' alt='Icone d'euro'>", $offer["categoryData"]["gamme_de_prix"]) ?>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </a>
+            <?php }
+        } ?>
+    </div>
+</section>
+
 <!-- Section Offre -->
 <section class="offer-section">
     <h2>Découvrez nos offres</h2>
@@ -76,7 +164,7 @@ $starCalculator = new MetricStarsCalculator();
                     $imageUrl = null;
 
                     if (!empty($offer['imageData']) && is_array($offer['imageData'])) {
-                        // Cherche l'image principale en priorité
+                        
                         foreach ($offer['imageData'] as $img) {
                             if (!empty($img['principale'])) {
                                 $imageUrl = $img['url_img'] ?? null;
@@ -84,7 +172,7 @@ $starCalculator = new MetricStarsCalculator();
                             }
                         }
 
-                        // Sinon prend la première image disponible
+                        
                         if (!$imageUrl && isset($offer['imageData'][0]['url_img'])) {
                             $imageUrl = $offer['imageData'][0]['url_img'];
                         }
