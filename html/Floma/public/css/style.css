@@ -891,6 +891,7 @@ footer div nav :any-link {
   border-radius: 1.875rem;
   background-color: var(--white-color);
   padding: 0.438rem 0.938rem 0.438rem 0.938rem;
+  color: #000;
 }
 
 .connection .logLines {
