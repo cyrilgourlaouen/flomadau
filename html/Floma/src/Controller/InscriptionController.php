@@ -36,7 +36,7 @@ class InscriptionController extends AbstractController
     public function signUp()
     {
         // Imaginons ici traiter la soumission d'un formulaire de contact et envoyer un mail...
-        if (isset($_POST)) {
+        if (isset($_POST)) { 
             $compte = new Compte();
             $compte->setNom($_POST['nom']);
 			$compte->setPrenom($_POST['prenom']);
@@ -54,8 +54,7 @@ class InscriptionController extends AbstractController
             $compteManager = new CompteManager();
             $compteManager->add($compte);
 
-            $id_compte = $compte.getId();
-
+            $id_compte = $compteManager->findBy(["nom" => $_POST["nom"]])[0]->getId();
             $membre = new Membre();
             $membre->setPseudo($_POST['pseudo']);
             $membre->setIdCompte($id_compte);

@@ -12,7 +12,7 @@ $starCalculator = new MetricStarsCalculator();
 
     <div class="offer-list">
         <?php foreach ($data["offers"] as $offer) { ?>
-            <article class="offer-card">
+            <a href="?path=offer/<?= $offer['id'] ?>" class="offer-card">
                 <!-- Image -->
                 <div class="offer-card-img">
                     <?php
@@ -147,7 +147,7 @@ $starCalculator = new MetricStarsCalculator();
                         </div>
                     </div>
                 </div>
-            </article>
+            </a>
         <?php } ?>
     </div>
 </section>

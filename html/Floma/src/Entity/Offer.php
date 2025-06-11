@@ -24,6 +24,8 @@ class Offer
     private bool $en_ligne = true;
     private int $code_professionnel;
 
+    private string $date_creation;
+
     public function getId(): int
     {
         return $this->id;
@@ -192,5 +194,15 @@ class Offer
     public function setCodeProfessionnel(int $code_professionnel): void
     {
         $this->code_professionnel = $code_professionnel;
+    }
+
+    public function getDateCreation(): string
+    {
+        return $this->date_creation;
+    }
+
+    public function setDateCreation(string $date_creation): void
+    {
+        $this->date_creation = $date_creation;
     }
 }
