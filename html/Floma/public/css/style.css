@@ -707,6 +707,7 @@ footer div nav :any-link {
     width: 100%;
     justify-content: center;
     align-items: stretch;
+    padding: 0.625rem;
   }
 
   .offer-card {
