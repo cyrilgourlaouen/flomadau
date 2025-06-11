@@ -42,4 +42,19 @@ const ROUTES = [
         'method' => 'submit',
         'show' => false,
     ],
+    '/connexion'=> [
+        'controller' => App\Controller\ConnexionController::class,
+        'method' => 'connection',
+        'layout' => Layout::LOG,
+    ],
+    '/connexion/logIn' => [
+        'controller' => App\Controller\ConnexionController::class,
+        'method' => 'logIn',
+    ],
+    '/connexion/logOut' => [
+        'controller' => App\Controller\ConnexionController::class,
+        'method' => 'logOut',
+    ]
 ];
+
+?>

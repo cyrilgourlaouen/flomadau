@@ -3,16 +3,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
 
 * {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 :root {
   --primary-color: #005bb5;
   --dark-blue-color: #1e3a8a;
   --pink-color: #eb4671;
-  --green-color: #03AD23;
+  --green-color: #03ad23;
   --dark-grey-color: #424656;
   --background-color: #f5f7fa;
   --white-color: #ffffff;
@@ -38,6 +39,7 @@ box-sizing: border-box;
 body {
   font-family: var(--noto);
   background-color: var(--background-color);
+  overflow-x: hidden;
 }
 
 h1 {
@@ -188,7 +190,7 @@ a {
 
 /** header Format téléphone **/
 header .hidden,
-.logIn,
+.logBtn,
 .postOffer {
   display: none;
 }
@@ -269,7 +271,18 @@ header .nav-hover:hover {
   text-decoration: underline var(--white-color);
 }
 
-/** Footer Format téléphone **/
+header .imgLog {
+  width: 2.9rem;
+}
+
+header .imgLogOut {
+  width: 2.7rem;
+}
+
+header .checkBtn {
+  width: 1.938rem;
+}
+
 footer {
   padding: 1.25rem;
   background-color: var(--dark-grey-color);
@@ -291,8 +304,9 @@ footer div nav {
 }
 
 footer div nav img {
-  width: 50%;
-  max-width: 15.625rem;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 footer div nav p {
@@ -339,9 +353,7 @@ footer div nav :any-link {
   background-color: var(--white-color);
   border-radius: 0.938rem;
   word-wrap: break-word;
-  box-shadow:
-    0 4px 8px 3px rgba(0, 0, 0, 0.15),
-    0 1px 3px rgba(0, 0, 0, 0.30);
+  box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .offer-card-info-layout {
@@ -367,6 +379,7 @@ footer div nav :any-link {
 
 .offer-card-img {
   position: relative;
+  overflow-x: visible;
 }
 
 .offer-card-img-badges {
@@ -431,13 +444,7 @@ footer div nav :any-link {
 .offer-card-img-category-icon img {
   width: 1.5rem;
   height: auto;
-}
-
-.offer-card .offer-card-img-main {
-  width: 100%;
-  height: auto;
-  border-radius: 0.938rem;
-}
+} 
 
 .offer-card-price-note,
 .offer-card-city-author {
@@ -465,6 +472,143 @@ footer div nav :any-link {
   justify-content: center;
 }
 
+.undoBtn {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+}
+
+.connection .logMember {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+
+.connection .logMember .form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 20px;
+}
+
+.connection .logMember .logLines {
+  gap: 0.625rem;
+}
+
+.connection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.875rem;
+  align-items: center;
+  padding: 6.25rem;
+}
+
+.connection p {
+  width: max-content;
+}
+
+.connection hr {
+  width: 100%;
+  border: 0.063rem solid #424656;
+}
+
+.connection a {
+  text-decoration:underline;
+}
+
+.connection .logPro {
+  display: none; 
+}
+
+.connection input {
+  border: 0.063rem solid #637381;
+  padding: 0 0.625rem 0 2.25rem;
+  margin: 0.313rem 0 0.313rem 0;
+  border-radius: 0.375rem;
+  height: 2.813rem;
+}
+
+.connection button {
+  border: 0.125rem solid #000;
+  width: fit-content;
+  height: 3.375rem;
+  border-radius: 1.875rem;
+  background-color: var(--white-color);
+  padding: 0.438rem 0.938rem 0.438rem 0.938rem;
+  color: #000;
+}
+
+.connection .logLines {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 0.625rem 0 0.625rem ;
+}
+
+.connection a {
+  color: #000;
+}
+
+.connection .formBtnEmail {
+  background: url("/assets/icons/login_black.svg") no-repeat 0.5rem center;
+  background-size: 1.25rem;
+  font-size: var(--text-size);
+}
+
+.connection .formBtnPassword {
+  background: url("/assets/icons/shield_black.svg") no-repeat 0.5rem center;
+  background-size: 1.25rem;
+}
+
+.connection-page header,
+.right-img,
+.title-connexion {
+  display: none;
+}
+
+.connection input:focus {
+  outline-color: var(--primary-color);
+}
+
+.connection button:active {
+  background-color: #444444;
+  color: #000;
+}
+
+.connection .error {
+  color: var(--pink-color);
+}
+
+.logMenu {
+  position: absolute;
+  top: 4.4rem;
+  right: 0.625rem;
+  background: white;
+  border: 0.063rem solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 0.625rem;
+}
+
+.logMenu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.logMenu ul li {
+  margin: 0.5rem 0;
+}
+
+.logMenu ul li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+}
+
 /* Format tablette */
 @media (min-width: 35rem) {
   :root {
@@ -474,14 +618,14 @@ footer div nav :any-link {
     --small-text-size: 1.094rem;
     --very-small-text-size: 0.75rem;
 
-    --page-padding: 2.188rem
+    --page-padding: 2.188rem;
   }
 
   header .btnBurger {
     display: none;
   }
 
-  header .logIn,
+  header .logBtn,
   header .postOffer {
     display: block;
   }
@@ -520,10 +664,19 @@ footer div nav :any-link {
   header .txtPostOffer:active {
     background-color: #334f9f;
     color: var(--white-color);
-
   }
 
-  header .ImgLogIn,
+  header .txtPostOffer:hover {
+    background-color: var(--white-color);
+    color: var(--primary-color);
+  }
+
+  header .txtPostOffer:active {
+    background-color: #334f9f;
+    color: var(--white-color);
+  }
+
+  header .ImgBtn,
   header .ImgSearch {
     width: 3.125rem;
     height: 3.125rem;
@@ -537,6 +690,125 @@ footer div nav :any-link {
   footer div nav {
     flex-direction: row;
     gap: 2.188rem;
+  }
+
+  .main footer {
+    display: none;
+  }
+
+  .offer-section {
+    align-items: center;
+  }
+
+  .offer-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(0, 27rem));
+    gap: 1.25rem;
+    width: 100%;
+    justify-content: center;
+    align-items: stretch;
+    padding: 0.625rem;
+  }
+
+  .offer-card {
+    height: 100%;
+  }
+
+  .offer-card-img-badge-pink img,
+  .offer-card-img-badge-green img {
+    height: 18px;
+  }
+
+  .main {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .main .right-img {
+    display: block;
+    flex: 1;
+  }
+
+  .connection {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .connection .title-connexion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 0.313rem;
+  }
+
+  .connection .title-connexion hr {
+    max-width: 28.125rem;
+  }
+
+  .connection .submit-container {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    padding: 1.25rem 0 1.25rem 1.25rem;
+  }
+
+  .connection button:hover {
+    background-color: #000;
+    color: var(--white-color);
+  }
+
+  .connection-page footer {
+    display: none;
+  }
+
+  .main {
+    display: flex;
+    flex-direction: row;
+    overflow-x: hidden;
+  }
+
+  .main .right-img {
+    display: block;
+    flex: 1;
+  }
+
+  .connection {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .connection .title-connexion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 0.313rem;
+  }
+
+  .connection .title-connexion hr {
+    max-width: 28.125rem;
+  }
+
+  .connection .submit-container {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    padding: 1.25rem 0 1.25rem 1.25rem;
+  }
+
+  .connection button:hover {
+    background-color: #000;
+    color: var(--white-color);
+  }
+
+  .connection .logPro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.625rem; 
   }
 
   .offer-section {
@@ -569,6 +841,16 @@ footer div nav :any-link {
 
   footer div {
     justify-content: center;
+  }
+
+  .main .right-img {
+    display: none;
+  }
+}
+
+@media (max-width: 62.5rem) {
+  .main .right-img {
+    display: none;
   }
 }
 
