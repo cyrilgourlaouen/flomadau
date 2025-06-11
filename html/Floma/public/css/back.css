@@ -63,10 +63,6 @@ header {
   border-right: 1px solid var(--light-grey-color);
 }
 
-.hidden {
-  display: none;
-}
-
 main {
   flex: 1;
   flex-direction: column;
@@ -127,7 +123,6 @@ h3 {
 select {
   width: 100%;
   padding: 8px;
-  margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }

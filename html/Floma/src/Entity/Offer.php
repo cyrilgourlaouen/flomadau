@@ -25,6 +25,8 @@ class Offer
     private int $code_professionnel;
     private string $date_creation;
 
+    private string $date_creation;
+
     public function getId(): int
     {
         return $this->id;
