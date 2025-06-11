@@ -519,10 +519,7 @@ footer div nav :any-link {
 }
 
 .connection .logPro {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.625rem;
+  display: none; 
 }
 
 .connection input {
@@ -804,6 +801,13 @@ footer div nav :any-link {
   .connection button:hover {
     background-color: #000;
     color: var(--white-color);
+  }
+
+  .connection .logPro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.625rem; 
   }
 
   .offer-section {
