@@ -12,16 +12,14 @@
 			</a>
 			<a href="#" class="search"><img src="/assets/icons/search_white.svg" alt="loupe" class="ImgSearch"></a>
 			<?php if (!isset($_SESSION['email'])) { ?>
-				<a class="logBtn" id="logBtn"><img class="imgLog"
-						src="/assets/icons/menu_logIn_white.svg" alt="Icon de connexion"></a>
+				<img class="imgLog" id="logBtn"src="/assets/icons/menu_logIn_white.svg" alt="Icon de connexion">
 				<div id="logMenu" class="logMenu hidden">
 					<ul>
 						<li><a href="?path=/connexion">Se connecter</a></li>
 					</ul>
 				</div>
 			<?php } else { ?>
-				<a class="logBtn" id="logBtn"><img class="imgLogOut"
-						src="/assets/icons/login_white.svg" alt="Icon de déconnexion"></a>
+				<img class="imgLogOut" id="logBtn" src="/assets/icons/login_white.svg" alt="Icon de déconnexion">
 				<div id="logMenu" class="logMenu hidden">
 					<ul>
 						<li><a href="?path=/profil">Mes informations</></li>
@@ -38,7 +36,7 @@
 			<a id="BtnClose" href="#" class="close"><img src="/assets/icons/chevron_left_white.svg"
 					alt="Chevron vers la gauche"></a>
 			<h2>Menu</h2>
-			<a href="#" class="action">
+			<a href="/" class="action">
 				<img src="/assets/icons/discover_white.svg" alt="Icone boussole">
 				<h2>Découvrez nos offres</h2>
 			</a>
