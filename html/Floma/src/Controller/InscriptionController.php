@@ -68,4 +68,25 @@ class InscriptionController extends AbstractController
         return $this->redirectToRoute('/inscription/membre', ['state' => 'failure']);
     }
 
+    /**
+     * @return null
+    */
+    public function getPseudo()
+    {
+        // Imaginons ici traiter la soumission d'un formulaire de contact et envoyer un mail...
+        
+    }
+
+    public function getEmail()
+    {
+        // Imaginons ici traiter la soumission d'un formulaire de contact et envoyer un mail...
+        
+    }
+
+    public function getTel()
+    {
+        // Imaginons ici traiter la soumission d'un formulaire de contact et envoyer un mail...
+        
+    }
+
 }
