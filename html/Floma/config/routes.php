@@ -81,12 +81,12 @@ const ROUTES = [
         'method' => 'checkEmail',
     ],
     '/offre/creation' => [
-        'controller' => App\Controller\CreationOffreController::class,
+        'controller' => App\Controller\Creation\CreationOffreController::class,
         'method' => 'home',
         'layout' => Layout::BACK,
     ],
     '/offre/creation/new' => [
-        'controller' => App\Controller\CreationOffreController::class,
+        'controller' => App\Controller\Creation\CreationOffreController::class,
         'method' => 'newOffer',
         'view' => false,
     ],
