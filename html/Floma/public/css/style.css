@@ -377,7 +377,8 @@ footer div nav :any-link {
   object-fit: cover;
 }
 
-.offer-card-img {
+.offer-card-img,
+.highlighted-card-img {
   position: relative;
   overflow-x: visible;
 }
@@ -426,7 +427,9 @@ footer div nav :any-link {
   background-color: var(--green-color);
 }
 
-.offer-card-img-category-icon {
+.offer-card-img-category-icon,
+.highlighted-card-img-category-icon {
+  z-index: 5;
   margin: 0.938rem;
   position: absolute;
   bottom: 0;
@@ -441,10 +444,11 @@ footer div nav :any-link {
   justify-content: center;
 }
 
-.offer-card-img-category-icon img {
-  width: 1.5rem;
-  height: auto;
-} 
+.highlighted-card-img-category-icon-img,
+.offer-card-img-category-icon-img {
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+}
 
 .offer-card-price-note,
 .offer-card-city-author {
@@ -453,7 +457,7 @@ footer div nav :any-link {
   justify-content: space-between;
   align-items: center;
 }
-
+.highlighted-card-city,
 .offer-card-city,
 .offer-card-note,
 .offer-card-price {
@@ -626,6 +630,7 @@ footer div nav :any-link {
 .highlighted-offers-list {
   overflow-x: auto;
   overflow-y: hidden;
+  scroll-snap-type: x mandatory;
   display: flex;
   flex-direction: row;
   gap: 1.25rem;
@@ -649,36 +654,12 @@ footer div nav :any-link {
   gap: 0.938rem;
 }
 
-.highlighted-card-img {
-  position: relative;
-}
-
 .highlighted-card-img img {
   width: 100%;
   height: 100%;
   aspect-ratio: 6 / 4;
-  object-fit: cover;
   border-radius: 0.938rem;
-}
-
-.highlighted-card-img-category-icon {
-  margin: 0.938rem;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  background-color: var(--background-color);
-  border-radius: 100%;
-  border: 1px solid var(--black-color);
-  width: 2.5rem;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.highlighted-card-img-category-icon img {
-  width: 1.5rem;
-  height: 1.5rem;
+  object-fit: cover;
 }
 
 .highlighted-card-price {
@@ -927,6 +908,10 @@ footer div nav :any-link {
   .offer-card-img-badge-green img {
     height: 18px;
   }
+
+  .highlighted-offers-section {
+    align-items: center;
+  }
 }
 
 @media (max-width: 61.875rem) {
@@ -992,5 +977,9 @@ footer div nav :any-link {
     isolation: isolate;
     background: #FFFFFF;
     padding-top: 0;
+  }
+
+  .highlighted-card-img {
+    aspect-ratio: 1/1;
   }
 }
