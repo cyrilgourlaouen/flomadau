@@ -1,4 +1,7 @@
 <header>
+	<?php 
+		session_start();
+	?>
 	<div class="top_header">
 		<a href="#" id="BtnOpen" class="btnBurger"><img src="/assets/icons/menu_burger_white.svg"
 				alt="Icone de menu burger"></a>
@@ -13,7 +16,6 @@
 						src="/assets/icons/menu_logIn_white.svg" alt="Icon de connexion"></a>
 				<div id="logMenu" class="logMenu hidden">
 					<ul>
-						<li><a href="?path=/profil">Mes informations</a></li>
 						<li><a href="?path=/connexion">Se connecter</a></li>
 					</ul>
 				</div>
@@ -55,15 +57,15 @@
 					<h2>Connexion / Inscription</h2>
 				</a>
 			<?php } else { ?>
+				<a href="#" class="action">
+					<img class="checkBtn" src="/assets/icons/check_white.svg" alt="Icone de consultation">
+					<h2>Consulté mes informations</h2>
+				</a>
 				<a href="?path=/connexion/logOut" class="action">
 					<img src="/assets/icons/login_white.svg" alt="Icone de connexion">
 					<h2>Déconnexion</h2>
 				</a></h3>
 			<?php } ?>
-			<a href="#" class="action">
-				<img class="checkBtn" src="/assets/icons/check_white.svg" alt="Icone de consultation">
-				<h2>Consulté mes informations</h2>
-			</a>
 		</div>
 		<nav>
 			<a href="https://entreprendre.service-public.fr/vosdroits/F31228" class="nav-hover">

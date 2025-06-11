@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use App\Manager\CompteManager;
@@ -19,14 +18,14 @@ class ConnexionController extends AbstractController
     public function logIn()
     {
         if (!empty($_POST)) {
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
             $compteManager = new CompteManager();
             $log = $compteManager->findBy([
                 "email" => $_POST["email"],
                 "mot_de_passe" => $_POST["password"],
             ]);
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
-            }
             if (!empty($log)) {
                 $_SESSION['email'] = $_POST['email'];
                 session_regenerate_id();
