@@ -33,56 +33,128 @@ include 'head_title.php';
                     <option value="Parc d'attraction">Parc d'attraction</option>
                 </select>
             </div>
-            <div class="formInline hidden" id="champs-visite">
-                <div>
-                    <label for="Duree">Duree *</label>
-                    <input type="text" name="Duree" id="Duree">
+            <div class="formInline hidden align-center" id="champs-visite">
+                <div class="gap-vsm flex-col">
+                    <label for="duree_visite">Duree *</label>
+                    <input type="text" name="duree_visite" id="duree_visite" placeholder="2h30">
                 </div>
                 <div>
-                    <label for="guide">guide</label>
-                    <input type="text" name="guide" id="guide">
+                    <label class="checkbox-item">
+                    <input type="checkbox" id="guideCheckbox" name="guide" value="oui">
+                    <span>Guide</span>
+                    </label>
                 </div>
-                <div >
-                    <label for="prix_minimal">prix minimal *</label>
-                    <input type="text" name="prix_minimal" id="prix_minimal">
+                <div class="gap-vsm flex-col hidden" id="selectGuides">
+                    <label for="guideOptions">Langue du guide:</label>
+                        <select name="guides[]" id="guideOptions" multiple>
+                            <option value="fr">Français</option>
+                            <option value="en">Anglais</option>
+                            <option value="es">Espagnol</option>
+                            <option value="it">Italien</option>
+                            <option value="al">Allemand</option>
+                        </select>
+                </div>
+                <div class="gap-vsm flex-col">
+                    <label for="prix_minimal_visite">Prix minimal *</label>
+                    <input type="number" name="prix_minimal_visite" id="prix_minimal_visite" placeholder="15.5">
                 </div>
             </div>
+
             <div class="formInline hidden" id="champs-spectacle">
-                <div>
-                    <label for="duree">duree *</label>
-                    <input type="text" name="duree" id="duree">
+                <div class="gap-vsm flex-col">
+                    <label for="duree_show">Duree *</label>
+                    <input type="text" name="duree_show" id="duree_show" placeholder="2h30">
                 </div>
 
-                <div>
-                    <label for="prix_minimal">prix minimal *</label>
-                    <input type="text" name="prix_minimal" id="prix_minimal">
+                <div class="gap-vsm flex-col">
+                    <label for="prix_minimal">Prix minimal *</label>
+                    <input type="number" name="prix_minimal" id="prix_minimal" placeholder="15.5">
                 </div>
 
-                <div>
-                    <label for="capacite">capacite *</label>
-                    <input type="text" name="capacite" id="capacite">
+                <div class="gap-vsm flex-col">
+                    <label for="capacite">Capacite *</label>
+                    <input type="number" name="capacite" id="capacite" placeholder="500">
                 </div>
             </div>
 
             
 
-            <div id="champs-restaurant" class="hidden">
-                <label for="type_cuisine">Type de cuisine :</label>
-                <input type="text" name="type_cuisine" id="type_cuisine">
+            <div id="champs-restaurant" class="hidden formInline">
+                <div class="gap-vsm flex-col">
+                    <label for="type_cuisine">Gamme de prix *</label>
+                    <select name="gamme_prix" id="gamme_prix">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div class="gap-vsm flex-col">
+                    <label for="carte_resto">Carte du restaurant *</label>
+                    <input type="file">
+                </div>
+                
+
+                <div class="checkbox-group flex-col">
+                    <label for="checkbox-group" class="text-center">Type de repas *</label>
+                    <div class="flex-row gap-vsm">
+                        <label class="checkbox-item">
+                        <input type="checkbox" name="options[]" value="petit_dejeuner">
+                        <p>Petit-Déjeuner</p>
+                        </label>
+
+                        <label class="checkbox-item">
+                        <input type="checkbox" name="options[]" value="dejeuner">
+                        <p>Déjeuner</p>
+                        </label>
+
+                        <label class="checkbox-item">
+                        <input type="checkbox" name="options[]" value="diner">
+                        <p>Dîner</p>
+                        </label>
+                    </div>
+                </div>
             </div>
 
-            <div id="champs-activite" class="hidden">
-                <label for="niveau_difficulte">Niveau de difficulté :</label>
-                <select name="niveau_difficulte" id="niveau_difficulte" >
-                    <option value="Facile">Facile</option>
-                    <option value="Moyen">Moyen</option>
-                    <option value="Difficile">Difficile</option>
-                </select>
+            <div id="champs-activite" class="hidden formInline">
+                <div class="gap-vsm flex-col">
+                    <label for="duree_activity">Duree *</label>
+                    <input type="text" name="duree_activity" id="duree_activity" placeholder="2h30">
+                </div>
+                <div class="gap-vsm flex-col">
+                    <label for="age_requis_activity">Age requis *</label>
+                    <input type="number" name="age_requis_activity" id="age_requis_activity" placeholder="15">
+                </div>
+                <div class="gap-vsm flex-col">
+                    <label for="prestations_incluses">Prestations incluses *</label>
+                    <input type="text" name="prestations_incluses" id="prestations_incluses" placeholder="palmes incluses">
+                </div>
+                <div class="gap-vsm flex-col">
+                    <label for="prestations_non_incluses">Prestations non incluses *</label>
+                    <input type="text" name="prestations_non_incluses" id="prestations_non_incluses" placeholder="prévoir bouteille d'eau">
+                </div>
+                <div class="gap-vsm flex-col">
+                    <label for="prix_minimal_activity">Prix minimal *</label>
+                    <input type="number" name="prix_minimal_activity" id="prix_minimal_activity" placeholder="15.5">
+                </div>
             </div>
 
-            <div id="champs-parc" class="hidden">
-                <label for="nombre_attractions">Nombre d’attractions :</label>
-                <input type="number" name="nombre_attractions" id="nombre_attractions" min="1">
+            <div id="champs-parc" class="hidden formInline">
+                <div class="flex-col gap-vsm">
+                    <label for="nombre_attractions">Nombre d’attractions *</label>
+                    <input type="number" name="nombre_attractions" id="nombre_attractions" min="1" placeholder="15">
+                </div>
+                <div class="flex-col gap-vsm">
+                    <label for="prix_minimal_amusement">Prix minimal *</label>
+                    <input type="number" name="prix_minimal_amusement" id="prix_minimal_amusement" min="1" placeholder="15.5">
+                </div>
+                <div class="flex-col gap-vsm">
+                    <label for="age_requis_amusement">Âge requis *</label>
+                    <input type="number" name="age_requis_amusement" id="age_requis_amusement" min="1" placeholder="15">
+                </div>
+                <div class="gap-vsm flex-col">
+                    <label for="carte_parc">Carte du parc d'attraction *</label>
+                    <input type="file">
+                </div>
             </div>
         </form>
 
@@ -106,6 +178,13 @@ include 'head_title.php';
                 document.getElementById(champs[value]).classList.remove("hidden");
             }
         }
+
+        const guideCheckbox = document.getElementById('guideCheckbox');
+        const selectGuides = document.getElementById('selectGuides');
+
+        guideCheckbox.addEventListener('change', () => {
+            selectGuides.classList.toggle('hidden', !guideCheckbox.checked);
+        });
         </script>
         </div>
         
