@@ -1,0 +1,4 @@
+git pull main 
+git checkout ma branche 
+git rebase
+
