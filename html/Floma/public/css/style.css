@@ -429,7 +429,6 @@ footer div nav :any-link {
 
 .offer-card-img-category-icon,
 .highlighted-card-img-category-icon {
-  z-index: 5;
   margin: 0.938rem;
   position: absolute;
   bottom: 0;
