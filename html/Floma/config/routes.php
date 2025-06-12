@@ -54,6 +54,10 @@ const ROUTES = [
     '/connexion/logOut' => [
         'controller' => App\Controller\ConnexionController::class,
         'method' => 'logOut',
+    ],
+    '/informationM' => [
+        'controller' => App\Controller\ConsultationMController::class,
+        'method' => 'consultation',
     ]
 ];
 

@@ -6,6 +6,7 @@ use App\Entity\Activite;
 use App\Entity\Compte;
 use App\Enum\CompteRoleEnum;
 use Floma\Resource\AbstractResource;
+use App\Entity\Membre;
 
 class CompteResource extends AbstractResource
 {
@@ -37,6 +38,21 @@ class CompteResource extends AbstractResource
                     : $resource::build($manager->findOneBy(['id_compte' => $this->compte->getId()]));
               
                 $this->add('roleData', $categoryData);
+            }
+        }
+        if (isset($context['userName'])) {
+            $isMultiple = (bool) ($context['userName']['isMultiple'] ?? false);
+
+            $enum = CompteRoleEnum::tryFrom("Membre");
+            if ($enum != null) {
+                $manager = $enum->getManager();
+                $resource = $enum->getResource();
+    
+                $categoryData = $isMultiple
+                    ? $resource::buildAll($manager->findBy(['id_compte' => $this->compte->getId()]))
+                    : $resource::build($manager->findOneBy(['id_compte' => $this->compte->getId()]));
+              
+                $this->add('membreData', $categoryData);
             }
         }
     }

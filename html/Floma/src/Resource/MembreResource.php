@@ -30,9 +30,9 @@ class MembreResource extends AbstractResource
     protected function baseData(): array
     {
         return [
-            'code'            => $this->membre->getCode(),
-            'raison_sociale'  => $this->membre->getPseudo(),
-            'id_compte'       => $this->membre->getIdCompte(),
+            'code' => $this->membre->getCode(),
+            'pseudo' => $this->membre->getPseudo(),
+            'id_compte' => $this->membre->getIdCompte(),
         ];
     }
 

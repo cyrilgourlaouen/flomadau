@@ -1,9 +1,13 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Membre;
 use App\Manager\CompteManager;
+use App\Manager\MembreManager;
+use App\Resource\MembreResource;
 use Floma\Controller\AbstractController;
 use Floma\View\Layout;
+use App\Resource\CompteResource;
 
 /**
  * Class ConnexionController
@@ -18,20 +22,19 @@ class ConnexionController extends AbstractController
     public function logIn()
     {
         if (!empty($_POST)) {
+            $compteManager = new CompteManager();
+            $enrichedAccounts = CompteResource::build($compteManager->findOneBy( ['email' => $_POST["email"]]), [
+                'userName' => ['isMultiple' => true],
+            ]);
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }
-            $compteManager = new CompteManager();
-            $log = $compteManager->findBy([
-                "email" => $_POST["email"],
-                "mot_de_passe" => $_POST["password"],
-            ]);
-            if (!empty($log)) {
-                $_SESSION['email'] = $_POST['email'];
+            if ($enrichedAccounts) {
+                $_SESSION = $enrichedAccounts;
                 session_regenerate_id();
                 return $this->redirectToRoute('/');
             } else {
-                return $this->redirectToRoute('/connexion', ["state" => "failure"]);
+                return $this->redirectToRoute('/connection', ["state" => "failure"]);
             }
         }
     }
