@@ -1,5 +1,6 @@
 <div>
     <?php
+
         use App\Service\MetricStarsCalculator;
         use App\Enum\OfferCategoryEnum;
         use App\Enum\OptionVisibiliteEnum;
@@ -75,7 +76,18 @@
                 <!-- Description -->
                 <div class="offer-card-section-one">
                     <h3><?= htmlspecialchars($offer['titre']) ?></h3>
-                    <p><?= htmlspecialchars($offer['description_detaillee']) ?></p>
+                    <?php 
+                        if(strlen($offer['description_detaillee']) > 200){
+                            $description = substr($offer['description_detaillee'],0, 200);
+                            if(strrpos($description, ' ')){
+                                $description = substr($description, 0, strrpos($description, ' '));
+                            }
+                            $description.='...';
+                        }else{
+                            $description = $offer['description_detaillee'];
+                        }
+                    ?>
+                    <p><?= htmlspecialchars($description) ?></p>
                 </div>
                 <div class="offer-card-section-two">
                     <div class="offer-card-category-prix-lieu">
@@ -119,7 +131,7 @@
                         <a href="">Aucun avis non consulté</a>
                         <a href="">Aucun avis non répondu</a>
                     </div>
-                <div>
+                </div>
             </div>
             <div id="offer-card-right-layout">
                 <div id="offer-online-visibility">
