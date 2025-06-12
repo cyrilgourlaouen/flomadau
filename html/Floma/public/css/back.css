@@ -578,4 +578,7 @@ input::placeholder {
   height: 2.75rem;
   color: var(--background-color);
   background-color: var(--green-color);
+  font-size: var(--text-size);
+  text-align: center;
+  align-content: center;
 }

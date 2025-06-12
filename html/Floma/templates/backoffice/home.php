@@ -73,52 +73,53 @@
             </div>
             <div class="offer-card-info-layout">
                 <!-- Description -->
-                <div class="offer-card-gap">
+                <div class="offer-card-section-one">
                     <h3><?= htmlspecialchars($offer['titre']) ?></h3>
                     <p><?= htmlspecialchars($offer['description_detaillee']) ?></p>
                 </div>
+                <div class="offer-card-section-two">
+                    <div class="offer-card-category-prix-lieu">
+                        <!-- Catégorie -->
+                        <p>Catégorie : <?= $offer['categorie'];?></p>
 
-                <div class="offer-card-category-prix-lieu">
-                    <!-- Catégorie -->
-                    <p>Catégorie : <?= $offer['categorie'];?></p>
-
-                    <!-- Prix -->
-                    <?php if ($offer['categorie'] != OfferCategoryEnum::Restauration->value) {
-                        if (isset($offer['categoryData'])) { ?>
-                            <div class="offer-card-price">
-                                <img src="/assets/icons/euro_symbol_primary.svg" alt="Icone d'euro">
-                                <p><?= $offer['categoryData']['prix_minimal'] == 0 ? "Gratuit" : $offer['categoryData']['prix_minimal'] ?> euros</p>
-                            </div>
+                        <!-- Prix -->
+                        <?php if ($offer['categorie'] != OfferCategoryEnum::Restauration->value) {
+                            if (isset($offer['categoryData'])) { ?>
+                                <div class="offer-card-price">
+                                    <img src="/assets/icons/euro_symbol_primary.svg" alt="Icone d'euro">
+                                    <p><?= $offer['categoryData']['prix_minimal'] == 0 ? "Gratuit" : $offer['categoryData']['prix_minimal'] ?> euros</p>
+                                </div>
+                            <?php } else { ?>
+                                <div class="offer-card-price">
+                                    <p>Min. 0</p>
+                                    <img src="/assets/icons/euro_symbol_primary.svg" alt="Icone d'euro">
+                                </div>
+                            <?php } ?>
                         <?php } else { ?>
-                            <div class="offer-card-price">
-                                <p>Min. 0</p>
-                                <img src="/assets/icons/euro_symbol_primary.svg" alt="Icone d'euro">
+                            <div class="offer-card-price-euros">
+                                <?= str_repeat("<img src='/assets/icons/euro_symbol_primary.svg' alt='Icone d'euro'>", $offer["categoryData"]["gamme_de_prix"]) ?>
                             </div>
                         <?php } ?>
-                    <?php } else { ?>
-                        <div class="offer-card-price-euros">
-                            <?= str_repeat("<img src='/assets/icons/euro_symbol_primary.svg' alt='Icone d'euro'>", $offer["categoryData"]["gamme_de_prix"]) ?>
-                        </div>
-                    <?php } ?>
 
-                    <!-- Ville -->
-                    <div class="offer-card-city">
-                        <img src="/assets/icons/location_primary.svg" alt="Icone de localisation">
-                        <p><?= htmlspecialchars($offer['ville']) ?></p>
-                    </div>
-                </div>
-
-                <div class="offer-card-note-avis">
-                    <!-- Note -->
-                    <div class="offer-card-note">
-                        <div class="offer-card-note-stars">
-                            <?= $starCalculator->calculStars($offer['note_moyenne']); ?>
+                        <!-- Ville -->
+                        <div class="offer-card-city">
+                            <img src="/assets/icons/location_primary.svg" alt="Icone de localisation">
+                            <p><?= htmlspecialchars($offer['ville']) ?></p>
                         </div>
-                        <p>(<?= htmlspecialchars($offer['nombre_avis']) ?>)</p>
                     </div>
-                    <a href="">Aucun avis non consulté</a>
-                    <a href="">Aucun avis non répondu</a>
-                </div>
+                
+                    <div class="offer-card-note-avis">
+                        <!-- Note -->
+                        <div class="offer-card-note">
+                            <div class="offer-card-note-stars">
+                                <?= $starCalculator->calculStars($offer['note_moyenne']); ?>
+                            </div>
+                            <p>(<?= htmlspecialchars($offer['nombre_avis']) ?>)</p>
+                        </div>
+                        <a href="">Aucun avis non consulté</a>
+                        <a href="">Aucun avis non répondu</a>
+                    </div>
+                <div>
             </div>
             <div id="offer-card-right-layout">
                 <div id="offer-online-visibility">
