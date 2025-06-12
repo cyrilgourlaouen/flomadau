@@ -49,4 +49,12 @@ class TypeRepasManager extends AbstractManager
     {
         return $this->readMany(TypeRepas  ::class, $filters, $order, $limit, $offset);
     }
+
+    public function add(TypeRepas $typeRepas) {
+		return $this->create(TypeRepas::class, [
+				'id' => $typeRepas->getId(),
+                'nom_type' => $typeRepas->getNomType(),
+			]
+		);
+	}
 }

@@ -48,4 +48,12 @@ class LangueGuideManager extends AbstractManager
     {
         return $this->readMany(LangueGuide  ::class, $filters, $order, $limit, $offset);
     }
+
+    public function add(LangueGuide $langueGuide) {
+		return $this->create(LangueGuide::class, [
+				'nom_langue' => $langueGuide->getNomLangue(),
+                'id' => $langueGuide->getId(),
+			]
+		);
+	}
 }

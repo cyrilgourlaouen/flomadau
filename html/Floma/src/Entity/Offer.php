@@ -16,7 +16,7 @@ class Offer
     private string $categorie;
     private string $conditions_accessibilite;
     private ?string $description_detaillee = null;
-    private ?string $telephone = null;
+    private string $telephone;
     private ?string $nom_rue = null;
     private ?int $numero_rue = null;
     private ?string $complement_adresse = null;
@@ -125,12 +125,12 @@ class Offer
         $this->description_detaillee = $description_detaillee;
     }
 
-    public function getTelephone(): ?string
+    public function getTelephone(): string
     {
         return $this->telephone;
     }
 
-    public function setTelephone(?string $telephone): void
+    public function setTelephone(string $telephone): void
     {
         $this->telephone = $telephone;
     }

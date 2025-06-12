@@ -8,8 +8,9 @@ $head_title = "Création du compte";
 $head_subtitle = "INFORMATIONS ENTREPRISE";
 $head_svg = "/assets/icons/account_white.svg";
 include 'head_title.php';
+include 'black_button.php'
 ?>
-<form class=".formContainer" action="?path=/offre/creation/new">
+<form action="?path=/offre/creation/new" method="post">
     <section class="formSectionContainer">
 
         <div class="h3-section">
@@ -156,7 +157,6 @@ include 'head_title.php';
                     <input type="file">
                 </div>
             </div>
-        </form>
 
         <script>
         function afficherChamps() {
@@ -195,8 +195,8 @@ include 'head_title.php';
             </div>
 
             <div class="field">
-                <label for="promotion">Promotion *</label>
-                <input name="promotion" type="text" placeholder="Promotion" required>
+                <label for="conditions_accesibilite">Conditions d'accessibilité *</label>
+                <input name="conditions_accesibilite" id="conditions_accesibilite" type="text" placeholder="Promotion" required>
             </div>
         </div>
 
@@ -211,13 +211,19 @@ include 'head_title.php';
         </div>
 
         <div class="field">
-            <label for="rue">Rue</label>
-            <input name="rue" type="text" placeholder="Rue Lepic">
+            <label for="nom_rue">Rue</label>
+            <input name="nom_rue" id="nom_rue" type="text" placeholder="Rue Lepic">
         </div>
 
-        <div class="field">
-            <label for="numéro_rue">Numéro</label>
-            <input name="numéro_rue" type="text" placeholder="15">
+        <div class="formInline">
+            <div class="field">
+                <label for="numero_rue">Numéro</label>
+                <input name="numero_rue" id="numero_rue" type="number" placeholder="15">
+            </div>
+            <div class="field">
+                <label for="complement_adresse">Complément adresse</label>
+                <input name="complement_adresse" id="complement_adresse" type="text" placeholder="au 2eme étage">
+            </div>
         </div>
 
         <div class="formInline">
@@ -240,13 +246,13 @@ include 'head_title.php';
         </div>
 
         <div class="field">
-            <label for="tel">Téléphone *</label>
-            <input name="tel" type="text" placeholder="00 00 00 00 00">
+            <label for="telephone">Téléphone *</label>
+            <input name="telephone" id="telephone" type="text" placeholder="00 00 00 00 00">
         </div>
 
         <div class="field">
-            <label for="web">Site web</label>
-            <input name="web" type="text" placeholder="www.site.fr">
+            <label for="site_web">Site web</label>
+            <input name="site_web" id="site_web" type="text" placeholder="www.site.fr">
         </div>
 
         <div class="field">
@@ -255,8 +261,8 @@ include 'head_title.php';
         </div>
 
         <div class="field">
-            <label for="detail">Description détaillée *</label>
-            <textarea name="detail" class="bigField" type="text" placeholder="Description détaillée qui sera affichée sur la page de votre offre." ></textarea>
+            <label for="description_detaillee">Description détaillée *</label>
+            <textarea name="description_detaillee" id="description_detaillee" class="bigField" type="text" placeholder="Description détaillée qui sera affichée sur la page de votre offre." ></textarea>
         </div>
 
         <div class="field">
@@ -264,9 +270,7 @@ include 'head_title.php';
             <input type="file" class="bigField" name="photo" accept="image/png, image/jpeg" required></input>
         </div>
     </section>
+    <div class="buttonContainer">
+        <?= black_button('Se connecter'); ?>
+    </div>
 </form>
-
-<div class="buttonContainer">
-    <button class="button-black">Prévisualiser</button>
-    <button class="button-blue">Publier l'offre<button>
-</div>
