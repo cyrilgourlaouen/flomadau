@@ -27,17 +27,11 @@
                 <form action="" method="">
                     <input type="search" id="input_search" name="recherche" placeholder="Rechercher" disabled>
                 </form>
-                <?php 
-                    echo button('Filtrer', 'btn_filtrer');    
-                ?>
-                <?php 
-                    echo button('Trier', 'btn_trier');    
-                ?>
+                <?= button('Filtrer', 'btn_filtrer'); ?>
+                <?= button('Trier', 'btn_trier'); ?>
             </div>
             <div id="blue_btn">
-                <?php 
-                    echo button('Ajouter', 'btn_ajouter');    
-                ?>
+                <?= button('Ajouter', 'btn_ajouter'); ?>
             </div>
         </div>
     </div>

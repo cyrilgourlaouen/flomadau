@@ -1,5 +1,5 @@
 <?php
-// Usage: include 'black_button.php'; echo black_button('Valider');
+/* Usage: include 'black_button.php'; <?= black_button('Valider'); ?>*/
 function black_button($text, $type = 'submit', $name = '', $id = '') {
     $name_attr = $name ? " name='$name'" : "";
     $id_attr = $id ? " id='$id'" : "";

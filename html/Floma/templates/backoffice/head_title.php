@@ -8,11 +8,11 @@
     <div class="headContainer">
         <div class="headContent">
             <div class="boxIcon">
-                <img src="<?php echo htmlspecialchars($head_svg); ?>" alt="Account Icon" class="icon">
+                <img src="<?= htmlspecialchars($head_svg); ?>" alt="Account Icon" class="icon">
             </div>
             <div class="flexColumn">
-                <h1><?php echo htmlspecialchars($head_title); ?></h1>
-                <h2><?php echo htmlspecialchars($head_subtitle); ?></h2>
+                <h1><?= htmlspecialchars($head_title); ?></h1>
+                <h2><?= htmlspecialchars($head_subtitle); ?></h2>
             </div>
         </div>
     </div>
