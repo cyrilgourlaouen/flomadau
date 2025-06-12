@@ -11,8 +11,8 @@ include 'black_button.php'
         <form method="POST" action="?path=/pro/connexion/login">
             <hr class="barCompte">
             <div class="logInLines">
-                <p>Identifiant</p>
-                <input type="text" placeholder="Dénomination sociale" id="raison_sociale" name="raison_sociale" required>
+                <p>Adresse mail</p>
+                <input type="text" placeholder="exemple@gmail.com" id="email" name="email" required>
             </div>
             <div class="logInLines">
                 <p>Mot de passe</p>

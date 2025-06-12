@@ -29,12 +29,13 @@ class ConnexionProController extends AbstractController
             $enrichedAccounts = CompteResource::buildAll($compteManager->findAll(), [
                 'gradeUser' => ['isMultiple' => true],
             ]);
-            $isProExist = $metricProAccount->isProExist($enrichedAccounts, $_POST["raison_sociale"], $_POST["password"]);
+            $isProExist = $metricProAccount->isProExist($enrichedAccounts, $_POST["email"], $_POST["password"]);
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }
             if ($isProExist) {
-                $_SESSION['raison_sociale'] = $_POST['raison_sociale'];
+                $proId = $metricProAccount->getProId($enrichedAccounts, $_POST["email"], $_POST["password"]);
+                $_SESSION['code_pro'] = $proId;
                 session_regenerate_id();
                 return $this->redirectToRoute('/pro');
             } else {
