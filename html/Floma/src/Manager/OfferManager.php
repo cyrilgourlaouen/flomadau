@@ -57,7 +57,12 @@ class OfferManager extends AbstractManager
                 'ville' => $offer->getVille(),
                 'code_postal' => $offer->getCodePostal(),
                 'categorie' => $offer->getCategorie(),
-                'conditions_accessibilite' => $offer->getConditionsAccessibilite()
+                'conditions_accessibilite' => $offer->getConditionsAccessibilite(),
+                'telephone' => $offer->getTelephone(),
+                'site_web' => $offer->getSiteWeb(),
+                'description_detaillee' => $offer->getDescriptionDetaillee(),
+                'nom_rue' => $offer->getNomRue(),
+                'numero_rue' => $offer->getNumeroRue(),
 			]
 		);
 	}
