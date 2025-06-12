@@ -18,11 +18,11 @@ class MetricProAccount
         return false;
     }
 
-    public function getProId(mixed $proAccount, $raisonSociale, $password): string
+    public function getProId(mixed $proAccount, $email, $password): string
     {
         foreach($proAccount as $account) {
             if ($account["roleData"]) {
-                if ($account["email"] == $raisonSociale && password_verify($password, $account["mot_de_passe"])){
+                if ($account["email"] == $email && password_verify($password, $account["mot_de_passe"])){
                     return $account["roleData"][0]["code"];
                 }
             }
