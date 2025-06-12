@@ -1,6 +1,7 @@
 <?php $compte = $_SESSION;?>
 <div class="information-data-container">
-    <form method="POST" class="personal-data">
+    <form method="POST" class="personal-data" action="?path=/updateM">
+        <input type="hidden" name="id_compte" value="<?= htmlspecialchars($compte['id']) ?>">
         <div class="title">
             <h2>Informations personnelles</h2>
         </div>
@@ -73,7 +74,5 @@
         </form>
     </div>
 </div>
+
 <script src="./js/_js-ConsultationMembre.js"></script>
-
-
-
