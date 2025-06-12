@@ -94,6 +94,8 @@ class CreationOffreController extends AbstractController
 
             } elseif ($_POST["categorie"] === OfferCategoryEnum::Restauration->value) {
                 $restauration = new Restaurant();
+                $typeRepas = new TypeRepas();
+                $typeRepasRestaurant = new TypeRepasRestaurant();
                 $restaurationManager = new RestaurantManager();
                 $restauration->setIdOffre($id[1]);
                 $restauration->setGammeDePrix($_POST["gamme_de_prix"]);
