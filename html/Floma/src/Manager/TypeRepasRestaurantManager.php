@@ -49,4 +49,12 @@ class TypeRepasRestaurantManager extends AbstractManager
     {
         return $this->readMany(TypeRepasRestaurant  ::class, $filters, $order, $limit, $offset);
     }
+
+    public function add(TypeRepasRestaurant $typeRepasRestaurant) {
+		return $this->create(TypeRepasRestaurant::class, [
+				'id_offre' => $typeRepasRestaurant->getIdOffre(),
+                'id_type' => $typeRepasRestaurant->getIdType(),
+			]
+		);
+	}
 }
