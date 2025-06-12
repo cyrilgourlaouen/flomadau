@@ -19,6 +19,7 @@ class MainProController extends AbstractController
             'professionnel' => ['isMultiple' => false],
             'option' => ['isMultiple' => true],
             'image' => ['isMultiple' => true],
+            'avis' => ['isMultiple' => true],
         ]);
 
         return $this->renderView(
