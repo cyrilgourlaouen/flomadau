@@ -58,6 +58,10 @@ const ROUTES = [
     '/consultationMembre' => [
         'controller' => App\Controller\ConsultationMController::class,
         'method' => 'consultation',
+    ],
+    'updateM' => [
+        'controller' => App\Controller\ModificationMembreController::class,
+        'method' => 'updateData',
     ]
 ];
 

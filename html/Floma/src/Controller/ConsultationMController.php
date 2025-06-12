@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Manager\CompteManager;
 use Floma\Controller\AbstractController;
+use App\Entity\Compte;
 
 
 /**
@@ -28,7 +29,6 @@ class ConsultationMController extends AbstractController
                 ]],
     );
     }
-
 
     /**
      * @return null
