@@ -3,21 +3,21 @@
         <?php
             //Sous-en-tête pour offre
             $head_title = "OFFRES";
-            $head_subtitle = $nb_offres;
+            $head_subtitle = $nbOffres;
             $head_svg = "/assets/icons/offer_white.svg";
-            include 'little_title.php';
+            include 'little_title_without_h1.php';
 
             //Sous-en-tête pour avis
-            $head_title = "AVIS";
-            $head_subtitle = $nb_avis;
+            $head_title = "AVIS NON RÉPONDU";
+            $head_subtitle = $nbAvisNonConsulte;
             $head_svg = "/assets/icons/avis_white.svg";
-            include 'little_title.php';
+            include 'little_title_without_h1.php';
 
             //Sous-en-tête pour facture
-            $head_title = "FACTURE : $mois";
-            $head_subtitle = "0€";
-            $head_svg = "/assets/icons/facture_white.svg";
-            include 'little_title.php';
+            $head_title = "AVIS NON CONSULTÉ";
+            $head_subtitle = $nbAvisNonRepondu;
+            $head_svg = "/assets/icons/eye_close_white.svg";
+            include 'little_title_without_h1.php';
         ?>
     </div>
     <div id="title_searchbar_btn">
