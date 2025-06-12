@@ -7,18 +7,18 @@
 
         include 'button.php';
 
-        $nb_offres = 0;
-        $nb_avis = 0;
-
-        /*$now = new DateTime();
-        $formatter = new IntlDateFormatter( "fr_FR" , IntlDateFormatter::NONE, IntlDateFormatter::NONE, null, null, 'MMMM');
-        $mois = $formatter->format($now);
-        echo($mois);*/
-        $mois = 'JUIN';
+        $nbOffres = count($data['offers']);
+        $nbAvisNonConsulte= 0;
+        $nbAvisNonRepondu = 0;
 
         //En-tête
-        $head_title = "ACCEUIL";
-        $head_subtitle = "LEGO$nom_entreprise";
+        $head_title = "ACCUEIL";
+        $raison_sociale = $data['offers'][0]['professionnelData']['raison_sociale'];
+        if($raison_sociale === null){
+            $head_subtitle = "";
+        }else{
+            $head_subtitle = $raison_sociale;
+        }
         $head_svg = "/assets/icons/account_white.svg";
         include 'head_title.php';
     ?>
@@ -46,7 +46,7 @@
         }else{
             include 'nav_searchbar.php';
     ?>
-        <div class="list_offer">
+        <div id="list_offer">
     <?php
         foreach ($data["offers"] as $offer) { ?>
         <article class="offer-card">
@@ -75,7 +75,7 @@
                 <!-- Description -->
                 <div class="offer-card-gap">
                     <h3><?= htmlspecialchars($offer['titre']) ?></h3>
-                    <p><?= htmlspecialchars($offer['resume']) ?></p>
+                    <p><?= htmlspecialchars($offer['description_detaillee']) ?></p>
                 </div>
 
                 <div class="offer-card-category-prix-lieu">
@@ -86,9 +86,8 @@
                     <?php if ($offer['categorie'] != OfferCategoryEnum::Restauration->value) {
                         if (isset($offer['categoryData'])) { ?>
                             <div class="offer-card-price">
-                                <p><?= $offer['categoryData']['prix_minimal'] == 0 ? "Gratuit" : $offer['categoryData']['prix_minimal'] ?>
-                                </p>
                                 <img src="/assets/icons/euro_symbol_primary.svg" alt="Icone d'euro">
+                                <p><?= $offer['categoryData']['prix_minimal'] == 0 ? "Gratuit" : $offer['categoryData']['prix_minimal'] ?> euros</p>
                             </div>
                         <?php } else { ?>
                             <div class="offer-card-price">
@@ -109,7 +108,7 @@
                     </div>
                 </div>
 
-                <div class="offer-card-price-note">
+                <div class="offer-card-note-avis">
                     <!-- Note -->
                     <div class="offer-card-note">
                         <div class="offer-card-note-stars">
@@ -117,8 +116,8 @@
                         </div>
                         <p>(<?= htmlspecialchars($offer['nombre_avis']) ?>)</p>
                     </div>
-                    <p>Aucun avis non consulté</p>
-                    <p>Aucun avis non répondu</p>
+                    <a href="">Aucun avis non consulté</a>
+                    <a href="">Aucun avis non répondu</a>
                 </div>
             </div>
             <div id="offer-card-right-layout">
@@ -146,13 +145,15 @@
 
                                 if ($label === OptionVisibiliteEnum::EnRelief->value) {
                                     ?>
-                                        <p>A la une</p>
+                                        <p>En relief</p>
                                     <?php
                                 }
                             }
                         }
                     ?>
                 </div>
+                <!-- Btn voir plus -->
+                <?= button('Voir plus', 'btn_voir_plus'); ?>
             </div>
         </article>
     <?php 
