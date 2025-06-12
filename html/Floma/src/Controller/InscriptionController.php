@@ -41,7 +41,7 @@ class InscriptionController extends AbstractController
 			$compte->setPrenom($_POST['prenom']);
 			$compte->setEmail($_POST['email']);
             $compte->setTelephone($_POST['tel']);
-            $compte->setMotDePasse($_POST['password']);
+            $compte->setMotDePasse($_POST['password']);//hasher
             $compte->setVille($_POST['city']);
             $compte->setCodePostal($_POST['zip_code']);
             $compte->setNomRue($_POST['name_street']);

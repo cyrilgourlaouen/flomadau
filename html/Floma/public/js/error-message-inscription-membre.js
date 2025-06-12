@@ -37,7 +37,7 @@ document.getElementById('inscription_membre').addEventListener('submit',function
 
     // *Pour la version mobile uniquement* Mot de passe ne remplissant pas toutes les conditions (ex: Caractère spécial, minimum de 12 caractères etc...)
     const password = document.getElementById('password').value.trim();
-    if (password.length < 12 && !password.match(/[a-z]/) && !password.match(/[A-Z]/) && !password.match(/[0-9]/) && !password.match(/[[$&+,:;=?@#|'<>.-^*()%!]]/)) {
+    if (password.length < 12 && !password.match(/[a-z]/) && !password.match(/[A-Z]/) && !password.match(/[0-9]/) && !password.match(/[[$&+,:;=?@#|'<>.-^*()%!]]/) && password.includes(" ")) {
         isValid = false;
         document.getElementById('error-password').textContent = "Mot de passe ne remplissant pas toutes les conditions";
     }

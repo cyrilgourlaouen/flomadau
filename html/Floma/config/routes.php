@@ -24,22 +24,6 @@ const ROUTES = [
         'controller' => App\Controller\OfferController::class,
         'method' => 'show',
     ],
-    '/offer/{id}' => [
-        'controller' => App\Controller\OfferController::class,
-        'method' => 'show',
-    ],
-    '/offer/{id}' => [
-        'controller' => App\Controller\OfferController::class,
-        'method' => 'show',
-    ],
-    '/offer/{id}' => [
-        'controller' => App\Controller\OfferController::class,
-        'method' => 'show',
-    ],
-    '/offer/{id}' => [
-        'controller' => App\Controller\OfferController::class,
-        'method' => 'show',
-    ],
     '/pro' => [
         'controller' => App\Controller\MainProController::class,
         'method' => 'home',
