@@ -12,7 +12,7 @@ include 'black_button.php'
             <hr class="barCompte">
             <div class="logInLines">
                 <p>Adresse mail</p>
-                <input type="text" placeholder="tata.tutu@gmail.com" id="email" name="email" required>
+                <input type="text" placeholder="exemple@gmail.com" id="email" name="email" required>
             </div>
             <div class="logInLines">
                 <p>Mot de passe</p>
