@@ -627,6 +627,7 @@ footer div nav :any-link {
 }
 
 .highlighted-offers-list {
+  position: relative;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
@@ -682,6 +683,10 @@ footer div nav :any-link {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.highlighted-offers-list-arrows {
+  display: none;
 }
 
 /* Format tablette */
@@ -980,5 +985,23 @@ footer div nav :any-link {
 
   .highlighted-card-img {
     aspect-ratio: 1/1;
+    width: 21.75rem;
+  }
+
+  .highlighted-card {
+    width: 21.75rem;
+  }
+
+  .highlighted-offers-list-arrows {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    pointer-events: none;
   }
 }

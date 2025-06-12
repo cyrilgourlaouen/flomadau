@@ -19,6 +19,10 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
 <section class="highlighted-offers-section">
     <h2>Sélection du moment</h2>
     <div class="highlighted-offers-list">
+        <div class="highlighted-offers-list-arrows">
+            <img src="/assets/icons/circle_chevron_left_primary.svg" alt="">
+            <img src="/assets/icons/circle_chevron_right_primary.svg" alt="">
+        </div>
         <?php foreach ($highlightedOffers as $offer) { ?>
                 <a href="?path=offer/<?= $offer['id'] ?>" class="highlighted-card">
                     <!-- Image -->
@@ -57,7 +61,7 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
                     </div>
 
                     <!-- Description -->
-                    <div>
+                    <div class="highlighted-card-info">
                         <!-- Titre -->
                         <h3><?= htmlspecialchars($offer['titre']) ?></h3>
                         
