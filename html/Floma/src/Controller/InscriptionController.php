@@ -35,7 +35,6 @@ class InscriptionController extends AbstractController
      */
     public function signUp()
     {
-        // Imaginons ici traiter la soumission d'un formulaire de contact et envoyer un mail...
         if (isset($_POST)) { 
             $compte = new Compte();
             $compte->setNom($_POST['nom']);
@@ -67,25 +66,29 @@ class InscriptionController extends AbstractController
         return $this->redirectToRoute('/inscription/membre', ['state' => 'failure']);
     }
 
+    //Permet d'envoyer les vérifications lorsque qu'un utilisateur crée un compte
     /**
      * @return null
     */
     public function getPseudo()
     {
-        // Imaginons ici traiter la soumission d'un formulaire de contact et envoyer un mail...
-        
+        if (isset($_POST)){
+            return new CompteManager.findOneBy(['pseudo' => $_POST('pseudo')]);
+        }
     }
 
     public function getEmail()
     {
-        // Imaginons ici traiter la soumission d'un formulaire de contact et envoyer un mail...
-        
+        if (isset($_POST)){
+            return new CompteManager.findOneBy(['email' => $_POST('email')]);
+        }
     }
 
     public function getTel()
     {
-        // Imaginons ici traiter la soumission d'un formulaire de contact et envoyer un mail...
-        
+        if (isset($_POST)){
+            return new CompteManager.findOneBy(['telephone' => $_POST('tel')]);
+        }
     }
 
 }

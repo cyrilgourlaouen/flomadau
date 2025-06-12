@@ -111,5 +111,5 @@
     <figure id="background_image_block">
         <img src="/assets/images/bg_inscription.png" alt="Vue de haut sur une plage de la côte d'azur" id="background_image">
     </figure>
-    <script src="/js/error-message.js"></script>
+    <script src="/js/error-message-inscription-membre.js"></script>
 </div>
