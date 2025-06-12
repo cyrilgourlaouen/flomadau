@@ -85,7 +85,7 @@
 
                 <div class="offer-card-category-prix-lieu">
                     <!-- Catégorie -->
-                    <p>Catégorie : <?php echo $offer['categorie'];?></p>
+                    <p>Catégorie : <?= $offer['categorie'];?></p>
 
                     <!-- Prix -->
                     <?php if ($offer['categorie'] != OfferCategoryEnum::Restauration->value) {
