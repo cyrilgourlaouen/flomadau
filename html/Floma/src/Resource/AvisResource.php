@@ -4,6 +4,7 @@ namespace App\Resource;
 
 use App\Entity\Avis;
 use App\Manager\AvisManager;
+use App\Manager\ReponseProManager;
 use Floma\Resource\AbstractResource;
 
 class AvisResource extends AbstractResource
@@ -23,6 +24,13 @@ class AvisResource extends AbstractResource
      */
     private function hydrate(array $context): void
     {
+        if(isset($context['reponsePro'])){
+            $reponseProManager = new ReponseProManager();
+
+            $reponsePro = ReponseProResource::buildAll($reponseProManager->findBy(['id_avis' => $this->avis->getId()]));
+
+            $this->add('ReponseProData', $reponsePro);
+        }
     }
 
     /**
