@@ -12,7 +12,7 @@
             </div>
             <div class="lines">
                 <h3>Nom*</h3>
-                <input class="input" type="text" name="name" value="<?= htmlspecialchars($compte['prenom']) ?>" disabled
+                <input class="input" type="text" name="name" value="<?= htmlspecialchars($compte['nom']) ?>" disabled
                     required>
             </div>
         </div>
