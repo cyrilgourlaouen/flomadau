@@ -14,7 +14,7 @@ class MainProController extends AbstractController
 
         $offerManager = new OfferManager();
 
-        $enrichedOffers = OfferResource::buildAll($offerManager->findBy(['code_professionnel' => 2]), [
+        $enrichedOffers = OfferResource::buildAll($offerManager->findBy(['code_professionnel' => 2/*$_SESSION['code_pro']*/]), [
             'categorie' => ['isMultiple' => false],
             'professionnel' => ['isMultiple' => false],
             'option' => ['isMultiple' => true],

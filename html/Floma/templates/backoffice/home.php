@@ -9,7 +9,7 @@
         include 'button.php';
 
         $nbOffres = count($data['offers']);
-        $nbAvisNonConsulte= 0;
+        $nbAvisNonConsulte = 0;
         $nbAvisNonRepondu = 0;
 
         //En-tête
