@@ -1,10 +1,7 @@
 <?php
 namespace App\Controller;
 
-use App\Entity\Membre;
 use App\Manager\CompteManager;
-use App\Manager\MembreManager;
-use App\Resource\MembreResource;
 use Floma\Controller\AbstractController;
 use App\Resource\CompteResource;
 use App\Service\MetricMembreAccount;
@@ -36,7 +33,7 @@ class ConnexionController extends AbstractController
                 session_regenerate_id(true);
                 return $this->redirectToRoute('/');
             } else {
-                return $this->redirectToRoute('/connection', ["state" => "failure"]);
+                return $this->redirectToRoute('/connexion', ["state" => "failure"]);
             }
         }
     }
