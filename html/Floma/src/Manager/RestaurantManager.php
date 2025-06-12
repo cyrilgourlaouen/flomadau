@@ -48,4 +48,13 @@ class RestaurantManager extends AbstractManager
     {
         return $this->readMany(Restaurant::class);
     }
+
+    public function add(Restaurant $restaurant) {
+		return $this->create(Restaurant::class, [
+				'id_offre' => $restaurant->getIdOffre(),
+                'url_carte_restaurant' => $restaurant->getUrlCarteRestaurant(),
+                'gamme_de_prix' => $restaurant->getGammeDePrix(),
+			]
+		);
+	}
 }
