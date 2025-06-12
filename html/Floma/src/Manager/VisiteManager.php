@@ -48,4 +48,13 @@ class VisiteManager extends AbstractManager
     {
         return $this->readMany(Visite::class);
     }
+
+    public function add(Visite $visite) {
+		return $this->create(Visite::class, [
+				'id_offre' => $visite->getIdOffre(),
+                'duree' => $visite->getDuree(),
+                'prix_minimal' => $visite->getPrixMinimal(),
+			]
+		);
+	}
 }
