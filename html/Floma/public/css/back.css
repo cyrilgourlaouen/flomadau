@@ -41,7 +41,7 @@ body {
   background-color: var(--background-color);
   display: flex;
   flex-direction: row;
-  min-width: 1200px;
+  min-width: 1440px;
 }
 
 header {
@@ -538,7 +538,8 @@ input::placeholder {
 
 .offer-card-img{
   width: 20rem;
-  height: auto;
+  height: 13.75rem;
+  object-fit: cover;
   border-radius: 0.625rem;
 } 
 
@@ -581,4 +582,21 @@ input::placeholder {
   font-size: var(--text-size);
   text-align: center;
   align-content: center;
+}
+
+.offer-card-section-two, .offer-card-section-one{
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.offer-card-section-one h3{
+  margin: 0;
+}
+
+.offer-card-note-avis a{
+  font-family: var(--noto);
+  font-weight: normal;
+  font-size: var(--text-size);
+  color: var(--black-color);
 }

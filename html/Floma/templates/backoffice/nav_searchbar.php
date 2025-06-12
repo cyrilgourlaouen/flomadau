@@ -25,7 +25,7 @@
         <div id="searchbar_all_btn">
             <div id="searchbar_white_btn">
                 <form action="" method="">
-                    <input type="search" id="input_search" name="recherche" placeholder="Rechercher" disabled>
+                    <input type="search" id="input_search" name="recherche" placeholder="Rechercher">
                 </form>
                 <?= button('Filtrer', 'btn_filtrer'); ?>
                 <?= button('Trier', 'btn_trier'); ?>
