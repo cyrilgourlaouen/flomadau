@@ -14,23 +14,37 @@ document.getElementById('inscription_membre').addEventListener('submit',function
     document.getElementById('error-password').textContent = "";
     document.getElementById('error-password-conf').textContent = "";
 
-    //Pseudo existe déjà en BDD
+
     const pseudo = document.getElementById('pseudo').value.trim();
-    if (getPseudo(pseudo) !== undefined) {
+    const tel = document.getElementById('tel').value.trim();
+    const email = document.getElementById('email').value.trim();
+
+    const formData = new FormData();
+    formData.append('pseudo', pseudo);
+    formData.append('tel', tel);
+    formData.append('email', email);
+
+    const response = /*await*/ fetch('check_user.php', {
+        method: 'POST',
+        body: formData
+    });
+
+    const result = /*await*/ response.json();
+
+    //Pseudo existe déjà en BDD
+    if (result.gettingPseudo !== undefined) {
         isValid = false;
         document.getElementById('error-pseudo').textContent = "Pseudo déjà existant";
     }
 
     //Numéro de téléphone existe déjà en BDD ou invalide
-    const tel = document.getElementById('tel').value.trim();
-    if (tel.length !== 10 && getTel(tel) !== undefined) {
+    if (tel.length !== 10 && result.gettingTel !== undefined) {
         isValid = false;
         document.getElementById('error-tel').textContent = "Numéro de téléphone non valide ou déjà existant";
     }
 
     // Adresse e-mail invalide ou déjà existant
-    const email = document.getElementById('email').value.trim();
-    if (getEmail() !== undefined) {
+    if (result.gettingEmail !== undefined) {
         isValid = false;
         document.getElementById('error-email').textContent = "Adresse e-mail non valide ou déjà existant";
     }

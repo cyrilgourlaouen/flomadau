@@ -36,12 +36,20 @@ class InscriptionController extends AbstractController
     public function signUp()
     {
         if (isset($_POST)) { 
+
+            $response['gettingPseudo'] = new CompteManager.findOneBy(['pseudo' => $_POST('pseudo')]);
+            $response['gettingEmail'] = new CompteManager.findOneBy(['email' => $_POST('email')]);
+            $response['gettingTel'] = new CompteManager.findOneBy(['telephone' => $_POST('tel')]);
+
+            json_encode($response);
+            
             $compte = new Compte();
             $compte->setNom($_POST['nom']);
 			$compte->setPrenom($_POST['prenom']);
 			$compte->setEmail($_POST['email']);
             $compte->setTelephone($_POST['tel']);
-            $compte->setMotDePasse($_POST['password']);//hasher
+            $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $compte->setMotDePasse($hash);
             $compte->setVille($_POST['city']);
             $compte->setCodePostal($_POST['zip_code']);
             $compte->setNomRue($_POST['name_street']);
@@ -64,31 +72,6 @@ class InscriptionController extends AbstractController
             return $this->redirectToRoute('/');
         }
         return $this->redirectToRoute('/inscription/membre', ['state' => 'failure']);
-    }
-
-    //Permet d'envoyer les vérifications lorsque qu'un utilisateur crée un compte
-    /**
-     * @return null
-    */
-    public function getPseudo()
-    {
-        if (isset($_POST)){
-            return new CompteManager.findOneBy(['pseudo' => $_POST('pseudo')]);
-        }
-    }
-
-    public function getEmail()
-    {
-        if (isset($_POST)){
-            return new CompteManager.findOneBy(['email' => $_POST('email')]);
-        }
-    }
-
-    public function getTel()
-    {
-        if (isset($_POST)){
-            return new CompteManager.findOneBy(['telephone' => $_POST('tel')]);
-        }
     }
 
 }
