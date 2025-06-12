@@ -50,7 +50,7 @@ class AvisResource extends AbstractResource
             'nb_dislike' => $this->avis->getNbDislike(),
             'signalements' => $this->avis->getSignalements(),
             'signalement_pro' => $this->avis->isSignalementPro(),
-            'id_offre' => $this->avis->getPrestationsNonIncluses(),
+            'id_offre' => $this->avis->getIdOffre(),
             'code_membre' => $this->avis->getCodeMembre(),
         ];
     }
