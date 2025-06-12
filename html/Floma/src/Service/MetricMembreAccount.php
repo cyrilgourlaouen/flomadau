@@ -8,20 +8,17 @@ class MetricMembreAccount
      * Retourne l'index du compte membre si trouvé, sinon false
      */
     public function isMembreExist(array $accounts, string $email, string $password): int|false
-{
-    foreach ($accounts as $index => $account) {
-        if (
-            isset($account['email'], $account['mot_de_passe']) &&
-            $account['email'] === $email &&
-            $account['mot_de_passe'] === $password
-        ) {
-            return $index;
+    {
+        foreach ($accounts as $index => $account) {
+            if (
+                $account['email'] === $email &&
+                password_verify($password, $account['mot_de_passe'])
+            ) {
+                return $index;
+            }
         }
+
+        return false;
     }
-    return false;
 }
-
-}
-
-
 ?>
