@@ -1,8 +1,11 @@
 <?php
 namespace App\Controller;
 
+use App\Entity\Membre;
 use App\Manager\CompteManager;
 use App\Manager\CompteProManager;
+use App\Manager\MembreManager;
+use App\Resource\MembreResource;
 use Floma\Controller\AbstractController;
 use App\Resource\CompteResource;
 use App\Service\MetricMembreAccount;
