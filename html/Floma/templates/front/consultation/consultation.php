@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="lines-container">
-            <div class="lines , email">
+            <div class="lines email">
                 <h3>Adresse e-mail*</h3>
                 <input class="input" type="email" name="email" value="<?= htmlspecialchars($compte['email']) ?>" disabled
                     required>
