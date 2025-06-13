@@ -62,7 +62,7 @@ class ConnexionProController extends AbstractController
             );
         }
         session_destroy();
-        return $this->redirectToRoute('/');
+        return $this->redirectToRoute('/pro');
     }
 
     public function connection()
