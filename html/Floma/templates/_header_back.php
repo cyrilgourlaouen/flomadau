@@ -7,9 +7,15 @@
                 <li id="menu-home">
                     <a href="index.php?path=/pro">Accueil</a>
                 </li>
-                <li id="menu-logout">
-                    <a href="index.php?path=/pro/connexion/logout">Déconnexion</a>
-                </li>
+                <?php
+                    if(isset($_SESSION['code_pro'])){
+                        ?>
+                            <li id="menu-logout">
+                                <a href="index.php?path=/pro/connexion/logout">Déconnexion</a>
+                    </li>
+                <?php
+                    }
+                ?>
                 <!-- <li id="menu-info"><a href="index.php?path=/pro/signup">
                         <h2>Informations</h2>
                     </a></li> -->
