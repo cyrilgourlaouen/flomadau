@@ -124,9 +124,7 @@ abstract class AbstractManager
 	 * @param string $class
 	 * @param array $fields
 	 * @return array(PDOStatement, Int)
-	 * @return array(PDOStatement, Int)
 	 */
-	protected function create(string $class, array $fields): array
 	protected function create(string $class, array $fields): array
 	{
 		$query = "INSERT INTO " . $this->getTableName($class) . " (";
