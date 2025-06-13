@@ -8,23 +8,11 @@
 <div id="main-check">
   <section class="check-section">
     <h3>Photo de profil</h3>
-    <?php
-      if(isset($compte['url_photo_profil'])){
-        ?>
-          <img src="/uploads/profilePicture/<?= $compte['url_photo_profil'] ?>.jpg" alt="Photo de profil" title="Photo de profil">
-        <?php
-      }else{
-        ?>
-          <img src="/uploads/profilePicture/pp_compte_defaut.jpg" alt="Photo de profil" title="Photo de profil">
-        <?php
-      }
-
-    ?>
+    <img src="/uploads/profilePicture/<?= $compte['url_photo_profil'] ?>.jpg" alt="Photo de profil" title="Photo de profil">
   </section>
   
   <section class="check-section">
-    <h3>Informations générales</h3>
-    <div class="check-div">
+    <h3>Informations générales</h3>  
       <article>
         <label for="prenom">Prénom </label>
         <input type="text" id="prenom" name="prenom" placeholder="<?= $compte['prenom'] ?>" disabled/>
@@ -34,26 +22,17 @@
         <label for="nom">Nom </label>
         <input type="text" id="nom" name="nom" placeholder="<?= $compte['nom'] ?>" disabled/>
       </article>
-    </div>
 
-    <div class="check-div">
       <article>
         <label for="telephone">Numéro de téléphone</label>
-        <?php 
-          $numSansEspace = $compte['telephone'];
-          $numExplode = str_split($numSansEspace, 2);
-          $numAvecEspaces = implode(' ', $numExplode);
-        ?>
-        <input type="tel" id="telephone" name="telephone" placeholder="<?= $numAvecEspaces ?>" disabled/>
+        <input type="tel" id="telephone" name="telephone" placeholder="<?= $compte['telephone'] ?>" disabled/>
       </article>
 
       <article>
         <label for="email">Adresse e-mail</label>
         <input type="email" id="email" name="email" placeholder="<?= $compte['email'] ?>" disabled/>
       </article>
-    </div>
 
-    <div class="check-div">
       <article>
         <label for="denomination">Dénomination sociale</label>
         <input type="text" id="denomination" name="denomination" placeholder="<?= $data['infosPro'][0]['raison_sociale'] ?>" disabled/>
@@ -87,74 +66,29 @@
 
   <section class="check-section">
     <h3>Adresse</h3>
-    <div class="check-div">
       <article>
-        <label for="rue">Rue</label>
+        <label for="rue">Rue</label><br>
         <input type="text" id="rue" name="rue" placeholder="<?= $compte['nom_rue'] ?>" disabled/>
       </article>
 
       <article>
-        <label for="numero">Numéro</label>
+        <label for="numero">Numéro</label><br>
         <input type="text" id="numero" name="numero" placeholder="<?= $compte['numero_rue'] ?>" disabled/>
       </article>
-    </div>
-
-    <div class="check-div">
-      <?php
-        if(isset($compte['complement_adresse'])){
-          ?>
-            <article>
-              <label for="complement">Complément d'adresse</label>
-              <input type="text" id="complement" name="complement" placeholder="<?= $compte['complement_adresse'] ?>" disabled/>
-            </article>
-          <?php
-        }
-      ?>
 
       <article>
-        <label for="ville">Ville</label>
+        <label for="complement">Complément d'adresse</label><br>
+        <input type="text" id="complement" name="complement" placeholder="<?= $compte['complement_adresse'] ?>" disabled/>
+      </article>
+
+      <article>
+        <label for="ville">Ville</label><br>
         <input type="text" id="ville" name="ville" placeholder="<?= $compte['ville'] ?>" disabled/>
       </article>
-    <?php 
-      if(isset($compte['complement_adresse'])){
-        ?>
-          </div>
-        <?php
-      }
-    ?>
+
       <article>
-        <label for="codePostal">Code postal</label>
+        <label for="codePostal">Code postal</label><br>
         <input type="text" id="codePostal" name="codePostal" placeholder="<?= $compte['code_postal'] ?>" disabled/>
       </article>
-    <?php 
-      if(!isset($compte['complement_adresse'])){
-        ?>
-          </div>
-        <?php
-      }
-    ?>
   </section>
-
-  <?php
-    if(isset($data['infosPro'][0]['proPriveData'][0]['numero_carte'])){
-      $numCarte = $data['infosPro'][0]['proPriveData'][0]['numero_carte'];
-      $numCarteDebut = substr($numCarte, 0, 4);
-      $numCarteFin = substr($numCarte, 12, 15);
-      $numCarteCache = $numCarteDebut." **** **** ".$numCarteFin;
-
-      $dateExpiration = $data['infosPro'][0]['proPriveData'][0]['date_expiration'];
-      $dateExplode = explode('-', $dateExpiration);
-      $dateExpirationFr = $dateExplode[1].'/'.$dateExplode[0];
-      ?>
-        <section class="check-section">
-        <h3>Carte bancaire</h3>
-          <article id="check-card">
-            <p id="check-num-card"><?= $numCarteCache ?></p>
-            <p>Expire fin : <?= $dateExpirationFr ?></p>
-            <p><?= $compte['nom']." ". $compte['prenom'] ?></p>
-          </article>
-        </section>
-      <?php
-      }
-    ?>
 </div>
