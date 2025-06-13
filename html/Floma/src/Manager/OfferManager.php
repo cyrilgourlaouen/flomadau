@@ -63,6 +63,7 @@ class OfferManager extends AbstractManager
                 'description_detaillee' => $offer->getDescriptionDetaillee(),
                 'nom_rue' => $offer->getNomRue(),
                 'numero_rue' => $offer->getNumeroRue(),
+                'code_professionnel' => $offer->getCodeProfessionnel(),
 			]
 		);
 	}
