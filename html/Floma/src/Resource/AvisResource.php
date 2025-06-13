@@ -29,7 +29,7 @@ class AvisResource extends AbstractResource
 
             $reponsePro = ReponseProResource::buildAll($reponseProManager->findBy(['id_avis' => $this->avis->getId()]));
 
-            $this->add('ReponseProData', $reponsePro);
+            $this->add('reponseProData', $reponsePro);
         }
     }
 

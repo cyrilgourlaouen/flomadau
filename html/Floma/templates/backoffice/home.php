@@ -9,8 +9,16 @@
         include 'button.php';
 
         $nbOffres = count($data['offers']);
+        /*TODO récupérer le nombre d'avis non consulté*/
         $nbAvisNonConsulte = 0;
         $nbAvisNonRepondu = 0;
+        foreach($data['offers'] as $offre){
+            foreach($offre['avisData'] as $avis){
+                if(empty($avis['reponseProData'])){
+                    $nbAvisNonRepondu++;
+                }
+            }
+        }
 
         //En-tête
         $head_title = "ACCUEIL";
@@ -45,6 +53,7 @@
                 </div>
             <?php
         }else{
+            /*TODO : Implémenter barre de recherche + filtres si on a le temps */
             include 'nav_searchbar.php';
     ?>
         <div id="list_offer">
@@ -128,8 +137,26 @@
                             </div>
                             <p>(<?= htmlspecialchars($offer['nombre_avis']) ?>)</p>
                         </div>
-                        <a href="">Aucun avis non consulté</a>
-                        <a href="">Aucun avis non répondu</a>
+                        <?php
+                            $lienNbAvisNnConsulte = 0;
+                            $lienNbAvisNnRepondu = 0;
+                            
+                            foreach($offer['avisData'] as $avisOffre){
+                                if(empty($avisOffre['reponseProData'])){
+                                    $lienNbAvisNnRepondu++ ;
+                                }
+                            }
+
+                            if($lienNbAvisNnRepondu === 0){
+                                $lienNbAvisNnRepondu = 'Aucun';
+                            }
+                            
+                            if($lienNbAvisNnConsulte === 0){
+                                $lienNbAvisNnConsulte = 'Aucun';
+                            }
+                        ?>
+                        <!--TODO A completer quand la page sera ok--><a href=""><?= $lienNbAvisNnConsulte ?> avis non consulté</a>
+                        <!--TODO A completer quand la page sera ok--><a href=""><?= $lienNbAvisNnRepondu ?> avis non répondu</a>
                     </div>
                 </div>
             </div>
@@ -166,6 +193,7 @@
                     ?>
                 </div>
                 <!-- Btn voir plus -->
+                <!--TODO le faire pointer vers la page de consultation-->
                 <?= button('Voir plus', 'btn_voir_plus'); ?>
             </div>
         </article>

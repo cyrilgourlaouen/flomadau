@@ -9,13 +9,13 @@
 
             //Sous-en-tête pour avis
             $head_title = "AVIS NON RÉPONDU";
-            $head_subtitle = $nbAvisNonConsulte;
+            $head_subtitle = $nbAvisNonRepondu;
             $head_svg = "/assets/icons/avis_white.svg";
             include 'info_box.php';
 
             //Sous-en-tête pour facture
             $head_title = "AVIS NON CONSULTÉ";
-            $head_subtitle = $nbAvisNonRepondu;
+            $head_subtitle = $nbAvisNonConsulte;
             $head_svg = "/assets/icons/eye_close_white.svg";
             include 'info_box.php';
         ?>

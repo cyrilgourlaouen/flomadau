@@ -37,11 +37,17 @@
   box-sizing: border-box;
 }
 
+html{
+  display: flex;
+  justify-content: center;
+}
+
 body {
   background-color: var(--background-color);
   display: flex;
   flex-direction: row;
   min-width: 1440px;
+  max-width: 1700px;
 }
 
 header {

@@ -200,7 +200,9 @@ class OfferResource extends AbstractResource
         if(isset($context['avis'])){
             $avisManager = new AvisManager();
 
-            $avis = AvisResource::buildAll($avisManager->findBy(['id_offre' => $this->offer->getId()]));
+            $avis = AvisResource::buildAll($avisManager->findBy(['id_offre' => $this->offer->getId()]), [
+                'reponsePro' => ['isMultiple' => false],
+            ]);
 
             $this->add('avisData', $avis);
         }
