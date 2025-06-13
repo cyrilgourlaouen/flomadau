@@ -41,6 +41,8 @@ class CreationOffreController extends AbstractController
      */
     public function newOffer()
     {
+        var_dump($_FILES, $_POST["photo"]);
+        exit;
         if (isset($_POST)) {
             $offerManager = new OfferManager();
             $offer = new Offer();
@@ -55,20 +57,16 @@ class CreationOffreController extends AbstractController
             $offer->setCategorie($_POST['categorie']);
             $offer->setTelephone($_POST["telephone"]);
             $offer->setSiteWeb($_POST["site_web"]);
-            print_r($offer);
+            $offer->setCodeProfessionnel(1);
             isset($_POST["complement_adresse"]) ?? $offer->setComplementAdresse($_POST["complement_adresse"]);
             $offerManager = new OfferManager();
             $offerManager->add($offer);
-            $enrichedOffer = OfferResource::build($offerManager->findOneBy(["description_detaillee" => $_POST["description_detaillee"]]), [
-                'categorie' => ['isMultiple' => false],
-            ]);
-            print_r($enrichedOffer);
-            exit;
-
+            $enrichedOffer = OfferResource::build($offerManager->findOneBy(["description_detaillee" => $_POST["description_detaillee"]]));
             if ($_POST["categorie"] === OfferCategoryEnum::Activity->value) {
                 $activity = new Activite();
                 $activityManager = new ActiviteManager();
                 $activity->setDuree($_POST["duree_activity"]);
+                $activity->setIdOffre($enrichedOffer["id"]);
                 $activity->setPrixMinimal($_POST["prix_minimal_activity"]);
                 $activity->setAgeRequis($_POST['age_requis_activity']);
                 $activity->setPrestationsIncluses($_POST["prestatios_incluses"]);
@@ -78,6 +76,7 @@ class CreationOffreController extends AbstractController
             } elseif ($_POST["categorie"] === OfferCategoryEnum::AmusementPark->value) {
                 $amusementPark = new ParcAttraction();
                 $amusementParkManager = new ParcAttractionManager();
+                $amusementPark->setIdOffre($enrichedOffer["id"]);
                 $amusementPark->setNombreAttraction($_POST["nombre_attraction"]);
                 $amusementPark->setPrixMinimal($_POST["prix_minimal_amusement"]);
                 $amusementPark->setAgeRequis($_POST["age_requis_amusement"]);
@@ -91,6 +90,7 @@ class CreationOffreController extends AbstractController
                 $restaurationManager = new RestaurantManager();
                 $typeRepasManager = new TypeRepasManager();
                 $typeRepasRestaurantManager = new TypeRepasRestaurantManager();
+                $restauration->setIdOffre($enrichedOffer["id"]);
                 $restauration->setGammeDePrix($_POST["gamme_de_prix"]);
                 $restauration->setUrlCarteRestaurant($_POST["url_carte_restaurant"]);
                 $restaurationManager->add($restauration);
@@ -98,6 +98,7 @@ class CreationOffreController extends AbstractController
             } elseif ($_POST["categorie"] === OfferCategoryEnum::Show->value) {
                 $show = new Spectacle();
                 $showManager = new SpectacleManager();
+                $show->setIdOffre($enrichedOffer["id"]);
                 $show->setDuree($_POST["duree_show"]);
                 $show->setCapacite($_POST["capacite"]);
                 $show->setPrixMinimal($_POST["prix_minimal_show"]);
@@ -106,12 +107,12 @@ class CreationOffreController extends AbstractController
             } elseif ($_POST["categorie"] === OfferCategoryEnum::Visite->value) {
                 $visite = new Visite();
                 $visiteManager = new VisiteManager();
+                $visite->setIdOffre($enrichedOffer["id"]);
                 $visite->setDuree($_POST["duree_visite"]);
                 $visite->setPrixMinimal($_POST["prix_minimal_visite"]);
                 $visite->setGuidee($_POST["guide"]);
                 $visiteManager->add($visite);
             }
-
             
             return $this->redirectToRoute('/');
         }

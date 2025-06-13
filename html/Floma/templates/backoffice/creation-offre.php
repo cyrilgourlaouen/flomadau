@@ -1,4 +1,14 @@
 <?php
+
+use App\Manager\LangueGuideManager;
+use App\Manager\OfferManager;
+use App\Manager\TagManager;
+use App\Resource\LangueGuideResource;
+use App\Resource\OfferResource;
+use App\Resource\TagResource;
+use App\Service\ManageOption;
+use App\Service\ManageTags;
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     echo "<pre>";
     print_r($_POST);
@@ -10,7 +20,7 @@ $head_svg = "/assets/icons/account_white.svg";
 include 'head_title.php';
 include 'black_button.php'
 ?>
-<form action="?path=/offre/creation/new" method="post">
+<form action="?path=/offre/creation/new" method="post" enctype="multipart/form-data">
     <section class="formSectionContainer">
 
         <div class="h3-section">
@@ -27,6 +37,7 @@ include 'black_button.php'
             <div class="field">
                 <label for="categorie">Catégorie</label>
                 <select name="categorie" id="categorie" onchange="afficherChamps()">
+                    <option value="" selected disabled hidden>-- Catégorie --</option>
                     <option value="Visite">Visite</option>
                     <option value="Spectacle">Spectacle</option>
                     <option value="Restaurant">Restaurant</option>
@@ -47,12 +58,14 @@ include 'black_button.php'
                 </div>
                 <div class="gap-vsm flex-col hidden" id="selectGuides">
                     <label for="guideOptions">Langue du guide:</label>
-                        <select name="guides[]" id="guideOptions" multiple>
-                            <option value="fr">Français</option>
-                            <option value="en">Anglais</option>
-                            <option value="es">Espagnol</option>
-                            <option value="it">Italien</option>
-                            <option value="al">Allemand</option>
+                    <?php 
+                        $guideManager = new LangueGuideManager();
+                        $manageOption = new ManageOption();
+                        $enrichedOffer = LangueGuideResource::buildAll($guideManager->findAll());
+                        $guide = $manageOption->getGuides($enrichedOffer);
+                    ?>
+                        <select name="guides[]" id="guideOptions" multiple>    
+                            <?= $guide ?>
                         </select>
                 </div>
                 <div class="gap-vsm flex-col">
@@ -68,8 +81,8 @@ include 'black_button.php'
                 </div>
 
                 <div class="gap-vsm flex-col">
-                    <label for="prix_minimal">Prix minimal *</label>
-                    <input type="number" name="prix_minimal" id="prix_minimal" placeholder="15.5">
+                    <label for="prix_minimal_show">Prix minimal *</label>
+                    <input type="number" name="prix_minimal_show" id="prix_minimal_show" placeholder="15.5">
                 </div>
 
                 <div class="gap-vsm flex-col">
@@ -90,8 +103,8 @@ include 'black_button.php'
                     </select>
                 </div>
                 <div class="gap-vsm flex-col">
-                    <label for="carte_resto">Carte du restaurant *</label>
-                    <input type="file">
+                    <label for="carte_resto" >Carte du restaurant *</label>
+                    <input type="file" name="carte_resto" required>
                 </div>
                 
 
@@ -153,38 +166,13 @@ include 'black_button.php'
                     <input type="number" name="age_requis_amusement" id="age_requis_amusement" min="1" placeholder="15">
                 </div>
                 <div class="gap-vsm flex-col">
-                    <label for="carte_parc">Carte du parc d'attraction *</label>
-                    <input type="file">
+                    <label for="carte_parc" >Carte du parc d'attraction *</label>
+                    <input type="file" name="carte_parc" required>
                 </div>
             </div>
 
         <script>
-        function afficherChamps() {
-            const value = document.getElementById("categorie").value;
-
-            const champs = {
-                "Visite": "champs-visite",
-                "Spectacle": "champs-spectacle",
-                "Restaurant": "champs-restaurant",
-                "Activite": "champs-activite",
-                "Parc d'attraction": "champs-parc"
-            };
-
-            for (const id of Object.values(champs)) {
-                document.getElementById(id).classList.add("hidden");
-            }
-
-            if (champs[value]) {
-                document.getElementById(champs[value]).classList.remove("hidden");
-            }
-        }
-
-        const guideCheckbox = document.getElementById('guideCheckbox');
-        const selectGuides = document.getElementById('selectGuides');
-
-        guideCheckbox.addEventListener('change', () => {
-            selectGuides.classList.toggle('hidden', !guideCheckbox.checked);
-        });
+        
         </script>
         </div>
         
@@ -198,7 +186,24 @@ include 'black_button.php'
                 <label for="conditions_accesibilite">Conditions d'accessibilité *</label>
                 <input name="conditions_accesibilite" id="conditions_accesibilite" type="text" placeholder="Promotion" required>
             </div>
-        </div>
+
+            <div class="gap-vsm flex-col">
+                <label>Tags *</label>
+                <?php 
+                    $tagManager = new TagManager();
+                    $manageOption = new ManageOption();
+                    $enrichedOffer = TagResource::buildAll($tagManager->findAll());
+                    $tags = $manageOption->getTags($enrichedOffer);
+                ?>
+                <select id="isNotRestauration" class='hidden' multiple>
+                    <div><?= $tags["isNotRestauration"] ?></div>
+                </select>
+                <select id="isRestauration" class='hidden' multiple>
+                    <div><?= $tags["isRestauration"] ?></div>
+                </select>
+            <div>
+            </div>
+        
 
         
     </section>
@@ -266,11 +271,12 @@ include 'black_button.php'
         </div>
 
         <div class="field">
-            <label for="photo"> Photo de profil </label>
-            <input type="file" class="bigField" name="photo" accept="image/png, image/jpeg" required></input>
+            <label for="photo"> Photo de l'offre * </label>
+            <input type="file" class="bigField" name="photo" required></input>
         </div>
     </section>
     <div class="buttonContainer">
         <?= black_button('Se connecter'); ?>
     </div>
 </form>
+<script src="./js/displayForm.js"></script>
