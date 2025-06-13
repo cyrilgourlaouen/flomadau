@@ -38,7 +38,7 @@
             </html>   
             <div class="solo">
                 <label for="photo"> Photo de profil </label>
-                <input type="file" id="photo" name="photo" accept="image/png, image/jpeg" required></input>
+                <input type="file" id="photo" name="photo" accept="image/png, image/jpeg image/webp" size="2097152"></input>
             </div>
 
             <div class="groupe">

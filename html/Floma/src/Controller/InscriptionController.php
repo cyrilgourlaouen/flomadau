@@ -42,8 +42,8 @@ class InscriptionController extends AbstractController
 			$compte->setPrenom($_POST['prenom']);
 			$compte->setEmail($_POST['email']);
             $compte->setTelephone($_POST['tel']);
-            $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $compte->setMotDePasse($hash);
+            $hashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
+            $compte->setMotDePasse($hashed);
             $compte->setVille($_POST['city']);
             $compte->setCodePostal($_POST['zip_code']);
             $compte->setNomRue($_POST['name_street']);
@@ -68,4 +68,39 @@ class InscriptionController extends AbstractController
         return $this->redirectToRoute('/inscription/membre', ['state' => 'failure']);
     }
 
+    public function verification()
+    {
+        $response = [];
+        if (isset($_POST['email'])){
+            $checkEmail = new CompteManager().findOneBy(['email' => $POST['email']]);
+            if ($checkEmail == undefined) {
+                $response['emailExists'] = false;
+            }
+            else
+            {
+                $response['emailExists'] = true;
+            }
+        }
+        if (isset($_POST['pseudo'])){
+            $checkPseudo = new CompteManager().findOneBy(['pseudo' => $POST['pseudo']]);
+            if ($checkPseudo == undefined) {
+                $response['pseudoExists'] = false;
+            }
+            else
+            {
+                $response['pseudoExists'] = true;
+            }
+        }
+        if (isset($_POST['tel'])){
+            $checkTel = new CompteManager().findOneBy(['telephone' => $POST['tel']]);
+            if ($checkTel == undefined) {
+                $response['telExists'] = false;
+            }
+            else
+            {
+                $response['telExists'] = true;
+            }
+        }
+        echo json_encode($reponse);
+    }
 }

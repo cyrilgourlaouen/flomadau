@@ -15,6 +15,12 @@ const ROUTES = [
         'layout' => Layout::FRONT_INSCRIPTION,
     ],
 
+    '/inscription/membre/verification' => [
+        'controller' => App\Controller\InscriptionController::class,
+        'method' => 'verification',
+        'view' => false,
+    ],
+
     '/inscription/membre/sign-up' => [
         'controller' => App\Controller\InscriptionController::class,
         'method' => 'signUp',
