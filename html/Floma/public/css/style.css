@@ -377,7 +377,8 @@ footer div nav :any-link {
   object-fit: cover;
 }
 
-.offer-card-img {
+.offer-card-img,
+.highlighted-card-img {
   position: relative;
   overflow-x: visible;
 }
@@ -426,7 +427,8 @@ footer div nav :any-link {
   background-color: var(--green-color);
 }
 
-.offer-card-img-category-icon {
+.offer-card-img-category-icon,
+.highlighted-card-img-category-icon {
   margin: 0.938rem;
   position: absolute;
   bottom: 0;
@@ -441,10 +443,11 @@ footer div nav :any-link {
   justify-content: center;
 }
 
-.offer-card-img-category-icon img {
-  width: 1.5rem;
-  height: auto;
-} 
+.highlighted-card-img-category-icon-img,
+.offer-card-img-category-icon-img {
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+}
 
 .offer-card-price-note,
 .offer-card-city-author {
@@ -453,7 +456,7 @@ footer div nav :any-link {
   justify-content: space-between;
   align-items: center;
 }
-
+.highlighted-card-city,
 .offer-card-city,
 .offer-card-note,
 .offer-card-price {
@@ -607,6 +610,83 @@ footer div nav :any-link {
   color: #333;
   text-decoration: none;
   font-weight: 500;
+}
+
+/* Section à la une offre */
+
+.highlighted-offers-section h2 {
+  padding: var(--page-padding) var(--page-padding) 0 var(--page-padding);
+}
+
+.highlighted-offers-section {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.highlighted-offers-list {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  display: flex;
+  flex-direction: row;
+  gap: 1.25rem;
+  width: 100%;
+  height: 100%;
+  scrollbar-width: none;
+  padding-inline: var(--page-padding);
+}
+
+.highlighted-offers-list::-webkit-scrollbar {
+  display: none;
+}
+
+
+.highlighted-card {
+  min-width: 348px;
+  max-width: 27rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.938rem;
+  scroll-snap-align: center;
+}
+
+.highlighted-card-img img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 6 / 4;
+  border-radius: 0.938rem;
+  object-fit: cover;
+}
+
+.highlighted-card-price {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.313rem;
+}
+
+.highlighted-card-note {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.313rem;
+}
+
+.highlighted-card-note-stars {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.highlighted-offers-list-arrows {
+  display: none;
 }
 
 /* Format tablette */
@@ -832,6 +912,10 @@ footer div nav :any-link {
   .offer-card-img-badge-green img {
     height: 18px;
   }
+
+  .highlighted-offers-section {
+    align-items: center;
+  }
 }
 
 @media (max-width: 61.875rem) {
@@ -897,5 +981,38 @@ footer div nav :any-link {
     isolation: isolate;
     background: #FFFFFF;
     padding-top: 0;
+  }
+
+  .highlighted-offers-section {
+    position: relative;
+  }
+
+  .highlighted-card-img {
+    aspect-ratio: 1/1;
+    width: 21.75rem;
+  }
+
+  .highlighted-card {
+    width: 21.75rem;
+  }
+
+  .highlighted-offers-list-arrows {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: calc(2.188rem + 1.875rem + 1.25rem + 10.875rem + 1.25rem);
+    transform: translateY(-50%);
+    z-index: 10;
+    padding-inline: var(--page-padding);
+  }
+
+  .highlighted-offers-list-arrows img {
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+    pointer-events: auto;
   }
 }

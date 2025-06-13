@@ -123,9 +123,9 @@ abstract class AbstractManager
 	/**
 	 * @param string $class
 	 * @param array $fields
-	 * @return PDOStatement
+	 * @return array(PDOStatement, Int)
 	 */
-	protected function create(string $class, array $fields): PDOStatement
+	protected function create(string $class, array $fields): array
 	{
 		$query = "INSERT INTO " . $this->getTableName($class) . " (";
 		foreach (array_keys($fields) as $field) {
@@ -140,7 +140,11 @@ abstract class AbstractManager
 				$query .= ', ';
 		}
 		$query .= ')';
-		return $this->executeQuery($query, $fields);
+		$query .= ')';
+		$db = $this->connect();
+		$stmt = $this->executeQuery($query, $fields);
+		$id = $db->lastInsertId();
+		return [$stmt, $id];
 	}
 
 	/**
