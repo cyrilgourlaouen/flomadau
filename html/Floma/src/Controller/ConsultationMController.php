@@ -17,7 +17,7 @@ class ConsultationMController extends AbstractController
 {
    
     /**
-     * @return string
+     * @return void
      */
     public function consultation()
     {

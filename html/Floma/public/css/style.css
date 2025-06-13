@@ -1030,7 +1030,7 @@ footer div nav :any-link {
   }
 
   .information-data-container .lines {
-    width: 60%;
+    width: 100%;
   }
   .information-data-container .inputPassword {
     width: 80%;
@@ -1139,6 +1139,9 @@ footer div nav :any-link {
 @media (width < 43.75rem) {
   .information-data-container .lines-container {
     flex-direction: column;
+  }
+  .information-data-container .lines-container {
+    width: 100%;
   }
 }
 
