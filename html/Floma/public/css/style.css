@@ -190,8 +190,8 @@ a {
 
 /** header Format téléphone **/
 header .hidden,
-.logBtn,
-.postOffer {
+header .logBtn,
+header .postOffer {
   display: none;
 }
 
@@ -272,10 +272,11 @@ header .nav-hover:hover {
 }
 
 header .imgLog {
-  width: 2.9rem;
+  display: none;
 }
 
 header .imgLogOut {
+  display: none;
   width: 2.7rem;
 }
 
@@ -689,6 +690,178 @@ footer div nav :any-link {
   display: none;
 }
 
+.information-data-container {
+  background-color: var(--white-color);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.information-data-container .logo {
+  display: flex;
+  justify-content: center;
+}
+
+.information-data-container .personal-data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.625rem 0 0.625rem 0;
+  border-radius: 0.375rem;
+}
+
+.information-data-container .lines-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  width: 100%;
+}
+
+.information-data-container .lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.information-data-container .title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.information-data-container input {
+  font-size: var(--text-size);
+  font-family: var(--noto);
+  height: 2.813rem;
+  border-radius: 0.375rem;
+  border: 0.063rem solid #637381;
+  padding-left: 0.625rem;
+}
+
+.information-data-container button {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 0.625rem 0.938rem;
+  width: fit-content;
+  height: fit-content;
+  border: none;
+  border-radius: 0.625rem;  
+  box-shadow: 0 0.25rem 0.5rem 0.188rem rgba(0, 0, 0, 0.15),0 0.063rem 0.188rem rgba(0, 0, 0, 0.3);
+}
+
+.information-data-container button:active {
+  background-color: var(--white-color);
+  color: var(--primary-color);
+  border: 0.063rem solid var(--primary-color);
+}
+
+.information-data-container input:focus {
+  outline-color: var(--primary-color);
+}
+
+.information-data-container .title {
+  padding-bottom: 0.625rem;
+  border-bottom: 0.063rem solid #000;
+}  
+
+.information-data-container .password {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.625rem;
+}
+
+.information-data-container .inputPassword {
+  width: 75%;
+}
+
+.information-data-container .hidden {
+  display: none;
+}
+
+@media (width >= 65rem) {
+  .hideTab {
+    display: block;
+  }
+
+  .hideMob {
+    display: none !important;
+  }
+
+  .contentMob {
+    padding: 2.188rem;
+  }
+
+  .images img {
+    width:100%;
+    height:auto;
+    border-radius: 0.938rem;
+  }
+
+  .images{
+    width: 100%;
+  }
+
+  .infoTab {
+    background: #FFFFFF;
+    box-shadow: 0px 8px 12px 6px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 0.938rem;
+    padding: 1.25rem;
+    width: 100%;
+  }
+
+  .contentTab {
+    padding: 2.188rem;
+  }
+
+  .description {
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+    width: calc(100% + 2.5rem);
+    padding: 0.938rem 1.25rem;
+    isolation: isolate;
+    background: #FFFFFF;
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 62.5rem) {
+  .main .right-img {
+    display: none;
+  }
+}
+
+@media (max-width: 61.875rem) {
+  footer div nav {
+    flex-direction: column;
+  }
+
+  footer div {
+    justify-content: center;
+  }
+
+  .main .right-img {
+    display: none;
+  }
+}
+
+@media (width < 56.25rem) {
+  .information .UpdateBtn {
+      position: relative;
+      left: 0%;
+  }
+}
+
+@media (width < 43.75rem) {
+  .information-data-container .lines-container {
+    flex-direction: column;
+  }
+  .information-data-container .lines-container {
+    width: 100%;
+  }
+}
+
 /* Format tablette */
 @media (min-width: 35rem) {
   :root {
@@ -708,6 +881,13 @@ footer div nav :any-link {
   header .logBtn,
   header .postOffer {
     display: block;
+  }
+
+
+  header .imgLogOut ,
+  header .imgLog {
+  display: block;
+  width: 3.125rem;
   }
 
   header .top_header {
@@ -916,6 +1096,29 @@ footer div nav :any-link {
   .highlighted-offers-section {
     align-items: center;
   }
+
+  .information-data-container {
+    align-items: center;
+    gap: 1.875rem;
+  }
+ 
+  .information-data-container .personal-data {
+    box-shadow: 0 0.25rem 0.5rem 0.188rem rgba(0, 0, 0, 0.15),0 0.063rem 0.188rem rgba(0, 0, 0, 0.3);
+    width: 80%;
+    padding: 1.875rem;
+  }
+
+  .information-data-container .lines-container {
+    align-items: center;
+    width: 80%;
+  }
+
+  .information-data-container .lines {
+    width: 100%;
+  }
+  .information-data-container .inputPassword {
+    width: 80%;
+  }
 }
 
 @media (max-width: 61.875rem) {
@@ -1016,3 +1219,26 @@ footer div nav :any-link {
     pointer-events: auto;
   }
 }
+
+@media (width < 43.75rem) {
+  .information-data-container .lines-container {
+    flex-direction: column;
+  }
+  .information-data-container .lines-container {
+    width: 100%;
+  }
+}
+
+@media (width < 56.25rem) {
+  .information .UpdateBtn {
+      position: relative;
+      left: 0%;
+  }
+
+
+}
+
+
+
+
+
