@@ -40,7 +40,7 @@ class SignupProController extends AbstractController
 
             $compteProManager->add($comptePro);
 
-            return $this->redirectToRoute('/pro');
+            return $this->redirectToRoute('/pro/connexion');
         }
 
             return $this->redirectToRoute('/pro/signup');
