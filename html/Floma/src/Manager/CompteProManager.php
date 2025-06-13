@@ -23,4 +23,12 @@ class CompteProManager extends AbstractManager
             'complement_adresse' => $compte->getComplementAdresse()
         ]);
     }
+
+    public function checkEmail(string $email)
+    {
+        return $this->readOne(Compte::class, [
+            'email' => $email
+        ]);
+    }
+
 }

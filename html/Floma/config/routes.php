@@ -42,6 +42,11 @@ const ROUTES = [
         'method' => 'submit',
         'show' => false,
     ],
+    '/pro/signup/verify' => [
+        'controller' => App\Controller\SignupProController::class,
+        'method' => 'verify',
+        'show' => false,
+    ],
     '/connexion'=> [
         'controller' => App\Controller\ConnexionController::class,
         'method' => 'connection',
