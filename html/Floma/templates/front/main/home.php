@@ -109,6 +109,15 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
 <section class="offer-section">
     <h2>Découvrez nos offres</h2>
 
+    <div class="offer-search">
+        <div class="offer-search-bar">
+            <input type="text" id="offer-search-input" placeholder="Rechercher">
+        </div>
+        <div class="offer-search-filters">
+            <button id="offer-search-filter-button">Filtrer</button>
+        </div>
+    </div>
+
     <div class="offer-list">
         <?php foreach ($data["offers"] as $offer) { ?>
             <a href="?path=offer/<?= $offer['id'] ?>" class="offer-card">
