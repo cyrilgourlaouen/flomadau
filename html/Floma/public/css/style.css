@@ -327,6 +327,50 @@ footer div nav :any-link {
   gap: 0.313rem;
 }
 
+/* Search bar */
+.offer-search {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  gap: 0.625rem;
+}
+
+.offer-search-bar {
+  flex-grow: 1
+}
+
+.offer-search-filters {
+  flex-shrink: 1;
+}
+
+#offer-search-input {
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 1.5rem 0 2.5rem;
+  border-radius: 100px;
+  background-image: url('/assets/icons/search_primary.svg');
+  background-repeat: no-repeat;
+  background-position: 0.5rem center;
+  background-size: 1.75rem;
+  font-size: var(--text-size);
+}
+
+#offer-search-filter-button {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  width: 100%;
+  height: 2.75rem;
+  border-radius: 100px;
+  padding: 0 1.5rem;
+  border-color: none;
+  font-size: var(--text-size);
+}
+
+#offer-search-filter-button:active {
+  background-color: var(--dark-blue-color);
+}
+
 /* Carte affichage des offres */
 .offer-section {
   display: flex;
@@ -342,6 +386,7 @@ footer div nav :any-link {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  padding: 0.5rem;
 }
 
 .offer-card {
@@ -354,6 +399,8 @@ footer div nav :any-link {
   background-color: var(--white-color);
   border-radius: 0.938rem;
   word-wrap: break-word;
+  -webkit-box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
   box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
