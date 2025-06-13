@@ -271,13 +271,9 @@ header .nav-hover:hover {
   text-decoration: underline var(--white-color);
 }
 
-header .imgLog {
-  display: none;
-}
-
+header .imgLog,
 header .imgLogOut {
   display: none;
-  width: 2.7rem;
 }
 
 header .checkBtn {
@@ -886,8 +882,8 @@ footer div nav :any-link {
 
   header .imgLogOut ,
   header .imgLog {
-  display: block;
-  width: 3.125rem;
+    display: block;
+    width: 3.125rem;
   }
 
   header .top_header {
