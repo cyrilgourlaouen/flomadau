@@ -485,6 +485,7 @@ input::placeholder {
 #btn_filtrer:hover, #btn_trier:hover, #btn_voir_plus:hover{
   background-color: var(--black-color);
   color: var(--background-color);
+  cursor: pointer;
 }
 
 #btn_filtrer:active, #btn_trier:active, #btn_voir_plus:active{
@@ -496,10 +497,7 @@ input::placeholder {
   background-color: var(--background-color);
   border: 3px solid var(--primary-color);
   color: var(--primary-color);
-}
-
-#btn_connexion:hover a, #btn_inscription:hover a{
-  color: var(--primary-color);
+  cursor: pointer;
 }
 
 #btn_ajouter:active, #btn_connexion:active, #btn_inscription:active{

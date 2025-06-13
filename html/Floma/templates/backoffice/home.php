@@ -45,8 +45,8 @@
                 <div class="msg_offer">
                     <p class="text_offer">Vous souhaitez bénéficier des options professionnelles ?</p>
                     <div id="btn_co_inscription">
-                        <button id="btn_connexion"><a href="?path=/pro/connexion">Connexion</a></button>
-                        <button id="btn_inscription"><a href="?path=/pro/inscription">Inscription</a></button>
+                        <a href="?path=/pro/connexion"><button id="btn_connexion">Connexion</button></a>
+                        <a href="?path=/pro/inscription"><button id="btn_inscription">Inscription</button></a>
                     </div>
                 </div>
             <?php
