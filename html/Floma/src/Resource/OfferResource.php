@@ -19,6 +19,7 @@ use App\Manager\TypeRepasManager;
 use App\Manager\TypeRepasRestaurantManager;
 use App\Manager\OptionSouscriteManager;
 use App\Manager\OptionVisibiliteManager;
+use App\Manager\AvisManager;
 use App\Entity\OptionSouscrite;
 use App\Entity\OptionVisibilite;
 use Floma\Resource\AbstractResource;
@@ -194,6 +195,17 @@ class OfferResource extends AbstractResource
 
             $this->add('imageData', $images);
         }
+
+        
+        if(isset($context['avis'])){
+            $avisManager = new AvisManager();
+
+            $avis = AvisResource::buildAll($avisManager->findBy(['id_offre' => $this->offer->getId()]), [
+                'reponsePro' => ['isMultiple' => false],
+            ]);
+
+            $this->add('avisData', $avis);
+        }
     }
 
     /**
@@ -219,6 +231,7 @@ class OfferResource extends AbstractResource
             'site_web' => $this->offer->getSiteWeb(),
             'en_ligne' => $this->offer->isEnLigne(),
             'code_professionnel' => $this->offer->getCodeProfessionnel(),
+            'date_creation' => $this->offer->getDateCreation(),
         ];
     }
 

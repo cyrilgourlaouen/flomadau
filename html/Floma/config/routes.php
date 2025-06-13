@@ -16,9 +16,49 @@ const ROUTES = [
         'method' => 'home',
         'layout' => Layout::BACK,
     ],
-    '/pro/profil' => [
-        'controller' => App\Controller\ProfilProController::class,
-        'method' => 'home',
+    '/pro/connexion' => [
+        'controller' => App\Controller\ConnexionProController::class,
+        'method' => 'connexionPro',
         'layout' => Layout::BACK,
     ],
+    '/pro/connexion/login' => [
+        'controller' => App\Controller\ConnexionProController::class,
+        'method' => 'logIn',
+        'layout' => Layout::BACK,
+        'view' => false,
+    ],
+    '/pro/connexion/logout' => [
+        'controller' => App\Controller\ConnexionProController::class,
+        'method' => 'logOut',
+        'layout' => Layout::BACK,
+    ],
+    '/pro/signup' => [
+        'controller' => App\Controller\SignupProController::class,
+        'method' => 'page',
+        'layout' => Layout::BACK,
+    ],
+    '/pro/signup/submit' => [
+        'controller' => App\Controller\SignupProController::class,
+        'method' => 'submit',
+        'show' => false,
+    ],
+    '/connexion'=> [
+        'controller' => App\Controller\ConnexionController::class,
+        'method' => 'connection',
+        'layout' => Layout::LOG,
+    ],
+    '/connexion/logIn' => [
+        'controller' => App\Controller\ConnexionController::class,
+        'method' => 'logIn',
+    ],
+    '/connexion/logOut' => [
+        'controller' => App\Controller\ConnexionController::class,
+        'method' => 'logOut',
+    ],
+    '/consultationMembre' => [
+        'controller' => App\Controller\ConsultationMController::class,
+        'method' => 'consultation',
+    ]
 ];
+
+?>

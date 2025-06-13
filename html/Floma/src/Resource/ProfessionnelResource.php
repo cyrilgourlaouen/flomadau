@@ -3,7 +3,6 @@
 namespace App\Resource;
 
 use App\Entity\Professionnel;
-use App\Manager\ProfessionnelManager;
 use Floma\Resource\AbstractResource;
 
 class ProfessionnelResource extends AbstractResource
@@ -34,6 +33,7 @@ class ProfessionnelResource extends AbstractResource
             'code'            => $this->professionnel->getCode(),
             'raison_sociale'  => $this->professionnel->getRaisonSociale(),
             'id_compte'       => $this->professionnel->getIdCompte(),
+            'est_prive'       => $this->professionnel->isPrive(),
         ];
     }
 
