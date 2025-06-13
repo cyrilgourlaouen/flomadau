@@ -10,15 +10,15 @@
                 <?php
                     if(isset($_SESSION['code_pro'])){
                         ?>
+                            <li id="menu-info">
+                                <a href="index.php?path=/pro/check">Informations</a>
+                            </li>
                             <li id="menu-logout">
                                 <a href="index.php?path=/pro/connexion/logout">Déconnexion</a>
-                    </li>
-                <?php
+                            </li>
+                        <?php
                     }
                 ?>
-                <!-- <li id="menu-info"><a href="index.php?path=/pro/signup">
-                        <h2>Informations</h2>
-                    </a></li> -->
                 <!-- <li id="menu-offers"><a href="#"> -->
                 <!--         <h2>Offres</h2> -->
                 <!--     </a></li> -->

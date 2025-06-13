@@ -3,6 +3,8 @@
 namespace App\Resource;
 
 use App\Entity\Professionnel;
+use App\Manager\CompteManager;
+use App\Manager\ProPriveManager;
 use Floma\Resource\AbstractResource;
 
 class ProfessionnelResource extends AbstractResource
@@ -22,6 +24,21 @@ class ProfessionnelResource extends AbstractResource
      */
     private function hydrate(array $context): void
     {
+        if(isset($context['compte'])){
+            $compteManager = new CompteManager();
+
+            $compte = CompteResource::buildAll($compteManager->findBy(['id' => $this->professionnel->getIdCompte()]));
+
+            $this->add('compteData', $compte);
+        }
+
+        if(isset($context['prive'])){
+            $proPriveManager = new ProPriveManager();
+
+            $proPrive = ProPriveResource::buildAll($proPriveManager->findBy(['code_professionnel' => $this->professionnel->getCode()]));
+
+            $this->add('proPriveData', $proPrive);
+        }
     }
 
     /**
