@@ -6,16 +6,15 @@
             <h2>Informations personnelles</h2>
         </div>
         <div class="lines-container">
-            <div class="lines">
-                <h3>Prénom*</h3>
-                <input class="input" type="text" name="firstname" value="<?= htmlspecialchars($compte['prenom']) ?>"
-                    disabled required>
-            </div>
-            <div class="lines">
-                <h3>Nom*</h3>
-                <input class="input" type="text" name="name" value="<?= htmlspecialchars($compte['nom']) ?>" disabled
-                    required>
-            </div>
+            <input class="input" type="text" name="firstname"
+                value="<?= htmlspecialchars($compte['prenom']) ?>"
+                oninput="this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s\-']/g, '')"
+                disabled required>
+
+            <input class="input" type="text" name="name"
+                value="<?= htmlspecialchars($compte['nom']) ?>"
+                oninput="this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s\-']/g, '')"
+                disabled required>
         </div>
         <div class="lines-container">
             <div class="lines">
@@ -25,7 +24,7 @@
             </div>
             <div class="lines">
                 <h3>Numéro de téléphone*</h3>
-                <input class="input" type="text" name="num" value="<?= htmlspecialchars($compte['telephone']) ?>" disabled
+                <input class="input" type="tel" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="10" name="num"  value="<?= htmlspecialchars($compte['telephone']) ?>" disabled
                     required>
             </div>
         </div>
