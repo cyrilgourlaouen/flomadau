@@ -43,13 +43,9 @@ const ROUTES = [
         'show' => false,
     ],
     '/pro/check' => [
-        'controller' => App\Controller\CheckModifDataProController::class,
+        'controller' => App\Controller\CheckDataProController::class,
         'method' => 'home',
         'layout' => Layout::BACK,
-    ],
-    '/pro/update/account' => [
-        'controller' => App\Controller\CheckDataProController::class,
-        'method' => 'updateData',
     ],
     '/connexion'=> [
         'controller' => App\Controller\ConnexionController::class,
