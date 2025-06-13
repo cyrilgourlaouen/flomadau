@@ -151,37 +151,41 @@ p.placeholder {
 }
 
 /* Menu */
-.menuContent {
+#menuContent {
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 3.125rem;
 }
 
-.menuTextContainer {
+#menuTextContainer {
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 1.875rem;
 }
 
-.sidebar-menu {
+#sidebar-menu {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: 1.875rem;
 }
 
-.sidebar-menu li a {
+#sidebar-menu li a {
   text-decoration: none;
+  font-family: var(--raleway);
+  font-weight: bold;
+  font-size: var(--title-size);
+  color: var(--light-grey-color);
 }
 
-.sidebar-menu li {
+#sidebar-menu li {
   position: relative;
   padding-left: 2rem;
 }
 
-.sidebar-menu li::before {
+#sidebar-menu li::before {
   content: "";
   display: inline-block;
   position: absolute;
@@ -194,20 +198,24 @@ p.placeholder {
   background-repeat: no-repeat;
 }
 
-.menu-home::before {
+#menu-home::before {
   background-image: url("../assets/icons/home_grey.svg");
 }
 
-.menu-info::before {
+#menu-logout::before{
+  background-image: url("../assets/icons/logout_grey.svg");
+}
+
+#menu-info::before {
   background-image: url("../assets/icons/account_grey.svg");
 }
-.menu-offers::before {
+#menu-offers::before {
   background-image: url("../assets/icons/offer_grey.svg");
 }
-.menu-avis::before {
+#menu-avis::before {
   background-image: url("../assets/icons/avis_grey.svg");
 }
-.menu-factures::before {
+#menu-factures::before {
   background-image: url("../assets/icons/facture_grey.svg");
 }
 

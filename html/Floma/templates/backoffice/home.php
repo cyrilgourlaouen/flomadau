@@ -8,21 +8,27 @@
 
         include 'button.php';
 
-        $nbOffres = count($data['offers']);
-        /*TODO récupérer le nombre d'avis non consulté*/
-        $nbAvisNonConsulte = 0;
-        $nbAvisNonRepondu = 0;
-        foreach($data['offers'] as $offre){
-            foreach($offre['avisData'] as $avis){
-                if(empty($avis['reponseProData'])){
-                    $nbAvisNonRepondu++;
+        $raison_sociale = null;
+
+        if(isset($_SESSION['code_pro'])){
+            $nbOffres = count($data['offers']);
+            /*TODO récupérer le nombre d'avis non consulté*/
+            $nbAvisNonConsulte = 0;
+            $nbAvisNonRepondu = 0;
+
+            foreach($data['offers'] as $offre){
+                foreach($offre['avisData'] as $avis){
+                    if(empty($avis['reponseProData'])){
+                        $nbAvisNonRepondu++;
+                    }
                 }
             }
+
+            $raison_sociale = $data['offers'][0]['professionnelData']['raison_sociale'];
         }
 
         //En-tête
         $head_title = "ACCUEIL";
-        $raison_sociale = $data['offers'][0]['professionnelData']['raison_sociale'];
         if($raison_sociale === null){
             $head_subtitle = "";
         }else{
@@ -34,7 +40,7 @@
 </div>
 <div id="body_acceuil">
     <?php
-        if(/*!*/isset($_SESSION['id'])){
+        if(!isset($_SESSION['code_pro'])){
             ?>
                 <div class="msg_offer">
                     <p class="text_offer">Vous souhaitez bénéficier des options professionnelles ?</p>

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+session_start();
+
 use App\Manager\OfferManager;
 use App\Resource\OfferResource;
 use Floma\Controller\AbstractController;
@@ -14,13 +16,17 @@ class MainProController extends AbstractController
 
         $offerManager = new OfferManager();
 
-        $enrichedOffers = OfferResource::buildAll($offerManager->findBy(['code_professionnel' => 2/*$_SESSION['code_pro']*/]), [
-            'categorie' => ['isMultiple' => false],
-            'professionnel' => ['isMultiple' => false],
-            'option' => ['isMultiple' => true],
-            'image' => ['isMultiple' => true],
-            'avis' => ['isMultiple' => true],
-        ]);
+        $enrichedOffers = [];
+
+        if(isset($_SESSION['code_pro'])){
+            $enrichedOffers = OfferResource::buildAll($offerManager->findBy(['code_professionnel' => $_SESSION['code_pro']]), [
+                'categorie' => ['isMultiple' => false],
+                'professionnel' => ['isMultiple' => false],
+                'option' => ['isMultiple' => true],
+                'image' => ['isMultiple' => true],
+                'avis' => ['isMultiple' => true],
+            ]);
+        }
 
         return $this->renderView(
             'backoffice/home.php',
