@@ -5,10 +5,11 @@ namespace App\Controller;
 
 
 use App\Manager\CompteManager;
+use App\Manager\MembreManager;
 use Floma\Controller\AbstractController;
 use App\Entity\Compte;
-use App\Service\MetricMembreAccount;
 use App\Resource\CompteResource;
+use App\Entity\Membre;
 
 /**
  * Class InformationMController
@@ -18,36 +19,50 @@ use App\Resource\CompteResource;
 class ModificationMembreController extends AbstractController
 {
     public function updateData()
-{
-    if (!empty($_POST)) {
-        $compte = new Compte();
-        $compteManager = new CompteManager();
+    {
+        if (!empty($_POST)) {
+            $compte = new Compte();
+            $compteManager = new CompteManager();
 
-        $compte->setNom($_POST['name'] ?? null);
-        $compte->setPrenom($_POST['firstname'] ?? null);
-        $compte->setEmail($_POST['email'] ?? null);
-        $compte->setTelephone($_POST['num'] ?? null);
+            $compte->setNom($_POST['name'] ?? null);
+            $compte->setPrenom($_POST['firstname'] ?? null);
+            $compte->setEmail($_POST['email'] ?? null);
+            $compte->setTelephone($_POST['num'] ?? null);
 
-        $id = (int) ($_POST['id_compte'] ?? 0);
+            $membre = new Membre();
+            $membreManager = new MembreManager();
+            
+            $id = (int) ($_POST['id_compte'] ?? 0);
+            
+            $previousMembre = $membreManager->findOneBy(['id_compte' => $id ?? null]);
 
-        $compteManager->updateCompte($compte, $id); 
+            if($previousMembre->getPseudo() !== $_POST['pseudo']){
+                $membre->setPseudo($_POST['pseudo'] ?? null);
+                $membreManager->updateMembre($membre , $id);
+            } else {
+                $compteManager->updateCompte($compte, $id); 
+            }
 
-        $compteManager = new CompteManager();
-        $metricMembreAccount = new MetricMembreAccount();
-        $enrichedAccounts = $compteManager->findOneBy($_POST['email']);
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
+            session_unset();
+
+            // 🔁 Reconnexion
+            $compteMisAJour = CompteResource::build($compteManager->findOneBy( ['email' => $compte->getEmail()] ), [
+                'userName' => ['isMultiple' => true],
+            ]);
+
+            if ($compteMisAJour) {
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();
+                }
+
+                $_SESSION = $compteMisAJour;
+
+                session_regenerate_id(true);
+                return $this->redirectToRoute('/consultationMembre');
+            } else {
+                return $this->redirectToRoute('/consultationMembre', ["state" => "failure"]);
+            }
         }
-        if($enrichedAccounts){
-            $_SESSION = $enrichedAccounts;
-            session_regenerate_id(true);
-            return $this->redirectToRoute('/consultation');
-        } else {
-            return $this->redirectToRoute('/connexion', ["state" => "failure"]);
-        }
+        return $this->redirectToRoute('/connexion');
     }
-
-    return $this->redirectToRoute('/connexion');
-}
-
 }
