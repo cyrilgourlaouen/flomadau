@@ -6,7 +6,6 @@ let message = document.getElementById("message");
 
 updateBtn.onclick = displayText;
 cancelBtn.onclick = hiddenText;
-submitPasswordInput.onclick = checkPasswordMatch;
 
 function displayText() {
     submitBtn.classList.remove("hidden");
@@ -23,7 +22,5 @@ function hiddenText() {
     let champs = document.querySelectorAll('.input');
     champs.forEach(champ => champ.disabled = true);
 }
-
-
 
 
