@@ -27,7 +27,7 @@ class ModificationMembreController extends AbstractController
             $compte->setNom($_POST['name'] ?? null);
             $compte->setPrenom($_POST['firstname'] ?? null);
             $compte->setEmail($_POST['email'] ?? null);
-            $compte->setTelephone($_POST['num'] ?? null);
+            $compte->setTelephone($_POST['phone'] ?? null);
 
             $membre = new Membre();
             $membreManager = new MembreManager();

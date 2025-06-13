@@ -6,15 +6,16 @@
             <h2>Informations personnelles</h2>
         </div>
         <div class="lines-container">
-            <input class="input" type="text" name="firstname"
-                value="<?= htmlspecialchars($compte['prenom']) ?>"
-                oninput="this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s\-']/g, '')"
-                disabled required>
-
-            <input class="input" type="text" name="name"
-                value="<?= htmlspecialchars($compte['nom']) ?>"
-                oninput="this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s\-']/g, '')"
-                disabled required>
+            <div class="lines">
+                <h3>Prénom*</h3>
+                <input class="input" type="text" name="firstname" oninput="this.= this.value.replace(/[^a-zA-ZÀ-ÿ\s\-']/g, '')" value="<?= htmlspecialchars($compte['prenom']) ?>"
+                    disabled required>
+            </div>
+            <div class="lines">
+                <h3>Nom*</h3>
+                <input class="input" type="text" name="name" oninput="this.value = this.value.replace(/[^a-zA-ZÀ-ÿ\s\-']/g, '')" value="<?= htmlspecialchars($compte['nom']) ?>" disabled
+                    required>
+            </div>
         </div>
         <div class="lines-container">
             <div class="lines">
@@ -24,7 +25,7 @@
             </div>
             <div class="lines">
                 <h3>Numéro de téléphone*</h3>
-                <input class="input" type="tel" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="10" name="num"  value="<?= htmlspecialchars($compte['telephone']) ?>" disabled
+                <input class="input" type="tel" name="phone" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="10" name="num"  value="<?= htmlspecialchars($compte['telephone']) ?>" disabled
                     required>
             </div>
         </div>
@@ -38,9 +39,14 @@
         <button class="UpdateBtn" id="UpdateBtn" type="button">
             <p>Modifier</p>
         </button>
-        <button class="hidden" id="BtnValider" type="submit">
-            <p>Valider</p>
-        </button>
+        <div class="BtnLines">
+            <button class="hidden" id="BtnCancel" type="button">
+                <p>Annuler</p>
+            </button>
+            <button class="hidden" id="BtnValider" type="submit">
+                <p>Valider</p>
+            </button>
+        </div>
     </form>
     <div class="personal-data">
         <div class="title">
@@ -73,5 +79,7 @@
         </form>
     </div>
 </div>
-
 <script src="./js/_js-ConsultationMembre.js"></script>
+
+
+
