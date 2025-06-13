@@ -21,7 +21,12 @@ class ConsultationMController extends AbstractController
      */
     public function consultation()
     {
-        return $this->renderView('front/consultation/consultation.php', ['title' => 'Information Membre'] );
+        return $this->renderView('front/consultation/consultation.php', 
+            ['seo' => [
+                    'title' => 'Consultation',
+                    'description' => 'Page de consultation des informations du membre'
+                ]],
+    );
     }
 
 

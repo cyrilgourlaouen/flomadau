@@ -190,8 +190,8 @@ a {
 
 /** header Format téléphone **/
 header .hidden,
-.logBtn,
-.postOffer {
+header .logBtn,
+header .postOffer {
   display: none;
 }
 
@@ -272,7 +272,7 @@ header .nav-hover:hover {
 }
 
 header .imgLog {
-  width: 2.9rem;
+  display: none;
 }
 
 header .imgLogOut {
@@ -883,9 +883,11 @@ footer div nav :any-link {
     display: block;
   }
 
-  header .imgLogOut {
+
+  header .imgLogOut ,
+  header .imgLog {
   display: block;
-  width: 2.7rem;
+  width: 3.125rem;
   }
 
   header .top_header {

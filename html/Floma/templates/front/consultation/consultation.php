@@ -72,18 +72,6 @@
             </button>
         </form>
     </div>
-
-
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $motDePasseSaisi = $_POST["mdp"];
-        if (password_verify($motDePasseSaisi, $user['mot_de_passe'])) {
-            echo "Mot de passe correct.";
-        } else {
-            echo "Mot de passe incorrect.";
-        }
-    }
-    ?>
 </div>
 <script src="./js/_js-ConsultationMembre.js"></script>
 
