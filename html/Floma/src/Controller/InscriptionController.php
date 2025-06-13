@@ -36,12 +36,6 @@ class InscriptionController extends AbstractController
     public function signUp()
     {
         if (isset($_POST)) { 
-
-            $response['gettingPseudo'] = new CompteManager.findOneBy(['pseudo' => $_POST('pseudo')]);
-            $response['gettingEmail'] = new CompteManager.findOneBy(['email' => $_POST('email')]);
-            $response['gettingTel'] = new CompteManager.findOneBy(['telephone' => $_POST('tel')]);
-
-            json_encode($response);
             
             $compte = new Compte();
             $compte->setNom($_POST['nom']);

@@ -24,7 +24,7 @@ document.getElementById('inscription_membre').addEventListener('submit',function
     formData.append('tel', tel);
     formData.append('email', email);
 
-    const response = /*await*/ fetch('check_user.php', {
+    const response = /*await*/ fetch('/src/InscriptionController.php/', {
         method: 'POST',
         body: formData
     });
