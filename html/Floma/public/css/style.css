@@ -301,10 +301,7 @@ header .nav-hover:hover {
   text-decoration: underline var(--white-color);
 }
 
-header .imgLog {
-  display: none;
-}
-
+header .imgLog,
 header .imgLogOut {
   display: none;
 }
