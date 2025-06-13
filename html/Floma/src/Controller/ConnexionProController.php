@@ -16,9 +16,10 @@ class ConnexionProController extends AbstractController
             [
                 'seo' => [
                     'title' => 'Connexion compte professionnel',
-                    'description'=> 'Page de connexion d\'un professionnel PACT afin d\'avoir accès à vos offres.'
+                    'description' => 'Page de connexion d\'un professionnel PACT afin d\'avoir accès à vos offres.'
                 ]
-            ]);
+            ]
+        );
     }
 
     public function logIn()

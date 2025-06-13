@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-session_start();
-
 use App\Manager\OfferManager;
 use App\Resource\OfferResource;
 use Floma\Controller\AbstractController;
