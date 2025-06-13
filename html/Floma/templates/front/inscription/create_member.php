@@ -112,4 +112,92 @@
         <img src="/assets/images/bg_inscription.png" alt="Vue de haut sur une plage de la côte d'azur" id="background_image">
     </figure>
     <script src="/js/error-message-inscription-membre.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.querySelector('#inscription_membre');
+            const btn = document.querySelector('#signup_button');
+            
+            // Validation rules
+            const rules = [
+                { field: 'prenom', valid: val => val !== '', message: 'Veuillez entrer un prénom.' },
+                { field: 'nom', valid: val => val !== '', message: 'Veuillez entrer un nom.' },
+                { field: 'tel', valid: val => /^(?:(?:\+33|0033)\s?|0)[1-9](?:[\s.-]?\d{2}){4}$/.test(val), message: 'Veuillez entrer un numéro valide.' },
+                { field: 'email', valid: val => /^\S+@\S+\.\S+$/.test(val), message: 'Veuillez entrer une adresse email valide.' },
+                { field: 'pseudo', valid: val => val !== '', message: 'Veuillez entrer le pseudo.' },
+                { field: 'password', valid: val => val.length >= 6, message: 'Le mot de passe est trop court.' },
+                { field: 'conf_password', valid: val => val === document.getElementById('mdp').value, message: 'Les mots de passe ne correspondent pas.' },
+                { field: 'name_street', valid: val => val !== '', message: 'Veuillez entrer la rue.' },
+                { field: 'num_street', valid: val => val !== '', message: 'Veuillez entrer le numéro.' },
+                { field: 'city', valid: val => val !== '', message: 'Veuillez entrer la ville.' },
+                { field: 'zip-code', valid: val => /^\d{5}$/.test(val), message: 'Veuillez entrer un code postal valide.' },
+            ];
+            
+            // Function to validate a single field
+            function validateField(fieldId) {
+                const field = document.getElementById(fieldId);
+                const value = field.value.trim();
+                const rule = rules.find(r => r.field === fieldId);
+                
+                // Remove existing error message
+                const existingError = field.parentNode.querySelector('.error-msg');
+                if (existingError.id) {
+                    existingError.innerText = "";
+                }
+                else if (existingError) {
+                    existingError.remove();
+                }
+
+                // Check if valid
+                if (!rule.valid(value)) {
+                    if (field.parentNode.childElementCount > 0){
+                        const errorEl = document.getElementByClass('error-msg');
+                        errorEl.innerText = rule.message;
+                    }
+                    else{
+                        const errorEl = document.createElement('div');
+                        errorEl.className = 'error-message';
+                        errorEl.innerText = rule.message;
+                        field.parentNode.appendChild(errorEl);
+                    }
+                    return false;
+                }
+                return true;
+            }
+            
+            // Add blur event listeners to all fields
+            rules.forEach(rule => {
+                const field = document.getElementById(rule.field);
+                field.addEventListener('blur', () => {
+                    validateField(rule.field);
+                });
+                
+                // For confirmation password, also validate when password changes
+                if (rule.field === 'conf_mdp') {
+                    document.getElementById('mdp').addEventListener('input', () => {
+                        if (field.value) {
+                            validateField('conf_mdp');
+                        }
+                    });
+                }
+            });
+            
+            // Submit button handler
+            btn.addEventListener('click', function (event) {
+                event.preventDefault();
+                let isValid = true;
+                
+                // Validate all fields
+                rules.forEach(rule => {
+                    if (!validateField(rule.field)) {
+                        isValid = false;
+                    }
+                });
+                
+                // If all valid, submit form
+                if (isValid) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
 </div>

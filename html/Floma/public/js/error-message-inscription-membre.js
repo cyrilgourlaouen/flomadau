@@ -44,7 +44,7 @@ document.getElementById('inscription_membre').addEventListener('submit',function
     }
 
     //Numéro de téléphone existe déjà en BDD ou invalide
-    if (tel.length !== 10 || result.telExists !== undefined) {
+    if (tel.length !== 10 || result.telExists === true ) {
         isValid = false;
         document.getElementById('error-tel').textContent = "Numéro de téléphone non valide ou déjà existant";
     }
@@ -55,7 +55,7 @@ document.getElementById('inscription_membre').addEventListener('submit',function
         document.getElementById('error-email').textContent = "Adresse e-mail non valide ou déjà existant";
     }
 
-    // *Pour la version mobile uniquement* Mot de passe ne remplissant pas toutes les conditions (ex: Caractère spécial, minimum de 12 caractères etc...)
+    // Mot de passe ne remplissant pas toutes les conditions (ex: Caractère spécial, minimum de 12 caractères etc...)
     const password = document.getElementById('password').value.trim();
     if (password.length < 12 && !password.match(/[a-z]/) && !password.match(/[A-Z]/) && !password.match(/[0-9]/) && !password.match(/[[$&+,:;=?@#|'<>.-^*()%!]]/) && password.includes(" ")) {
         isValid = false;
