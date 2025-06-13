@@ -16,6 +16,22 @@ const ROUTES = [
         'method' => 'home',
         'layout' => Layout::BACK,
     ],
+    '/pro/connexion' => [
+        'controller' => App\Controller\ConnexionProController::class,
+        'method' => 'connexionPro',
+        'layout' => Layout::BACK,
+    ],
+    '/pro/connexion/login' => [
+        'controller' => App\Controller\ConnexionProController::class,
+        'method' => 'logIn',
+        'layout' => Layout::BACK,
+        'view' => false,
+    ],
+    '/pro/connexion/logout' => [
+        'controller' => App\Controller\ConnexionProController::class,
+        'method' => 'logOut',
+        'layout' => Layout::BACK,
+    ],
     '/pro/signup' => [
         'controller' => App\Controller\SignupProController::class,
         'method' => 'page',
@@ -26,4 +42,19 @@ const ROUTES = [
         'method' => 'submit',
         'show' => false,
     ],
+    '/connexion'=> [
+        'controller' => App\Controller\ConnexionController::class,
+        'method' => 'connection',
+        'layout' => Layout::LOG,
+    ],
+    '/connexion/logIn' => [
+        'controller' => App\Controller\ConnexionController::class,
+        'method' => 'logIn',
+    ],
+    '/connexion/logOut' => [
+        'controller' => App\Controller\ConnexionController::class,
+        'method' => 'logOut',
+    ]
 ];
+
+?>
