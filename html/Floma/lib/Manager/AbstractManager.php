@@ -39,18 +39,14 @@ abstract class AbstractManager
 	 * @param array $params
 	 * @return PDOStatement
 	 */
-	private function executeQuery(string $query, array $params = []): array
+	private function executeQuery(string $query, array $params = []): PDOStatement
 	{
 		$db = $this->connect();
-		$id = null;
 		$stmt = $db->prepare($query);
 		foreach ($params as $key => $param)
 			$stmt->bindValue($key, $param);
 		$stmt->execute();
-		if(str_contains($query, "INSERT")){
-			$id = $db->lastInsertId();
-		}
-		return [$stmt, $id];
+		return $stmt;
 	}
 
 	/**
@@ -127,9 +123,9 @@ abstract class AbstractManager
 	/**
 	 * @param string $class
 	 * @param array $fields
-	 * @return PDOStatement
+	 * @return array(PDOStatement, Int)
 	 */
-	protected function create(string $class, array $fields): PDOStatement
+	protected function create(string $class, array $fields): array
 	{
 		$query = "INSERT INTO " . $this->getTableName($class) . " (";
 		foreach (array_keys($fields) as $field) {
@@ -144,7 +140,10 @@ abstract class AbstractManager
 				$query .= ', ';
 		}
 		$query .= ')';
-		return $this->executeQuery($query, $fields);
+		$db = $this->connect();
+		$stmt = $this->executeQuery($query, $fields);
+		$id = $db->lastInsertId();
+		return [$stmt, $id];
 	}
 
 	/**
