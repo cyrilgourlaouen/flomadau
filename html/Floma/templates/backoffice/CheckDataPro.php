@@ -12,7 +12,8 @@
   </section>
   
   <section class="check-section">
-    <h3>Informations générales</h3>  
+    <h3>Informations générales</h3>
+    <div class="check-div">
       <article>
         <label for="prenom">Prénom </label>
         <input type="text" id="prenom" name="prenom" placeholder="<?= $compte['prenom'] ?>" disabled/>
@@ -22,7 +23,9 @@
         <label for="nom">Nom </label>
         <input type="text" id="nom" name="nom" placeholder="<?= $compte['nom'] ?>" disabled/>
       </article>
+    </div>
 
+    <div class="check-div">
       <article>
         <label for="telephone">Numéro de téléphone</label>
         <input type="tel" id="telephone" name="telephone" placeholder="<?= $compte['telephone'] ?>" disabled/>
@@ -32,7 +35,9 @@
         <label for="email">Adresse e-mail</label>
         <input type="email" id="email" name="email" placeholder="<?= $compte['email'] ?>" disabled/>
       </article>
+    </div>
 
+    <div class="check-div">
       <article>
         <label for="denomination">Dénomination sociale</label>
         <input type="text" id="denomination" name="denomination" placeholder="<?= $data['infosPro'][0]['raison_sociale'] ?>" disabled/>
@@ -66,28 +71,32 @@
 
   <section class="check-section">
     <h3>Adresse</h3>
+    <div class="check-div">
       <article>
-        <label for="rue">Rue</label><br>
+        <label for="rue">Rue</label>
         <input type="text" id="rue" name="rue" placeholder="<?= $compte['nom_rue'] ?>" disabled/>
       </article>
 
       <article>
-        <label for="numero">Numéro</label><br>
+        <label for="numero">Numéro</label>
         <input type="text" id="numero" name="numero" placeholder="<?= $compte['numero_rue'] ?>" disabled/>
       </article>
+    </div>
 
+    <div class="check-div">
       <article>
-        <label for="complement">Complément d'adresse</label><br>
+        <label for="complement">Complément d'adresse</label>
         <input type="text" id="complement" name="complement" placeholder="<?= $compte['complement_adresse'] ?>" disabled/>
       </article>
 
       <article>
-        <label for="ville">Ville</label><br>
+        <label for="ville">Ville</label>
         <input type="text" id="ville" name="ville" placeholder="<?= $compte['ville'] ?>" disabled/>
       </article>
+    </div>
 
       <article>
-        <label for="codePostal">Code postal</label><br>
+        <label for="codePostal">Code postal</label>
         <input type="text" id="codePostal" name="codePostal" placeholder="<?= $compte['code_postal'] ?>" disabled/>
       </article>
   </section>
