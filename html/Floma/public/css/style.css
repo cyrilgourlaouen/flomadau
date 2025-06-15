@@ -330,8 +330,9 @@ footer div nav :any-link {
 /* Search bar */
 .offer-search {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  align-items: self-start;
+  justify-items: center;
   width: 100%;
   gap: 0.625rem;
 }
@@ -344,6 +345,63 @@ footer div nav :any-link {
   flex-shrink: 1;
 }
 
+.offer-search-bar-filters {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.offer-search-sort-mobile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.325rem;
+}
+
+.offer-search-sort-mobile div {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  gap: 0.325rem;
+  background-color: var(--white-color);
+  border: #000 solid 1px;
+  border-radius: 10px;
+}
+
+.offer-search-sort-mobile div p {
+  width: 100%;
+  padding: 0.625rem;
+  text-align: center;
+  font-size: var(--text-size);
+  color: var(--black-color);
+  cursor: pointer;
+}
+
+.offer-search-sort-mobile div p:hover {
+  cursor: pointer;
+  background-color: var(--background-color);
+}
+
+#offer-search-sort-mobile-button {
+  background-color: var(--white-color);
+  color: var(--black-color);
+  height: 2.75rem;
+  border-radius: 10px;
+  padding: 0 2.5rem 0 1rem;
+  background-image: url('/assets/icons/unfold_more_primary.svg');
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1.75rem;
+  font-size: var(--text-size);
+  cursor: pointer;
+  pointer-events: all;
+  border: #000 solid 1px;
+}
+
 #offer-search-input {
   width: 100%;
   height: 2.75rem;
@@ -354,6 +412,7 @@ footer div nav :any-link {
   background-position: 0.5rem center;
   background-size: 1.75rem;
   font-size: var(--text-size);
+  border: #000 solid 1px;
 }
 
 #offer-search-filter-button {
@@ -365,6 +424,9 @@ footer div nav :any-link {
   padding: 0 1.5rem;
   border-color: none;
   font-size: var(--text-size);
+  cursor: pointer;
+  pointer-events: all;
+  border: #000 solid 1px;
 }
 
 #offer-search-filter-button:active {
@@ -1231,6 +1293,10 @@ footer div nav :any-link {
     isolation: isolate;
     background: #FFFFFF;
     padding-top: 0;
+  }
+
+  #offer-search-filter-button {
+    display: none;
   }
 
   .highlighted-offers-section {
