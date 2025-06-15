@@ -49,6 +49,8 @@ body {
   flex-direction: row;
   justify-content: center;
   width: 100%;
+  justify-content: center;
+  width: 100%;
 }
 
 header {
@@ -69,6 +71,8 @@ main {
   margin-left: var(--menu-width);
   width: calc(100vw - 21.875rem);
   height: 100vh;
+  min-width: 1170px;
+  max-width: 1430px;
   min-width: 1170px;
   max-width: 1430px;
 }
@@ -435,6 +439,8 @@ input::placeholder {
   font-size: var(--title-size);
   color: var(--dark-grey-color);
 }
+
+/*ACCUEIL PRO*/
 
 /*ACCUEIL PRO*/
 
