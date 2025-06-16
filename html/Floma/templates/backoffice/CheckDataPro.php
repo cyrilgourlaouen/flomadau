@@ -8,7 +8,18 @@
 <div id="main-check">
   <section class="check-section">
     <h3>Photo de profil</h3>
-    <img src="/uploads/profilePicture/<?= $compte['url_photo_profil'] ?>.jpg" alt="Photo de profil" title="Photo de profil">
+    <?php
+      if(isset($compte['url_photo_profil'])){
+        ?>
+          <img src="/uploads/profilePicture/<?= $compte['url_photo_profil'] ?>.jpg" alt="Photo de profil" title="Photo de profil">
+        <?php
+      }else{
+        ?>
+          <img src="/uploads/profilePicture/pp_compte_defaut.jpg" alt="Photo de profil" title="Photo de profil">
+        <?php
+      }
+
+    ?>
   </section>
   
   <section class="check-section">
@@ -84,10 +95,16 @@
     </div>
 
     <div class="check-div">
-      <article>
-        <label for="complement">Complément d'adresse</label>
-        <input type="text" id="complement" name="complement" placeholder="<?= $compte['complement_adresse'] ?>" disabled/>
-      </article>
+      <?php
+        if(isset($compte['complement_adresse'])){
+          ?>
+            <article>
+              <label for="complement">Complément d'adresse</label>
+              <input type="text" id="complement" name="complement" placeholder="<?= $compte['complement_adresse'] ?>" disabled/>
+            </article>
+          <?php
+        }
+      ?>
 
       <article>
         <label for="ville">Ville</label>
