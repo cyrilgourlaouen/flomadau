@@ -41,9 +41,10 @@ class ActiviteManager extends AbstractManager
 		return $this->create(Activite::class, [
 				'duree' => $activite->getDuree(),
                 'age_requis' => $activite->getAgeRequis(),
-                'prestation_incluses' => $activite->getPrestationsIncluses(),
-                'prestation_non_incluses' => $activite->getPrestationsNonIncluses(),
+                'prestations_incluses' => $activite->getPrestationsIncluses(),
+                'prestations_non_incluses' => $activite->getPrestationsNonIncluses(),
                 'prix_minimal' => $activite->getPrixMinimal(),
+                'id_offre' => $activite->getIdOffre(),
 			]
 		);
 	}

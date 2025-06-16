@@ -3,6 +3,7 @@
 namespace App\Controller\Creation;
 
 use App\Entity\Activite;
+use App\Entity\LangueGuideVisite;
 use App\Entity\Offer;
 use App\Entity\ParcAttraction;
 use App\Entity\Restaurant;
@@ -12,6 +13,7 @@ use App\Entity\TypeRepasRestaurant;
 use App\Entity\Visite;
 use App\Enum\OfferCategoryEnum;
 use App\Manager\ActiviteManager;
+use App\Manager\LangueGuideVisiteManager;
 use App\Manager\OfferManager;
 use App\Manager\ParcAttractionManager;
 use App\Manager\RestaurantManager;
@@ -20,6 +22,7 @@ use App\Manager\TypeRepasManager;
 use App\Manager\TypeRepasRestaurantManager;
 use App\Manager\VisiteManager;
 use App\Resource\OfferResource;
+use App\Service\UploadsImage;
 use Floma\Controller\AbstractController;
 
 class CreationOffreController extends AbstractController
@@ -41,9 +44,9 @@ class CreationOffreController extends AbstractController
      */
     public function newOffer()
     {
-        var_dump($_FILES, $_POST["photo"]);
-        exit;
-        if (isset($_POST)) {
+        if (isset($_POST) && isset($_FILES)) {
+            $uploadsImage = new UploadsImage();
+            $uploadsImage->uploads();
             $offerManager = new OfferManager();
             $offer = new Offer();
             $offer->setTitre($_POST['offer_name']);
@@ -69,8 +72,8 @@ class CreationOffreController extends AbstractController
                 $activity->setIdOffre($enrichedOffer["id"]);
                 $activity->setPrixMinimal($_POST["prix_minimal_activity"]);
                 $activity->setAgeRequis($_POST['age_requis_activity']);
-                $activity->setPrestationsIncluses($_POST["prestatios_incluses"]);
-                $activity->setPrestationsNonIncluses($_POST["prestatios_non_incluses"]);
+                $activity->setPrestationsIncluses($_POST["prestations_incluses"]);
+                $activity->setPrestationsNonIncluses($_POST["prestations_non_incluses"]);
                 $activityManager->add($activity);
 
             } elseif ($_POST["categorie"] === OfferCategoryEnum::AmusementPark->value) {
@@ -85,15 +88,20 @@ class CreationOffreController extends AbstractController
 
             } elseif ($_POST["categorie"] === OfferCategoryEnum::Restauration->value) {
                 $restauration = new Restaurant();
-                $typeRepas = new TypeRepas();
-                $typeRepasRestaurant = new TypeRepasRestaurant();
                 $restaurationManager = new RestaurantManager();
-                $typeRepasManager = new TypeRepasManager();
-                $typeRepasRestaurantManager = new TypeRepasRestaurantManager();
                 $restauration->setIdOffre($enrichedOffer["id"]);
                 $restauration->setGammeDePrix($_POST["gamme_de_prix"]);
-                $restauration->setUrlCarteRestaurant($_POST["url_carte_restaurant"]);
+                $restauration->setUrlCarteRestaurant('$_POST["url_carte_restaurant"]');
                 $restaurationManager->add($restauration);
+                if (isset($_POST["types_repas"])) {
+                    $typeRepasRestaurant = new TypeRepasRestaurant();
+                    $typeRepasRestaurantManager = new TypeRepasRestaurantManager();
+                    foreach ($_POST["types_repas"] as $type) {
+                        $typeRepasRestaurant->setIdOffre($enrichedOffer["id"] );
+                        $typeRepasRestaurant->setIdType($type);
+                        $typeRepasRestaurantManager->add($typeRepasRestaurant);
+                    }
+                }
                 
             } elseif ($_POST["categorie"] === OfferCategoryEnum::Show->value) {
                 $show = new Spectacle();
@@ -103,6 +111,8 @@ class CreationOffreController extends AbstractController
                 $show->setCapacite($_POST["capacite"]);
                 $show->setPrixMinimal($_POST["prix_minimal_show"]);
                 $showManager->add($show);
+                print_r($show);
+                exit;
 
             } elseif ($_POST["categorie"] === OfferCategoryEnum::Visite->value) {
                 $visite = new Visite();
@@ -110,10 +120,19 @@ class CreationOffreController extends AbstractController
                 $visite->setIdOffre($enrichedOffer["id"]);
                 $visite->setDuree($_POST["duree_visite"]);
                 $visite->setPrixMinimal($_POST["prix_minimal_visite"]);
-                $visite->setGuidee($_POST["guide"]);
+                isset($_POST["guide"]) ? $visite->setGuidee($_POST["guide"]) : $visite->setGuidee(false);
                 $visiteManager->add($visite);
+
+                if (isset($_POST["guide"])) {
+                    $langueGuideVisite = new LangueGuideVisite();
+                    $langueGuideVisiteManager = new LangueGuideVisiteManager();
+                    foreach($_POST["guides"] as $language) {
+                        $langueGuideVisite->setIdLangue($language);
+                        $langueGuideVisite->setIdOffre($enrichedOffer["id"]);
+                        $langueGuideVisiteManager->add($langueGuideVisite);
+                    }
+                }
             }
-            
             return $this->redirectToRoute('/');
         }
         return $this->redirectToRoute('/offre/creation', ['state' => 'failure']);
