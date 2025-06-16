@@ -64,4 +64,20 @@ class CompteManager extends AbstractManager
 			]
 		);
 	}
+
+    public function addGetId(Compte $compte) {
+		return $this->createGetId(Compte::class, [
+				'nom' => $compte->getNom(),
+				'prenom' => $compte->getPrenom(),
+				'email' => $compte->getEmail(),
+                'telephone' => $compte->getTelephone(),
+                'mot_de_passe' => $compte->getMotDePasse(),
+                'ville' => $compte->getVille(),
+                'code_postal' => $compte->getCodePostal(),
+                'nom_rue' => $compte->getNomRue(),
+                'numero_rue' => $compte->getNumeroRue(),
+                'complement_adresse' => $compte->getComplementAdresse()
+			]
+		);
+	}
 }

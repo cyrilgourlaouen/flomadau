@@ -53,9 +53,9 @@ class InscriptionController extends AbstractController
             }
 
             $compteManager = new CompteManager();
-            $compteManager->add($compte);
-
-            $id_compte = $compteManager->findBy(["nom" => $_POST["nom"]])[0]->getId();
+            $temp = $compteManager->addGetId($compte);
+            $id_compte = $temp[1];
+            
             $membre = new Membre();
             $membre->setPseudo($_POST['pseudo']);
             $membre->setIdCompte($id_compte);
