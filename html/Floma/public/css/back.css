@@ -345,7 +345,6 @@ select {
 input {
   font-family: var(--noto);
   font-size: var(--text-size);
-  color: var(--light-grey-color);
 }
 
 .field {

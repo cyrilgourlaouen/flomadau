@@ -50,7 +50,7 @@
 =======
 >>>>>>> d452eb8 (aa)
       </article>
-      <button class="cache">Supprimer</button>
+      <button class="hidden">Supprimer</button>
       <article id="new-pp">
         <label for="photo">Nouvelle photo de profil :</label>
         <input type="file" id="photo" name="photo" accept="image/png, image/jpeg image/webp" size="2097152"></input>
@@ -259,7 +259,7 @@
       ?>
     </section>
 
-    <section class="check-section cache">
+    <section class="check-section hidden">
       <h3>Mot de passe</h3>
       <article>
 <<<<<<< HEAD
@@ -317,6 +317,7 @@
             </article>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             <button class="hidden btn-modif-pro" id="btn-delete-credit-card" type="button">Supprimer</button>
             <article id="new-credit-card" class="hidden-credit-card">
               <label for="card-number">Numéro de carte</label>
@@ -354,6 +355,9 @@
 =======
 >>>>>>> c6d5e5a (aaa)
             <button class="cache">Supprimer</button>
+=======
+            <button class="hidden">Supprimer</button>
+>>>>>>> d6beba8 (réglé problème js)
             <article id="new-credit-card">
               <label for="card-number">Numéro de carte</label>
               <input type="text" id="card-number" name="card-number"></input>
@@ -372,7 +376,7 @@
         <?php
       }else{
         ?>
-          <section class="check-section cache">
+          <section class="check-section hidden">
             <h3>Carte bancaire</h3>
             <article>
               <label for="card-number">Numéro de carte</label>
@@ -396,6 +400,7 @@
     <button type="button" id="btn-cancel" class="hidden btn-modif-pro">Annuler</button>
 =======
     <button type="button" id="btn-modifier">Modifier</button>
+<<<<<<< HEAD
     <button type="submit" id="btn-enregistrer" class="cache">Enregistrer les modifications</button>
     <button type="button" id="btn-annuler" class="cache">Annuler</button>
 >>>>>>> 958593a (aaa)
@@ -404,6 +409,10 @@
     <button type="submit" id="btn-enregistrer" class="cache">Enregistrer les modifications</button>
     <button type="button" id="btn-annuler" class="cache">Annuler</button>
 >>>>>>> c6d5e5a (aaa)
+=======
+    <button type="submit" id="btn-enregistrer" class="hidden">Enregistrer les modifications</button>
+    <button type="button" id="btn-annuler" class="hidden">Annuler</button>
+>>>>>>> d6beba8 (réglé problème js)
 
   </form>
 </div>
