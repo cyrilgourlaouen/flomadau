@@ -11,7 +11,7 @@ use Floma\Manager\AbstractManager;
  */
 class JourOuvertureOffreManager extends AbstractManager
 {
-       /**
+    /**
      * @param int $id
      * @return mixed
      */
@@ -46,6 +46,16 @@ class JourOuvertureOffreManager extends AbstractManager
      */
     public function findBy(array $filters, array $order = [], ?int $limit = null, ?int $offset = null)
     {
-        return $this->readMany(JourOuvertureOffre  ::class, $filters, $order, $limit, $offset);
+        return $this->readMany(JourOuvertureOffre::class, $filters, $order, $limit, $offset);
     }
+
+    public function add(JourOuvertureOffre $jourOuvertureOffre) {
+		return $this->create(JourOuvertureOffre::class, [
+				'id_offre' => $jourOuvertureOffre->getIdOffre(),
+                'id_jour' => $jourOuvertureOffre->getIdJour(),
+                'horaire_debut' => $jourOuvertureOffre->getHoraireDebut(),
+                'horaire_fin' => $jourOuvertureOffre->getHoraireFin(),
+			]
+		);
+	}
 }

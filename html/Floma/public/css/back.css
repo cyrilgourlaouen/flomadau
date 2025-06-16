@@ -848,3 +848,24 @@ input::placeholder, textarea::placeholder, textarea::content {
   height: 1.2rem;
   accent-color: #3498db;
 }
+
+.slot {
+  margin-bottom: 5px;
+}
+
+.slot input {
+  margin-right: 5px;
+}
+
+.dayLabel {
+  float:right;
+}
+
+.dayLabel > input {
+  width: 14px;
+}
+
+.horaire-container > div > button {
+  padding: 5px;
+  margin-bottom:5px;
+}

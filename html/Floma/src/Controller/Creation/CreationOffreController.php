@@ -3,25 +3,25 @@
 namespace App\Controller\Creation;
 
 use App\Entity\Activite;
+use App\Entity\Image;
 use App\Entity\LangueGuideVisite;
 use App\Entity\Offer;
 use App\Entity\ParcAttraction;
 use App\Entity\Restaurant;
 use App\Entity\Spectacle;
-use App\Entity\TypeRepas;
 use App\Entity\TypeRepasRestaurant;
 use App\Entity\Visite;
 use App\Enum\OfferCategoryEnum;
 use App\Manager\ActiviteManager;
+use App\Manager\ImageManager;
 use App\Manager\LangueGuideVisiteManager;
 use App\Manager\OfferManager;
 use App\Manager\ParcAttractionManager;
 use App\Manager\RestaurantManager;
 use App\Manager\SpectacleManager;
-use App\Manager\TypeRepasManager;
 use App\Manager\TypeRepasRestaurantManager;
 use App\Manager\VisiteManager;
-use App\Resource\OfferResource;
+use App\Service\HoraireManage;
 use App\Service\UploadsImage;
 use Floma\Controller\AbstractController;
 
@@ -49,6 +49,9 @@ class CreationOffreController extends AbstractController
             $uploadsImage->uploads();
             $offerManager = new OfferManager();
             $offer = new Offer();
+            $image = new Image();
+            $imageManager = new ImageManager();
+            $horaireManager = new HoraireManage();
             $offer->setTitre($_POST['offer_name']);
             $offer->setConditionsAccessibilite($_POST["conditions_accesibilite"]);
             $offer->setResume($_POST['resume']);
@@ -61,15 +64,18 @@ class CreationOffreController extends AbstractController
             $offer->setTelephone($_POST["telephone"]);
             $offer->setSiteWeb($_POST["site_web"]);
             $offer->setCodeProfessionnel(1);
-            isset($_POST["complement_adresse"]) ?? $offer->setComplementAdresse($_POST["complement_adresse"]);
-            $offerManager = new OfferManager();
-            $offerManager->add($offer);
-            $enrichedOffer = OfferResource::build($offerManager->findOneBy(["description_detaillee" => $_POST["description_detaillee"]]));
+            $_POST["complement_adresse"] ?? $offer->setComplementAdresse($_POST["complement_adresse"]);
+            $id = $offerManager->addGetId($offer);
+            $horaireManager->setHourly($id[1]);
+            $image->setIdOffre($id[1]);
+            $image->setPrincipale(true);
+            $image->setUrlImg($_FILES["photo"]["name"]);
+            $imageManager->add($image);
             if ($_POST["categorie"] === OfferCategoryEnum::Activity->value) {
                 $activity = new Activite();
                 $activityManager = new ActiviteManager();
                 $activity->setDuree($_POST["duree_activity"]);
-                $activity->setIdOffre($enrichedOffer["id"]);
+                $activity->setIdOffre($id[1]);
                 $activity->setPrixMinimal($_POST["prix_minimal_activity"]);
                 $activity->setAgeRequis($_POST['age_requis_activity']);
                 $activity->setPrestationsIncluses($_POST["prestations_incluses"]);
@@ -79,25 +85,25 @@ class CreationOffreController extends AbstractController
             } elseif ($_POST["categorie"] === OfferCategoryEnum::AmusementPark->value) {
                 $amusementPark = new ParcAttraction();
                 $amusementParkManager = new ParcAttractionManager();
-                $amusementPark->setIdOffre($enrichedOffer["id"]);
-                $amusementPark->setNombreAttraction($_POST["nombre_attraction"]);
+                $amusementPark->setIdOffre($id[1]);
+                $amusementPark->setNombreAttraction($_POST["nombre_attractions"]);
                 $amusementPark->setPrixMinimal($_POST["prix_minimal_amusement"]);
                 $amusementPark->setAgeRequis($_POST["age_requis_amusement"]);
-                $amusementPark->setUrlPlan($_POST["url_parc_attraction"]);
+                $amusementPark->setUrlPlan($_FILES["url_carte_parc"]["name"]);
                 $amusementParkManager->add($amusementPark);
 
             } elseif ($_POST["categorie"] === OfferCategoryEnum::Restauration->value) {
                 $restauration = new Restaurant();
                 $restaurationManager = new RestaurantManager();
-                $restauration->setIdOffre($enrichedOffer["id"]);
+                $restauration->setIdOffre($id[1]);
                 $restauration->setGammeDePrix($_POST["gamme_de_prix"]);
-                $restauration->setUrlCarteRestaurant('$_POST["url_carte_restaurant"]');
+                $restauration->setUrlCarteRestaurant($_FILES["url_carte_restaurant"]["name"]);
                 $restaurationManager->add($restauration);
                 if (isset($_POST["types_repas"])) {
                     $typeRepasRestaurant = new TypeRepasRestaurant();
                     $typeRepasRestaurantManager = new TypeRepasRestaurantManager();
                     foreach ($_POST["types_repas"] as $type) {
-                        $typeRepasRestaurant->setIdOffre($enrichedOffer["id"] );
+                        $typeRepasRestaurant->setIdOffre($id[1]);
                         $typeRepasRestaurant->setIdType($type);
                         $typeRepasRestaurantManager->add($typeRepasRestaurant);
                     }
@@ -106,18 +112,16 @@ class CreationOffreController extends AbstractController
             } elseif ($_POST["categorie"] === OfferCategoryEnum::Show->value) {
                 $show = new Spectacle();
                 $showManager = new SpectacleManager();
-                $show->setIdOffre($enrichedOffer["id"]);
+                $show->setIdOffre($id[1]);
                 $show->setDuree($_POST["duree_show"]);
                 $show->setCapacite($_POST["capacite"]);
                 $show->setPrixMinimal($_POST["prix_minimal_show"]);
                 $showManager->add($show);
-                print_r($show);
-                exit;
 
             } elseif ($_POST["categorie"] === OfferCategoryEnum::Visite->value) {
                 $visite = new Visite();
                 $visiteManager = new VisiteManager();
-                $visite->setIdOffre($enrichedOffer["id"]);
+                $visite->setIdOffre($id[1]);
                 $visite->setDuree($_POST["duree_visite"]);
                 $visite->setPrixMinimal($_POST["prix_minimal_visite"]);
                 isset($_POST["guide"]) ? $visite->setGuidee($_POST["guide"]) : $visite->setGuidee(false);
@@ -128,7 +132,7 @@ class CreationOffreController extends AbstractController
                     $langueGuideVisiteManager = new LangueGuideVisiteManager();
                     foreach($_POST["guides"] as $language) {
                         $langueGuideVisite->setIdLangue($language);
-                        $langueGuideVisite->setIdOffre($enrichedOffer["id"]);
+                        $langueGuideVisite->setIdOffre($id[1]);
                         $langueGuideVisiteManager->add($langueGuideVisite);
                     }
                 }

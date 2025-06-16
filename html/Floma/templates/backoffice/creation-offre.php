@@ -1,27 +1,18 @@
 <?php
 
-use App\Entity\TypeRepas;
 use App\Manager\LangueGuideManager;
-use App\Manager\OfferManager;
 use App\Manager\TagManager;
 use App\Manager\TypeRepasManager;
 use App\Resource\LangueGuideResource;
-use App\Resource\OfferResource;
 use App\Resource\TagResource;
 use App\Resource\TypeRepasResource;
 use App\Service\ManageOption;
-use App\Service\ManageTags;
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
-}
 $head_title = "Création du compte";
 $head_subtitle = "INFORMATIONS ENTREPRISE";
 $head_svg = "/assets/icons/account_white.svg";
 include 'head_title.php';
-include 'black_button.php'
+include 'black_button.php';
 ?>
 <form action="?path=/offre/creation/new" method="post" enctype="multipart/form-data">
     <section class="formSectionContainer">
@@ -162,46 +153,44 @@ include 'black_button.php'
                     <input type="number" name="age_requis_amusement" id="age_requis_amusement" min="1" placeholder="15">
                 </div>
                 <div class="gap-vsm flex-col">
-                    <label for="carte_parc" >Carte du parc d'attraction *</label>
-                    <input type="file" name="carte_parc">
+                    <label for="url_carte_parc" >Carte du parc d'attraction *</label>
+                    <input type="file" name="url_carte_parc">
                 </div>
             </div>
-
-        <script>
-        
-        </script>
-        </div>
-        
-        <div class="formInline">
-            <div class="field">
-                <label for="type">Type *</label>
-                <input name="type" type="text" placeholder="Type d'offre" required>
-            </div>
-
-            <div class="field">
-                <label for="conditions_accesibilite">Conditions d'accessibilité *</label>
-                <input name="conditions_accesibilite" id="conditions_accesibilite" type="text" placeholder="Promotion" required>
-            </div>
-
-            <div class="gap-vsm flex-col">
-                <label>Tags *</label>
+            <div class="formInline">
+                <div class="field">
+                    <label for="conditions_accesibilite">Conditions d'accessibilité *</label>
+                    <input name="conditions_accesibilite" id="conditions_accesibilite" type="text" placeholder="Promotion" required>
+                </div>
+                    
                 <?php 
                     $tagManager = new TagManager();
                     $manageOption = new ManageOption();
                     $enrichedOffer = TagResource::buildAll($tagManager->findAll());
                     $tags = $manageOption->getTags($enrichedOffer);
                 ?>
-                <select id="isNotRestauration" class='hidden' multiple>
-                    <div><?= $tags["isNotRestauration"] ?></div>
-                </select>
-                <select id="isRestauration" class='hidden' multiple>
-                    <div><?= $tags["isRestauration"] ?></div>
-                </select>
-            <div>
+                <div class="gap-vsm flex-col" id="isNotRestauration" class='hidden'>
+                    <label>Tags *</label>
+                    <select multiple>
+                        <div><?= $tags["isNotRestauration"] ?></div>
+                    </select>
+                </div>
+                <div class="gap-vsm flex-col" id="isRestauration"  class='hidden'>
+                    <label>Tags *</label>
+                    <select multiple>
+                        <div><?= $tags["isRestauration"] ?></div>
+                    </select>
+                <div>
             </div>
-        
-
-        
+        </div>
+    <section class="formSectionContainer">
+        <div class="h3-section">
+            <h3>Horaire d'ouverture et fermeture</h3>
+            <hr>
+        </div>
+        <div class="flex-col">
+            <div id="horaire-container" class="horaire-container"></div>    
+        </div>
     </section>
 
     <section class="formSectionContainer">
