@@ -8,7 +8,18 @@
 <div id="main-check">
   <section class="check-section">
     <h3>Photo de profil</h3>
-    <img src="/uploads/profilePicture/<?= $compte['url_photo_profil'] ?>.jpg" alt="Photo de profil" title="Photo de profil">
+    <?php
+      if(isset($compte['url_photo_profil'])){
+        ?>
+          <img src="/uploads/profilePicture/<?= $compte['url_photo_profil'] ?>.jpg" alt="Photo de profil" title="Photo de profil">
+        <?php
+      }else{
+        ?>
+          <img src="/uploads/profilePicture/pp_compte_defaut.jpg" alt="Photo de profil" title="Photo de profil">
+        <?php
+      }
+
+    ?>
   </section>
   
   <section class="check-section">
@@ -43,10 +54,16 @@
         <input type="text" id="denomination" name="denomination" placeholder="<?= $data['infosPro'][0]['raison_sociale'] ?>" disabled/>
       </article>
 
-      <article>
-        <label for="siren">Numéro SIREN</label>
-        <input type="text" id="siren" name="siren" placeholder="<?= $data['infosPro'][0]['proPriveData'][0]['siren'] ?>" disabled/>
-      </article>
+      <?php
+        if(isset($compte['url_photo_profil'])){
+          ?>
+            <article>
+              <label for="siren">Numéro SIREN</label>
+              <input type="text" id="siren" name="siren" placeholder="<?= $data['infosPro'][0]['proPriveData'][0]['siren'] ?>" disabled/>
+            </article>
+          <?php
+        }
+      ?>
     </div>
 
       <!-- Ajouter la pp ? MDP inutile pour cette partie mais utilse pour modif<article>
@@ -75,10 +92,16 @@
     </div>
 
     <div class="check-div">
-      <article>
-        <label for="complement">Complément d'adresse</label>
-        <input type="text" id="complement" name="complement" placeholder="<?= $compte['complement_adresse'] ?>" disabled/>
-      </article>
+      <?php
+        if(isset($compte['complement_adresse'])){
+          ?>
+            <article>
+              <label for="complement">Complément d'adresse</label>
+              <input type="text" id="complement" name="complement" placeholder="<?= $compte['complement_adresse'] ?>" disabled/>
+            </article>
+          <?php
+        }
+      ?>
 
       <article>
         <label for="ville">Ville</label>
