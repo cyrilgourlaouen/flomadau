@@ -1,5 +1,6 @@
 <?php
 
+use App\Entity\TypeRepas;
 use App\Manager\LangueGuideManager;
 use App\Manager\TagManager;
 use App\Manager\TypeRepasManager;
