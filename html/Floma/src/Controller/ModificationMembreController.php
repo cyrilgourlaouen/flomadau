@@ -23,15 +23,16 @@ class ModificationMembreController extends AbstractController
         if (!empty($_POST)) {
             $compte = new Compte();
             $compteManager = new CompteManager();
-
+            
             $compte->setNom($_POST['name'] ?? null);
             $compte->setPrenom($_POST['firstname'] ?? null);
             $compte->setTelephone($_POST['phone'] ?? null);
-
-            if ($this->isEmailAvailable($_POST['email'] ?? '')) {
-                $compte->setEmail($_POST['email'] ?? null);
-            }
-
+            
+            if (!empty($_POST['email']) && $this->isEmailAvailable($_POST['email'])) {
+                $compte->setEmail($_POST['email']);
+                $compteManager->updateEmail($compte, $_SESSION['id']);
+            } 
+            
             $membre = new Membre();
             $membreManager = new MembreManager();
             
@@ -49,7 +50,7 @@ class ModificationMembreController extends AbstractController
             session_unset();
 
             // 🔁 Reconnexion
-            $compteMisAJour = CompteResource::build($compteManager->findOneBy( ['email' => $compte->getEmail()] ), [
+            $compteMisAJour = CompteResource::build($compteManager->findOneBy( ['id' => $id] ), [
                 'userName' => ['isMultiple' => true],
             ]);
 
@@ -67,7 +68,6 @@ class ModificationMembreController extends AbstractController
             }
         }
     }
-
 
     public function checkPassword() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -104,7 +104,6 @@ class ModificationMembreController extends AbstractController
         $compte->setMotDePasse($password);
         $compteManager->updatePassword($compte, $_SESSION['id'] ?? 0);
 
-        
         // 🔁 Reconnexion
         $compteMisAJour = CompteResource::build($compteManager->findOneBy( ['id' => $_SESSION['id']] ), [
             'userName' => ['isMultiple' => true],
@@ -120,11 +119,10 @@ class ModificationMembreController extends AbstractController
             session_regenerate_id(true);
             echo json_encode(['success' => true]);
             exit;
-            } else {
-                 echo json_encode(['success' => false]);
-                 exit;
-            }
-
+        } else {
+            echo json_encode(['success' => false]);
+            exit;
+        }
     }
 
     private function isValidPassword(string $password): bool {
@@ -145,8 +143,6 @@ class ModificationMembreController extends AbstractController
         }
         return true;
     }
-
-
     private function isEmailAvailable(string $email): bool {
         if (empty($email)) return false;
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) return false;

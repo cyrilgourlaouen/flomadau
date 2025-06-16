@@ -1,6 +1,6 @@
 <?php $compte = $_SESSION; ?>
 <div class="information-data-container">
-    <form method="POST" class="personal-data" action="?path=/updateM">
+    <form method="POST" class="personal-data" action="?path=/update/membre">
         <input type="hidden" name="id_compte" value="<?= htmlspecialchars($compte['id']) ?>">
         <div class="title">
             <h2>Informations personnelles</h2>

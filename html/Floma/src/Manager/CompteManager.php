@@ -54,10 +54,17 @@ class CompteManager extends AbstractManager
         $fields = [
             'nom' => $compte->getNom(),
             'prenom' => $compte->getPrenom(),
-            'email' => $compte->getEmail(),
             'telephone' => $compte->getTelephone(),
         ];
 
+        return $this->update(Compte::class, $fields, $id);
+    }
+
+    public function updateEmail(Compte $compte, int $id): \PDOStatement
+    {
+        $fields = [
+            'email'=> $compte->getEmail(),
+        ];
         return $this->update(Compte::class, $fields, $id);
     }
 
