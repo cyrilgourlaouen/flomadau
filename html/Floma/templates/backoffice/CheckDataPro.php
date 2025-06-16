@@ -39,7 +39,12 @@
     <div class="check-div">
       <article>
         <label for="telephone">Numéro de téléphone</label>
-        <input type="tel" id="telephone" name="telephone" placeholder="<?= $compte['telephone'] ?>" disabled/>
+        <?php 
+          $numSansEspace = $compte['telephone'];
+          $numExplode = str_split($numSansEspace, 2);
+          $numAvecEspaces = implode(' ', $numExplode);
+        ?>
+        <input type="tel" id="telephone" name="telephone" placeholder="<?= $numAvecEspaces ?>" disabled/>
       </article>
 
       <article>
@@ -56,10 +61,13 @@
 
       <?php
         if(isset($compte['url_photo_profil'])){
+          $numSirenSansEspace = $data['infosPro'][0]['proPriveData'][0]['siren'];
+          $numSirenExplode = str_split($numSirenSansEspace, 3);
+          $numSirenAvecEspaces = implode(' ', $numSirenExplode);
           ?>
             <article>
               <label for="siren">Numéro SIREN</label>
-              <input type="text" id="siren" name="siren" placeholder="<?= $data['infosPro'][0]['proPriveData'][0]['siren'] ?>" disabled/>
+              <input type="text" id="siren" name="siren" placeholder="<?= $numSirenAvecEspaces ?>" disabled/>
             </article>
           <?php
         }
@@ -126,4 +134,27 @@
       }
     ?>
   </section>
+
+  <?php
+    if(isset($data['infosPro'][0]['proPriveData'][0]['numero_carte'])){
+      $numCarte = $data['infosPro'][0]['proPriveData'][0]['numero_carte'];
+      $numCarteDebut = substr($numCarte, 0, 4);
+      $numCarteFin = substr($numCarte, 12, 15);
+      $numCarteCache = $numCarteDebut." **** **** ".$numCarteFin;
+
+      $dateExpiration = $data['infosPro'][0]['proPriveData'][0]['date_expiration'];
+      $dateExplode = explode('-', $dateExpiration);
+      $dateExpirationFr = $dateExplode[1].'/'.$dateExplode[0];
+      ?>
+        <section class="check-section">
+        <h3>Carte bancaire</h3>
+          <article id="check-card">
+            <p id="check-num-card"><?= $numCarteCache ?></p>
+            <p>Expire fin : <?= $dateExpirationFr ?></p>
+            <p><?= $compte['nom']." ". $compte['prenom'] ?></p>
+          </article>
+        </section>
+      <?php
+      }
+    ?>
 </div>
