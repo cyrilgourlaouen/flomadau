@@ -1,5 +1,5 @@
 export function getOfferPrice(offer) {
-  if ((offer.categorie === "Restaurant" || offer.categorie === "Restauration") && offer.categoryData) {
+  if (offer.categorie === "Restaurant" && offer.categoryData) {
     switch (offer.categoryData.gamme_de_prix) {
       case 1: return 25;
       case 2: return 40;
@@ -7,7 +7,7 @@ export function getOfferPrice(offer) {
       default: return 0;
     }
   }
-  if (offer.categorie !== "Restaurant" && offer.categorie !== "Restauration" && offer.categoryData) {
+  if (offer.categorie !== "Restaurant" && offer.categoryData) {
     return offer.categoryData.prix_minimal || 0;
   }
   return 0;
