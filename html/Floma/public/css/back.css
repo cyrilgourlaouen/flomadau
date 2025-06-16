@@ -8,6 +8,7 @@
   --primary-color: #005bb5;
   --background-color: #fcfcfc;
   --menu-background-color: #f5f6fa;
+  --very-light-grey-color : #d0d0d0;
   --light-grey-color: #637381;
   --dark-grey-color: #424656;
   --white-color: #ffffff;
@@ -329,6 +330,7 @@ select {
 input::placeholder {
   font-family: var(--noto);
   font-size: var(--text-size);
+  color: var(--light-grey-color);
 }
 
 .field {
@@ -630,8 +632,8 @@ input::placeholder {
 }
 
 .check-section{
-  border-bottom: 0.125rem solid #f0f0f0;
-  padding-bottom: 1rem;
+  border-bottom: 0.125rem solid var(--very-light-grey-color);
+  padding-bottom: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -659,4 +661,5 @@ input::placeholder {
 .check-section article{
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
