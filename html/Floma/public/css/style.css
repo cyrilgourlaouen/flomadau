@@ -327,6 +327,129 @@ footer div nav :any-link {
   gap: 0.313rem;
 }
 
+/* Search bar */
+.offer-controls {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  position: relative;
+  overflow: visible;
+  gap: 0.625rem;
+}
+
+.offer-search {
+  display: flex;
+  flex-direction: row;
+  align-items: self-start;
+  justify-items: center;
+  width: 100%;
+  gap: 0.625rem;
+  flex-wrap: nowrap;
+}
+
+.offer-search-bar {
+  flex-grow: 1
+}
+
+.offer-search-filters {
+  flex-shrink: 1;
+}
+
+.offer-sort-mobile{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 0.325rem;
+  overflow: visible;
+  width: fit-content;
+}
+
+#offer-sort-mobile-options, #offer-sort-desktop-options {
+  z-index: 5;
+  top: 3rem;
+  position: absolute;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  gap: 0.325rem;
+  background-color: var(--white-color);
+  border: #000 solid 1px;
+  border-radius: 10px;
+}
+
+
+#offer-sort-mobile-options p , #offer-sort-desktop-options p {
+  width: 100%;
+  padding: 0.625rem;
+  text-align: center;
+  font-size: var(--text-size);
+  color: var(--black-color);
+  cursor: pointer;
+}
+
+#offer-sort-mobile-options p:hover, #offer-sort-desktop-options p:hover {
+  cursor: pointer;
+  background-color: var(--background-color);
+}
+
+#offer-sort-mobile-button {
+  background-color: var(--white-color);
+  color: var(--black-color);
+  height: 2.75rem;
+  border-radius: 10px;
+  padding: 0 2.5rem 0 1rem;
+  background-image: url('/assets/icons/unfold_more_primary.svg');
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1.75rem;
+  font-size: var(--text-size);
+  cursor: pointer;
+  pointer-events: all;
+  border: #000 solid 1px;
+}
+
+#offer-search-input {
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 1.5rem 0 2.5rem;
+  border-radius: 100px;
+  background-image: url('/assets/icons/search_primary.svg');
+  background-repeat: no-repeat;
+  background-position: 0.5rem center;
+  background-size: 1.75rem;
+  font-size: var(--text-size);
+  border: #000 solid 1px;
+}
+
+#offer-search-filter-button {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  width: 100%;
+  height: 2.75rem;
+  border-radius: 100px;
+  padding: 0 1.5rem;
+  border-color: none;
+  font-size: var(--text-size);
+  cursor: pointer;
+  pointer-events: all;
+  border: #000 solid 1px;
+}
+
+#offer-search-filter-button:active {
+  background-color: var(--dark-blue-color);
+}
+
+.offer-sort-desktop {
+  display: none;
+}
+
+.offer-search-filters select {
+  display: none;
+}
+
 /* Carte affichage des offres */
 .offer-section {
   display: flex;
@@ -342,6 +465,7 @@ footer div nav :any-link {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  padding: 0.5rem;
 }
 
 .offer-card {
@@ -354,6 +478,8 @@ footer div nav :any-link {
   background-color: var(--white-color);
   border-radius: 0.938rem;
   word-wrap: break-word;
+  -webkit-box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
   box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
@@ -867,7 +993,7 @@ footer div nav :any-link {
   :root {
     --title-size: 1.875rem;
     --subtitle-size: 1.563rem;
-    --text-size: 1.25rem;
+    --text-size: 1.125rem;
     --small-text-size: 1.094rem;
     --very-small-text-size: 0.75rem;
 
@@ -1184,6 +1310,73 @@ footer div nav :any-link {
     isolation: isolate;
     background: #FFFFFF;
     padding-top: 0;
+  }
+
+  #offer-sort-desktop-options {
+    top: 2.5rem;
+  }
+
+  .offer-search-filters {
+    position: relative;
+    overflow: visible;
+  }
+
+  .offer-sort-desktop {
+    width: 100%;
+    display: flex;
+    gap: 0.625rem;
+    position: relative;
+    overflow: visible;
+  }
+
+  #offer-search-filter-button {
+    display: none;
+  }
+
+  .offer-sort-mobile {
+    display: none;
+  }
+
+  .offer-search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    overflow: visible;
+  }
+
+  .offer-search-bar {
+    width: 70%;
+  }
+
+  .offer-search-filters {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.625rem;
+    width: fit-content;
+  }
+
+  .offer-search-filters select, #offer-sort-desktop-button {
+    display: block;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    height: 2.188rem;
+    padding: 0 2.5rem 0 1rem;
+    border-radius: 100px;
+    background-color: var(--white-color);
+    border: #000 solid 1px;
+    font-size: var(--text-size);
+    cursor: pointer;
+    pointer-events: all;
+
+    background-image: url('/assets/icons/keyboard_arrow_down_black.svg');
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1.75rem;
   }
 
   .highlighted-offers-section {

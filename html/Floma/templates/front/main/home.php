@@ -106,8 +106,54 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
 <?php } ?>
 
 <!-- Section Offre -->
-<section class="offer-section">
+<section class="offer-section" data-offers='<?= htmlspecialchars(json_encode($data["offers"]), ENT_QUOTES, 'UTF-8') ?>'>
     <h2>Découvrez nos offres</h2>
+
+    <div class="offer-controls">
+        <div class="offer-search">
+            <div class="offer-search-bar">
+                <input type="text" id="offer-search-input" placeholder="Rechercher par lieu, catégorie, mot-clé">
+            </div>
+            <div class="offer-search-filters">
+                <button id="offer-search-filter-button">Filtrer</button>
+                <select name="Catégorie" id="">
+                    <option value="">Catégorie</option>
+                </select>
+                <select name="Prix" id="">
+                    <option value="">Prix</option>
+                </select>
+                <select name="Statut" id="">
+                    <option value="">Statut</option>
+                </select>
+                <select name="Note" id="">
+                    <option value="">Note</option>
+                </select>
+                <div class="offer-sort-desktop">
+                    <button id="offer-sort-desktop-button">
+                        Trier par : <span id="selected-sort-desktop-label">Date d'ajout</span>
+                    </button>
+                    <div id="offer-sort-desktop-options">
+                        <p id="date" class="selected-sort">Date d'ajout</p>
+                        <p id="asc">Prix croissant</p>
+                        <p id="desc">Prix décroissant</p>
+                        <p id="note">Note</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="offer-sort-mobile">
+            <button id="offer-sort-mobile-button">
+                Trier par : <span id="selected-sort-mobile-label"></span>
+            </button>
+            <div id="offer-sort-mobile-options">
+                <p id="date" class="selected-sort">Date d'ajout</p>
+                <p id="asc">Prix croissant</p>
+                <p id="desc">Prix décroissant</p>
+                <p id="note">Note</p>
+            </div>
+        </div>
+    </div>
 
     <div class="offer-list">
         <?php foreach ($data["offers"] as $offer) { ?>
@@ -250,3 +296,5 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
     </div>
 </section>
 <script src="/js/highlightedOffer.js"></script>
+<script type="module" src="/js/offerSort.js"></script>
+<script type="module" src="/js/searchAndSortOffers.js"></script>
