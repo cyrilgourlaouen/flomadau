@@ -7,7 +7,6 @@ let timeout = null;
 const urlParams = new URLSearchParams(window.location.search);
 const state = urlParams.get('state');
 
-
 updateBtn.onclick = displayText;
 
 function displayText() {
@@ -66,8 +65,6 @@ function hiddenText() {
     emailMessage.style.color = '';
 
 }
-
-
 
 document.getElementById('checkPasswordBtn').addEventListener('click', () => {
     const password = document.getElementById('inputPassword').value;
