@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const offersData = JSON.parse(offerSection.dataset.offers);
   const input = document.getElementById("offer-search-input");
   const offerList = document.querySelector(".offer-list");
-  const offerCards = document.querySelectorAll(".offer-card");
 
   // Tri mobile
   const sortMobileBtn = document.getElementById("offer-sort-mobile-button");
@@ -16,6 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const sortDesktopBtn = document.getElementById("offer-sort-desktop-button");
   const sortDesktopOptions = document.getElementById("offer-sort-desktop-options");
   const selectedSortDesktopLabel = document.getElementById("selected-sort-desktop-label");
+
+  function getOfferCards() {
+    return document.querySelectorAll(".offer-card");
+  }
 
   let currentSort = "date"; // Par défaut : Date d'ajout
   let searchTimeout;
@@ -46,13 +49,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Affiche les offres triées et filtrées
   function displayOffers(offers) {
+    const offerCards = getOfferCards();
     offerCards.forEach((card) => (card.style.display = "none"));
     offers.forEach((offer) => {
-      const idx = offersData.findIndex((o) => o.id === offer.id);
-      if (idx !== -1 && offerCards[idx]) {
+        const idx = offersData.findIndex((o) => o.id === offer.id);
+        if (idx !== -1 && offerCards[idx]) {
         offerCards[idx].style.display = "";
         offerList.appendChild(offerCards[idx]);
-      }
+        }
     });
   }
 
