@@ -110,11 +110,23 @@
         <label for="ville">Ville</label>
         <input type="text" id="ville" name="ville" placeholder="<?= $compte['ville'] ?>" disabled/>
       </article>
-    </div>
-
+    <?php 
+      if(isset($compte['complement_adresse'])){
+        ?>
+          </div>
+        <?php
+      }
+    ?>
       <article>
         <label for="codePostal">Code postal</label>
         <input type="text" id="codePostal" name="codePostal" placeholder="<?= $compte['code_postal'] ?>" disabled/>
       </article>
+    <?php 
+      if(!isset($compte['complement_adresse'])){
+        ?>
+          </div>
+        <?php
+      }
+    ?>
   </section>
 </div>
