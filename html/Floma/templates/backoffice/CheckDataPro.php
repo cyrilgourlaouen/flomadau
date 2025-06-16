@@ -59,19 +59,10 @@
         <input type="text" id="denomination" name="denomination" placeholder="<?= $data['infosPro'][0]['raison_sociale'] ?>" disabled/>
       </article>
 
-      <?php
-        if(isset($data['infosPro'][0]['proPriveData'][0]['siren'])){
-          $numSirenSansEspace = $data['infosPro'][0]['proPriveData'][0]['siren'];
-          $numSirenExplode = str_split($numSirenSansEspace, 3);
-          $numSirenAvecEspaces = implode(' ', $numSirenExplode);
-          ?>
-            <article>
-              <label for="siren">Numéro SIREN</label>
-              <input type="text" id="siren" name="siren" placeholder="<?= $numSirenAvecEspaces ?>" disabled/>
-            </article>
-          <?php
-        }
-      ?>
+      <article>
+        <label for="siren">Numéro SIREN</label>
+        <input type="text" id="siren" name="siren" placeholder="<?= $data['infosPro'][0]['proPriveData'][0]['siren'] ?>" disabled/>
+      </article>
     </div>
 
       <!-- Ajouter la pp ? MDP inutile pour cette partie mais utilse pour modif<article>
