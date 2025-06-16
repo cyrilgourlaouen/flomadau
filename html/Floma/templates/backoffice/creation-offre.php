@@ -1,11 +1,14 @@
 <?php
 
+use App\Entity\TypeRepas;
 use App\Manager\LangueGuideManager;
 use App\Manager\OfferManager;
 use App\Manager\TagManager;
+use App\Manager\TypeRepasManager;
 use App\Resource\LangueGuideResource;
 use App\Resource\OfferResource;
 use App\Resource\TagResource;
+use App\Resource\TypeRepasResource;
 use App\Service\ManageOption;
 use App\Service\ManageTags;
 
@@ -52,8 +55,8 @@ include 'black_button.php'
                 </div>
                 <div>
                     <label class="checkbox-item">
-                    <input type="checkbox" id="guideCheckbox" name="guide" value="oui">
-                    <span>Guide</span>
+                        <input type="checkbox" id="guideCheckbox" name="guide" id="guide" value="true">
+                        <span>Guide</span>
                     </label>
                 </div>
                 <div class="gap-vsm flex-col hidden" id="selectGuides">
@@ -91,40 +94,33 @@ include 'black_button.php'
                 </div>
             </div>
 
-            
-
             <div id="champs-restaurant" class="hidden formInline">
                 <div class="gap-vsm flex-col">
                     <label for="type_cuisine">Gamme de prix *</label>
-                    <select name="gamme_prix" id="gamme_prix">
+                    <select name="gamme_de_prix" id="gamme_de_prix">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                     </select>
                 </div>
                 <div class="gap-vsm flex-col">
-                    <label for="carte_resto" >Carte du restaurant *</label>
-                    <input type="file" name="carte_resto" required>
+                    <label for="url_carte_restaurant" >Carte du restaurant *</label>
+                    <input type="file" name="url_carte_restaurant">
                 </div>
                 
 
                 <div class="checkbox-group flex-col">
                     <label for="checkbox-group" class="text-center">Type de repas *</label>
                     <div class="flex-row gap-vsm">
-                        <label class="checkbox-item">
-                        <input type="checkbox" name="options[]" value="petit_dejeuner">
-                        <p>Petit-Déjeuner</p>
-                        </label>
-
-                        <label class="checkbox-item">
-                        <input type="checkbox" name="options[]" value="dejeuner">
-                        <p>Déjeuner</p>
-                        </label>
-
-                        <label class="checkbox-item">
-                        <input type="checkbox" name="options[]" value="diner">
-                        <p>Dîner</p>
-                        </label>
+                        <?php 
+                        $typeRepasManager = new TypeRepasManager();
+                        $typesRepas = TypeRepasResource::buildAll($typeRepasManager->findAll());
+                        foreach ($typesRepas as $type) { ?>
+                            <label class="checkbox-item">
+                            <input type="checkbox" name="types_repas[]" value=<?= $type["id"]; ?>>
+                            <p><?= $type["nom_type"]; ?></p>
+                            </label>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -167,7 +163,7 @@ include 'black_button.php'
                 </div>
                 <div class="gap-vsm flex-col">
                     <label for="carte_parc" >Carte du parc d'attraction *</label>
-                    <input type="file" name="carte_parc" required>
+                    <input type="file" name="carte_parc">
                 </div>
             </div>
 
