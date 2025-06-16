@@ -646,10 +646,6 @@ input::placeholder {
   object-fit: contain;
 }
 
-.check-section:last-child {
-  border-bottom: none;
-}
-
 .check-div{
   display: flex;
   flex-direction: row;
@@ -682,4 +678,8 @@ input::placeholder {
 
 #check-num-card{
   font-size: var(--larger-text-size);
+}
+
+.cache{
+  display: none !important;
 }
