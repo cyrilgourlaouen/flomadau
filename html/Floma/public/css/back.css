@@ -683,7 +683,9 @@ input::placeholder {
 
 .check-section img{
   width: 10rem;
+  height: 10rem;
   border-radius: 0.313rem;
+  object-fit: contain;
 }
 
 .check-section:last-child {
@@ -700,4 +702,26 @@ input::placeholder {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+.check-section article p{
+  color: var(--background-color);
+}
+
+#check-card{
+  background-color: var(--primary-color);
+  border-radius: 0.938rem;
+  padding: 1.5rem;
+  width: 18rem;
+  height: 10rem;
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #073f93, #1256bc);
+  /*box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);*/
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+    0px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+#check-num-card{
+  font-size: var(--larger-text-size);
 }
