@@ -67,6 +67,19 @@ const ROUTES = [
     'updateM' => [
         'controller' => App\Controller\ModificationMembreController::class,
         'method' => 'updateData',
-    ]
-]
+    ],
+    'checkPassword' => [
+        'controller' => App\Controller\ModificationMembreController::class,
+        'method' => 'checkPassword',
+    ],
+    'updatePassword' => [
+        'controller' => App\Controller\ModificationMembreController::class,
+        'method' => 'updatePassword',
+    ],
+    'checkEmail' => [
+        'controller' => App\Controller\ModificationMembreController::class,
+        'method' => 'checkEmail',
+    ],
+];
+
 ?>

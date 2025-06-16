@@ -60,4 +60,12 @@ class CompteManager extends AbstractManager
 
         return $this->update(Compte::class, $fields, $id);
     }
+
+    public function updatePassword(Compte $compte, int $id): \PDOStatement
+    {
+        $fields = [
+            'mot_de_passe'=> $compte->getMotDePasse(),
+        ];
+        return $this->update(Compte::class, $fields, $id);
+    }
 }
