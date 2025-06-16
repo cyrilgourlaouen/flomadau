@@ -328,13 +328,23 @@ footer div nav :any-link {
 }
 
 /* Search bar */
-.offer-search {
+.offer-controls {
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
+  position: relative;
+  overflow: visible;
+  gap: 0.625rem;
+}
+
+.offer-search {
+  display: flex;
+  flex-direction: row;
   align-items: self-start;
   justify-items: center;
   width: 100%;
   gap: 0.625rem;
+  flex-wrap: nowrap;
 }
 
 .offer-search-bar {
@@ -345,22 +355,19 @@ footer div nav :any-link {
   flex-shrink: 1;
 }
 
-.offer-search-bar-filters {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.625rem;
-}
-
-.offer-search-sort-mobile {
+.offer-sort-mobile {
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 0.325rem;
+  overflow: visible;
+  width: fit-content;
 }
 
-.offer-search-sort-mobile div {
+#offer-sort-mobile-options {
+  z-index: 5;
+  top: 3rem;
+  position: absolute;
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -372,7 +379,7 @@ footer div nav :any-link {
   border-radius: 10px;
 }
 
-.offer-search-sort-mobile div p {
+#offer-sort-mobile-options p {
   width: 100%;
   padding: 0.625rem;
   text-align: center;
@@ -381,12 +388,12 @@ footer div nav :any-link {
   cursor: pointer;
 }
 
-.offer-search-sort-mobile div p:hover {
+#offer-sort-mobile-options p:hover {
   cursor: pointer;
   background-color: var(--background-color);
 }
 
-#offer-search-sort-mobile-button {
+#offer-sort-mobile-button {
   background-color: var(--white-color);
   color: var(--black-color);
   height: 2.75rem;

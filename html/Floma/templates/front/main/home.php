@@ -109,8 +109,8 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
 <section class="offer-section" data-offers='<?= htmlspecialchars(json_encode($data["offers"]), ENT_QUOTES, 'UTF-8') ?>'>
     <h2>Découvrez nos offres</h2>
 
-    <div class="offer-search">
-        <div class="offer-search-bar-filters">
+    <div class="offer-controls">
+        <div class="offer-search">
             <div class="offer-search-bar">
                 <input type="text" id="offer-search-input" placeholder="Rechercher">
             </div>
@@ -118,23 +118,18 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
                 <button id="offer-search-filter-button">Filtrer</button>
             </div>
         </div>
-        <div class="offer-search-sort-mobile">
-            <button id="offer-search-sort-mobile-button">
+
+        <div class="offer-sort-mobile">
+            <button id="offer-sort-mobile-button">
                 Trier par : <span id="selected-sort-label"></span>
             </button>
-            <div>
+    
+            <div id="offer-sort-mobile-options">
                 <p id="asc" class="selected-sort">Prix croissant</p>
                 <p id="desc">Prix décroissant</p>
                 <p id="note">Note</p>
             </div>
         </div>
-        <!-- <div>
-            <button>Catégorie</button>
-            <button>Prix</button>
-            <button>Statut</button>
-            <button>Note</button>
-            <button>Catégorie</button>
-        </div> -->
     </div>
 
     <div class="offer-list">
@@ -278,5 +273,4 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
     </div>
 </section>
 <script src="/js/highlightedOffer.js"></script>
-<script src="/js/searchOffers.js"></script>
-<script src="/js/sortOffers.js"></script>
+<script src="/js/searchAndSortOffers.js"></script>
