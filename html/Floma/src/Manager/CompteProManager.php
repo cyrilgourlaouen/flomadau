@@ -23,4 +23,13 @@ class CompteProManager extends AbstractManager
             'complement_adresse' => $compte->getComplementAdresse()
         ]);
     }
+
+    /**
+     * @param array $filters
+     * @return mixed
+     */
+    public function findOneBy(array $filters)
+    {
+        return $this->readOne(Compte::class, $filters);
+    }
 }
