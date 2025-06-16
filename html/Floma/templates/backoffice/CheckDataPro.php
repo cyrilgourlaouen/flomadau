@@ -60,7 +60,7 @@
       </article>
 
       <?php
-        if(isset($compte['url_photo_profil'])){
+        if(isset($data['infosPro'][0]['proPriveData'][0]['siren'])){
           $numSirenSansEspace = $data['infosPro'][0]['proPriveData'][0]['siren'];
           $numSirenExplode = str_split($numSirenSansEspace, 3);
           $numSirenAvecEspaces = implode(' ', $numSirenExplode);
