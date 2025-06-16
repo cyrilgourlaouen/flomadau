@@ -11,6 +11,7 @@
       <h3>Photo de profil</h3>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <article id="check-pp">
 =======
       <article>
@@ -18,6 +19,9 @@
 =======
       <article>
 >>>>>>> c6d5e5a (aaa)
+=======
+      <article id="check-pp">
+>>>>>>> d452eb8 (aa)
         <?php
           if(isset($compte['url_photo_profil'])){
             ?>
@@ -31,6 +35,7 @@
         ?>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       </article>
       <button class="hidden btn-modif-pro" id="btn-delete-pp" type="button">Supprimer</button>
       <article id="new-pp" class="hidden-pp">
@@ -42,7 +47,10 @@
 =======
 >>>>>>> c6d5e5a (aaa)
         <button class="cache">Supprimer</button>
+=======
+>>>>>>> d452eb8 (aa)
       </article>
+      <button class="cache">Supprimer</button>
       <article id="new-pp">
         <label for="photo">Nouvelle photo de profil :</label>
         <input type="file" id="photo" name="photo" accept="image/png, image/jpeg image/webp" size="2097152"></input>
@@ -254,15 +262,20 @@
     <section class="check-section cache">
       <h3>Mot de passe</h3>
       <article>
+<<<<<<< HEAD
         <label for="old-password">Mot de passe</label>
 <<<<<<< HEAD
 >>>>>>> 958593a (aaa)
 =======
 >>>>>>> c6d5e5a (aaa)
+=======
+        <label for="old-password">Ancien mot de passe</label>
+>>>>>>> d452eb8 (aa)
         <input type="password" id="old-password" name="old-password"/>
       </article>
 
       <article>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         <label for="new-password">Nouveau mot de passe</label>
@@ -272,6 +285,9 @@
 =======
         <label for="new-password">Mot de passe</label>
 >>>>>>> c6d5e5a (aaa)
+=======
+        <label for="new-password">Nouveau mot de passe</label>
+>>>>>>> d452eb8 (aa)
         <input type="password" id="new-password" name="new-password" disabled/>
       </article>
 
@@ -351,6 +367,22 @@
 >>>>>>> 958593a (aaa)
 =======
 >>>>>>> c6d5e5a (aaa)
+            </article>
+          </section>
+        <?php
+      }else{
+        ?>
+          <section class="check-section cache">
+            <h3>Carte bancaire</h3>
+            <article>
+              <label for="card-number">Numéro de carte</label>
+              <input type="text" id="card-number" name="card-number"></input>
+
+              <label for="expiration-date">Date expiration</label>
+              <input type="date" id="expiration-date" name="expiration-date"></input>
+
+              <label for="CVV">Cryptogramme</label>
+              <input type="text" id="CVV" name="CVV"></input>
             </article>
           </section>
         <?php
