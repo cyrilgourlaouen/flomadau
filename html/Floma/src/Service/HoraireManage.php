@@ -61,5 +61,6 @@ class HoraireManage
                 $jourOuvertureOffre->setIdJour($idOffre);
             }
         }
+        $jourOuvertureOffreManager->add($jourOuvertureOffre);
     }    
 }
