@@ -7,7 +7,7 @@ use App\Resource\ProfessionnelResource;
 use Floma\Controller\AbstractController;
 use Floma\View\Layout;
 
-class CheckDataProController extends AbstractController
+class CheckModifDataProController extends AbstractController
 {
 
     public function home()
@@ -25,7 +25,7 @@ class CheckDataProController extends AbstractController
         }
 
         return $this->renderView(
-            'backoffice/CheckDataPro.php',
+            'backoffice/checkModifDataPro.php',
             [
                 'infosPro' => $infosPro,
                 'seo' => [
