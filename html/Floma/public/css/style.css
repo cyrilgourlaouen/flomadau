@@ -330,6 +330,7 @@ footer div nav :any-link {
 /* Search bar */
 .offer-controls {
   display: flex;
+  width: 100%;
   flex-direction: column;
   flex-wrap: nowrap;
   position: relative;
@@ -355,7 +356,7 @@ footer div nav :any-link {
   flex-shrink: 1;
 }
 
-.offer-sort-mobile {
+.offer-sort-mobile{
   position: relative;
   display: flex;
   flex-direction: row;
@@ -364,7 +365,7 @@ footer div nav :any-link {
   width: fit-content;
 }
 
-#offer-sort-mobile-options {
+#offer-sort-mobile-options, #offer-sort-desktop-options {
   z-index: 5;
   top: 3rem;
   position: absolute;
@@ -379,7 +380,8 @@ footer div nav :any-link {
   border-radius: 10px;
 }
 
-#offer-sort-mobile-options p {
+
+#offer-sort-mobile-options p , #offer-sort-desktop-options p {
   width: 100%;
   padding: 0.625rem;
   text-align: center;
@@ -388,7 +390,7 @@ footer div nav :any-link {
   cursor: pointer;
 }
 
-#offer-sort-mobile-options p:hover {
+#offer-sort-mobile-options p:hover, #offer-sort-desktop-options p:hover {
   cursor: pointer;
   background-color: var(--background-color);
 }
@@ -438,6 +440,14 @@ footer div nav :any-link {
 
 #offer-search-filter-button:active {
   background-color: var(--dark-blue-color);
+}
+
+.offer-sort-desktop {
+  display: none;
+}
+
+.offer-search-filters select {
+  display: none;
 }
 
 /* Carte affichage des offres */
@@ -983,7 +993,7 @@ footer div nav :any-link {
   :root {
     --title-size: 1.875rem;
     --subtitle-size: 1.563rem;
-    --text-size: 1.25rem;
+    --text-size: 1.125rem;
     --small-text-size: 1.094rem;
     --very-small-text-size: 0.75rem;
 
@@ -1302,8 +1312,71 @@ footer div nav :any-link {
     padding-top: 0;
   }
 
+  #offer-sort-desktop-options {
+    top: 2.5rem;
+  }
+
+  .offer-search-filters {
+    position: relative;
+    overflow: visible;
+  }
+
+  .offer-sort-desktop {
+    width: 100%;
+    display: flex;
+    gap: 0.625rem;
+    position: relative;
+    overflow: visible;
+  }
+
   #offer-search-filter-button {
     display: none;
+  }
+
+  .offer-sort-mobile {
+    display: none;
+  }
+
+  .offer-search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+    overflow: visible;
+  }
+
+  .offer-search-bar {
+    width: 70%;
+  }
+
+  .offer-search-filters {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.625rem;
+    width: fit-content;
+  }
+
+  .offer-search-filters select, #offer-sort-desktop-button {
+    display: block;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    height: 2.188rem;
+    padding: 0 2.5rem 0 1rem;
+    border-radius: 100px;
+    background-color: var(--white-color);
+    border: #000 solid 1px;
+    font-size: var(--text-size);
+    cursor: pointer;
+    pointer-events: all;
+
+    background-image: url('/assets/icons/keyboard_arrow_down_black.svg');
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1.75rem;
   }
 
   .highlighted-offers-section {
