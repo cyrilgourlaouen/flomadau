@@ -48,4 +48,13 @@ class ImageManager extends AbstractManager
     {
         return $this->readMany(Image::class);
     }
+
+    public function add(Image $image) {
+		return $this->create(Image::class, [
+				'id_offre' => $image->getIdOffre(),
+                'url_img' => $image->getUrlImg(),
+                'principale' => $image->isPrincipale(),
+			]
+		);
+	}
 }
