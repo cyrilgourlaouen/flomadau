@@ -219,4 +219,10 @@ form.addEventListener('input', function(event) {
   for(let j=0; j<inputs.length; j++){
     
   }
+
+  //on active les inputs
+  inputs = document.getElementsByClassName('not-active');
+  for(let j=0; j<inputs.length; j++){
+    
+  }
 });
