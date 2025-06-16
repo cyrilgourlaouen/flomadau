@@ -225,4 +225,15 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
         </section>
     </div>
 </div>
+<a href="?path=/avis/<?= $offer['id'] ?>">avis</a>
+<?php $avis = $data['avis'];
+    print_r($avis);
+    exit;
+?>
+<div class="container-avis">
+    <hr>
+    <h3>Avis</h3>
+    <?php ?>
+
+</div>
 <script src="./js/MapCalculator.js"></script>

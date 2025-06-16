@@ -63,6 +63,10 @@ const ROUTES = [
     '/consultationMembre' => [
         'controller' => App\Controller\ConsultationMController::class,
         'method' => 'consultation',
+    ],
+    '/avis/{id}' => [
+        'controller' => App\Controller\AvisController::class,
+        'method' => 'show',
     ]
 ];
 
