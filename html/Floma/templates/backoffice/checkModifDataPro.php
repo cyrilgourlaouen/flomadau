@@ -9,7 +9,7 @@
   <form action="?path=/pro/update/account" method="POST" enctype="multipart/form-data" id="form-pro">
     <section class="check-section">
       <h3>Photo de profil</h3>
-      <article>
+      <article id="check-pp">
         <?php
           if(isset($compte['url_photo_profil'])){
             ?>
@@ -21,8 +21,8 @@
             <?php
           }
         ?>
-        <button class="cache">Supprimer</button>
       </article>
+      <button class="cache">Supprimer</button>
       <article id="new-pp">
         <label for="photo">Nouvelle photo de profil :</label>
         <input type="file" id="photo" name="photo" accept="image/png, image/jpeg image/webp" size="2097152"></input>
@@ -135,12 +135,12 @@
     <section class="check-section cache">
       <h3>Mot de passe</h3>
       <article>
-        <label for="old-password">Mot de passe</label>
+        <label for="old-password">Ancien mot de passe</label>
         <input type="password" id="old-password" name="old-password"/>
       </article>
 
       <article>
-        <label for="new-password">Mot de passe</label>
+        <label for="new-password">Nouveau mot de passe</label>
         <input type="password" id="new-password" name="new-password" disabled/>
       </article>
 
@@ -170,6 +170,22 @@
             </article>
             <button class="cache">Supprimer</button>
             <article id="new-credit-card">
+              <label for="card-number">Numéro de carte</label>
+              <input type="text" id="card-number" name="card-number"></input>
+
+              <label for="expiration-date">Date expiration</label>
+              <input type="date" id="expiration-date" name="expiration-date"></input>
+
+              <label for="CVV">Cryptogramme</label>
+              <input type="text" id="CVV" name="CVV"></input>
+            </article>
+          </section>
+        <?php
+      }else{
+        ?>
+          <section class="check-section cache">
+            <h3>Carte bancaire</h3>
+            <article>
               <label for="card-number">Numéro de carte</label>
               <input type="text" id="card-number" name="card-number"></input>
 
