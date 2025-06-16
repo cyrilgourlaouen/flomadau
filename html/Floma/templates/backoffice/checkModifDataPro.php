@@ -9,7 +9,11 @@
   <form action="?path=/pro/update/account" method="POST" enctype="multipart/form-data" id="form-pro">
     <section class="check-section">
       <h3>Photo de profil</h3>
+<<<<<<< HEAD
       <article id="check-pp">
+=======
+      <article>
+>>>>>>> 958593a (aaa)
         <?php
           if(isset($compte['url_photo_profil'])){
             ?>
@@ -21,6 +25,7 @@
             <?php
           }
         ?>
+<<<<<<< HEAD
       </article>
       <button class="hidden btn-modif-pro" id="btn-delete-pp" type="button">Supprimer</button>
       <article id="new-pp" class="hidden-pp">
@@ -28,6 +33,14 @@
         <input type="file" id="photo" name="photo" accept="image/png, image/jpeg image/webp" size="2097152"></input>
       </article>
       <button class="hidden-pp btn-modif-pro" id="btn-cancel-pp" type="button">Annuler</button>
+=======
+        <button class="cache">Supprimer</button>
+      </article>
+      <article id="new-pp">
+        <label for="photo">Nouvelle photo de profil :</label>
+        <input type="file" id="photo" name="photo" accept="image/png, image/jpeg image/webp" size="2097152"></input>
+      </article>
+>>>>>>> 958593a (aaa)
     </section>
   
     <section class="check-section">
@@ -36,13 +49,19 @@
         <article>
           <label for="prenom">Prénom </label>
           <input type="text" id="prenom" name="prenom" value="<?= $compte['prenom'] ?>" disabled class="not-active"/>
+<<<<<<< HEAD
           <span id="erreur-prenom" class="erreur"></span>
+=======
+>>>>>>> 958593a (aaa)
         </article>
         
         <article>
           <label for="nom">Nom </label>
           <input type="text" id="nom" name="nom" value="<?= $compte['nom'] ?>" disabled class="not-active"/>
+<<<<<<< HEAD
           <span id="erreur-nom" class="erreur"></span>
+=======
+>>>>>>> 958593a (aaa)
         </article>
       </div>
 
@@ -55,13 +74,19 @@
             $numAvecEspaces = implode(' ', $numExplode);
           ?>
           <input type="tel" id="telephone" name="telephone" value="<?= $numAvecEspaces ?>" disabled class="not-active"/>
+<<<<<<< HEAD
           <span id="erreur-telephone" class="erreur"></span>
+=======
+>>>>>>> 958593a (aaa)
         </article>
 
         <article>
           <label for="email">Adresse e-mail</label>
           <input type="email" id="email" name="email" value="<?= $compte['email'] ?>" disabled class="not-active"/>
+<<<<<<< HEAD
           <span id="erreur-email" class="erreur"></span>
+=======
+>>>>>>> 958593a (aaa)
         </article>
       </div>
 
@@ -69,7 +94,10 @@
         <article>
           <label for="denomination">Dénomination sociale</label>
           <input type="text" id="denomination" name="denomination" value="<?= $data['infosPro'][0]['raison_sociale'] ?>" disabled class="not-active"/>
+<<<<<<< HEAD
           <span id="erreur-denomination" class="erreur"></span>
+=======
+>>>>>>> 958593a (aaa)
         </article>
 
         <?php
@@ -81,7 +109,10 @@
               <article>
                 <label for="siren">Numéro SIREN</label>
                 <input type="text" id="siren" name="siren" value="<?= $numSirenAvecEspaces ?>" disabled class="not-active"/>
+<<<<<<< HEAD
                 <span id="erreur-siren" class="erreur"></span>
+=======
+>>>>>>> 958593a (aaa)
               </article>
             <?php
           }
@@ -95,12 +126,16 @@
         <article>
           <label for="rue">Rue</label>
           <input type="text" id="rue" name="rue" value="<?= $compte['nom_rue'] ?>" disabled class="not-active"/>
+<<<<<<< HEAD
           <span id="erreur-rue" class="erreur"></span>
+=======
+>>>>>>> 958593a (aaa)
         </article>
 
         <article>
           <label for="numero">Numéro</label>
           <input type="text" id="numero" name="numero" value="<?= $compte['numero_rue'] ?>" disabled class="not-active"/>
+<<<<<<< HEAD
           <span id="erreur-numero" class="erreur"></span>
         </article>
       </div>
@@ -142,11 +177,60 @@
       <h3>Mot de passe</h3>
       <article>
         <label for="old-password">Ancien mot de passe</label>
+=======
+        </article>
+      </div>
+
+      <div class="check-div">
+        <?php
+          if(isset($compte['complement_adresse'])){
+            ?>
+              <article>
+                <label for="complement">Complément d'adresse</label>
+                <input type="text" id="complement" name="complement" value="<?= $compte['complement_adresse'] ?>" disabled class="not-active"/>
+              </article>
+            <?php
+          }
+        ?>
+
+        <article>
+          <label for="ville">Ville</label>
+          <input type="text" id="ville" name="ville" value="<?= $compte['ville'] ?>" disabled class="not-active"/>
+        </article>
+      <?php 
+        if(isset($compte['complement_adresse'])){
+          ?>
+            </div>
+          <?php
+        }
+      ?>
+        <article>
+          <label for="codePostal">Code postal</label>
+          <input type="text" id="codePostal" name="codePostal" value="<?= $compte['code_postal'] ?>" disabled class="not-active"/>
+        </article>
+      <?php 
+        if(!isset($compte['complement_adresse'])){
+          ?>
+            </div>
+          <?php
+        }
+      ?>
+    </section>
+
+    <section class="check-section cache">
+      <h3>Mot de passe</h3>
+      <article>
+        <label for="old-password">Mot de passe</label>
+>>>>>>> 958593a (aaa)
         <input type="password" id="old-password" name="old-password"/>
       </article>
 
       <article>
+<<<<<<< HEAD
         <label for="new-password">Nouveau mot de passe</label>
+=======
+        <label for="new-password">Mot de passe</label>
+>>>>>>> 958593a (aaa)
         <input type="password" id="new-password" name="new-password" disabled/>
       </article>
 
@@ -174,6 +258,7 @@
               <p>Expire fin : <?= $dateExpirationFr ?></p>
               <p><?= $compte['nom']." ". $compte['prenom'] ?></p>
             </article>
+<<<<<<< HEAD
             <button class="hidden btn-modif-pro" id="btn-delete-credit-card" type="button">Supprimer</button>
             <article id="new-credit-card" class="hidden-credit-card">
               <label for="card-number">Numéro de carte</label>
@@ -207,15 +292,33 @@
               <label for="cvv">Cryptogramme</label>
               <input type="text" id="cvv" name="cvv"></input>
               <span id="erreur-cvv" class="erreur"></span>
+=======
+            <button class="cache">Supprimer</button>
+            <article id="new-credit-card">
+              <label for="card-number">Numéro de carte</label>
+              <input type="text" id="card-number" name="card-number"></input>
+
+              <label for="expiration-date">Date expiration</label>
+              <input type="date" id="expiration-date" name="expiration-date"></input>
+
+              <label for="CVV">Cryptogramme</label>
+              <input type="text" id="CVV" name="CVV"></input>
+>>>>>>> 958593a (aaa)
             </article>
           </section>
         <?php
       }
     ?>
 
+<<<<<<< HEAD
     <button type="button" id="btn-update" class="btn-modif-pro">Modifier</button>
     <button type="submit" id="btn-submit" class="hidden btn-modif-pro">Enregistrer</button>
     <button type="button" id="btn-cancel" class="hidden btn-modif-pro">Annuler</button>
+=======
+    <button type="button" id="btn-modifier">Modifier</button>
+    <button type="submit" id="btn-enregistrer" class="cache">Enregistrer les modifications</button>
+    <button type="button" id="btn-annuler" class="cache">Annuler</button>
+>>>>>>> 958593a (aaa)
 
   </form>
 </div>
