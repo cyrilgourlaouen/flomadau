@@ -47,6 +47,7 @@ class ModificationMembreController extends AbstractController
                 $compteManager->updateCompte($compte, $id); 
             }
 
+
             session_unset();
 
             // 🔁 Reconnexion
@@ -62,7 +63,7 @@ class ModificationMembreController extends AbstractController
                 $_SESSION = $compteMisAJour;
 
                 session_regenerate_id(true);
-                return $this->redirectToRoute('/consultation/membre');
+                return $this->redirectToRoute('/consultation/membre' , ["state" => "success"]);
             } else {
                 return $this->redirectToRoute('/consultation/membre', ["state" => "failure"]);
             }

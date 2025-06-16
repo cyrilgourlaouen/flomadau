@@ -4,6 +4,9 @@ let cancelBtn = document.getElementById("BtnCancel");
 const emailInput = document.getElementById('emailInput');
 const emailMessage = document.getElementById('emailMessage');
 let timeout = null;
+const urlParams = new URLSearchParams(window.location.search);
+const state = urlParams.get('state');
+
 
 updateBtn.onclick = displayText;
 
@@ -42,6 +45,16 @@ cancelBtn.addEventListener('click', () => {
         hiddenText();
     }
 });
+
+submitBtn.addEventListener('click', () => {
+    if (state === 'success') {
+        alert("Modification effectuée avec succès !");
+        window.history.replaceState(null, '', window.location.pathname);
+    } else if (state === 'failure') {
+        alert("Erreur lors de la modification.");
+        window.history.replaceState(null, '', window.location.pathname);
+    }
+})
 
 function hiddenText() {
     submitBtn.classList.add("hidden");
