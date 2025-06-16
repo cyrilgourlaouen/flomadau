@@ -327,10 +327,9 @@ select {
   color: var(--black-color);
 }
 
-input::placeholder {
+input {
   font-family: var(--noto);
   font-size: var(--text-size);
-  color: var(--light-grey-color);
 }
 
 .field {
@@ -688,7 +687,11 @@ input::placeholder {
   font-size: var(--larger-text-size);
 }
 
-.cache{
+input.not-active{
+  color: var(--light-grey-color);
+}
+
+.hidden{
   display: none !important;
 }
 
