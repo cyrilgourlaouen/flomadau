@@ -10,10 +10,14 @@
     <section class="check-section">
       <h3>Photo de profil</h3>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <article id="check-pp">
 =======
       <article>
 >>>>>>> 958593a (aaa)
+=======
+      <article>
+>>>>>>> c6d5e5a (aaa)
         <?php
           if(isset($compte['url_photo_profil'])){
             ?>
@@ -26,6 +30,7 @@
           }
         ?>
 <<<<<<< HEAD
+<<<<<<< HEAD
       </article>
       <button class="hidden btn-modif-pro" id="btn-delete-pp" type="button">Supprimer</button>
       <article id="new-pp" class="hidden-pp">
@@ -34,13 +39,18 @@
       </article>
       <button class="hidden-pp btn-modif-pro" id="btn-cancel-pp" type="button">Annuler</button>
 =======
+=======
+>>>>>>> c6d5e5a (aaa)
         <button class="cache">Supprimer</button>
       </article>
       <article id="new-pp">
         <label for="photo">Nouvelle photo de profil :</label>
         <input type="file" id="photo" name="photo" accept="image/png, image/jpeg image/webp" size="2097152"></input>
       </article>
+<<<<<<< HEAD
 >>>>>>> 958593a (aaa)
+=======
+>>>>>>> c6d5e5a (aaa)
     </section>
   
     <section class="check-section">
@@ -50,18 +60,24 @@
           <label for="prenom">Prénom </label>
           <input type="text" id="prenom" name="prenom" value="<?= $compte['prenom'] ?>" disabled class="not-active"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
           <span id="erreur-prenom" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
+=======
+>>>>>>> c6d5e5a (aaa)
         </article>
         
         <article>
           <label for="nom">Nom </label>
           <input type="text" id="nom" name="nom" value="<?= $compte['nom'] ?>" disabled class="not-active"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
           <span id="erreur-nom" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
+=======
+>>>>>>> c6d5e5a (aaa)
         </article>
       </div>
 
@@ -75,18 +91,24 @@
           ?>
           <input type="tel" id="telephone" name="telephone" value="<?= $numAvecEspaces ?>" disabled class="not-active"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
           <span id="erreur-telephone" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
+=======
+>>>>>>> c6d5e5a (aaa)
         </article>
 
         <article>
           <label for="email">Adresse e-mail</label>
           <input type="email" id="email" name="email" value="<?= $compte['email'] ?>" disabled class="not-active"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
           <span id="erreur-email" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
+=======
+>>>>>>> c6d5e5a (aaa)
         </article>
       </div>
 
@@ -95,9 +117,12 @@
           <label for="denomination">Dénomination sociale</label>
           <input type="text" id="denomination" name="denomination" value="<?= $data['infosPro'][0]['raison_sociale'] ?>" disabled class="not-active"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
           <span id="erreur-denomination" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
+=======
+>>>>>>> c6d5e5a (aaa)
         </article>
 
         <?php
@@ -110,9 +135,12 @@
                 <label for="siren">Numéro SIREN</label>
                 <input type="text" id="siren" name="siren" value="<?= $numSirenAvecEspaces ?>" disabled class="not-active"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <span id="erreur-siren" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
+=======
+>>>>>>> c6d5e5a (aaa)
               </article>
             <?php
           }
@@ -127,14 +155,18 @@
           <label for="rue">Rue</label>
           <input type="text" id="rue" name="rue" value="<?= $compte['nom_rue'] ?>" disabled class="not-active"/>
 <<<<<<< HEAD
+<<<<<<< HEAD
           <span id="erreur-rue" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
+=======
+>>>>>>> c6d5e5a (aaa)
         </article>
 
         <article>
           <label for="numero">Numéro</label>
           <input type="text" id="numero" name="numero" value="<?= $compte['numero_rue'] ?>" disabled class="not-active"/>
+<<<<<<< HEAD
 <<<<<<< HEAD
           <span id="erreur-numero" class="erreur"></span>
         </article>
@@ -178,6 +210,8 @@
       <article>
         <label for="old-password">Ancien mot de passe</label>
 =======
+=======
+>>>>>>> c6d5e5a (aaa)
         </article>
       </div>
 
@@ -221,16 +255,23 @@
       <h3>Mot de passe</h3>
       <article>
         <label for="old-password">Mot de passe</label>
+<<<<<<< HEAD
 >>>>>>> 958593a (aaa)
+=======
+>>>>>>> c6d5e5a (aaa)
         <input type="password" id="old-password" name="old-password"/>
       </article>
 
       <article>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <label for="new-password">Nouveau mot de passe</label>
 =======
         <label for="new-password">Mot de passe</label>
 >>>>>>> 958593a (aaa)
+=======
+        <label for="new-password">Mot de passe</label>
+>>>>>>> c6d5e5a (aaa)
         <input type="password" id="new-password" name="new-password" disabled/>
       </article>
 
@@ -258,6 +299,7 @@
               <p>Expire fin : <?= $dateExpirationFr ?></p>
               <p><?= $compte['nom']." ". $compte['prenom'] ?></p>
             </article>
+<<<<<<< HEAD
 <<<<<<< HEAD
             <button class="hidden btn-modif-pro" id="btn-delete-credit-card" type="button">Supprimer</button>
             <article id="new-credit-card" class="hidden-credit-card">
@@ -293,6 +335,8 @@
               <input type="text" id="cvv" name="cvv"></input>
               <span id="erreur-cvv" class="erreur"></span>
 =======
+=======
+>>>>>>> c6d5e5a (aaa)
             <button class="cache">Supprimer</button>
             <article id="new-credit-card">
               <label for="card-number">Numéro de carte</label>
@@ -303,13 +347,17 @@
 
               <label for="CVV">Cryptogramme</label>
               <input type="text" id="CVV" name="CVV"></input>
+<<<<<<< HEAD
 >>>>>>> 958593a (aaa)
+=======
+>>>>>>> c6d5e5a (aaa)
             </article>
           </section>
         <?php
       }
     ?>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     <button type="button" id="btn-update" class="btn-modif-pro">Modifier</button>
     <button type="submit" id="btn-submit" class="hidden btn-modif-pro">Enregistrer</button>
@@ -319,6 +367,11 @@
     <button type="submit" id="btn-enregistrer" class="cache">Enregistrer les modifications</button>
     <button type="button" id="btn-annuler" class="cache">Annuler</button>
 >>>>>>> 958593a (aaa)
+=======
+    <button type="button" id="btn-modifier">Modifier</button>
+    <button type="submit" id="btn-enregistrer" class="cache">Enregistrer les modifications</button>
+    <button type="button" id="btn-annuler" class="cache">Annuler</button>
+>>>>>>> c6d5e5a (aaa)
 
   </form>
 </div>
