@@ -1,189 +1,177 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const offerSection = document.querySelector(".offer-section");
-    const offersData = JSON.parse(offerSection.dataset.offers);
-    const input = document.getElementById("offer-search-input");
-    const offerList = document.querySelector(".offer-list"); // Conteneur des cartes
-    
-    const sortButton = document.getElementById('offer-sort-mobile-button');
-    const sortDropdown = document.getElementById('offer-sort-mobile-options');
-    const selectedLabel = document.getElementById('selected-sort-label');
-    const sortOptions = document.querySelectorAll('#offer-sort-mobile-options p');
-    
-    let searchTimeout;
-    let currentQuery = '';
-    let currentSortType = 'asc';
-    let filteredOffers = [...offersData];
-    
-    init();
-    
-    function init() {
-        const defaultSelected = document.querySelector('.selected-sort');
-        if (defaultSelected) {
-            selectedLabel.textContent = defaultSelected.textContent;
-            defaultSelected.style.display = 'none';
-            currentSortType = defaultSelected.id;
-        }
-        
-        sortDropdown.style.display = 'none';
-        
-        applyFiltersAndSort();
-    }
-    
-    function normalizeString(str) {
-        return str
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .toLowerCase()
-            .trim();
-    }
-    
-    /**
-     * Extrait le prix d'une offre pour le tri
-     */
-    function getPriceForSort(offer) {
-        if (!offer.categoryData) {
-            return 0;
-        }
-        
-        // Pour la restauration, utiliser gamme_de_prix
-        if (offer.categorie === 'Restauration') {
-            return offer.categoryData.gamme_de_prix || 0;
-        }
-        
-        // Pour les autres catégories, utiliser prix_minimal
-        return parseFloat(offer.categoryData.prix_minimal) || 0;
-    }
-    
-    function filterOffers(query) {
-        if (query === "") {
-            return [...offersData];
-        }
-        
-        return offersData.filter((offer) => {
-            const title = normalizeString(offer.titre);
-            const resume = normalizeString(offer.resume);
-            const ville = normalizeString(offer.ville);
-            const category = normalizeString(offer.categorie);
-            const raison_sociale = normalizeString(offer.professionnelData.raison_sociale);
-            
-            return title.includes(query) ||
-                   resume.includes(query) ||
-                   ville.includes(query) ||
-                   raison_sociale.includes(query) ||
-                   category.includes(query);
-        });
-    }
-    
-    function sortOffers(offers, sortType) {
-        const sorted = [...offers];
-        
-        switch(sortType) {
-            case 'asc':
-                // Tri par prix croissant
-                return sorted.sort((a, b) => {
-                    const priceA = getPriceForSort(a);
-                    const priceB = getPriceForSort(b);
-                    return priceA - priceB;
-                });
+import { sortOffers } from './offerSort.js';
 
-            case 'desc':
-                // Tri par prix décroissant
-                return sorted.sort((a, b) => {
-                    const priceA = getPriceForSort(a);
-                    const priceB = getPriceForSort(b);
-                    return priceB - priceA;
-                });
-                
-            case 'note':
-                return sorted.sort((a, b) => {
-                    const noteA = parseFloat(a.note_moyenne) || 0;
-                    const noteB = parseFloat(b.note_moyenne) || 0;
-                    return noteB - noteA; // Tri décroissant par note
-                });
-                
-            default:
-                return sorted;
-        }
-    }
-    
-    function applyFiltersAndSort() {
-        filteredOffers = filterOffers(currentQuery);
-        const sortedOffers = sortOffers(filteredOffers, currentSortType);
-        displayOffers(sortedOffers);
-    }
-    
-    function displayOffers(offers) {
-        // Récupère toutes les cartes actuelles
-        const offerCards = document.querySelectorAll(".offer-card");
-        
-        // Cache toutes les cartes d'abord
-        offerCards.forEach(card => card.style.display = 'none');
-        
-        // Réorganise les cartes dans le bon ordre
-        offers.forEach((offer, index) => {
-            // Trouve la carte correspondant à cette offre
-            const originalIndex = offersData.findIndex(o => o.id === offer.id);
-            if (originalIndex !== -1 && offerCards[originalIndex]) {
-                const card = offerCards[originalIndex];
-                card.style.display = '';
-                
-                // Réordonne physiquement les éléments dans le DOM
-                offerList.appendChild(card);
-            }
-        });
-    }
-    
-    input.addEventListener("input", () => {
-        currentQuery = normalizeString(input.value);
-        
-        clearTimeout(searchTimeout);
-        
-        searchTimeout = setTimeout(() => {
-            applyFiltersAndSort();
-        }, 300);
+document.addEventListener("DOMContentLoaded", () => {
+  const offerSection = document.querySelector(".offer-section");
+  const offersData = JSON.parse(offerSection.dataset.offers);
+  const input = document.getElementById("offer-search-input");
+  const offerList = document.querySelector(".offer-list");
+  const offerCards = document.querySelectorAll(".offer-card");
+
+  // Tri mobile
+  const sortMobileBtn = document.getElementById("offer-sort-mobile-button");
+  const sortMobileOptions = document.getElementById("offer-sort-mobile-options");
+  const selectedSortMobileLabel = document.getElementById("selected-sort-mobile-label");
+
+  // Tri desktop
+  const sortDesktopBtn = document.getElementById("offer-sort-desktop-button");
+  const sortDesktopOptions = document.getElementById("offer-sort-desktop-options");
+  const selectedSortDesktopLabel = document.getElementById("selected-sort-desktop-label");
+
+  let currentSort = "date"; // Par défaut : Date d'ajout
+  let searchTimeout;
+
+  // Utilitaire pour normaliser les chaînes
+  const normalizeString = (str) =>
+    str
+      ? str
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .trim()
+      : "";
+
+  // Filtre selon la recherche
+  function filterOffers(query) {
+    return offersData.filter((offer) => {
+      const fields = [
+        offer.titre,
+        offer.resume,
+        offer.ville,
+        offer.categorie,
+        offer.professionnelData?.raison_sociale,
+      ];
+      return fields.some((field) => normalizeString(field).includes(query));
     });
-    
-    sortButton.addEventListener('click', (e) => {
-        e.preventDefault();
-        
-        if (sortDropdown.style.display === 'none') {
-            sortDropdown.style.display = 'flex';
-        } else {
-            sortDropdown.style.display = 'none';
-        }
+  }
+
+  // Affiche les offres triées et filtrées
+  function displayOffers(offers) {
+    offerCards.forEach((card) => (card.style.display = "none"));
+    offers.forEach((offer) => {
+      const idx = offersData.findIndex((o) => o.id === offer.id);
+      if (idx !== -1 && offerCards[idx]) {
+        offerCards[idx].style.display = "";
+        offerList.appendChild(offerCards[idx]);
+      }
     });
-    
-    sortOptions.forEach(option => {
-        option.addEventListener('click', (e) => {
-            e.preventDefault();
-            
-            // Retire la classe selected-sort de toutes les options
-            sortOptions.forEach(opt => {
-                opt.classList.remove('selected-sort');
-                opt.style.display = '';
-            });
-            
-            // Ajoute la classe à l'option cliquée
-            option.classList.add('selected-sort');
-            option.style.display = 'none';
-            
-            // Met à jour le label
-            selectedLabel.textContent = option.textContent;
-            
-            // Met à jour le type de tri
-            currentSortType = option.id;
-            
-            // Ferme le dropdown
-            sortDropdown.style.display = 'none';
-            
-            // Applique le nouveau tri
-            applyFiltersAndSort();
-        });
+  }
+
+  // Applique recherche + tri
+  function applyFiltersAndSort() {
+    const query = normalizeString(input.value);
+    let filtered = query ? filterOffers(query) : [...offersData];
+    let sorted = sortOffers(filtered, currentSort);
+    displayOffers(sorted);
+  }
+
+  // Met à jour le label et masque l'option sélectionnée (mobile)
+  function updateSortMobileUI() {
+    if (!sortMobileOptions) return;
+    sortMobileOptions.querySelectorAll("p").forEach((option) => {
+      if (option.id === currentSort) {
+        option.classList.add("selected-sort");
+        option.style.display = "none";
+        selectedSortMobileLabel.textContent = option.textContent;
+      } else {
+        option.classList.remove("selected-sort");
+        option.style.display = "";
+      }
     });
-    
-    document.addEventListener('click', (e) => {
-        if (!sortButton.contains(e.target) && !sortDropdown.contains(e.target)) {
-            sortDropdown.style.display = 'none';
-        }
+  }
+
+  // Met à jour le label et masque l'option sélectionnée (desktop)
+  function updateSortDesktopUI() {
+    if (!sortDesktopOptions) return;
+    sortDesktopOptions.querySelectorAll("p").forEach((option) => {
+      if (option.id === currentSort) {
+        option.classList.add("selected-sort");
+        option.style.display = "none";
+        selectedSortDesktopLabel.textContent = option.textContent;
+      } else {
+        option.classList.remove("selected-sort");
+        option.style.display = "";
+      }
     });
+  }
+
+  // Recherche
+  input.addEventListener("input", () => {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(applyFiltersAndSort, 300);
+  });
+
+  // Gestion du tri mobile
+  if (sortMobileBtn && sortMobileOptions) {
+    sortMobileOptions.style.display = "none";
+
+    sortMobileBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      sortMobileOptions.style.display =
+        sortMobileOptions.style.display === "block" ? "none" : "block";
+    });
+
+    sortMobileOptions.querySelectorAll("p").forEach((option) => {
+      option.addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentSort = option.id;
+        updateSortMobileUI();
+        updateSortDesktopUI();
+        sortMobileOptions.style.display = "none";
+        applyFiltersAndSort();
+      });
+    });
+
+    // Ferme le menu si on clique à l'extérieur
+    document.addEventListener("click", (e) => {
+      if (
+        sortMobileOptions.style.display === "block" &&
+        !sortMobileOptions.contains(e.target) &&
+        e.target !== sortMobileBtn
+      ) {
+        sortMobileOptions.style.display = "none";
+      }
+    });
+
+    // Initialisation UI tri mobile
+    updateSortMobileUI();
+  }
+
+  // Gestion du tri desktop
+  if (sortDesktopBtn && sortDesktopOptions) {
+    sortDesktopOptions.style.display = "none";
+
+    sortDesktopBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      sortDesktopOptions.style.display =
+        sortDesktopOptions.style.display === "block" ? "none" : "block";
+    });
+
+    sortDesktopOptions.querySelectorAll("p").forEach((option) => {
+      option.addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentSort = option.id;
+        updateSortDesktopUI();
+        updateSortMobileUI();
+        sortDesktopOptions.style.display = "none";
+        applyFiltersAndSort();
+      });
+    });
+
+    // Ferme le menu si on clique à l'extérieur
+    document.addEventListener("click", (e) => {
+      if (
+        sortDesktopOptions.style.display === "block" &&
+        !sortDesktopOptions.contains(e.target) &&
+        e.target !== sortDesktopBtn
+      ) {
+        sortDesktopOptions.style.display = "none";
+      }
+    });
+
+    // Initialisation UI tri desktop
+    updateSortDesktopUI();
+  }
+
+  // Initialisation
+  applyFiltersAndSort();
 });
