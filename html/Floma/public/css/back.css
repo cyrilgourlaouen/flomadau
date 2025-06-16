@@ -683,3 +683,7 @@ input::placeholder {
 .cache{
   display: none !important;
 }
+
+#new-pp, #new-credit-card{
+  display: none;
+}
