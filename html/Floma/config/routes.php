@@ -42,6 +42,11 @@ const ROUTES = [
         'method' => 'submit',
         'show' => false,
     ],
+    '/pro/check' => [
+        'controller' => App\Controller\CheckDataProController::class,
+        'method' => 'home',
+        'layout' => Layout::BACK,
+    ],
     '/connexion'=> [
         'controller' => App\Controller\ConnexionController::class,
         'method' => 'connection',

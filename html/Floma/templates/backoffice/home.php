@@ -114,7 +114,7 @@
                             if (isset($offer['categoryData'])) { ?>
                                 <div class="offer-card-price">
                                     <img src="/assets/icons/euro_symbol_primary.svg" alt="Icone d'euro">
-                                    <p><?= $offer['categoryData']['prix_minimal'] == 0 ? "Gratuit" : $offer['categoryData']['prix_minimal'] ?> euros</p>
+                                    <p><?= $offer['categoryData']['prix_minimal'] == 0 ? "Gratuit" : $offer['categoryData']['prix_minimal']." euros" ?></p>
                                 </div>
                             <?php } else { ?>
                                 <div class="offer-card-price">
