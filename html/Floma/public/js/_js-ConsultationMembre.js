@@ -17,12 +17,10 @@ function displayText() {
     champs.forEach(champ => champ.disabled = false);
 }
 
-// Au chargement de la page ou après avoir affiché les champs modifiables
 document.querySelectorAll('.input').forEach(input => {
     input.setAttribute('data-original', input.value);
 });
 
-// Fonction "Annuler"
 cancelBtn.addEventListener('click', () => {
     const champs = document.querySelectorAll('.input');
     let modifie = false;
@@ -35,7 +33,6 @@ cancelBtn.addEventListener('click', () => {
 
     if (modifie) {
         if (confirm("Des modifications non enregistrées seront perdues. Voulez-vous continuer ?")) {
-            // Reset les valeurs si tu veux vraiment annuler
             champs.forEach(champ => {
                 champ.value = champ.getAttribute('data-original');
             });
@@ -97,7 +94,7 @@ document.getElementById('checkPasswordBtn').addEventListener('click', () => {
 });
 
 document.getElementById('submitPasswordBtn').addEventListener('click', (e) => {
-    e.preventDefault(); // Évite que le formulaire soit soumis classiquement
+    e.preventDefault();
 
     const newPassword = document.getElementById('newPassword').value;
     const confirmPassword = document.getElementById('confirmPassword').value;
@@ -129,16 +126,13 @@ document.getElementById('submitPasswordBtn').addEventListener('click', (e) => {
 });
 
 document.getElementById('BtnCancelPassword').addEventListener('click', () => {
-    // Réinitialiser tous les champs
     document.getElementById('inputPassword').value = '';
     document.getElementById('newPassword').value = '';
     document.getElementById('confirmPassword').value = '';
 
-    // Réinitialiser les messages
     document.getElementById('message').textContent = '';
     document.getElementById('messageNewPassword').textContent = '';
 
-    // Désactiver les champs de nouveau mot de passe
     document.getElementById('newPassword').disabled = true;
     document.getElementById('confirmPassword').disabled = true;
     document.getElementById('submitPasswordBtn').disabled = true;
@@ -165,25 +159,20 @@ emailInput.addEventListener('input', () => {
         .then(response => response.json())
         .then(result => {
             if (!result.success) {
-                // Erreur de validation côté serveur (email vide, invalide, etc.)
                 emailMessage.textContent = result.error || "Erreur lors de la vérification.";
                 emailMessage.style.color = "orange";
-                // document.getElementById('submitBtn').disabled = true;
             } else if (result.available === false) {
                 emailMessage.textContent = "Cet email est déjà utilisé.";
                 emailMessage.style.color = "red";
-                // document.getElementById('submitBtn').disabled = true;
             } else {
                 emailMessage.textContent = "Email disponible.";
                 emailMessage.style.color = "green";
-                // document.getElementById('submitBtn').disabled = false;
             }
         })
         .catch(error => {
             console.error('Erreur de vérification email :', error);
             emailMessage.textContent = "Erreur technique.";
             emailMessage.style.color = "orange";
-            // document.getElementById('submitBtn').disabled = true;
         });
     }, 300);
 });
