@@ -2,17 +2,18 @@
 
 namespace App\Resource;
 
-use App\Entity\Membre;
+use App\Entity\ReponsePro;
+use App\Manager\ReponseProManager;
 use Floma\Resource\AbstractResource;
 
-class MembreResource extends AbstractResource
+class ReponseProResource extends AbstractResource
 {
     /**
      * Constructeur. Si un contexte (managers) est fourni, on enrichit aussitôt.
      */
-    public function __construct(private Membre $membre, array $context = [])
+    public function __construct(private ReponsePro $reponsePro, array $context = [])
     {
-        parent::__construct($membre);
+        parent::__construct($reponsePro);
         $this->hydrate($context);
     }
 
@@ -25,14 +26,15 @@ class MembreResource extends AbstractResource
     }
 
     /**
-     * Données de base extraites de l'entité Offer.
+     * Données de base extraites de l'entité Avis.
      */
     protected function baseData(): array
     {
         return [
-            'code' => $this->membre->getCode(),
-            'pseudo' => $this->membre->getPseudo(),
-            'id_compte' => $this->membre->getIdCompte(),
+            'id' => $this->reponsePro->getId(),
+            'reponse' => $this->reponsePro->getReponse(),
+            'signalement' => $this->reponsePro->isSignalement(),
+            'id_avis' => $this->reponsePro->getIdAvis(),
         ];
     }
 
@@ -40,9 +42,9 @@ class MembreResource extends AbstractResource
     /**
      * Construit une ressource enrichie pour UNE offre.
      */
-    public static function build(Membre $membre, array $context = []): array
+    public static function build(ReponsePro $reponsePro, array $context = []): array
     {
-        return (new self($membre, $context))->toArray();
+        return (new self($reponsePro, $context))->toArray();
     }
 
     /**
@@ -50,6 +52,6 @@ class MembreResource extends AbstractResource
      */
     public static function buildAll(array $entities, array $context = []): array
     {
-        return array_map(fn($membre) => self::build($membre, $context), $entities);
+        return array_map(fn($reponsePro) => self::build($reponsePro, $context), $entities);
     }
 }
