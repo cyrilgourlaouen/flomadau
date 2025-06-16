@@ -22,7 +22,7 @@
           }
         ?>
       </article>
-      <button class="cache">Supprimer</button>
+      <button class="hidden">Supprimer</button>
       <article id="new-pp">
         <label for="photo">Nouvelle photo de profil :</label>
         <input type="file" id="photo" name="photo" accept="image/png, image/jpeg image/webp" size="2097152"></input>
@@ -132,7 +132,7 @@
       ?>
     </section>
 
-    <section class="check-section cache">
+    <section class="check-section hidden">
       <h3>Mot de passe</h3>
       <article>
         <label for="old-password">Ancien mot de passe</label>
@@ -168,7 +168,7 @@
               <p>Expire fin : <?= $dateExpirationFr ?></p>
               <p><?= $compte['nom']." ". $compte['prenom'] ?></p>
             </article>
-            <button class="cache">Supprimer</button>
+            <button class="hidden">Supprimer</button>
             <article id="new-credit-card">
               <label for="card-number">Numéro de carte</label>
               <input type="text" id="card-number" name="card-number"></input>
@@ -183,7 +183,7 @@
         <?php
       }else{
         ?>
-          <section class="check-section cache">
+          <section class="check-section hidden">
             <h3>Carte bancaire</h3>
             <article>
               <label for="card-number">Numéro de carte</label>
@@ -201,8 +201,8 @@
     ?>
 
     <button type="button" id="btn-modifier">Modifier</button>
-    <button type="submit" id="btn-enregistrer" class="cache">Enregistrer les modifications</button>
-    <button type="button" id="btn-annuler" class="cache">Annuler</button>
+    <button type="submit" id="btn-enregistrer" class="hidden">Enregistrer les modifications</button>
+    <button type="button" id="btn-annuler" class="hidden">Annuler</button>
 
   </form>
 </div>
