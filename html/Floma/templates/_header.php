@@ -21,8 +21,7 @@
 					alt="Icon de déconnexion">
 				<div id="logMenu" class="logMenu hidden">
 					<ul>
-						<li><a href="?path=/consultationMembre">Mes informations</>
-						</li>
+						<li><a href="?path=/consultation/membre">Mes informations</></li>
 						<li><a href="?path=/connexion/logOut">Se déconnecter</a></li>
 					</ul>
 				</div>
@@ -55,7 +54,7 @@
 					<h2>Connexion / Inscription</h2>
 				</a>
 			<?php } else { ?>
-				<a href="?path=/consultationMembre" class="action">
+				<a href="?path=/consultation/membre" class="action">
 					<img class="checkBtn" src="/assets/icons/check_white.svg" alt="Icone de consultation">
 					<h2>Consulté mes informations</h2>
 				</a>

@@ -3,21 +3,48 @@ let updateBtn = document.getElementById("UpdateBtn");
 let cancelBtn = document.getElementById("BtnCancel");
 const emailInput = document.getElementById('emailInput');
 const emailMessage = document.getElementById('emailMessage');
-
-
 let timeout = null;
-let message = document.getElementById("message");
 
 updateBtn.onclick = displayText;
-cancelBtn.onclick = hiddenText;
 
 function displayText() {
     submitBtn.classList.remove("hidden");
     cancelBtn.classList.remove("hidden");
-    updateBtn.classList.add("hidden");
+    updateBtn.classList.add("hidden");   
+    emailMessage.textContent = '';
+    emailMessage.style.color = '';
     let champs = document.querySelectorAll('.input');
     champs.forEach(champ => champ.disabled = false);
 }
+
+// Au chargement de la page ou après avoir affiché les champs modifiables
+document.querySelectorAll('.input').forEach(input => {
+    input.setAttribute('data-original', input.value);
+});
+
+// Fonction "Annuler"
+cancelBtn.addEventListener('click', () => {
+    const champs = document.querySelectorAll('.input');
+    let modifie = false;
+
+    champs.forEach(champ => {
+        if (champ.value !== champ.getAttribute('data-original')) {
+            modifie = true;
+        }
+    });
+
+    if (modifie) {
+        if (confirm("Des modifications non enregistrées seront perdues. Voulez-vous continuer ?")) {
+            // Reset les valeurs si tu veux vraiment annuler
+            champs.forEach(champ => {
+                champ.value = champ.getAttribute('data-original');
+            });
+            hiddenText();
+        }
+    } else {
+        hiddenText();
+    }
+});
 
 function hiddenText() {
     submitBtn.classList.add("hidden");
@@ -25,14 +52,19 @@ function hiddenText() {
     updateBtn.classList.remove("hidden");
     let champs = document.querySelectorAll('.input');
     champs.forEach(champ => champ.disabled = true);
+    emailMessage.textContent = '';
+    emailMessage.style.color = '';
+
 }
+
+
 
 document.getElementById('checkPasswordBtn').addEventListener('click', () => {
     const password = document.getElementById('inputPassword').value;
     const message = document.getElementById('message');
 
     console.log(password);
-    fetch('?path=/checkPassword', {
+    fetch('?path=/check/password', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -71,7 +103,7 @@ document.getElementById('submitPasswordBtn').addEventListener('click', (e) => {
     const confirmPassword = document.getElementById('confirmPassword').value;
     const message = document.getElementById('messageNewPassword');
 
-    fetch('?path=/updatePassword', {
+    fetch('?path=/update/password', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -123,7 +155,7 @@ emailInput.addEventListener('input', () => {
             return;
         }
 
-        fetch('?path=/checkEmail', {
+        fetch('?path=/check/email', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'

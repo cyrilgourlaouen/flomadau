@@ -61,9 +61,9 @@ class ModificationMembreController extends AbstractController
                 $_SESSION = $compteMisAJour;
 
                 session_regenerate_id(true);
-                return $this->redirectToRoute('/consultationMembre');
+                return $this->redirectToRoute('/consultation/membre');
             } else {
-                return $this->redirectToRoute('/consultationMembre', ["state" => "failure"]);
+                return $this->redirectToRoute('/consultation/membre', ["state" => "failure"]);
             }
         }
     }

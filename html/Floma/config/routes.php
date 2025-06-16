@@ -60,23 +60,23 @@ const ROUTES = [
         'controller' => App\Controller\ConnexionController::class,
         'method' => 'logOut',
     ],
-    '/consultationMembre' => [
+    '/consultation/membre' => [
         'controller' => App\Controller\ConsultationMController::class,
         'method' => 'consultation',
     ],
-    'updateM' => [
+    'update/membre' => [
         'controller' => App\Controller\ModificationMembreController::class,
         'method' => 'updateData',
     ],
-    'checkPassword' => [
+    '/check/password' => [
         'controller' => App\Controller\ModificationMembreController::class,
         'method' => 'checkPassword',
     ],
-    'updatePassword' => [
+    '/update/password' => [
         'controller' => App\Controller\ModificationMembreController::class,
         'method' => 'updatePassword',
     ],
-    'checkEmail' => [
+    '/check/email' => [
         'controller' => App\Controller\ModificationMembreController::class,
         'method' => 'checkEmail',
     ],
