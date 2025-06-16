@@ -640,7 +640,7 @@ input::placeholder {
 }
 
 .check-section{
-  border-bottom: 0.125rem solid #f0f0f0;
+  border-bottom: 0.125rem solid var(--very-light-grey-color);
   padding-bottom: 1rem;
   display: flex;
   flex-direction: column;
@@ -715,4 +715,8 @@ input::placeholder {
 
 .cache{
   display: none !important;
+}
+
+#new-pp, #new-credit-card{
+  display: none;
 }
