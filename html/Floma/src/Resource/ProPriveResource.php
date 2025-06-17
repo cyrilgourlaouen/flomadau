@@ -2,17 +2,17 @@
 
 namespace App\Resource;
 
-use App\Entity\Membre;
+use App\Entity\ProPrive;
 use Floma\Resource\AbstractResource;
 
-class MembreResource extends AbstractResource
+class ProPriveResource extends AbstractResource
 {
     /**
      * Constructeur. Si un contexte (managers) est fourni, on enrichit aussitôt.
      */
-    public function __construct(private Membre $membre, array $context = [])
+    public function __construct(private ProPrive $proPrive, array $context = [])
     {
-        parent::__construct($membre);
+        parent::__construct($proPrive);
         $this->hydrate($context);
     }
 
@@ -30,9 +30,11 @@ class MembreResource extends AbstractResource
     protected function baseData(): array
     {
         return [
-            'code' => $this->membre->getCode(),
-            'pseudo' => $this->membre->getPseudo(),
-            'id_compte' => $this->membre->getIdCompte(),
+            'siren'=> $this->proPrive->getSiren(),
+            'numero_carte'=> $this->proPrive->getNumeroCarte(),
+            'code_securite'=> $this->proPrive->getCodeSecurite(),
+            'date_expiration'=> $this->proPrive->getDateExpiration(),
+            'code_professionnel'=> $this->proPrive->getCodeProfessionnel(),
         ];
     }
 
@@ -40,9 +42,9 @@ class MembreResource extends AbstractResource
     /**
      * Construit une ressource enrichie pour UNE offre.
      */
-    public static function build(Membre $membre, array $context = []): array
+    public static function build(ProPrive $proPrive, array $context = []): array
     {
-        return (new self($membre, $context))->toArray();
+        return (new self($proPrive, $context))->toArray();
     }
 
     /**
@@ -50,6 +52,6 @@ class MembreResource extends AbstractResource
      */
     public static function buildAll(array $entities, array $context = []): array
     {
-        return array_map(fn($membre) => self::build($membre, $context), $entities);
+        return array_map(fn($proPrive) => self::build($proPrive, $context), $entities);
     }
 }

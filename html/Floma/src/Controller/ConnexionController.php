@@ -2,8 +2,10 @@
 namespace App\Controller;
 
 use App\Manager\CompteManager;
+use App\Manager\CompteProManager;
 use Floma\Controller\AbstractController;
-use Floma\View\Layout;
+use App\Resource\CompteResource;
+use App\Service\MetricMembreAccount;
 
 /**
  * Class ConnexionController
@@ -16,25 +18,38 @@ class ConnexionController extends AbstractController
      * @return void
      */
     public function logIn()
-    {
-        if (!empty($_POST)) {
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
-            }
-            $compteManager = new CompteManager();
-            $log = $compteManager->findBy([
-                "email" => $_POST["email"],
-                "mot_de_passe" => $_POST["password"],
-            ]);
-            if (!empty($log)) {
-                $_SESSION['email'] = $_POST['email'];
-                session_regenerate_id();
-                return $this->redirectToRoute('/');
-            } else {
-                return $this->redirectToRoute('/connexion', ["state" => "failure"]);
-            }
+{
+    if (!empty($_POST)) {
+        $compteManager = new CompteManager();
+        $pro = new CompteProManager();
+        $metricMembreAccount = new MetricMembreAccount();
+
+        $enrichedAccounts = CompteResource::buildAll($compteManager->findAll(), [
+            'userName' => ['isMultiple' => true],
+        ]);
+
+        $id = $metricMembreAccount->isMembreExist($enrichedAccounts, $_POST["email"], $_POST["password"]);
+
+        if ($id === false) {
+            return $this->redirectToRoute('/connexion', ["state" => "failure"]);
         }
+
+        $isPro = $pro->findOneBy(['id' => $id]);
+
+        if ($isPro !== null && $isPro !== false && $isPro !== "") {
+            return $this->redirectToRoute('/connexion', ["state" => "notMember"]);
+        }
+
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        $_SESSION = $enrichedAccounts[$id];
+        session_regenerate_id(true);
+        return $this->redirectToRoute('/');
     }
+}
+
     public function logOut()
     {
         // Clear session data

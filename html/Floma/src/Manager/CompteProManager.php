@@ -31,4 +31,13 @@ class CompteProManager extends AbstractManager
         ]);
     }
 
+
+    /**
+     * @param array $filters
+     * @return mixed
+     */
+    public function findOneBy(array $filters)
+    {
+        return $this->readOne(Compte::class, $filters);
+    }
 }
