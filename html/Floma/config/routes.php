@@ -9,7 +9,7 @@ const ROUTES = [
         'layout' => Layout::FRONT,
     ],
 
-    '/inscription/membre' => [
+    '/inscription' => [
         'controller' => App\Controller\InscriptionController::class,
         'method' => 'home',
         'layout' => Layout::FRONT_INSCRIPTION,

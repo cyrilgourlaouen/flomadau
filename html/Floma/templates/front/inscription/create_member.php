@@ -150,7 +150,7 @@
                 // Check if valid
                 if (!rule.valid(value)) {
                     if (field.parentNode.childElementCount > 0){
-                        const errorEl = document.getElementByClass('error-msg');
+                        const errorEl = document.getElementsByClassName('error-msg');
                         errorEl.innerText = rule.message;
                     }
                     else{
