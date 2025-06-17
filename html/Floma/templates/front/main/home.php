@@ -157,7 +157,7 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
 
     <div class="offer-list">
         <?php foreach ($data["offers"] as $offer) { ?>
-            <a href="?path=offer/<?= $offer['id'] ?>" class="offer-card">
+            <a href="?path=offer/<?= $offer['id'] ?>" class="offer-card" data-offer-id="<?= $offer['id'] ?>">
                 <!-- Image -->
                 <div class="offer-card-img">
                     <?php

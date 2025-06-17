@@ -1,5 +1,8 @@
 export function getOfferPrice(offer) {
-  if (offer.categorie === "Restaurant" && offer.categoryData) {
+  if (!offer || !offer.categoryData) {
+    return 0;
+  }
+  if (offer.categorie === "Restaurant") {
     switch (offer.categoryData.gamme_de_prix) {
       case 1: return 25;
       case 2: return 40;
@@ -7,7 +10,7 @@ export function getOfferPrice(offer) {
       default: return 0;
     }
   }
-  if (offer.categorie !== "Restaurant" && offer.categoryData) {
+  if (offer.categorie !== "Restaurant") {
     return offer.categoryData.prix_minimal || 0;
   }
   return 0;
@@ -16,7 +19,7 @@ export function getOfferPrice(offer) {
 export function sortOffers(offers, sortType) {
   const sorted = [...offers];
   if (sortType === "date") {
-    sorted.sort((a, b) => new Date(b.date_publication) - new Date(a.date_publication));
+    sorted.sort((a, b) => new Date(b.date_creation) - new Date(a.date_creation));
   } else if (sortType === "asc") {
     sorted.sort((a, b) => getOfferPrice(a) - getOfferPrice(b));
   } else if (sortType === "desc") {
