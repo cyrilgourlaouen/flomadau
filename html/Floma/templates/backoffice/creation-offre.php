@@ -1,6 +1,5 @@
 <?php
 
-use App\Entity\TypeRepas;
 use App\Manager\LangueGuideManager;
 use App\Manager\TagManager;
 use App\Manager\TypeRepasManager;
@@ -15,9 +14,9 @@ $head_svg = "/assets/icons/account_white.svg";
 include 'head_title.php';
 include 'black_button.php';
 ?>
-<form action="?path=/offre/creation/new" method="post" enctype="multipart/form-data">
+<form action="?path=/offre/creation/new" method="post" enctype="multipart/form-data" class="formContainer">
     <section class="formSectionContainer">
-
+        <section class="formSectionContainer">
         <div class="h3-section">
             <h3>Information principales</h3>
             <hr>
@@ -26,7 +25,7 @@ include 'black_button.php';
         <div class="formInline">
             <div class="field">
                 <label for="offer_name">Nom de l'offre *</label>
-                <input name="offer_name" type="text" placeholder="..." required>
+                <input name="offer_name" id="offer_name" type="text" placeholder="..." >
             </div>
 
             <div class="field">
@@ -40,10 +39,14 @@ include 'black_button.php';
                     <option value="Parc d'attraction">Parc d'attraction</option>
                 </select>
             </div>
-            <div class="formInline hidden align-center" id="champs-visite">
+            <div class="formInline hidden align-end" id="champs-visite">
                 <div class="gap-vsm flex-col">
                     <label for="duree_visite">Duree *</label>
                     <input type="text" name="duree_visite" id="duree_visite" placeholder="2h30">
+                </div>
+                <div class="gap-vsm flex-col">
+                    <label for="prix_minimal_visite">Prix minimal *</label>
+                    <input type="number" name="prix_minimal_visite" id="prix_minimal_visite" placeholder="15.5">
                 </div>
                 <div>
                     <label class="checkbox-item">
@@ -52,7 +55,14 @@ include 'black_button.php';
                     </label>
                 </div>
                 <div class="gap-vsm flex-col hidden" id="selectGuides">
-                    <label for="guideOptions">Langue du guide:</label>
+                    <label for="guideOptions">Langue du guide *
+                        <span class="tooltip-trigger">
+                            <img src="./assets/icons/info_black.svg">
+                            <span class="tooltip-text">
+                                Maintenez Ctrl (ou Cmd) pour sélectionner plusieurs tags.
+                            </span>
+                        </span>
+                    </label>
                     <?php 
                         $guideManager = new LangueGuideManager();
                         $manageOption = new ManageOption();
@@ -63,10 +73,7 @@ include 'black_button.php';
                             <?= $guide ?>
                         </select>
                 </div>
-                <div class="gap-vsm flex-col">
-                    <label for="prix_minimal_visite">Prix minimal *</label>
-                    <input type="number" name="prix_minimal_visite" id="prix_minimal_visite" placeholder="15.5">
-                </div>
+                
             </div>
 
             <div class="formInline hidden" id="champs-spectacle">
@@ -97,11 +104,11 @@ include 'black_button.php';
                 </div>
                 <div class="gap-vsm flex-col">
                     <label for="url_carte_restaurant" >Carte du restaurant *</label>
-                    <input type="file" name="url_carte_restaurant">
+                    <input type="file" name="url_carte_restaurant" id="url_carte_restaurant">
                 </div>
                 
 
-                <div class="checkbox-group flex-col">
+                <div class="checkbox-group flex-col" id="types_repas">
                     <label for="checkbox-group" class="text-center">Type de repas *</label>
                     <div class="flex-row gap-vsm">
                         <?php 
@@ -128,11 +135,11 @@ include 'black_button.php';
                 </div>
                 <div class="gap-vsm flex-col">
                     <label for="prestations_incluses">Prestations incluses *</label>
-                    <input type="text" name="prestations_incluses" id="prestations_incluses" placeholder="palmes incluses">
+                    <input type="text" name="prestations_incluses" id="prestations_incluses" placeholder="palmes, bouteille">
                 </div>
                 <div class="gap-vsm flex-col">
                     <label for="prestations_non_incluses">Prestations non incluses *</label>
-                    <input type="text" name="prestations_non_incluses" id="prestations_non_incluses" placeholder="prévoir bouteille d'eau">
+                    <input type="text" name="prestations_non_incluses" id="prestations_non_incluses" placeholder="transport, combinaison">
                 </div>
                 <div class="gap-vsm flex-col">
                     <label for="prix_minimal_activity">Prix minimal *</label>
@@ -155,13 +162,13 @@ include 'black_button.php';
                 </div>
                 <div class="gap-vsm flex-col">
                     <label for="url_carte_parc" >Carte du parc d'attraction *</label>
-                    <input type="file" name="url_carte_parc">
+                    <input type="file" name="url_carte_parc" id="url_carte_parc">
                 </div>
             </div>
             <div class="formInline">
                 <div class="field">
                     <label for="conditions_accesibilite">Conditions d'accessibilité *</label>
-                    <input name="conditions_accesibilite" id="conditions_accesibilite" type="text" placeholder="Promotion" required>
+                    <input name="conditions_accesibilite" id="conditions_accesibilite" type="text" placeholder="accessible a tous" >
                 </div>
                     
                 <?php 
@@ -170,26 +177,41 @@ include 'black_button.php';
                     $enrichedOffer = TagResource::buildAll($tagManager->findAll());
                     $tags = $manageOption->getTags($enrichedOffer);
                 ?>
-                <div class="gap-vsm flex-col" id="isNotRestauration" class='hidden'>
-                    <label>Tags *</label>
-                    <select multiple>
+                <div class="gap-vsm flex-col hidden" id="isNotRestauration">
+                    <label>Tags *
+                        <span class="tooltip-trigger">
+                            <img src="./assets/icons/info_black.svg">
+                            <span class="tooltip-text">
+                            Maintenez Ctrl (ou Cmd) pour sélectionner plusieurs tags.
+                            </span>
+                        </span>
+                    </label>
+                    <select multiple name="tag[]" id="categoryAll">
                         <div><?= $tags["isNotRestauration"] ?></div>
                     </select>
                 </div>
-                <div class="gap-vsm flex-col" id="isRestauration"  class='hidden'>
-                    <label>Tags *</label>
-                    <select multiple>
+                <div class="gap-vsm flex-col hidden" id="isRestauration">
+                    <label>Tags *
+                        <span class="tooltip-trigger">
+                            <img src="./assets/icons/info_black.svg">
+                            <span class="tooltip-text">
+                            Maintenez Ctrl (ou Cmd) pour sélectionner plusieurs tags.
+                            </span>
+                        </span>
+                    </label>
+                    <select multiple name="tag[]" id="restaurant">
                         <div><?= $tags["isRestauration"] ?></div>
                     </select>
                 <div>
             </div>
         </div>
+    </section>
     <section class="formSectionContainer">
         <div class="h3-section">
             <h3>Horaire d'ouverture et fermeture</h3>
             <hr>
         </div>
-        <div class="flex-col">
+        <div class="flex-col" id="horaires">
             <div id="horaire-container" class="horaire-container"></div>    
         </div>
     </section>
@@ -202,13 +224,13 @@ include 'black_button.php';
         </div>
 
         <div class="field">
-            <label for="nom_rue">Rue</label>
+            <label for="nom_rue">Rue *</label>
             <input name="nom_rue" id="nom_rue" type="text" placeholder="Rue Lepic">
         </div>
 
         <div class="formInline">
             <div class="field">
-                <label for="numero_rue">Numéro</label>
+                <label for="numero_rue">Numéro *</label>
                 <input name="numero_rue" id="numero_rue" type="number" placeholder="15">
             </div>
             <div class="field">
@@ -220,12 +242,12 @@ include 'black_button.php';
         <div class="formInline">
             <div class="field">
                 <label for="ville">Ville *</label>
-                <input name="ville" type="text" placeholder="Paris">
+                <input name="ville" id="ville" type="text" placeholder="Paris">
             </div>
 
             <div class="field">
                 <label for="code_postal">Code Postal *</label>
-                <input name="code_postal" type="text" placeholder="75000">
+                <input name="code_postal" id="code_postal" type="text" placeholder="75000">
             </div>
         </div>
     </section>
@@ -248,7 +270,7 @@ include 'black_button.php';
 
         <div class="field">
             <label for="resume">Résumé *</label>
-            <textarea name="resume" id="resume"  type="text" placeholder="Résumé court qui sera affiché dans la version miniature de votre offre" required></textarea>
+            <textarea name="resume" id="resume"  type="text" placeholder="Résumé court qui sera affiché dans la version miniature de votre offre" ></textarea>
         </div>
 
         <div class="field">
@@ -257,12 +279,19 @@ include 'black_button.php';
         </div>
 
         <div class="field">
-            <label for="photo"> Photo de l'offre * </label>
-            <input type="file" class="bigField" name="photo" required></input>
+            <label for="photo"> Photo(s) de l'offre * 
+                <span class="tooltip-trigger"><img src="./assets/icons/info_black.svg">
+                    <span class="tooltip-text">
+                    Maintenez Ctrl (ou Cmd) pour sélectionner plusieurs images.
+                    </span>
+                </span>
+            </label>
+            <input type="file" class="bigField" id="photo_offre" name="photo[]"  multiple></input>
         </div>
     </section>
     <div class="buttonContainer">
-        <?= black_button('Se connecter'); ?>
+        <?= black_button("Créer l'offre"); ?>
     </div>
 </form>
-<script src="./js/displayForm.js"></script>
+<script src="./js/CreationOffre/displayForm.js"></script>
+<script src="./js/CreationOffre/verifFields.js"></script>

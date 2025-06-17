@@ -103,7 +103,7 @@ h3 {
 .flex-row { display: flex; flex-direction: row !important;}
 .flex-col { display: flex; flex-direction: column; }
 .align-start { align-items: flex-start; }
-.align-center { align-items: center; }
+.align-end { align-items: end; }
 .text-center {text-align: center;}
 .gap-vsm { gap: 0.3rem; }
 .gap-sm { gap: 0.625rem; }
@@ -885,4 +885,40 @@ input::placeholder, textarea::placeholder, textarea::content {
 .horaire-container > div > button {
   padding: 5px;
   margin-bottom:5px;
+}
+
+.tooltip-trigger {
+  position: relative;
+  cursor: help;
+  vertical-align: bottom;
+  color: #555;
+}
+
+.tooltip-trigger img {
+  width: 24px;
+  height: 24px;
+  vertical-align: bottom;
+  cursor: pointer;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  width: 250px;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 4px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 20px;
+  transition: opacity 0.3s;
+  font-size: 13px;
+}
+
+.tooltip-trigger:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
 }
