@@ -165,14 +165,14 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
                 <button id="offer-search-filter-button">Filtrer</button>
 
                 <!-- Catégorie -->
-                <!-- <div class="desktop-filter-dropdown">
-                    <button class="desktop-filter-button" id="desktop-categorie-button">Catégorie<span id="selected-category-label"> : </span></button>
+                <div class="desktop-filter-dropdown">
+                    <button class="desktop-filter-button" id="desktop-categorie-button">Catégorie <span id="selected-category-label"></span></button>
                     <div class="desktop-filter-options" id="desktop-categorie-options">
                         <?php foreach (OfferCategoryEnum::cases() as $category) { ?>
                             <p class="desktop-filter-option" data-category="<?= $category->value ?>"><?= $category->value ?></p>
                         <?php } ?>
                     </div>
-                </div> -->
+                </div>
 
                 <select name="Prix" id="">
                     <option value="">Prix</option>
@@ -351,5 +351,4 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
     </div>
 </section>
 <script src="/js/highlightedOffer.js"></script>
-<script type="module" src="/js/offerSort.js"></script>
-<script type="module" src="/js/searchAndSortOffers.js"></script>
+<script type="module" src="/js/offerDisplayControl.js"></script>
