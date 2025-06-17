@@ -101,6 +101,6 @@ class InscriptionController extends AbstractController
                 $response['telExists'] = true;
             }
         }
-        echo json_encode($reponse);
+        echo json_encode($response);
     }
 }

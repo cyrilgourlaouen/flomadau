@@ -92,9 +92,9 @@
                     <div>
                         <label for="conf_password"> Confirmation du mot de passe </label>
                         <input name="conf_password" type="password" id="conf_password" required> </input>
+                        <span class="error-msg" id="error-password-conf"></span>
                     </div>
                 </div>
-                <span class="error-msg" id="error-password-conf"></span>
             </div>
             <ul id="liste_tablette">
                 <li> 12 caractère minimum </li> 
@@ -125,25 +125,26 @@
                 { field: 'email', valid: val => /^\S+@\S+\.\S+$/.test(val), message: 'Veuillez entrer une adresse email valide.' },
                 { field: 'pseudo', valid: val => val !== '', message: 'Veuillez entrer le pseudo.' },
                 { field: 'password', valid: val => val.length >= 6, message: 'Le mot de passe est trop court.' },
-                { field: 'conf_password', valid: val => val === document.getElementById('mdp').value, message: 'Les mots de passe ne correspondent pas.' },
+                { field: 'conf_password', valid: val => val === document.getElementById('password').value, message: 'Les mots de passe ne correspondent pas.' },
                 { field: 'name_street', valid: val => val !== '', message: 'Veuillez entrer la rue.' },
                 { field: 'num_street', valid: val => val !== '', message: 'Veuillez entrer le numéro.' },
                 { field: 'city', valid: val => val !== '', message: 'Veuillez entrer la ville.' },
-                { field: 'zip-code', valid: val => /^\d{5}$/.test(val), message: 'Veuillez entrer un code postal valide.' },
+                { field: 'zip_code', valid: val => /^\d{5}$/.test(val), message: 'Veuillez entrer un code postal valide.' },
             ];
             
             // Function to validate a single field
             function validateField(fieldId) {
                 const field = document.getElementById(fieldId);
+                console.log(field);
                 const value = field.value.trim();
                 const rule = rules.find(r => r.field === fieldId);
                 
                 // Remove existing error message
                 const existingError = field.parentNode.querySelector('.error-msg');
-                if (existingError.id) {
+                if (existingError && existingError.id !== null) {
                     existingError.innerText = "";
                 }
-                else if (existingError) {
+                if (existingError !== null) {
                     existingError.remove();
                 }
 
@@ -155,7 +156,7 @@
                     }
                     else{
                         const errorEl = document.createElement('div');
-                        errorEl.className = 'error-message';
+                        errorEl.className = 'error-msg';
                         errorEl.innerText = rule.message;
                         field.parentNode.appendChild(errorEl);
                     }
@@ -172,10 +173,10 @@
                 });
                 
                 // For confirmation password, also validate when password changes
-                if (rule.field === 'conf_mdp') {
-                    document.getElementById('mdp').addEventListener('input', () => {
+                if (rule.field === 'conf_password') {
+                    document.getElementById('password').addEventListener('input', () => {
                         if (field.value) {
-                            validateField('conf_mdp');
+                            validateField('conf_password');
                         }
                     });
                 }

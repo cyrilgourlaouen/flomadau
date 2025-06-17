@@ -23,7 +23,7 @@
                         <p class="error">Erreur email ou mot de passe incorrect</p>
                     <?php } ?>
                 </div>
-                <p>Si vous n'avez pas de compte <a href="/inscription">inscrivez-vous</a></p>
+                <p>Si vous n'avez pas de compte <a href="/inscription/membre">inscrivez-vous</a></p>
                 <nav class="submit-container">
                     <button type="submit">
                         <p>Se connecter</p>
