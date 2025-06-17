@@ -245,7 +245,7 @@ $proManager = new ReponseProManager();
     <h3 class="big-title-avis">Avis</h3>
     <section class="avis avis-grid">
         <?php foreach ($avis as $unAvis) { ?>
-            <?
+            <?php
             $pro = $proManager->findOneBy(['id_avis' => $unAvis->getId()]);
             $membre = $membreManager->findBy(['id_compte' => $unAvis->getCodeMembre()]);
             $compte = $compteManager->findBy(['id' => $unAvis->getCodeMembre()]);
