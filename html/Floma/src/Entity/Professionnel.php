@@ -9,8 +9,7 @@ class Professionnel
     private int $code;
     private string $raison_sociale;
     private int $id_compte;
-
-    private bool $est_prive = false;
+    private bool $est_prive;
 
     public function getCode(): int
     {
@@ -30,7 +29,17 @@ class Professionnel
         $this->raison_sociale = $raison_sociale;
     }
 
-    public function getIdCompte(): int { return $this->id_compte; }
-    public function setIdCompte(int $id_compte): void { $this->id_compte = $id_compte; }
-    public function isPrive(int $est_prive): bool { return $this->est_prive; }
+    public function getIdCompte(): int
+    {
+        return $this->id_compte;
+    }
+    public function setIdCompte(int $id_compte): void
+    {
+        $this->id_compte = $id_compte;
+    }
+
+    public function isPrive(): bool
+    {
+        return $this->est_prive;
+    }
 }

@@ -74,26 +74,24 @@
                     <span class="error-msg" id="error-adress-comp"></span>
                 </div>
             </div>
-            <div class="align-row">
-                <div class="groupe">
-                    <div>
-                        <label for="password"> Mot de passe </label>
-                        <ul id="liste_mobile">
-                            <li> 12 caractère minimum </li> 
-                            <li> Majuscules </li> 
-                            <li> Minuscules </li> 
-                            <li> Chiffres </li> 
-                            <li> Caractères spéciaux </li> 
-                        </ul>
-                        <input name="password" type="password" id="password" required> </input>
-                        <span class="error-msg" id="error-password"></span>
-                    </div>
+            <div class="groupe">
+                <div>
+                    <label for="password"> Mot de passe </label>
+                    <ul id="liste_mobile">
+                        <li> 12 caractère minimum </li> 
+                        <li> Majuscules </li> 
+                        <li> Minuscules </li> 
+                        <li> Chiffres </li> 
+                        <li> Caractères spéciaux </li> 
+                    </ul>
+                    <input name="password" type="password" id="password" required> </input>
+                    <span class="error-msg" id="error-password"></span>
+                </div>
 
-                    <div>
-                        <label for="conf_password"> Confirmation du mot de passe </label>
-                        <input name="conf_password" type="password" id="conf_password" required> </input>
-                        <span class="error-msg" id="error-password-conf"></span>
-                    </div>
+                <div>
+                    <label for="conf_password"> Confirmation du mot de passe </label>
+                    <input name="conf_password" type="password" id="conf_password" required> </input>
+                    <span class="error-msg" id="error-password-conf"></span>
                 </div>
             </div>
             <ul id="liste_tablette">
@@ -135,34 +133,29 @@
             // Function to validate a single field
             function validateField(fieldId) {
                 const field = document.getElementById(fieldId);
-                console.log(field);
                 const value = field.value.trim();
                 const rule = rules.find(r => r.field === fieldId);
-                
-                // Remove existing error message
-                const existingError = field.parentNode.querySelector('.error-msg');
-                if (existingError && existingError.id !== null) {
-                    existingError.innerText = "";
-                }
-                if (existingError !== null) {
-                    existingError.remove();
-                }
 
-                // Check if valid
+                let errorElement = document.getElementById(`error-${fieldId}`);
+
                 if (!rule.valid(value)) {
-                    if (field.parentNode.childElementCount > 0){
-                        const errorEl = document.getElementsByClassName('error-msg');
-                        errorEl.innerText = rule.message;
+                    // S'il y a déjà une balise <span id="error-...">
+                    if (!errorElement) {
+                        // Si elle n'existe pas, on la crée
+                        errorElement = document.createElement('span');
+                        errorElement.className = 'error-msg';
+                        errorElement.id = `error-${fieldId}`;
+                        field.parentNode.appendChild(errorElement);
                     }
-                    else{
-                        const errorEl = document.createElement('div');
-                        errorEl.className = 'error-msg';
-                        errorEl.innerText = rule.message;
-                        field.parentNode.appendChild(errorEl);
-                    }
+                    errorElement.innerText = rule.message;
                     return false;
+                } else {
+                    // Si valide, vider le message
+                    if (errorElement) {
+                        errorElement.innerText = '';
+                    }
+                    return true;
                 }
-                return true;
             }
             
             // Add blur event listeners to all fields

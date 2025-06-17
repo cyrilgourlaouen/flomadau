@@ -35,7 +35,7 @@ class InscriptionController extends AbstractController
      */
     public function signUp()
     {
-        if (isset($_POST)) { 
+        if (isset($_POST)) {
             
             $compte = new Compte();
             $compte->setNom($_POST['nom']);
@@ -70,34 +70,32 @@ class InscriptionController extends AbstractController
 
     public function verification()
     {
+        header('Content-Type: application/json');
         $response = [];
         if (isset($_POST['email'])){
-            $checkEmail = new CompteManager().findOneBy(['email' => $POST['email']]);
-            if ($checkEmail == undefined) {
+            $checkEmail = new CompteManager()->findOneBy(['email' => $_POST['email']]);
+            if ($checkEmail == null) {
                 $response['emailExists'] = false;
             }
-            else
-            {
+            else {
                 $response['emailExists'] = true;
             }
         }
         if (isset($_POST['pseudo'])){
-            $checkPseudo = new CompteManager().findOneBy(['pseudo' => $POST['pseudo']]);
-            if ($checkPseudo == undefined) {
+            $checkPseudo = new CompteManager()->findOneBy(['pseudo' => $_POST['pseudo']]);
+            if ($checkPseudo == null) {
                 $response['pseudoExists'] = false;
             }
-            else
-            {
+            else {
                 $response['pseudoExists'] = true;
             }
         }
         if (isset($_POST['tel'])){
-            $checkTel = new CompteManager().findOneBy(['telephone' => $POST['tel']]);
-            if ($checkTel == undefined) {
+            $checkTel = new CompteManager()->findOneBy(['telephone' => $_POST['tel']]);
+            if ($checkTel == null) {
                 $response['telExists'] = false;
             }
-            else
-            {
+            else {
                 $response['telExists'] = true;
             }
         }
