@@ -51,12 +51,16 @@ document.addEventListener("DOMContentLoaded", () => {
   function displayOffers(offers) {
     const offerCards = getOfferCards();
     offerCards.forEach((card) => (card.style.display = "none"));
+    
     offers.forEach((offer) => {
-        const idx = offersData.findIndex((o) => o.id === offer.id);
-        if (idx !== -1 && offerCards[idx]) {
-        offerCards[idx].style.display = "";
-        offerList.appendChild(offerCards[idx]);
-        }
+      const offerCard = Array.from(offerCards).find(card => 
+        card.dataset.offerId == offer.id
+      );
+      
+      if (offerCard) {
+        offerCard.style.display = "";
+        offerList.appendChild(offerCard);
+      }
     });
   }
 
