@@ -105,6 +105,53 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
 </section>
 <?php } ?>
 
+
+<div class="filter-modal">
+    <div class="filter-modal-content-wrapper">
+        <div class="filter-modal-header">
+            <h2>Filtrer par</h2>
+            <img src="/assets/icons/close_black.svg" alt="close icon" id="filter-close-icon">
+        </div>
+        <div class="filter-modal-content">
+            <div class="filter-modal-sort" id="filter-modal-category">
+                <h3>Catégorie</h3>
+                <div class="filter-modal-category-options">
+                    <?php foreach (OfferCategoryEnum::cases() as $category) { ?>
+                        <div class="filter-modal-category-option" data-category="<?= $category->value ?>">
+                            <img src="<?= $category->getIcon()['path'] ?>" alt="<?= $category->getIcon()['alt'] ?>">
+                            <p><?= $category->value ?></p>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+            <div id="filter-modal-location">
+                <h3>Lieu</h3>
+                <div>
+    
+                </div>
+            </div>
+            <div id="filter-modal-price">
+                <h3>Prix</h3>
+                <div>
+    
+                </div>
+            </div>
+            <div id="filter-modal-note">
+                <h3>Note</h3>
+                <div>
+    
+                </div>
+            </div>
+            <div id="filter-modal-status">
+                <h3>Statut</h3>
+                <div>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Section Offre -->
 <section class="offer-section" data-offers='<?= htmlspecialchars(json_encode($data["offers"]), ENT_QUOTES, 'UTF-8') ?>'>
     <h2>Découvrez nos offres</h2>
@@ -116,9 +163,17 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
             </div>
             <div class="offer-search-filters">
                 <button id="offer-search-filter-button">Filtrer</button>
-                <select name="Catégorie" id="">
-                    <option value="">Catégorie</option>
-                </select>
+
+                <!-- Catégorie -->
+                <!-- <div class="desktop-filter-dropdown">
+                    <button class="desktop-filter-button" id="desktop-categorie-button">Catégorie<span id="selected-category-label"> : </span></button>
+                    <div class="desktop-filter-options" id="desktop-categorie-options">
+                        <?php foreach (OfferCategoryEnum::cases() as $category) { ?>
+                            <p class="desktop-filter-option" data-category="<?= $category->value ?>"><?= $category->value ?></p>
+                        <?php } ?>
+                    </div>
+                </div> -->
+
                 <select name="Prix" id="">
                     <option value="">Prix</option>
                 </select>

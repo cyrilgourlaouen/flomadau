@@ -906,6 +906,85 @@ footer div nav :any-link {
   display: none;
 }
 
+/* ICI */
+
+.filter-modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.filter-modal-content-wrapper {
+  background-color: var(--white-color);
+  border-radius: 0.625rem;
+  padding: 1.25rem;
+  max-width: 600px;
+  width: 100%;
+  margin: auto;
+  position: relative;
+  
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 1rem;
+}
+
+.filter-modal-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.filter-modal-header img {
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+}
+
+.filter-modal-content {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 1.25rem;
+}
+
+.filter-modal-sort {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.625rem;
+}
+
+.filter-modal-category-options {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.filter-modal-category-option {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-items: center;
+  align-items: center;
+  border: #000 solid 1px;
+  border-radius: 100px;
+  gap: 0.313rem;
+  padding: 0 0.625rem;
+  cursor: pointer;
+}
+
+.filter-modal-category-option:hover {
+  background-color: var(--background-color);
+}
+
 @media (width >= 65rem) {
   .hideTab {
     display: block;
