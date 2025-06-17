@@ -770,7 +770,6 @@ footer div nav :any-link {
   display: none;
 }
 
-
 .highlighted-card {
   min-width: 348px;
   max-width: 27rem;
@@ -909,6 +908,8 @@ footer div nav :any-link {
 /* ICI */
 
 .filter-modal {
+  display: none;
+  justify-self: center;
   position: fixed;
   width: 100%;
   height: 100%;
@@ -927,7 +928,7 @@ footer div nav :any-link {
   width: 100%;
   margin: auto;
   position: relative;
-  
+
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -983,6 +984,15 @@ footer div nav :any-link {
 
 .filter-modal-category-option:hover {
   background-color: var(--background-color);
+}
+
+.selected-category {
+  border: #000 solid 2px;
+  background-color: var(--background-color);
+}
+
+.desktop-filter-dropdown {
+  display: none;
 }
 
 @media (width >= 65rem) {
@@ -1401,7 +1411,6 @@ footer div nav :any-link {
   }
 
   .offer-sort-desktop {
-    width: 100%;
     display: flex;
     gap: 0.625rem;
     position: relative;
@@ -1489,6 +1498,67 @@ footer div nav :any-link {
     height: 2.5rem;
     cursor: pointer;
     pointer-events: auto;
+  }
+
+  .selected-category-desktop {
+    background-color: var(--background-color);
+  }
+
+  .desktop-filter-dropdown {
+    display: flex;
+    gap: 0.625rem;
+    position: relative;
+    overflow: visible;
+  }
+
+  .desktop-filter-button {
+      display: block;
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      height: 2.188rem;
+      padding: 0 2.5rem 0 1rem;
+      border-radius: 100px;
+      background-color: var(--white-color);
+      border: #000 solid 1px;
+      font-size: var(--text-size);
+      cursor: pointer;
+      pointer-events: all;
+
+      background-image: url('/assets/icons/keyboard_arrow_down_black.svg');
+      background-repeat: no-repeat;
+      background-position: right 0.5rem center;
+      background-size: 1.75rem;
+  }
+
+  .desktop-filter-options {
+    z-index: 5;
+    top: 3rem;
+    position: absolute;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    gap: 0.325rem;
+    background-color: var(--white-color);
+    border: #000 solid 1px;
+    border-radius: 10px;
+    top: 2.5rem;
+  }
+
+  .desktop-filter-options p {
+    width: 100%;
+    padding: 0.625rem;
+    text-align: center;
+    font-size: var(--text-size);
+    color: var(--black-color);
+    cursor: pointer;
+  }
+
+  .desktop-filter-options p:hover {
+    cursor: pointer;
+    background-color: var(--background-color);
   }
 }
 
