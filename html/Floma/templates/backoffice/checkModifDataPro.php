@@ -22,11 +22,12 @@
           }
         ?>
       </article>
-      <button class="hidden">Supprimer</button>
-      <article id="new-pp">
+      <button class="hidden btn-modif-pro" id="btn-delete-pp" type="button">Supprimer</button>
+      <article id="new-pp" class="hidden-pp">
         <label for="photo">Nouvelle photo de profil :</label>
         <input type="file" id="photo" name="photo" accept="image/png, image/jpeg image/webp" size="2097152"></input>
       </article>
+      <button class="hidden-pp btn-modif-pro" id="btn-cancel-pp" type="button">Annuler</button>
     </section>
   
     <section class="check-section">
@@ -168,17 +169,18 @@
               <p>Expire fin : <?= $dateExpirationFr ?></p>
               <p><?= $compte['nom']." ". $compte['prenom'] ?></p>
             </article>
-            <button class="hidden">Supprimer</button>
-            <article id="new-credit-card">
+            <button class="hidden btn-modif-pro" id="btn-delete-credit-card" type="button">Supprimer</button>
+            <article id="new-credit-card" class="hidden-credit-card">
               <label for="card-number">Numéro de carte</label>
               <input type="text" id="card-number" name="card-number"></input>
-
+              
               <label for="expiration-date">Date expiration</label>
               <input type="date" id="expiration-date" name="expiration-date"></input>
-
+              
               <label for="CVV">Cryptogramme</label>
               <input type="text" id="CVV" name="CVV"></input>
             </article>
+            <button class="hidden-credit-card btn-modif-pro" id="btn-cancel-credit-card" type="button">Annuler</button>
           </section>
         <?php
       }else{
@@ -200,9 +202,9 @@
       }
     ?>
 
-    <button type="button" id="btn-modifier">Modifier</button>
-    <button type="submit" id="btn-enregistrer" class="hidden">Enregistrer les modifications</button>
-    <button type="button" id="btn-annuler" class="hidden">Annuler</button>
+    <button type="button" id="btn-update" class="btn-modif-pro">Modifier</button>
+    <button type="submit" id="btn-submit" class="hidden btn-modif-pro">Enregistrer</button>
+    <button type="button" id="btn-cancel" class="hidden btn-modif-pro">Annuler</button>
 
   </form>
 </div>

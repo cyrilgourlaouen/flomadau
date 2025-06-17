@@ -730,10 +730,6 @@ input.not-active{
   color: var(--light-grey-color);
 }
 
-.hidden{
+.hidden, .hidden-pp, .hidden-credit-card{
   display: none !important;
-}
-
-#new-pp, #new-credit-card{
-  display: none;
 }
