@@ -770,7 +770,6 @@ footer div nav :any-link {
   display: none;
 }
 
-
 .highlighted-card {
   min-width: 348px;
   max-width: 27rem;
@@ -903,6 +902,96 @@ footer div nav :any-link {
 }
 
 .information-data-container .hidden {
+  display: none;
+}
+
+/* ICI */
+
+.filter-modal {
+  display: none;
+  justify-self: center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.filter-modal-content-wrapper {
+  background-color: var(--white-color);
+  border-radius: 0.625rem;
+  padding: 1.25rem;
+  max-width: 600px;
+  width: 100%;
+  margin: auto;
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 1rem;
+}
+
+.filter-modal-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.filter-modal-header img {
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+}
+
+.filter-modal-content {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 1.25rem;
+}
+
+.filter-modal-sort {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.625rem;
+}
+
+.filter-modal-category-options {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.filter-modal-category-option {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-items: center;
+  align-items: center;
+  border: #000 solid 1px;
+  border-radius: 100px;
+  gap: 0.313rem;
+  padding: 0 0.625rem;
+  cursor: pointer;
+}
+
+.filter-modal-category-option:hover {
+  background-color: var(--background-color);
+}
+
+.selected-category {
+  border: #000 solid 2px;
+  background-color: var(--background-color);
+}
+
+.desktop-filter-dropdown {
   display: none;
 }
 
@@ -1322,7 +1411,6 @@ footer div nav :any-link {
   }
 
   .offer-sort-desktop {
-    width: 100%;
     display: flex;
     gap: 0.625rem;
     position: relative;
@@ -1410,6 +1498,67 @@ footer div nav :any-link {
     height: 2.5rem;
     cursor: pointer;
     pointer-events: auto;
+  }
+
+  .selected-category-desktop {
+    background-color: var(--background-color);
+  }
+
+  .desktop-filter-dropdown {
+    display: flex;
+    gap: 0.625rem;
+    position: relative;
+    overflow: visible;
+  }
+
+  .desktop-filter-button {
+      display: block;
+      appearance: none;
+      -moz-appearance: none;
+      -webkit-appearance: none;
+      height: 2.188rem;
+      padding: 0 2.5rem 0 1rem;
+      border-radius: 100px;
+      background-color: var(--white-color);
+      border: #000 solid 1px;
+      font-size: var(--text-size);
+      cursor: pointer;
+      pointer-events: all;
+
+      background-image: url('/assets/icons/keyboard_arrow_down_black.svg');
+      background-repeat: no-repeat;
+      background-position: right 0.5rem center;
+      background-size: 1.75rem;
+  }
+
+  .desktop-filter-options {
+    z-index: 5;
+    top: 3rem;
+    position: absolute;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    gap: 0.325rem;
+    background-color: var(--white-color);
+    border: #000 solid 1px;
+    border-radius: 10px;
+    top: 2.5rem;
+  }
+
+  .desktop-filter-options p {
+    width: 100%;
+    padding: 0.625rem;
+    text-align: center;
+    font-size: var(--text-size);
+    color: var(--black-color);
+    cursor: pointer;
+  }
+
+  .desktop-filter-options p:hover {
+    cursor: pointer;
+    background-color: var(--background-color);
   }
 }
 
