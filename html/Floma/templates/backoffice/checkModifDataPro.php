@@ -73,11 +73,15 @@
           <input type="text" id="prenom" name="prenom" value="<?= $compte['prenom'] ?>" disabled class="not-active"/>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           <span id="erreur-prenom" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
 =======
 >>>>>>> c6d5e5a (aaa)
+=======
+          <span id="erreur-prenom" class="erreur"></span>
+>>>>>>> e17c424 (Verif en temps reel finies)
         </article>
         
         <article>
@@ -85,11 +89,15 @@
           <input type="text" id="nom" name="nom" value="<?= $compte['nom'] ?>" disabled class="not-active"/>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           <span id="erreur-nom" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
 =======
 >>>>>>> c6d5e5a (aaa)
+=======
+          <span id="erreur-nom" class="erreur"></span>
+>>>>>>> e17c424 (Verif en temps reel finies)
         </article>
       </div>
 
@@ -104,11 +112,15 @@
           <input type="tel" id="telephone" name="telephone" value="<?= $numAvecEspaces ?>" disabled class="not-active"/>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           <span id="erreur-telephone" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
 =======
 >>>>>>> c6d5e5a (aaa)
+=======
+          <span id="erreur-telephone" class="erreur"></span>
+>>>>>>> e17c424 (Verif en temps reel finies)
         </article>
 
         <article>
@@ -116,11 +128,15 @@
           <input type="email" id="email" name="email" value="<?= $compte['email'] ?>" disabled class="not-active"/>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           <span id="erreur-email" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
 =======
 >>>>>>> c6d5e5a (aaa)
+=======
+          <span id="erreur-email" class="erreur"></span>
+>>>>>>> e17c424 (Verif en temps reel finies)
         </article>
       </div>
 
@@ -130,11 +146,15 @@
           <input type="text" id="denomination" name="denomination" value="<?= $data['infosPro'][0]['raison_sociale'] ?>" disabled class="not-active"/>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           <span id="erreur-denomination" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
 =======
 >>>>>>> c6d5e5a (aaa)
+=======
+          <span id="erreur-denomination" class="erreur"></span>
+>>>>>>> e17c424 (Verif en temps reel finies)
         </article>
 
         <?php
@@ -148,11 +168,15 @@
                 <input type="text" id="siren" name="siren" value="<?= $numSirenAvecEspaces ?>" disabled class="not-active"/>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <span id="erreur-siren" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
 =======
 >>>>>>> c6d5e5a (aaa)
+=======
+                <span id="erreur-siren" class="erreur"></span>
+>>>>>>> e17c424 (Verif en temps reel finies)
               </article>
             <?php
           }
@@ -168,16 +192,21 @@
           <input type="text" id="rue" name="rue" value="<?= $compte['nom_rue'] ?>" disabled class="not-active"/>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           <span id="erreur-rue" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
 =======
 >>>>>>> c6d5e5a (aaa)
+=======
+          <span id="erreur-rue" class="erreur"></span>
+>>>>>>> e17c424 (Verif en temps reel finies)
         </article>
 
         <article>
           <label for="numero">Numéro</label>
           <input type="text" id="numero" name="numero" value="<?= $compte['numero_rue'] ?>" disabled class="not-active"/>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
           <span id="erreur-numero" class="erreur"></span>
@@ -224,43 +253,43 @@
 =======
 =======
 >>>>>>> c6d5e5a (aaa)
+=======
+          <span id="erreur-numero" class="erreur"></span>
+>>>>>>> e17c424 (Verif en temps reel finies)
         </article>
       </div>
 
-      <div class="check-div">
-        <?php
-          if(isset($compte['complement_adresse'])){
-            ?>
-              <article>
-                <label for="complement">Complément d'adresse</label>
-                <input type="text" id="complement" name="complement" value="<?= $compte['complement_adresse'] ?>" disabled class="not-active"/>
-              </article>
-            <?php
-          }
-        ?>
+      <?php
+        if(isset($compte['complement_adresse'])){
+          ?>
+            <article>
+              <label for="complement">Complément d'adresse</label>
+              <input type="text" id="complement" name="complement" value="<?= $compte['complement_adresse'] ?>" disabled class="not-active"/>
+            </article>
+          <?php
+        }else{
+          ?>
+            <article class="hidden">
+              <label for="complement">Complément d'adresse</label>
+              <input type="text" id="complement" name="complement" value="<?= $compte['complement_adresse'] ?>" disabled class="not-active"/>
+            </article>
+          <?php
+        }
+      ?>
 
+      <div class="check-div">
         <article>
           <label for="ville">Ville</label>
           <input type="text" id="ville" name="ville" value="<?= $compte['ville'] ?>" disabled class="not-active"/>
+          <span id="erreur-ville" class="erreur"></span>
         </article>
-      <?php 
-        if(isset($compte['complement_adresse'])){
-          ?>
-            </div>
-          <?php
-        }
-      ?>
+
         <article>
-          <label for="codePostal">Code postal</label>
-          <input type="text" id="codePostal" name="codePostal" value="<?= $compte['code_postal'] ?>" disabled class="not-active"/>
+          <label for="code-postal">Code postal</label>
+          <input type="text" id="code-postal" name="code-postal" value="<?= $compte['code_postal'] ?>" disabled class="not-active"/>
+          <span id="erreur-code-postal" class="erreur"></span>
         </article>
-      <?php 
-        if(!isset($compte['complement_adresse'])){
-          ?>
-            </div>
-          <?php
-        }
-      ?>
+      </div>
     </section>
 
     <section class="check-section hidden">
@@ -328,6 +357,7 @@
               <label for="card-number">Numéro de carte</label>
               <input type="text" id="card-number" name="card-number"></input>
               <span id="erreur-card-number" class="erreur"></span>
+<<<<<<< HEAD
               
               <label for="expiration-date">Date expiration</label>
               <input type="month" id="expiration-date" name="expiration-date"></input>
@@ -370,16 +400,25 @@
 >>>>>>> 98826d6 (Avancé la gestiond des btn)
               <label for="card-number">Numéro de carte</label>
               <input type="text" id="card-number" name="card-number"></input>
+=======
+>>>>>>> e17c424 (Verif en temps reel finies)
               
               <label for="expiration-date">Date expiration</label>
-              <input type="date" id="expiration-date" name="expiration-date"></input>
+              <input type="month" id="expiration-date" name="expiration-date"></input>
+              <span id="erreur-expiration-date" class="erreur"></span>
               
+<<<<<<< HEAD
               <label for="CVV">Cryptogramme</label>
               <input type="text" id="CVV" name="CVV"></input>
 <<<<<<< HEAD
 >>>>>>> 958593a (aaa)
 =======
 >>>>>>> c6d5e5a (aaa)
+=======
+              <label for="cvv">Cryptogramme</label>
+              <input type="text" id="cvv" name="cvv"></input>
+              <span id="erreur-cvv" class="erreur"></span>
+>>>>>>> e17c424 (Verif en temps reel finies)
             </article>
             <button class="hidden-credit-card btn-modif-pro" id="btn-cancel-credit-card" type="button">Annuler</button>
           </section>
@@ -391,12 +430,15 @@
             <article>
               <label for="card-number">Numéro de carte</label>
               <input type="text" id="card-number" name="card-number"></input>
+              <span id="erreur-card-number" class="erreur"></span>
 
               <label for="expiration-date">Date expiration</label>
-              <input type="date" id="expiration-date" name="expiration-date"></input>
+              <input type="month" id="expiration-date" name="expiration-date"></input>
+              <span id="erreur-expiration-date" class="erreur"></span>
 
-              <label for="CVV">Cryptogramme</label>
-              <input type="text" id="CVV" name="CVV"></input>
+              <label for="cvv">Cryptogramme</label>
+              <input type="text" id="cvv" name="cvv"></input>
+              <span id="erreur-cvv" class="erreur"></span>
             </article>
           </section>
         <?php
