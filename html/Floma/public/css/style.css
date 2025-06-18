@@ -394,9 +394,9 @@ footer div nav :any-link {
   width: fit-content;
 }
 
-#offer-sort-mobile-options, #offer-sort-desktop-options {
+#offer-sort-mobile-options, #offer-sort-desktop-options, #desktop-price-range-options {
   z-index: 5;
-  top: 3rem;
+  top: 2.5rem;
   position: absolute;
   display: flex;
   width: 100%;
@@ -409,8 +409,12 @@ footer div nav :any-link {
   border-radius: 10px;
 }
 
+#desktop-price-range-options {
+  width: max-content;
+}
 
-#offer-sort-mobile-options p , #offer-sort-desktop-options p {
+
+#offer-sort-mobile-options p , #offer-sort-desktop-options p, #desktop-price-range-options p {
   width: 100%;
   padding: 0.625rem;
   text-align: center;
@@ -419,7 +423,7 @@ footer div nav :any-link {
   cursor: pointer;
 }
 
-#offer-sort-mobile-options p:hover, #offer-sort-desktop-options p:hover {
+#offer-sort-mobile-options p:hover, #offer-sort-desktop-options p:hover, #desktop-price-range-options p:hover {
   cursor: pointer;
   background-color: var(--background-color);
 }
@@ -1014,7 +1018,7 @@ footer div nav :any-link {
   background-color: var(--background-color);
 }
 
-.selected-category {
+.selected-category, .selected-price-range {
   border: #000 solid 2px;
   background-color: var(--background-color);
 }
@@ -1097,6 +1101,29 @@ footer div nav :any-link {
   background-color: red;
 }
 
+.filter-modal-price-range-options {
+  display: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.filter-modal-price-range-option {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-items: center;
+  align-items: center;
+  border: #000 solid 1px;
+  border-radius: 100px;
+  gap: 0.313rem;
+  padding: 0.313rem 0.625rem;
+  cursor: pointer;
+}
+
+.filter-modal-price-range-option:hover {
+  background-color: var(--background-color);
+}
 
 .avis .imgProfil {
   border-radius: 50%;
