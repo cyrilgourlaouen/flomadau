@@ -28,14 +28,29 @@
             </div>
             <div class="separation"></div>
             <div class="formInline">
+                <div class="field" >
+                    <div>
+                        <div>
+                            <label for="entreprise_privee" >Entreprise privée</label>
+                            <input type="radio" id="entreprise_privee" name="type_entreprise" value="privee"  style="width: 119px;" required>
+                        </div>
+                        <div>
+                            <label for="entreprise_publique">Entreprise publique</label>
+                            <input type="radio" id="entreprise_publique" name="type_entreprise" value="publique" style="width: 70px;" required>
+                        </div>
+                    </div>
+                    <div class="error-message"></div>
+                </div>
+            </div>
+            <div class="formInline">
                 <div class="field">
                     <label for="denomination">Dénomination</label><br>
                     <input type="text" id="denomination" name="denomination" placeholder="Café des Deux Moulins"
                         required>
                 </div>
-                <div class="field">
+                <div class="field" id="siren-field" style="display: none;">
                     <label for="siren">SIREN</label><br>
-                    <input type="text" id="siren" name="siren" placeholder="XXX XXX XXX" required>
+                    <input type="text" id="siren" name="siren" placeholder="XXX XXX XXX">
                 </div>
             </div>
             <div class="formInline">
@@ -101,6 +116,37 @@
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('.formContainer form');
     const btn = document.querySelector('.buttonContainer .button button');
+    const sirenField = document.getElementById('siren-field');
+    const sirenInput = document.getElementById('siren');
+
+    // Function to check if SIREN field should be visible
+    function isSirenRequired() {
+        const checkedRadio = document.querySelector('input[name="type_entreprise"]:checked');
+        return checkedRadio && checkedRadio.value === 'privee';
+    }
+
+    // Show/hide SIREN field based on company type selection
+    function toggleSirenField() {
+        if (isSirenRequired()) {
+            sirenField.style.display = 'block';
+            sirenInput.required = true;
+        } else {
+            sirenField.style.display = 'none';
+            sirenInput.required = false;
+            sirenInput.value = ''; // Clear value when hidden
+            // Remove any existing SIREN error messages
+            const existingError = sirenInput.parentNode.querySelector('.error-message');
+            if (existingError) {
+                existingError.remove();
+            }
+        }
+    }
+
+    // Add event listeners to radio buttons for company type
+    const radioButtons = document.querySelectorAll('input[name="type_entreprise"]');
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', toggleSirenField);
+    });
 
     // Validation rules
     const rules = [
@@ -108,8 +154,18 @@ document.addEventListener('DOMContentLoaded', function () {
         { field: 'nom', valid: val => val !== '', message: 'Veuillez entrer un nom.' },
         { field: 'num', valid: val => /^(?:(?:\+33|0033)\s?|0)[1-9](?:[\s.-]?\d{2}){4}$/.test(val), message: 'Veuillez entrer un numéro valide.' },
         { field: 'mail', valid: val => /^\S+@\S+\.\S+$/.test(val), message: 'Veuillez entrer une adresse email valide.' },
+        { field: 'type_entreprise', valid: val => val !== '', message: 'Veuillez sélectionner un type d\'entreprise.' },
         { field: 'denomination', valid: val => val !== '', message: 'Veuillez entrer la dénomination.' },
-        { field: 'siren', valid: val => /^\d{3}( \d{3}){2}$/.test(val), message: 'Veuillez entrer un SIREN valide.' },
+        { 
+            field: 'siren', 
+            valid: val => {
+                // Only validate SIREN if it's required (entreprise privée selected)
+                if (!isSirenRequired()) return true;
+                return /^\d{3}( \d{3}){2}$/.test(val);
+            }, 
+            message: 'Veuillez entrer un SIREN valide.',
+            conditional: true // Mark as conditional field
+        },
         { field: 'mdp', valid: val => val.length >= 6, message: 'Le mot de passe est trop court.' },
         { field: 'conf_mdp', valid: val => val === document.getElementById('mdp').value, message: 'Les mots de passe ne correspondent pas.' },
         { field: 'rue', valid: val => val !== '', message: 'Veuillez entrer la rue.' },
@@ -121,12 +177,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to validate a single field
     function validateField(fieldId) {
-        const field = document.getElementById(fieldId);
-        const value = field.value.trim();
         const rule = rules.find(r => r.field === fieldId);
+        
+        // Skip validation for conditional fields that aren't currently required
+        if (rule.conditional && fieldId === 'siren' && !isSirenRequired()) {
+            return true;
+        }
+        
+        let value;
+        let field;
+        
+        // Handle radio buttons for company type
+        if (fieldId === 'type_entreprise') {
+            const radioButtons = document.querySelectorAll('input[name="type_entreprise"]');
+            const checkedRadio = document.querySelector('input[name="type_entreprise"]:checked');
+            value = checkedRadio ? checkedRadio.value : '';
+            field = radioButtons[0].closest('.field'); // Get the container field
+        } else {
+            field = document.getElementById(fieldId);
+            value = field.value.trim();
+        }
 
         // Remove existing error message
-        const existingError = field.parentNode.querySelector('.error-message');
+        const existingError = field.querySelector ? field.querySelector('.error-message') : field.parentNode.querySelector('.error-message');
         if (existingError) {
             existingError.remove();
         }
@@ -136,26 +209,44 @@ document.addEventListener('DOMContentLoaded', function () {
             const errorEl = document.createElement('div');
             errorEl.className = 'error-message';
             errorEl.innerText = rule.message;
-            field.parentNode.appendChild(errorEl);
+            
+            if (fieldId === 'type_entreprise') {
+                field.appendChild(errorEl);
+            } else {
+                field.parentNode.appendChild(errorEl);
+            }
             return false;
         }
         return true;
     }
 
-    // Add blur event listeners to all fields
+    // Add event listeners to all fields
     rules.forEach(rule => {
-        const field = document.getElementById(rule.field);
-        field.addEventListener('blur', () => {
-            validateField(rule.field);
-        });
-
-        // For confirmation password, also validate when password changes
-        if (rule.field === 'conf_mdp') {
-            document.getElementById('mdp').addEventListener('input', () => {
-                if (field.value) {
-                    validateField('conf_mdp');
-                }
+        if (rule.field === 'type_entreprise') {
+            // Add listeners to radio buttons
+            const radioButtons = document.querySelectorAll('input[name="type_entreprise"]');
+            radioButtons.forEach(radio => {
+                radio.addEventListener('change', () => {
+                    validateField('type_entreprise');
+                    toggleSirenField(); // Update SIREN field visibility
+                });
             });
+        } else {
+            const field = document.getElementById(rule.field);
+            if (field) { // Check if field exists (SIREN might be hidden)
+                field.addEventListener('blur', () => {
+                    validateField(rule.field);
+                });
+
+                // For confirmation password, also validate when password changes
+                if (rule.field === 'conf_mdp') {
+                    document.getElementById('mdp').addEventListener('input', () => {
+                        if (field.value) {
+                            validateField('conf_mdp');
+                        }
+                    });
+                }
+            }
         }
     });
 
@@ -164,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
         let isValid = true;
 
-        // Validate all fields
+        // Validate all fields (conditional validation handled in validateField)
         rules.forEach(rule => {
             if (!validateField(rule.field)) {
                 isValid = false;
@@ -215,5 +306,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         }
     });
+
+    // Initialize SIREN field visibility on page load
+    toggleSirenField();
 });
 </script>
