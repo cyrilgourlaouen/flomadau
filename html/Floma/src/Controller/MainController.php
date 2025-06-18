@@ -21,35 +21,22 @@ class MainController extends AbstractController
     {
         $offerManager = new OfferManager();
 
-        $enrichedOffers = OfferResource::buildAll($offerManager->findBy(['en_ligne' => true], ["date_creation" => "DESC"]), [
+        $enrichedOffers = OfferResource::buildAll($offerManager->findBy(['en_ligne' => true]), [
             'categorie' => ['isMultiple' => false],
             'professionnel' => ['isMultiple' => false],
             'option' => ['isMultiple' => true],
             'image' => ['isMultiple' => true],
         ]);
-
-        
-        $offerVisibilitySort = new OfferVisibilitySort();
-        $sortedOffers = $offerVisibilitySort->sortVisibility($enrichedOffers);
         
         return $this->renderView(
             'front/main/home.php',
             [ 
-                'offers' => $sortedOffers,
+                'offers' => $enrichedOffers,
                 'seo' => [
                     'title' => 'Accueil',
                     'descriptions'=> 'Page d\'accueil du PACT, parcourez nos offres, partagez vos expériences.'
                 ]
             ]
         );
-    }
-
-    /**
-     * @return null
-     */
-    public function contact()
-    {
-        // Imaginons ici traiter la soumission d'un formulaire de contact et envoyer un mail...
-        return $this->redirectToRoute('home', ['state' => 'success']);
     }
 }

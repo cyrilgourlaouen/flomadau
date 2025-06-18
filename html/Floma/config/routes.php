@@ -64,6 +64,5 @@ const ROUTES = [
         'controller' => App\Controller\ConsultationMController::class,
         'method' => 'consultation',
     ]
-];
-
+]
 ?>

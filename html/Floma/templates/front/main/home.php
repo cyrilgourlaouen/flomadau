@@ -105,13 +105,157 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
 </section>
 <?php } ?>
 
+
+<div class="filter-modal">
+    <div class="filter-modal-content-wrapper">
+        <div class="filter-modal-header">
+            <h2>Filtrer par</h2>
+            <img src="/assets/icons/close_black.svg" alt="close icon" id="filter-close-icon">
+        </div>
+        <div class="filter-modal-content">
+            <div class="filter-modal-sort" id="filter-modal-category">
+                <h3>Catégorie</h3>
+                <div class="filter-modal-category-options">
+                    <?php foreach (OfferCategoryEnum::cases() as $category) { ?>
+                        <div class="filter-modal-category-option" data-category="<?= $category->value ?>">
+                            <img src="<?= $category->getIcon()['path'] ?>" alt="<?= $category->getIcon()['alt'] ?>">
+                            <p><?= $category->value ?></p>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+            <div id="filter-modal-location">
+                <h3>Lieu</h3>
+                <div>
+    
+                </div>
+            </div>
+            <div class="filter-modal-sort" id="filter-modal-price">
+                <h3>Prix</h3>
+                <div class="filter-modal-price-options">
+                    <div class="filter-modal-price-minimum">
+                        <label for="min-price">Min</label>
+                        <div class="filter-modal-price-icon-wrapper">
+                            <div class="filter-modal-price-icon">
+                                <img src="/assets/icons/euro_symbol_white.svg" alt="Symbole euro">
+                            </div>
+                            <input type="number" name="Minimum" id="min-price">
+                        </div>
+                    </div>
+                    <div class="filter-modal-price-maximum">
+                        <label for="">Max</label>
+                        <div class="filter-modal-price-icon-wrapper">
+                            <div class="filter-modal-price-icon">
+                                <img src="/assets/icons/euro_symbol_white.svg" alt="Symbole euro">
+                            </div>
+                            <input type="number" name="Maximum" id="max-price">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-modal-sort" id="filter-modal-note">
+                <h3>Note</h3>
+                <div>
+    
+                </div>
+            </div>
+            <div class="filter-modal-sort" id="filter-modal-status">
+                <h3>Statut</h3>
+                <div>
+    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Section Offre -->
-<section class="offer-section">
+<section class="offer-section" data-offers='<?= htmlspecialchars(json_encode($data["offers"]), ENT_QUOTES, 'UTF-8') ?>'>
     <h2>Découvrez nos offres</h2>
+
+    <div class="offer-controls">
+        <div class="offer-search">
+            <div class="offer-search-bar">
+                <input type="text" id="offer-search-input" placeholder="Rechercher par lieu, catégorie, mot-clé">
+            </div>
+            <div class="offer-search-filters">
+                <button id="offer-search-filter-button">Filtrer</button>
+
+                <!-- Catégorie -->
+                <div class="desktop-filter-dropdown">
+                    <button class="desktop-filter-button" id="desktop-categorie-button">Catégorie <span id="selected-category-label"></span></button>
+                    <div class="desktop-filter-options" id="desktop-categorie-options">
+                        <?php foreach (OfferCategoryEnum::cases() as $category) { ?>
+                            <p class="desktop-filter-option" data-category="<?= $category->value ?>"><?= $category->value ?></p>
+                        <?php } ?>
+                    </div>
+                </div>
+
+                <!-- Prix -->
+                <div class="desktop-filter-dropdown">
+                    <button class="desktop-filter-button" id="offer-price-desktop-button">
+                        Prix <span id="selected-price-label"></span>
+                    </button>
+                    <div id="desktop-price-options">
+                        <div>
+                            <label for="min-price">Min</label>
+                            <div class="filter-modal-price-icon-wrapper">
+                                <div class="filter-modal-price-icon">
+                                    <img src="/assets/icons/euro_symbol_white.svg" alt="Symbole euro">
+                                </div>
+                                <input type="number" name="Minimum" id="min-price-desktop">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="">Max</label>
+                            <div class="filter-modal-price-icon-wrapper">
+                                <div class="filter-modal-price-icon">
+                                    <img src="/assets/icons/euro_symbol_white.svg" alt="Symbole euro">
+                                </div>
+                                <input type="number" name="Maximum" id="max-price-desktop">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <select name="Statut" id="">
+                    <option value="">Statut</option>
+                </select>
+                <select name="Note" id="">
+                    <option value="">Note</option>
+                </select>
+
+                <!-- Tri -->
+                <div class="offer-sort-desktop">
+                    <button id="offer-sort-desktop-button">
+                        Trier par : <span id="selected-sort-desktop-label">Date d'ajout</span>
+                    </button>
+                    <div id="offer-sort-desktop-options">
+                        <p id="date" class="selected-sort">Date d'ajout</p>
+                        <p id="asc">Prix croissant</p>
+                        <p id="desc">Prix décroissant</p>
+                        <p id="note">Note</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="offer-sort-mobile">
+            <button id="offer-sort-mobile-button">
+                Trier par : <span id="selected-sort-mobile-label"></span>
+            </button>
+            <div id="offer-sort-mobile-options">
+                <p id="date" class="selected-sort">Date d'ajout</p>
+                <p id="asc">Prix croissant</p>
+                <p id="desc">Prix décroissant</p>
+                <p id="note">Note</p>
+            </div>
+        </div>
+    </div>
 
     <div class="offer-list">
         <?php foreach ($data["offers"] as $offer) { ?>
-            <a href="?path=offer/<?= $offer['id'] ?>" class="offer-card">
+            <a href="?path=offer/<?= $offer['id'] ?>" class="offer-card" data-offer-id="<?= $offer['id'] ?>">
                 <!-- Image -->
                 <div class="offer-card-img">
                     <?php
@@ -250,3 +394,4 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
     </div>
 </section>
 <script src="/js/highlightedOffer.js"></script>
+<script type="module" src="/js/offerDisplayControl.js"></script>
