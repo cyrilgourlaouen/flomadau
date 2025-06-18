@@ -198,50 +198,67 @@ const validateurs = {
   cvv: function(valeur) {
     if (!/^\d{3,4}$/.test(valeur)) return "Le CCV doit avoir 3 ou 4 chiffres";
     return null;
-  },
-
-  'old-password':function(valeur) {
-    if(document.getElementById('new-password').textContent === ''  && !(valeur)){
-      return "Le nouveau mot de passe doit être saisi";
-    }else if(document.getElementById('confirm-password').textContent === '' && !(valeur)){
-      return "La confirmation du mot de passe doit être saisie";
-    }else{
-      return null;
-    }
-  },
-
-  'new-password':function(valeur) {
-    if(document.getElementById('old-password').textContent === ''  && !(valeur)){
-      return "L'ancien mot de passe doit être saisi";
-    }else if(document.getElementById('confirm-password').textContent === '' && !(valeur)){
-      return "La confirmation du mot de passe doit être saisie";
-    }else{
-      return null;
-    }
-  },
-
-  'confirm-password':function(valeur) {
-    if(document.getElementById('old-password').textContent === ''  && !(valeur)){
-      return "L'ancien mot de passe doit être saisi";
-    }else if(document.getElementById('new-password').textContent === '' && !(valeur)){
-      return "Le nouveau mot de passe doit être saisi";
-    }else{
-      return null;
-    }
   }
-
 };
 
 form.addEventListener('input', function(event) {
   const champ = event.target;
   const nomDuChamp = champ.name;
+  const newPassword = document.getElementById('new-password');
+  const confirmPassword = document.getElementById('confirm-password');
+  const oldPassword = document.getElementById('old-password');
+
+  const erreurOldPassword = document.getElementById('erreur-old-password');
+  const erreurNewPassword = document.getElementById('erreur-new-password');
+  const erreurConfirmPassword = document.getElementById('erreur-confirm-password');
+
+  erreurOldPassword.textContent = '';
+  erreurNewPassword.textContent = '';
+  erreurConfirmPassword.textContent = '';
 
   if (validateurs[nomDuChamp]) {
-      const messageErreur = validateurs[nomDuChamp](champ.value);
-      const spanErreur = document.getElementById('erreur-' + nomDuChamp);
+    const messageErreur = validateurs[nomDuChamp](champ.value);
+    const spanErreur = document.getElementById('erreur-' + nomDuChamp);
 
-      if (spanErreur) {
-        spanErreur.textContent = messageErreur || '';
-      }
+    if (spanErreur) {
+      spanErreur.value = messageErreur || '';
+    }
+
+  } else if(nomDuChamp === 'old-password'){
+
+    if(newPassword.value === ''){
+      erreurNewPassword.textContent = "Le nouveau mot de passe doit être saisi";
+    }
+    if(confirmPassword.value === ''){
+      erreurConfirmPassword.textContent = "La confirmation du mot de passe doit être saisie";
+    }
+    if(champ.value === ''){
+      erreurOldPassword.textContent = "L'ancien mot de passe doit être saisi";
+    }
+
+  } else if(nomDuChamp === 'new-password'){
+
+    if(oldPassword.value === ''){
+      erreurOldPassword.textContent = "L'ancien mot de passe doit être saisi";
+    }
+    if(confirmPassword.value === ''){
+      erreurConfirmPassword.textContent = "La confirmation du mot de passe doit être saisie";
+    }
+    if(champ.value === ''){
+      erreurNewPassword.textContent = "Le nouveau mot de passe doit être saisi";
+    }
+
+  } else if(nomDuChamp === 'confirm-password'){
+
+    if(oldPassword.value === ''){
+      erreurOldPassword.textContent = "L'ancien mot de passe doit être saisi";
+    }
+    if(newPassword.value === ''){
+      erreurNewPassword.textContent = "Le nouveau mot de passe doit être saisi";
+    }
+    if(champ.value === ''){
+      erreurConfirmPassword.textContent = "La confirmation du mot de passe doit être saisie";
+    }
+
   }
 });
