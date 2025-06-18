@@ -70,6 +70,12 @@ export function setupFilterUI(filterManager, displayManager) {
     if (categoryDropdownOptions) {
       categoryDropdownOptions.style.display = "none";
     }
+    if (maxDesktopPriceInput) {
+      maxDesktopPriceInput.value =
+        max !== undefined && max !== "" && !isNaN(Number(max))
+          ? Number(max)
+          : "";
+    }
 
     if (currentCategory === "Restaurant") {
       // Pour Restaurant : afficher les gammes de prix
@@ -133,6 +139,40 @@ export function setupFilterUI(filterManager, displayManager) {
       // Mettre à jour le label
       updatePriceRangeLabel(rangeValue);
     }
+    // Si min ou max n'est pas un nombre valide
+    if (
+      (min !== undefined && min !== "" && isNaN(min)) ||
+      (max !== undefined && max !== "" && isNaN(max))
+    ) {
+      return {
+        valid: false,
+        min: undefined,
+        max: undefined,
+        reason: "not_a_number",
+      };
+    }
+    // Si max < min, filtre invalide
+    if (
+      min !== undefined &&
+      min !== "" &&
+      max !== undefined &&
+      max !== "" &&
+      Number(max) < Number(min)
+    ) {
+      return {
+        valid: false,
+        min: undefined,
+        max: undefined,
+        reason: "max_lt_min",
+      };
+    }
+    // Sinon, filtre valide
+    return {
+      valid: true,
+      min: min !== "" ? Number(min) : undefined,
+      max: max !== "" ? Number(max) : undefined,
+    };
+  }
 
     // Fermer le dropdown desktop si la sélection vient du desktop
     if (isFromDesktop && desktopPriceRangeOptions) {
@@ -461,6 +501,7 @@ export function setupFilterUI(filterManager, displayManager) {
         closeAllDropdowns();
       }
     }
+  }
 
     // Reset si on désélectionne Restaurant pour aller vers "aucune catégorie"
     if (isCurrentlySelected && previousCategory === "Restaurant") {
