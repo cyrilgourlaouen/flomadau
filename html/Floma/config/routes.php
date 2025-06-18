@@ -91,5 +91,4 @@ const ROUTES = [
         'view' => false,
     ],
 ];
-
 ?>
