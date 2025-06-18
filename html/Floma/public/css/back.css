@@ -708,3 +708,9 @@ input.not-active{
   font-family: var(--noto);
   width: 18.75rem;
 }
+
+#div-btn-modif{
+  display: flex;
+  gap: 1rem;
+  justify-content: end;
+}

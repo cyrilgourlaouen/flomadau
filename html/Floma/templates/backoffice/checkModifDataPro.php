@@ -216,9 +216,11 @@
       }
     ?>
 
-    <button type="button" id="btn-update" class="btn-modif-pro">Modifier</button>
-    <button type="submit" id="btn-submit" class="hidden btn-modif-pro">Enregistrer</button>
-    <button type="button" id="btn-cancel" class="hidden btn-modif-pro">Annuler</button>
+    <div id="div-btn-modif">
+      <button type="button" id="btn-update" class="btn-modif-pro">Modifier</button>
+      <button type="button" id="btn-cancel" class="hidden btn-modif-pro">Annuler</button>
+      <button type="submit" id="btn-submit" class="hidden btn-modif-pro">Enregistrer</button>
+    </div>
 
   </form>
 </div>
