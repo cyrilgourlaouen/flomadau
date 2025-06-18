@@ -198,7 +198,38 @@ const validateurs = {
   cvv: function(valeur) {
     if (!/^\d{3,4}$/.test(valeur)) return "Le CCV doit avoir 3 ou 4 chiffres";
     return null;
+  },
+
+  'old-password':function(valeur) {
+    if(document.getElementById('new-password').textContent === ''  && !(valeur)){
+      return "Le nouveau mot de passe doit être saisi";
+    }else if(document.getElementById('confirm-password').textContent === '' && !(valeur)){
+      return "La confirmation du mot de passe doit être saisie";
+    }else{
+      return null;
+    }
+  },
+
+  'new-password':function(valeur) {
+    if(document.getElementById('old-password').textContent === ''  && !(valeur)){
+      return "L'ancien mot de passe doit être saisi";
+    }else if(document.getElementById('confirm-password').textContent === '' && !(valeur)){
+      return "La confirmation du mot de passe doit être saisie";
+    }else{
+      return null;
+    }
+  },
+
+  'confirm-password':function(valeur) {
+    if(document.getElementById('old-password').textContent === ''  && !(valeur)){
+      return "L'ancien mot de passe doit être saisi";
+    }else if(document.getElementById('new-password').textContent === '' && !(valeur)){
+      return "Le nouveau mot de passe doit être saisi";
+    }else{
+      return null;
+    }
   }
+
 };
 
 form.addEventListener('input', function(event) {
