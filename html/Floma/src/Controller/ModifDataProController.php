@@ -15,12 +15,14 @@ use Floma\View\Layout;
 
 class ModifDataProController extends AbstractController
 {
+    private int $idCompte;
+
     public function updateData() {
         $dataJson = ['success' => true];
         $proManager = new ProfessionnelManager();
         $infosPro = ProfessionnelResource::buildAll($proManager->findBy(['code' => $_SESSION['code_pro']]));
 
-        $idCompte = $infosPro[0]['id_compte'];
+        $this->idCompte = $infosPro[0]['id_compte'];
 
         //Verif méthode
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -85,7 +87,7 @@ class ModifDataProController extends AbstractController
             exit;
         }
 
-        $compteManager->updateCompte($compte, $idCompte);
+        $compteManager->updateCompte($compte, $this->idCompte);
 
         //Update dans pro
         $pro = new Professionnel();
@@ -114,11 +116,10 @@ class ModifDataProController extends AbstractController
 
         $compteManager = new CompteManager();
 
-        $found = CompteResource::buildAll($compteManager->findBy([$nomVal => $val]));
-        var_dump($found);
+        $accountsFound = CompteResource::buildAll($compteManager->findBy([$nomVal => $val]));
 
-        foreach ($allMember as $member) {
-            if($member[$nomVal] === $val) {
+        foreach ($accountsFound as $account) {
+            if($account['id'] !== $this->idCompte) {
                 return false;
             }
         }
