@@ -877,6 +877,7 @@ input::placeholder, textarea::placeholder, textarea::content {
 .dayLabel {
   cursor: pointer;
   float:right;
+  user-select: none;
 }
 
 .dayLabel > input {
