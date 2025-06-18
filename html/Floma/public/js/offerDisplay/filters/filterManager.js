@@ -1,13 +1,13 @@
 import { filterByCategory } from './categoryFilter.js';
 import { filterBySearch } from './searchFilter.js';
-// Autres imports...
+import { filterByPrice } from './priceFilter.js';
 
 export function setupFilterManager(initialOffers) {
     
     let filters = {
         search: '',
         category: null,
-        // Autres filtres...
+        price: null,
     };
     
     const applyFilters = (offers) => {
@@ -23,7 +23,10 @@ export function setupFilterManager(initialOffers) {
             filtered = filterByCategory(filtered, filters.category);
         }
         
-        // Autres filtres...
+        // Filtre de prix
+        if (filters.price) {
+            filtered = filterByPrice(filtered, filters.price);
+        }
         
         return filtered;
     };
