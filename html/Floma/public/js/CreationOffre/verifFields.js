@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('.formContainer');
     const btn = document.querySelector('.buttonContainer .button-black');
 
-
     const jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
 
     function validateFile(input, allowedTypes, maxSize) {
@@ -210,6 +209,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 container.appendChild(errorEl);
             }
             return isValid;
+        }
+
+        if (fieldId === 'photo_offre') {
+            const label = document.querySelector('label[for="file"]'); 
+            if (!label) return true;
+
+            const existingError = label.nextElementSibling;
+            if (existingError?.classList.contains('error-message')) existingError.remove();
+
+            if (!rule.valid()) {
+                const errorEl = document.createElement('div');
+                errorEl.className = 'error-message';
+                errorEl.innerText = rule.message;
+                label.insertAdjacentElement('afterend', errorEl); 
+                return false;
+            }
+            return true;
         }
 
         if (field) {
