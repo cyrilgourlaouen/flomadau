@@ -250,6 +250,7 @@
       <h3>Mot de passe</h3>
       <article>
         <label for="old-password">Ancien mot de passe</label>
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> c6d5e5a (aaa)
@@ -305,6 +306,10 @@
         <label for="old-password">Ancien mot de passe</label>
 >>>>>>> d452eb8 (aa)
         <input type="password" id="old-password" name="old-password"/>
+=======
+        <input type="password" id="old-password" name="old-password" disabled class="not-active"/>
+        <span id="erreur-old-password" class="erreur"></span>
+>>>>>>> 08a511b (avnacée)
       </article>
 
       <article>
@@ -312,6 +317,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
         <label for="new-password">Nouveau mot de passe</label>
+<<<<<<< HEAD
 =======
         <label for="new-password">Mot de passe</label>
 >>>>>>> 958593a (aaa)
@@ -322,11 +328,16 @@
         <label for="new-password">Nouveau mot de passe</label>
 >>>>>>> d452eb8 (aa)
         <input type="password" id="new-password" name="new-password" disabled/>
+=======
+        <input type="password" id="new-password" name="new-password" disabled class="not-active"/>
+        <span id="erreur-new-password" class="erreur"></span>
+>>>>>>> 08a511b (avnacée)
       </article>
 
       <article>
         <label for="confirm-password">Confirmation du mot de passe</label>
-        <input type="password" id="confirm-password" name="confirm-password" disabled/>
+        <input type="password" id="confirm-password" name="confirm-password" disabled class="not-active"/>
+        <span id="erreur-confirm-password" class="erreur"></span>
       </article>
     </section>
 

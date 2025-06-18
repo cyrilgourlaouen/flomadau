@@ -34,4 +34,29 @@ class CheckModifDataProController extends AbstractController
                 ]
             ]);
     }
+
+    public function checkData() {
+        //email pas déjà associé
+        //mdp correct
+        $dataJson = [];
+        $dataJson['success'] = true;
+
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $dataJson['error'] = 'Méthode non autorisée';
+            $dataJson['success'] = false;
+            exit;
+        }
+
+        $email = $_POST['email'] ?? '';
+        $password = $_POST['old-password'] ?? '';
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            echo json_encode(['success' => false, 'error' => 'Email invalide']);
+            return;
+        }
+
+        $isAvailable = $this->isEmailAvailable($email);
+        echo json_encode(['success' => true, 'available' => $isAvailable]);
+    }
 }
