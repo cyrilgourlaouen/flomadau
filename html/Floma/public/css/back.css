@@ -178,6 +178,12 @@ p.placeholder {
   gap: 1.875rem;
 }
 
+#sidebar-menu div {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
 #sidebar-menu li a {
   text-decoration: none;
   font-family: var(--raleway);
@@ -224,7 +230,9 @@ p.placeholder {
 #menu-factures::before {
   background-image: url("../assets/icons/facture_grey.svg");
 }
-
+#menu-return::before {
+  background-image: url("../assets/icons/return_front_grey.svg");
+}
 /* head_title */
 .headContainer {
   display: flex;
