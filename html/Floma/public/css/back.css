@@ -834,11 +834,13 @@ input::placeholder, textarea::placeholder, textarea::content {
 }
 
 .dayLabel {
+  cursor: pointer;
   float:right;
 }
 
 .dayLabel > input {
   width: 14px;
+  cursor: pointer;
 }
 
 .horaire-container > div > button {
