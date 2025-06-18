@@ -181,7 +181,7 @@ if(!isset($_SESSION['code_pro'])){
             <div class="formInline">
                 <div class="field">
                     <label for="conditions_accesibilite">Conditions d'accessibilité *</label>
-                    <input name="conditions_accesibilite" id="conditions_accesibilite" type="text" placeholder="accessible a tous" >
+                    <input name="conditions_accesibilite" id="conditions_accesibilite" type="text" placeholder="Accessible à tous" >
                 </div>
                     
                 <?php 
