@@ -13,7 +13,7 @@ use Floma\Controller\AbstractController;
  *
  * @package App\Controller
  */
-class InscriptionController extends AbstractController
+class SignupMembreController extends AbstractController
 {
     /**
      * @return string

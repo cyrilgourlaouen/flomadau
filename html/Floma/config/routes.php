@@ -10,19 +10,19 @@ const ROUTES = [
     ],
 
     '/inscription/membre' => [
-        'controller' => App\Controller\InscriptionController::class,
+        'controller' => App\Controller\SignupMembreController::class,
         'method' => 'home',
         'layout' => Layout::FRONT_INSCRIPTION,
     ],
 
     '/inscription/membre/verification' => [
-        'controller' => App\Controller\InscriptionController::class,
+        'controller' => App\Controller\SignupMembreController::class,
         'method' => 'verification',
         'view' => false,
     ],
 
     '/inscription/membre/sign-up' => [
-        'controller' => App\Controller\InscriptionController::class,
+        'controller' => App\Controller\SignupMembreController::class,
         'method' => 'signUp',
         'view' => false,
     ],
