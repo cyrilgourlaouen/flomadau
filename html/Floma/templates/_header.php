@@ -21,7 +21,7 @@
 					alt="Icon de déconnexion">
 				<div id="logMenu" class="logMenu hidden">
 					<ul>
-						<li><a href="?path=/consultation/membre">Mes informations</></li>
+						<li><a href="?path=/consultation/membre">Mes informations</a></li>
 						<li><a href="?path=/connexion/logOut">Se déconnecter</a></li>
 					</ul>
 				</div>
