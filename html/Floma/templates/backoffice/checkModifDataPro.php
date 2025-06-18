@@ -459,6 +459,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <button type="button" id="btn-update" class="btn-modif-pro">Modifier</button>
     <button type="submit" id="btn-submit" class="hidden btn-modif-pro">Enregistrer</button>
     <button type="button" id="btn-cancel" class="hidden btn-modif-pro">Annuler</button>
@@ -482,6 +483,13 @@
     <button type="submit" id="btn-submit" class="hidden btn-modif-pro">Enregistrer</button>
     <button type="button" id="btn-cancel" class="hidden btn-modif-pro">Annuler</button>
 >>>>>>> 98826d6 (Avancé la gestiond des btn)
+=======
+    <div id="div-btn-modif">
+      <button type="button" id="btn-update" class="btn-modif-pro">Modifier</button>
+      <button type="button" id="btn-cancel" class="hidden btn-modif-pro">Annuler</button>
+      <button type="submit" id="btn-submit" class="hidden btn-modif-pro">Enregistrer</button>
+    </div>
+>>>>>>> 68d8597 (Bien avancé reste à tester le tout)
 
   </form>
 </div>
