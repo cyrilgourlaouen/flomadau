@@ -130,19 +130,36 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
     
                 </div>
             </div>
-            <div id="filter-modal-price">
+            <div class="filter-modal-sort" id="filter-modal-price">
                 <h3>Prix</h3>
-                <div>
-    
+                <div class="filter-modal-price-options">
+                    <div class="filter-modal-price-minimum">
+                        <label for="min-price">Min</label>
+                        <div class="filter-modal-price-icon-wrapper">
+                            <div class="filter-modal-price-icon">
+                                <img src="/assets/icons/euro_symbol_white.svg" alt="Symbole euro">
+                            </div>
+                            <input type="number" name="Minimum" id="min-price">
+                        </div>
+                    </div>
+                    <div class="filter-modal-price-maximum">
+                        <label for="">Max</label>
+                        <div class="filter-modal-price-icon-wrapper">
+                            <div class="filter-modal-price-icon">
+                                <img src="/assets/icons/euro_symbol_white.svg" alt="Symbole euro">
+                            </div>
+                            <input type="number" name="Maximum" id="max-price">
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="filter-modal-note">
+            <div class="filter-modal-sort" id="filter-modal-note">
                 <h3>Note</h3>
                 <div>
     
                 </div>
             </div>
-            <div id="filter-modal-status">
+            <div class="filter-modal-sort" id="filter-modal-status">
                 <h3>Statut</h3>
                 <div>
     
@@ -174,15 +191,41 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
                     </div>
                 </div>
 
-                <select name="Prix" id="">
-                    <option value="">Prix</option>
-                </select>
+                <!-- Prix -->
+                <div class="desktop-filter-dropdown">
+                    <button class="desktop-filter-button" id="offer-price-desktop-button">
+                        Prix <span id="selected-price-label"></span>
+                    </button>
+                    <div id="desktop-price-options">
+                        <div>
+                            <label for="min-price">Min</label>
+                            <div class="filter-modal-price-icon-wrapper">
+                                <div class="filter-modal-price-icon">
+                                    <img src="/assets/icons/euro_symbol_white.svg" alt="Symbole euro">
+                                </div>
+                                <input type="number" name="Minimum" id="min-price-desktop">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="">Max</label>
+                            <div class="filter-modal-price-icon-wrapper">
+                                <div class="filter-modal-price-icon">
+                                    <img src="/assets/icons/euro_symbol_white.svg" alt="Symbole euro">
+                                </div>
+                                <input type="number" name="Maximum" id="max-price-desktop">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <select name="Statut" id="">
                     <option value="">Statut</option>
                 </select>
                 <select name="Note" id="">
                     <option value="">Note</option>
                 </select>
+
+                <!-- Tri -->
                 <div class="offer-sort-desktop">
                     <button id="offer-sort-desktop-button">
                         Trier par : <span id="selected-sort-desktop-label">Date d'ajout</span>

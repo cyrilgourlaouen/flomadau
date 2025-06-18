@@ -905,8 +905,6 @@ footer div nav :any-link {
   display: none;
 }
 
-/* ICI */
-
 .filter-modal {
   display: none;
   justify-self: center;
@@ -978,7 +976,7 @@ footer div nav :any-link {
   border: #000 solid 1px;
   border-radius: 100px;
   gap: 0.313rem;
-  padding: 0 0.625rem;
+  padding: 0.313rem 0.625rem;
   cursor: pointer;
 }
 
@@ -994,6 +992,81 @@ footer div nav :any-link {
 .desktop-filter-dropdown {
   display: none;
 }
+
+.filter-modal-price-options {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0.625rem;
+}
+
+.filter-modal-price-minimum, .filter-modal-price-maximum {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.313rem;
+}
+
+.filter-modal-price-icon-wrapper {
+  display: flex;
+  width: 8.188rem;
+  height: 35px; /* force une hauteur fixe */
+  border: 1px solid #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.filter-modal-price-icon {
+  width: 35px;
+  height: 100%;
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.filter-modal-price-icon img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+}
+
+.filter-modal-price-icon-wrapper input {
+  flex: 1;
+  border: none;
+  outline: none;
+  height: 35px;
+  padding-left: 6px;
+  font-size: var(--text-size);
+  background-color: var(--background-color);
+}
+
+#desktop-price-options {
+    z-index: 5;
+    top: 3rem;
+    position: absolute;
+    display: none;
+    width: max-content;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    gap: 0.325rem;
+    background-color: var(--white-color);
+    border: #000 solid 1px;
+    border-radius: 10px;
+    top: 2.5rem;
+    padding: 0.625rem;
+}
+
+.filter-modal-price-icon-wrapper-error {
+  border: red solid 2px;
+}
+
+.filter-modal-price-icon-wrapper-error div {
+  background-color: red;
+}
+
 
 @media (width >= 65rem) {
   .hideTab {
