@@ -26,11 +26,13 @@ const ROUTES = [
         'method' => 'logIn',
         'layout' => Layout::BACK,
         'view' => false,
+        'show' => false,
     ],
     '/pro/connexion/logout' => [
         'controller' => App\Controller\ConnexionProController::class,
         'method' => 'logOut',
         'layout' => Layout::BACK,
+        'show' => false,
     ],
     '/pro/signup' => [
         'controller' => App\Controller\SignupProController::class,
@@ -55,10 +57,12 @@ const ROUTES = [
     '/connexion/logIn' => [
         'controller' => App\Controller\ConnexionController::class,
         'method' => 'logIn',
+        'show' => false,
     ],
     '/connexion/logOut' => [
         'controller' => App\Controller\ConnexionController::class,
         'method' => 'logOut',
+        'show' => false,
     ],
     '/consultationMembre' => [
         'controller' => App\Controller\ConsultationMController::class,
