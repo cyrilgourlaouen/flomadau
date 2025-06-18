@@ -4,8 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Compte;
 use App\Entity\Professionnel;
+use App\Entity\ProPrive;
+use App\Entity\ProPublique;
 use App\Manager\CompteProManager;
 use App\Manager\ProfessionnelManager;
+use App\Manager\ProPriveManager;
+use App\Manager\ProPubliqueManager;
 use Floma\Controller\AbstractController;
 
 class SignupProController extends AbstractController
@@ -64,8 +68,14 @@ class SignupProController extends AbstractController
             $comptePro = new Compte();
             $compteProManager = new CompteProManager();
 
-            /* $professionnel = new Professionnel(); */
-            /* $professionnelManager = new ProfessionnelManager(); */
+            $professionnel = new Professionnel();
+            $professionnelManager = new ProfessionnelManager();
+
+            $proPrive = new ProPrive();
+            $proPriveManager = new ProPriveManager();
+
+            $proPublique = new ProPublique();
+            $proPubliqueManager = new ProPubliqueManager();
 
             $comptePro->setNom($_POST['nom'] ?? null);
             $comptePro->setPrenom($_POST['prenom'] ?? null);
@@ -78,22 +88,29 @@ class SignupProController extends AbstractController
             $comptePro->setNumeroRue($_POST['numero'] ?? null);
             $comptePro->setComplementAdresse($_POST['complement'] ?? null);
 
-            /* $professionnel->setRaisonSociale($_POST['raison_sociale'] ?? null); */
-            /* $professionnel->setSiret($_POST['siret'] ?? null); */
+            $professionnel->setRaisonSociale($_POST['denomination'] ?? null);
 
-            // FIX: $professionnel->setIdCompte()
+            if($_POST['type_entreprise'] === 'privee') {
+                $proPrive->setSiren((int)$_POST['siren'] ?? null);
+                $professionnel->setPrive(true);
+            } else {
+                $professionnel->setPrive(false);
+            }
 
-            // OUTDATED:
-            // Check if the email already exists
+            // $returnedId looks like this : [$stmt, $id] and I only care about the id
+            $returnedId = $compteProManager->add($comptePro);
 
-            /* if ($compteProManager->checkEmail($comptePro->getEmail())) { */
-            /**/
-            /* return $this->redirectToRoute('/pro/signup', [ */
-            /* 'error' => 'L\'email est déjà utilisé.' */
-            /* ]); */
-            /* } */
+            $professionnel->setIdCompte($returnedId[1] ?? null);
 
-            $compteProManager->add($comptePro);
+            $returnedId = $professionnelManager->add($professionnel);
+
+            if($_POST['type_entreprise'] === 'privee') {
+                $proPrive->setCodeProfessionnel($returnedId[1] ?? null);
+                $proPriveManager->add($proPrive);
+            } else {
+                $proPublique->setCodeProfessionnel($returnedId[1] ?? null);
+                $proPubliqueManager->add($proPublique);
+            }
 
             return $this->redirectToRoute('/pro/connexion');
         }

@@ -11,6 +11,14 @@ use App\Entity\ProPrive;
  */
 class ProPriveManager extends AbstractManager
 {
+    public function add (ProPrive $proPrive)
+    {
+        return $this->create(ProPrive::class, [
+            'siren' => $proPrive->getSiren(),
+            'code_professionnel' => $proPrive->getCodeProfessionnel(),
+        ]);
+    }
+
     /**
      * @param int $id
      * @return mixed

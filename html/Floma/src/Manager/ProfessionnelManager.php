@@ -11,6 +11,14 @@ use App\Entity\Professionnel;
  */
 class ProfessionnelManager extends AbstractManager
 {
+    public function add(Professionnel $professionnel)
+    {
+        return $this->createGetCode(Professionnel::class, [
+            'id_compte' => $professionnel->getIdCompte(),
+            'raison_sociale' => $professionnel->getRaisonSociale(),
+            'est_prive' => $professionnel->isPrive() ? 'true' : 'false'
+        ]);
+    }
     /**
      * @param int $id
      * @return mixed
