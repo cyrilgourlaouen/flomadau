@@ -1018,7 +1018,7 @@ footer div nav :any-link {
   background-color: var(--background-color);
 }
 
-.selected-category, .selected-price-range {
+.selected-category {
   border: #000 solid 2px;
   background-color: var(--background-color);
 }
@@ -1122,6 +1122,11 @@ footer div nav :any-link {
 }
 
 .filter-modal-price-range-option:hover {
+  background-color: var(--background-color);
+}
+
+.selected-price-range {
+  border: #000 solid 2px;
   background-color: var(--background-color);
 }
 
