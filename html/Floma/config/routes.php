@@ -75,5 +75,4 @@ const ROUTES = [
         'view' => false,
     ],
 ];
-
 ?>

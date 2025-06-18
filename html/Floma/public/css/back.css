@@ -881,3 +881,70 @@ input::placeholder, textarea::placeholder, textarea::content {
   visibility: visible;
   opacity: 1;
 }
+
+input.bigField[type="file"]{
+    display: block;
+    padding: 12px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+input.bigField[type="file"]:hover {
+    background-color: #eef1f5;
+    border-color: #888;
+}
+
+input.bigField[type="file"]:focus {
+    outline: none;
+    border-color: #3f51b5;
+    background-color: #fff;
+}
+
+.custum-file-upload {
+  padding-top: 3.125rem;
+  height: 200px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  gap: 20px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #cacaca;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
+}
+
+.custum-file-upload .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload .icon .svg {
+  height: 80px;
+  fill: rgba(75, 85, 99, 1);
+}
+
+.custum-file-upload .text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload .text span {
+  font-weight: 400;
+  color: rgba(75, 85, 99, 1);
+}
+
+.custum-file-upload input {
+  display: none;
+}
+
+

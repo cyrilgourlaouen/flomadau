@@ -51,8 +51,8 @@ class CreationOffreController extends AbstractController
                 $image->setIdOffre($id);
                 $i == 0 ? $image->setPrincipale(true) : $image->setPrincipale(false);
                 $image->setUrlImg($_FILES["photo"]["name"][$i]);
+                $imageManager->add($image);
             }
-            $imageManager->add($image);
             if ($_POST["categorie"] === OfferCategoryEnum::Activity->value) {
                 $addCategory->setActivity($id);
 
@@ -69,7 +69,7 @@ class CreationOffreController extends AbstractController
                 $addCategory->setVisite($id);
 
             }
-            return $this->redirectToRoute('/');
+            return $this->redirectToRoute('/pro');
         }
         return $this->redirectToRoute('/offre/creation', ['state' => 'failure']);
     }

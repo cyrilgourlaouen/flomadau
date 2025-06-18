@@ -13,7 +13,21 @@ $head_subtitle = "INFORMATIONS ENTREPRISE";
 $head_svg = "/assets/icons/account_white.svg";
 include 'head_title.php';
 include 'black_button.php';
+if(!isset($_SESSION['code_pro'])){
+    ?>
+    <div id="body_acceuil">
+        <div class="msg_offer">
+            <p class="text_offer">Vous souhaitez bénéficier des options professionnelles ?</p>
+            <div id="btn_co_inscription">
+                <a href="?path=/pro/connexion"><button id="btn_connexion">Connexion</button></a>
+                <a href="?path=/pro/inscription"><button id="btn_inscription">Inscription</button></a>
+            </div>
+        </div>
+    </div>
+    <?php
+} else {
 ?>
+
 <form action="?path=/offre/creation/new" method="post" enctype="multipart/form-data" class="formContainer">
     <section class="formSectionContainer">
         <section class="formSectionContainer">
@@ -97,17 +111,16 @@ include 'black_button.php';
                 <div class="gap-vsm flex-col">
                     <label for="type_cuisine">Gamme de prix *</label>
                     <select name="gamme_de_prix" id="gamme_de_prix">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
+                        <option value="" selected disabled hidden>-- Gamme --</option>
+                        <option value="1">Moins de 25 euros</option>
+                        <option value="2">Entre 25 et 40 euros</option>
+                        <option value="3">Plus de 40 euros</option>
                     </select>
                 </div>
                 <div class="gap-vsm flex-col">
                     <label for="url_carte_restaurant" >Carte du restaurant *</label>
                     <input type="file" name="url_carte_restaurant" id="url_carte_restaurant">
                 </div>
-                
-
                 <div class="checkbox-group flex-col" id="types_repas">
                     <label for="checkbox-group" class="text-center">Type de repas *</label>
                     <div class="flex-row gap-vsm">
@@ -286,7 +299,15 @@ include 'black_button.php';
                     </span>
                 </span>
             </label>
-            <input type="file" class="bigField" id="photo_offre" name="photo[]"  multiple></input>
+            <label class="custum-file-upload" for="file">
+                <div class="icon">
+                    <img src="./assets/icons/cloud_primary.svg" class="svg">
+                </div>
+                <div class="text">
+                <span>Click to upload image</span>
+                </div>
+                <input type="file" class="bigField" id="photo_offre" name="photo[]"  multiple></input>
+            </label>
         </div>
     </section>
     <div class="buttonContainer">
@@ -295,3 +316,4 @@ include 'black_button.php';
 </form>
 <script src="./js/CreationOffre/displayForm.js"></script>
 <script src="./js/CreationOffre/verifFields.js"></script>
+<?php } ?>
