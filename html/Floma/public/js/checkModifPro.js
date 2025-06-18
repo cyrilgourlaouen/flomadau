@@ -116,6 +116,8 @@ function cancelCreditCard(){
 }
 
 /*GESTION DES INPUT EN TEMPS REEL*/
+
+//Validateur pour chaque input
 const validateurs = {
   
   nom: function(valeur) {
@@ -201,65 +203,60 @@ const validateurs = {
   }
 };
 
+//Validateur pour les champs qui contiennent les mots de passe
+function validerChampsMotDePasse() {
+    const newPassword = document.getElementById('new-password');
+    const confirmPassword = document.getElementById('confirm-password');
+    const oldPassword = document.getElementById('old-password');
+
+    const erreurOldPassword = document.getElementById('erreur-old-password');
+    const erreurNewPassword = document.getElementById('erreur-new-password');
+    const erreurConfirmPassword = document.getElementById('erreur-confirm-password');
+
+    erreurOldPassword.textContent = '';
+    erreurNewPassword.textContent = '';
+    erreurConfirmPassword.textContent = '';
+
+    let estValide = true;
+
+    if (oldPassword.value === '') {
+        erreurOldPassword.textContent = "L'ancien mot de passe doit être saisi";
+        estValide = false;
+    }
+
+    if (newPassword.value === '') {
+        erreurNewPassword.textContent = "Le nouveau mot de passe doit être saisi";
+        estValide = false;
+    }
+
+    if (confirmPassword.value === '') {
+        erreurConfirmPassword.textContent = "La confirmation du mot de passe doit être saisie";
+        estValide = false;
+    }
+
+    if (newPassword.value !== '' && confirmPassword.value !== '' && newPassword.value !== confirmPassword.value) {
+        erreurConfirmPassword.textContent = "Les mots de passe ne correspondent pas";
+        estValide = false;
+    }
+    
+    return estValide;
+}
+
+//EventListener qui surveille les input sur les champs du formulaire
 form.addEventListener('input', function(event) {
   const champ = event.target;
   const nomDuChamp = champ.name;
-  const newPassword = document.getElementById('new-password');
-  const confirmPassword = document.getElementById('confirm-password');
-  const oldPassword = document.getElementById('old-password');
 
-  const erreurOldPassword = document.getElementById('erreur-old-password');
-  const erreurNewPassword = document.getElementById('erreur-new-password');
-  const erreurConfirmPassword = document.getElementById('erreur-confirm-password');
+  if (nomDuChamp === 'old-password' || nomDuChamp === 'new-password' || nomDuChamp === 'confirm-password') {
+    validerChampsMotDePasse();
+  } else if (validateurs[nomDuChamp]) {
 
-  erreurOldPassword.textContent = '';
-  erreurNewPassword.textContent = '';
-  erreurConfirmPassword.textContent = '';
-
-  if (validateurs[nomDuChamp]) {
     const messageErreur = validateurs[nomDuChamp](champ.value);
     const spanErreur = document.getElementById('erreur-' + nomDuChamp);
 
     if (spanErreur) {
-      spanErreur.value = messageErreur || '';
+      spanErreur.textContent = messageErreur || '';
     }
-
-  } else if(nomDuChamp === 'old-password'){
-
-    if(newPassword.value === ''){
-      erreurNewPassword.textContent = "Le nouveau mot de passe doit être saisi";
-    }
-    if(confirmPassword.value === ''){
-      erreurConfirmPassword.textContent = "La confirmation du mot de passe doit être saisie";
-    }
-    if(champ.value === ''){
-      erreurOldPassword.textContent = "L'ancien mot de passe doit être saisi";
-    }
-
-  } else if(nomDuChamp === 'new-password'){
-
-    if(oldPassword.value === ''){
-      erreurOldPassword.textContent = "L'ancien mot de passe doit être saisi";
-    }
-    if(confirmPassword.value === ''){
-      erreurConfirmPassword.textContent = "La confirmation du mot de passe doit être saisie";
-    }
-    if(champ.value === ''){
-      erreurNewPassword.textContent = "Le nouveau mot de passe doit être saisi";
-    }
-
-  } else if(nomDuChamp === 'confirm-password'){
-
-    if(oldPassword.value === ''){
-      erreurOldPassword.textContent = "L'ancien mot de passe doit être saisi";
-    }
-    if(newPassword.value === ''){
-      erreurNewPassword.textContent = "Le nouveau mot de passe doit être saisi";
-    }
-    if(champ.value === ''){
-      erreurConfirmPassword.textContent = "La confirmation du mot de passe doit être saisie";
-    }
-
   }
 
   //on active les inputs
