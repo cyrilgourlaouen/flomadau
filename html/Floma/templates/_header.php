@@ -9,17 +9,20 @@
 			</a>
 			<a href="#" class="search"><img src="/assets/icons/search_white.svg" alt="loupe" class="ImgSearch"></a>
 			<?php if (!isset($_SESSION['email'])) { ?>
-				<img class="imgLog" id="logBtn"src="/assets/icons/menu_logIn_white.svg" alt="Icon de connexion">
+				<img class="imgLog" id="logBtn" src="/assets/icons/menu_logIn_white.svg" alt="Icon de connexion">
 				<div id="logMenu" class="logMenu hidden">
 					<ul>
 						<li><a href="?path=/connexion">Se connecter</a></li>
 					</ul>
 				</div>
 			<?php } else { ?>
-				<img class="imgLogOut" id="logBtn" src="/assets/icons/login_white.svg" alt="Icon de déconnexion">
+				<img class="imgLogOut imgProfil" id="logBtn"
+					src="uploads/profilePicture/<?= htmlspecialchars($_SESSION['url_photo_profil']) ?>.jpg"
+					alt="Icon de déconnexion">
 				<div id="logMenu" class="logMenu hidden">
 					<ul>
-						<li><a href="?path=/consultationMembre">Mes informations</></li>
+						<li><a href="?path=/consultationMembre">Mes informations</>
+						</li>
 						<li><a href="?path=/connexion/logOut">Se déconnecter</a></li>
 					</ul>
 				</div>
