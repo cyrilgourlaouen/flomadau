@@ -304,7 +304,7 @@ if(!isset($_SESSION['code_pro'])){
                     <img src="./assets/icons/cloud_primary.svg" class="svg">
                 </div>
                 <div class="text">
-                <span>Click to upload image</span>
+                    <span>Click to upload image</span>
                 </div>
                 <input type="file" class="bigField" id="photo_offre" name="photo[]"  multiple></input>
             </label>
