@@ -23,35 +23,35 @@ class ModificationMembreController extends AbstractController
         if (!empty($_POST)) {
             $compte = new Compte();
             $compteManager = new CompteManager();
-            
+
             $compte->setNom($_POST['name'] ?? null);
             $compte->setPrenom($_POST['firstname'] ?? null);
             $compte->setTelephone($_POST['phone'] ?? null);
-            
+
             if (!empty($_POST['email']) && $this->isEmailAvailable($_POST['email'])) {
                 $compte->setEmail($_POST['email']);
                 $compteManager->updateEmail($compte, $_SESSION['id']);
-            } 
-            
+            }
+
             $membre = new Membre();
             $membreManager = new MembreManager();
-            
+
             $id = (int) ($_POST['id_compte'] ?? 0);
-            
+
             $previousMembre = $membreManager->findOneBy(['id_compte' => $id ?? null]);
 
-            if($previousMembre->getPseudo() !== $_POST['pseudo']){
+            if ($previousMembre->getPseudo() !== $_POST['pseudo']) {
                 $membre->setPseudo($_POST['pseudo'] ?? null);
-                $membreManager->updateMembre($membre , $id);
+                $membreManager->updateMembre($membre, $id);
             } else {
-                $compteManager->updateCompte($compte, $id); 
+                $compteManager->updateCompte($compte, $id);
             }
 
 
             session_unset();
 
             // 🔁 Reconnexion
-            $compteMisAJour = CompteResource::build($compteManager->findOneBy( ['id' => $id] ), [
+            $compteMisAJour = CompteResource::build($compteManager->findOneBy(['id' => $id]), [
                 'userName' => ['isMultiple' => true],
             ]);
 
@@ -63,30 +63,32 @@ class ModificationMembreController extends AbstractController
                 $_SESSION = $compteMisAJour;
 
                 session_regenerate_id(true);
-                return $this->redirectToRoute('/consultation/membre' , ["state" => "success"]);
+                return $this->redirectToRoute('/consultation/membre', ["state" => "success"]);
             } else {
                 return $this->redirectToRoute('/consultation/membre', ["state" => "failure"]);
             }
         }
     }
 
-    public function checkPassword() {
+    public function checkPassword()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $password = $_POST['password'] ?? '';
 
             if (password_verify($password, $_SESSION['mot_de_passe'])) {
-                echo json_encode(true);  
+                echo json_encode(true);
             } else {
-                echo json_encode(false); 
+                echo json_encode(false);
             }
             exit;
         }
     }
 
-    public function updatePassword() {
+    public function updatePassword()
+    {
         $compte = new Compte();
         $compteManager = new CompteManager();
-        
+
         $compte = $compteManager->findOneBy(['id' => $_SESSION['id'] ?? 0]);
 
         $newPassword = $_POST['new_password'] ?? null;
@@ -106,10 +108,10 @@ class ModificationMembreController extends AbstractController
         $compteManager->updatePassword($compte, $_SESSION['id'] ?? 0);
 
         // 🔁 Reconnexion
-        $compteMisAJour = CompteResource::build($compteManager->findOneBy( ['id' => $_SESSION['id']] ), [
+        $compteMisAJour = CompteResource::build($compteManager->findOneBy(['id' => $_SESSION['id']]), [
             'userName' => ['isMultiple' => true],
         ]);
-        
+
         if ($compteMisAJour) {
             session_unset();
             if (session_status() === PHP_SESSION_NONE) {
@@ -126,7 +128,8 @@ class ModificationMembreController extends AbstractController
         }
     }
 
-    private function isValidPassword(string $password): bool {
+    private function isValidPassword(string $password): bool
+    {
         if (strlen($password) < 12) {
             return false;
         }
@@ -144,9 +147,12 @@ class ModificationMembreController extends AbstractController
         }
         return true;
     }
-    private function isEmailAvailable(string $email): bool {
-        if (empty($email)) return false;
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) return false;
+    private function isEmailAvailable(string $email): bool
+    {
+        if (empty($email))
+            return false;
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+            return false;
 
         $compteManager = new CompteManager();
         $allMembre = CompteResource::buildAll($compteManager->findAll(), [
@@ -160,7 +166,8 @@ class ModificationMembreController extends AbstractController
         }
         return true;
     }
-    public function checkEmail() {
+    public function checkEmail()
+    {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             echo json_encode(['success' => false, 'error' => 'Méthode non autorisée']);
             return;
