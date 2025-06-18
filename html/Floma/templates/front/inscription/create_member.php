@@ -109,7 +109,7 @@
     <figure id="background_image_block">
         <img src="/assets/images/bg_inscription.png" alt="Vue de haut sur une plage de la côte d'azur" id="background_image">
     </figure>
-    <script src="/js/error-message-inscription-membre.js"></script>
+    <!-- <script src="/js/error-message-inscription-membre.js"></script> -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.querySelector('#inscription_membre');
@@ -174,7 +174,7 @@
                     });
                 }
             });
-            
+ 
             // Submit button handler
             btn.addEventListener('click', function (event) {
                 event.preventDefault();
@@ -186,11 +186,54 @@
                         isValid = false;
                     }
                 });
-                
-                // If all valid, submit form
-                if (isValid) {
-                    form.submit();
-                }
+
+                const pseudo = document.getElementById('pseudo').value.trim();
+                const tel = document.getElementById('tel').value.trim();
+                const email = document.getElementById('email').value.trim();
+
+                // Use fetch to check email, but wait for the response
+                fetch('?path=/inscription/membre/verification', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        email: email,
+                        tel: tel,
+                        pseudo: pseudo
+                    })
+                })
+                    .then(response => {
+                        return response.json()
+                    }
+                    )
+                    .then(data => {
+                        if (data.statusEmail === 'error') {
+                            const errorEl = document.getElementById('error-email');
+                            errorEl.innerText = data.messageEmail;
+                        }
+                        if (data.statusTel === 'error') { 
+                            const errorEl = document.getElementById('error-tel');
+                            errorEl.innerText = data.messageTel;
+                        }
+                        if (data.statusPseudo === 'error') {
+                            const errorEl = document.getElementById('error-pseudo');
+                            errorEl.innerText = data.messagePseudo;
+                        } else {
+                            form.submit();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error checking datas in db:', error);
+                        // Show a generic error message
+                        const errorElEmail = document.getElementById('error-email');
+                        const errorElTel = document.getElementById('error-tel');
+                        const errorElPseudo = document.getElementById('error-pseudo');
+                        errorElEmail.innerText = 'Erreur de vérification de l\'email. Veuillez réessayer.';
+                        errorElTel.innerText = 'Erreur de vérification du numéro de téléphone. Veuillez réessayer.';
+                        errorElPseudo.innerText = 'Erreur de vérification du pseudo. Veuillez réessayer.';
+                        isValid = false;
+                    });
             });
         });
     </script>

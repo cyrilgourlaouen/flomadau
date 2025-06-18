@@ -72,36 +72,38 @@ class SignupMembreController extends AbstractController
     {
         header('Content-Type: application/json');
         $response = [];
-        if (isset($_POST['email'])){
-            $checkEmail = new CompteManager();
-            $checkEmail->findOneBy(['email' => $_POST['email']]);
-            if ($checkEmail == null) {
-                $response['emailExists'] = false;
-            }
-            else {
-                $response['emailExists'] = true;
-            }
-        }
-        if (isset($_POST['pseudo'])){
-            $checkPseudo = new CompteManager();
-            $checkPseudo->findOneBy(['pseudo' => $_POST['pseudo']]);
-            if ($checkPseudo == null) {
-                $response['pseudoExists'] = false;
-            }
-            else {
-                $response['pseudoExists'] = true;
+        $compteManager = new CompteManager();
+        $membreManager = new MembreManager();
+        if (isset($_POST['email'])) {
+            if ($compteManager->findOneBy(['email' => $_POST['email']])) {
+                $response['statusEmail'] = 'error';
+                $response['messageEmail'] = 'Cet email est déjà utilisé.';
+            } else {
+                $response['statusEmail'] = 'success';
+                $response['messageEmail'] = 'Email disponible.';
             }
         }
-        if (isset($_POST['tel'])){
-            $checkTel = new CompteManager();
-            $checkTel->findOneBy(['telephone' => $_POST['tel']]);
-            if ($checkTel == null) {
-                $response['telExists'] = false;
+
+        if (isset($_POST['pseudo'])) {
+            if ($membreManager->findOneBy(['pseudo' => $_POST['pseudo']])) {
+                $response['statusPseudo'] = 'error';
+                $response['messagePseudo'] = 'Ce pseudo est déjà utilisé.';
+            } else {
+                $response['statusPseudo'] = 'success';
+                $response['messagePseudo'] = 'Pseudo disponible.';
             }
-            else {
-                $response['telExists'] = true;
+        }
+
+        if (isset($_POST['tel'])) {
+            if ($compteManager->findOneBy(['telephone' => $_POST['tel']])) {
+                $response['statusTel'] = 'error';
+                $response['messageTel'] = 'Ce numéro de téléphone est déjà utilisé.';
+            } else {
+                $response['statusTel'] = 'success';
+                $response['messageTel'] = 'Numéro de téléphone disponible.';
             }
         }
         echo json_encode($response);
+        return;
     }
 }
