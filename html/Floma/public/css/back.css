@@ -949,4 +949,6 @@ input.bigField[type="file"]:focus {
   display: none;
 }
 
-
+input[type=file] {
+  cursor: pointer;
+}
