@@ -73,7 +73,8 @@ class InscriptionController extends AbstractController
         header('Content-Type: application/json');
         $response = [];
         if (isset($_POST['email'])){
-            $checkEmail = new CompteManager()->findOneBy(['email' => $_POST['email']]);
+            $checkEmail = new CompteManager();
+            $checkEmail->findOneBy(['email' => $_POST['email']]);
             if ($checkEmail == null) {
                 $response['emailExists'] = false;
             }
@@ -82,7 +83,8 @@ class InscriptionController extends AbstractController
             }
         }
         if (isset($_POST['pseudo'])){
-            $checkPseudo = new CompteManager()->findOneBy(['pseudo' => $_POST['pseudo']]);
+            $checkPseudo = new CompteManager();
+            $checkPseudo->findOneBy(['pseudo' => $_POST['pseudo']]);
             if ($checkPseudo == null) {
                 $response['pseudoExists'] = false;
             }
@@ -91,7 +93,8 @@ class InscriptionController extends AbstractController
             }
         }
         if (isset($_POST['tel'])){
-            $checkTel = new CompteManager()->findOneBy(['telephone' => $_POST['tel']]);
+            $checkTel = new CompteManager();
+            $checkTel->findOneBy(['telephone' => $_POST['tel']]);
             if ($checkTel == null) {
                 $response['telExists'] = false;
             }
