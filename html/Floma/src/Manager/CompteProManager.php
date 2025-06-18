@@ -10,7 +10,7 @@ class CompteProManager extends AbstractManager
 {
     public function add(Compte $compte)
     {
-        return $this->create(Compte::class, [
+        return $this->createGetId(Compte::class, [
             'nom' => $compte->getNom(),
             'prenom' => $compte->getPrenom(),
             'email' => $compte->getEmail(),
@@ -20,7 +20,8 @@ class CompteProManager extends AbstractManager
             'code_postal' => $compte->getCodePostal(),
             'nom_rue' => $compte->getNomRue(),
             'numero_rue' => $compte->getNumeroRue(),
-            'complement_adresse' => $compte->getComplementAdresse()
+            'complement_adresse' => $compte->getComplementAdresse(),
+            'est_pro' => 'true'
         ]);
     }
 
