@@ -13,7 +13,7 @@ class Compte
     private string $telephone;
     private string $mot_de_passe;
     private string $ville;
-    private int $code_postal;
+    private string $code_postal;
     private string $nom_rue;
     private int $numero_rue;
     private ?string $complement_adresse = null;
@@ -91,12 +91,12 @@ class Compte
         $this->ville = $ville;
     }
 
-    public function getCodePostal(): int
+    public function getCodePostal(): string
     {
         return $this->code_postal;
     }
 
-    public function setCodePostal(int $code_postal): void
+    public function setCodePostal(string $code_postal): void
     {
         $this->code_postal = $code_postal;
     }
