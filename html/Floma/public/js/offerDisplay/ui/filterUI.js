@@ -481,7 +481,7 @@ export function setupFilterUI(filterManager, displayManager) {
       filterManager.setFilter("date", { startDate: validation.startDate, endDate: validation.endDate });
       updateSelectedDateLabel(startDate, endDate);
     }
-    
+
     refreshDisplay();
   }
 
@@ -513,7 +513,7 @@ export function setupFilterUI(filterManager, displayManager) {
       filterManager.setFilter("date", { startDate: validation.startDate, endDate: validation.endDate });
       updateSelectedDateLabel(startDate, endDate);
     }
-    
+
     refreshDisplay();
   }
 
@@ -664,7 +664,6 @@ export function setupFilterUI(filterManager, displayManager) {
         closeAllDropdowns();
       }
     }
-  }
 
     // Reset si on désélectionne Restaurant pour aller vers "aucune catégorie"
     if (isCurrentlySelected && previousCategory === "Restaurant") {
