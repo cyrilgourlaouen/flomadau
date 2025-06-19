@@ -52,9 +52,9 @@ class CompteManager extends AbstractManager
     /**
      * @param Compte $compte
      * @param int $id
-     * @return PDOStatement
+     * @return \PDOStatement
      */
-    public function updateCompte(Compte $compte, int $id): PDOStatement
+    public function updateCompte(Compte $compte, int $id): \PDOStatement
     {
         $fields = [
             'nom' => $compte->getNom(),
