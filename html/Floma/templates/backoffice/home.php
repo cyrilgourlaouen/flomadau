@@ -200,7 +200,7 @@
                 </div>
                 <!-- Btn voir plus -->
                 <!--TODO le faire pointer vers la page de consultation-->
-                <?= button('Voir plus', 'btn_voir_plus'); ?>
+                <a href="?path=/pro/consultation/offer/<?= $offer['id']?>"><button id="btn_voir_plus">Voir plus</button></a>
             </div>
         </article>
     <?php 
