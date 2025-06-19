@@ -162,6 +162,7 @@ p.placeholder {
   flex-direction: column;
   align-items: start;
   gap: 3.125rem;
+  height: 100%;
 }
 
 #menuTextContainer {
@@ -169,10 +170,20 @@ p.placeholder {
   flex-direction: column;
   align-items: start;
   gap: 1.875rem;
+  height: 100%;
 }
 
 #sidebar-menu {
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.875rem;
+  height: 100%;
+  justify-content: space-between;
+  padding-bottom: 1.875rem;
+}
+
+#sidebar-menu div{
   display: flex;
   flex-direction: column;
   gap: 1.875rem;
@@ -224,7 +235,9 @@ p.placeholder {
 #menu-factures::before {
   background-image: url("../assets/icons/facture_grey.svg");
 }
-
+#menu-return::before {
+  background-image: url("../assets/icons/return_front_grey.svg");
+}
 /* head_title */
 .headContainer {
   display: flex;
