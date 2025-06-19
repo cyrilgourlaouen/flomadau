@@ -1,7 +1,7 @@
 <?php
 $head_title = "Désactiver 2FA";
 $head_subtitle = "AUTHENTIFICATION À DEUX FACTEURS";
-$head_svg = "/assets/icons/warning_white.svg";
+$head_svg = "/assets/icons/account_white.svg";
 include 'head_title.php';
 include 'black_button.php';
 ?>

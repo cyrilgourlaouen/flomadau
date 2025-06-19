@@ -63,7 +63,7 @@ document.getElementById('totp_code').addEventListener('input', function() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                feedback.textContent = '✅ Code valide';
+                feedback.textContent = 'Code valide';
                 feedback.className = 'code-feedback valid';
                 // Auto-submit after a short delay
                 setTimeout(() => {
