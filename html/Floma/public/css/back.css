@@ -727,3 +727,312 @@ input::placeholder {
 #check-num-card {
   font-size: var(--larger-text-size);
 }
+
+/* 2FA Component */
+.security-status-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.security-header h4 {
+    margin: 0 0 1rem 0;
+    color: #333;
+    font-size: 1.2em;
+}
+
+.alert {
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    color: #856404;
+}
+
+.status-enabled, .status-disabled {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.status-text {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.status-enabled .status-text {
+    color: #28a745;
+}
+
+.status-disabled .status-text {
+    color: #ffc107;
+}
+
+.status-description {
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.security-actions {
+    margin-top: 1rem;
+}
+
+.setup-2fa-btn {
+    background: #007cba;
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.setup-2fa-btn:hover {
+    background: #005a87;
+    text-decoration: none;
+    color: white;
+}
+
+.disable-2fa-link {
+    color: #dc3545;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.disable-2fa-link:hover {
+    text-decoration: underline;
+}
+
+/* 2FA SETUP */
+.twofa-setup {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.step-instructions {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.step-instructions h4 {
+    margin-top: 0;
+    color: #333;
+}
+
+.qr-code-container {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.qr-code {
+    max-width: 200px;
+    height: auto;
+}
+
+.manual-entry {
+    background: #f5f5f5;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+.manual-key {
+    display: block;
+    background: white;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 1.1em;
+    word-break: break-all;
+    margin: 0.5rem 0;
+}
+
+.copy-btn {
+    background: #007cba;
+    color: white;
+    border: none;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.copy-btn:hover {
+    background: #005a87;
+}
+
+.code-feedback {
+    font-size: 0.9em;
+    margin-top: 0.5rem;
+}
+
+.code-feedback.valid {
+    color: green;
+}
+
+.code-feedback.invalid {
+    color: red;
+}
+
+#totp_code {
+    text-align: center;
+    font-size: 1.2em;
+    letter-spacing: 0.2em;
+    font-family: monospace;
+}
+
+/* 2FA Verif */
+.twofa-verification {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.twofa-verification p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1em;
+}
+
+#totp_code {
+    text-align: center;
+    font-size: 1.5em;
+    letter-spacing: 0.3em;
+    font-family: monospace;
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+#totp_code:focus {
+    border-color: #007cba;
+    outline: none;
+}
+
+.code-feedback {
+    font-size: 1em;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.code-feedback.valid {
+    color: green;
+    font-weight: bold;
+}
+
+.code-feedback.invalid {
+    color: red;
+}
+
+.login-help {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.login-help a {
+    color: #007cba;
+    text-decoration: none;
+}
+
+.login-help a:hover {
+    text-decoration: underline;
+}
+
+/* 2FA disable */
+.disable-confirmation {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 2rem;
+}
+
+.disable-confirmation h3 {
+    color: #dc3545;
+    margin-bottom: 1.5rem;
+}
+
+.warning-details {
+    background: #fff3cd;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    border-left: 4px solid #ffc107;
+}
+
+.warning-details p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.warning-details p:last-child {
+    margin-bottom: 0;
+}
+
+.confirmation-actions {
+    margin: 2rem 0;
+}
+
+.button-group {
+    margin-bottom: 1rem;
+}
+
+.buttonContainer.danger button {
+    background-color: #dc3545;
+}
+
+.buttonContainer.danger button:hover {
+    background-color: #c82333;
+}
+
+.cancel-action {
+    margin-top: 1rem;
+}
+
+.cancel-link {
+    color: #007cba;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cancel-link:hover {
+    text-decoration: underline;
+}
+
+.security-reminder {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+    text-align: left;
+}
+
+.security-reminder h4 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.security-reminder ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+
+.security-reminder li {
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
