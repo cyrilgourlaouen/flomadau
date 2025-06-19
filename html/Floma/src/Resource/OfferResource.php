@@ -4,14 +4,12 @@ namespace App\Resource;
 
 use App\Entity\LangueGuideVisite;
 use App\Entity\Offer;
-use App\Entity\Tag;
 use App\Entity\TagOffre;
 use App\Entity\TypeRepasRestaurant;
 use App\Enum\OfferCategoryEnum;
 use App\Manager\ImageManager;
 use App\Manager\LangueGuideManager;
 use App\Manager\LangueGuideVisiteManager;
-use App\Manager\OfferManager;
 use App\Manager\ProfessionnelManager;
 use App\Manager\TagManager;
 use App\Manager\TagOffreManager;
@@ -21,7 +19,6 @@ use App\Manager\OptionSouscriteManager;
 use App\Manager\OptionVisibiliteManager;
 use App\Manager\AvisManager;
 use App\Entity\OptionSouscrite;
-use App\Entity\OptionVisibilite;
 use Floma\Resource\AbstractResource;
 
 class OfferResource extends AbstractResource

@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Activite;
 use App\Entity\LangueGuideVisite;
 use App\Entity\Offer;
+use App\Entity\OptionSouscrite;
 use App\Entity\ParcAttraction;
 use App\Entity\Restaurant;
 use App\Entity\Spectacle;
@@ -13,11 +14,13 @@ use App\Entity\Visite;
 use App\Manager\ActiviteManager;
 use App\Manager\LangueGuideVisiteManager;
 use App\Manager\OfferManager;
+use App\Manager\OptionSouscriteManager;
 use App\Manager\ParcAttractionManager;
 use App\Manager\RestaurantManager;
 use App\Manager\SpectacleManager;
 use App\Manager\TypeRepasRestaurantManager;
 use App\Manager\VisiteManager;
+use DateTimeImmutable;
 
 class AddCategory 
 {
@@ -112,8 +115,42 @@ class AddCategory
         $offer->setCategorie($_POST['categorie']);
         $offer->setTelephone($_POST["telephone"]);
         $offer->setSiteWeb($_POST["site_web"]);
-        $offer->setCodeProfessionnel(1);
+        $offer->setCodeProfessionnel($_SESSION['code_pro']);
         $_POST["complement_adresse"] ?? $offer->setComplementAdresse($_POST["complement_adresse"]);
         return $offerManager->addGetId($offer)[1];
+    }
+
+    public function setReliefOffre(int $id) 
+    {
+        $optionSouscrite = new OptionSouscrite();
+        $optionSouscriteManager = new OptionSouscriteManager();
+        if (isset($_POST["a_la_une"]) || isset($_POST["en_relief"])) {
+            date_default_timezone_set('Europe/Paris');
+            $date = new DateTimeImmutable();
+            $today = $date->format('Y-m-d');
+            $nextMonth = $date->modify('+1 month')->format('Y-m-d');
+            if (isset($_POST["a_la_une"]) && isset($_POST["en_relief"])) {
+                $optionSouscrite->setIdOption(2);
+                $optionSouscrite->setIdOffre($id);
+                $optionSouscrite->setNombreJour(0);
+                $optionSouscrite->setDateDebut($today);
+                $optionSouscrite->setDateFin($nextMonth);
+                $optionSouscriteManager->add($optionSouscrite);
+                $optionSouscrite->setIdOption(1);
+                $optionSouscrite->setIdOffre($id);
+                $optionSouscrite->setNombreJour(0);
+                $optionSouscrite->setDateDebut($today);
+                $optionSouscrite->setDateFin($nextMonth);
+                $optionSouscriteManager->add($optionSouscrite);
+            } else {
+                $_POST["a_la_une"] ?? $optionSouscrite->setIdOption(2);
+                $_POST["en_relief"] ?? $optionSouscrite->setIdOption(1);
+                $optionSouscrite->setIdOffre($id);
+                $optionSouscrite->setNombreJour(0);
+                $optionSouscrite->setDateDebut($today);
+                $optionSouscrite->setDateFin($nextMonth);
+                $optionSouscriteManager->add($optionSouscrite);
+            }
+        }
     }
 }
