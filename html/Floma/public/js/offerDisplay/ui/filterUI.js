@@ -68,6 +68,15 @@ export function setupFilterUI(filterManager, displayManager) {
   const startDesktopDateInput = document.getElementById('desktop-start-date');
   const endDesktopDateInput = document.getElementById('desktop-end-date');
 
+  // Note modal/mobile
+  const noteStars = document.querySelectorAll('.filter-modal-note-options img[data-star-value]');
+
+  // Note desktop
+  const noteDropdownButton = document.querySelector('#desktop-note-button');
+  const noteDropdownOptions = document.querySelector('#desktop-note-options');
+  const selectedNoteLabel = document.getElementById('selected-note-label');
+  const desktopNoteStars = document.querySelectorAll('#desktop-note-options img[data-star-value]');
+
   // --- FONCTIONS DE GESTION DES DROPDOWNS ---
 
   function closeAllDropdowns() {
@@ -82,6 +91,31 @@ export function setupFilterUI(filterManager, displayManager) {
     }
     if (dateDropdownOptions) {
       dateDropdownOptions.style.display = 'none';
+    }
+    if (noteDropdownOptions) {
+      noteDropdownOptions.style.display = 'none';
+    }
+  }
+
+  function toggleNoteDropdown() {
+    // Fermer les autres dropdowns
+    if (categoryDropdownOptions) {
+      categoryDropdownOptions.style.display = 'none';
+    }
+    if (priceDropdownOptions) {
+      priceDropdownOptions.style.display = 'none';
+    }
+    if (desktopPriceRangeOptions) {
+      desktopPriceRangeOptions.style.display = 'none';
+    }
+    if (dateDropdownOptions) {
+      dateDropdownOptions.style.display = 'none';
+    }
+
+    // Toggle le dropdown de note
+    if (noteDropdownOptions) {
+      const isVisible = noteDropdownOptions.style.display === 'flex';
+      noteDropdownOptions.style.display = isVisible ? 'none' : 'flex';
     }
   }
 
@@ -628,6 +662,106 @@ export function setupFilterUI(filterManager, displayManager) {
     refreshDisplay();
   }
 
+  // Fonction pour gérer la sélection des étoiles (mobile et desktop)
+  function handleStarSelection(selectedValue, isFromDesktop = false) {
+    const currentNote = filterManager.getFilter('note');
+
+    // Si on clique sur la même note, on désélectionne
+    if (currentNote === selectedValue) {
+      filterManager.setFilter('note', null);
+      updateStarDisplay(0);
+      updateSelectedNoteLabel(null);
+    } else {
+      filterManager.setFilter('note', selectedValue);
+      updateStarDisplay(selectedValue);
+      updateSelectedNoteLabel(selectedValue);
+    }
+
+    // Fermer le dropdown desktop si la sélection vient du desktop
+    if (isFromDesktop && noteDropdownOptions) {
+      noteDropdownOptions.style.display = 'none';
+    }
+
+    refreshDisplay();
+  }
+
+  // Fonction pour mettre à jour l'affichage des étoiles (mobile et desktop)
+  function updateStarDisplay(selectedNote) {
+    // Mettre à jour les étoiles mobiles
+    noteStars.forEach((star, index) => {
+      const starValue = index + 1;
+      const starImg = star;
+
+      if (selectedNote === 0) {
+        // Aucune sélection - toutes les étoiles en outline
+        starImg.src = '/assets/icons/star_outline_pink.svg';
+      } else if (starValue <= Math.floor(selectedNote)) {
+        // Étoiles pleines
+        starImg.src = '/assets/icons/star_pink.svg';
+      } else if (starValue === Math.ceil(selectedNote) && selectedNote % 1 !== 0) {
+        // Demi-étoile
+        starImg.src = '/assets/icons/star_half_pink.svg';
+      } else {
+        // Étoiles vides
+        starImg.src = '/assets/icons/star_outline_pink.svg';
+      }
+    });
+
+    // Mettre à jour les étoiles desktop
+    desktopNoteStars.forEach((star, index) => {
+      const starValue = index + 1;
+      const starImg = star;
+
+      if (selectedNote === 0) {
+        // Aucune sélection - toutes les étoiles en outline
+        starImg.src = '/assets/icons/star_outline_pink.svg';
+      } else if (starValue <= Math.floor(selectedNote)) {
+        // Étoiles pleines
+        starImg.src = '/assets/icons/star_pink.svg';
+      } else if (starValue === Math.ceil(selectedNote) && selectedNote % 1 !== 0) {
+        // Demi-étoile
+        starImg.src = '/assets/icons/star_half_pink.svg';
+      } else {
+        // Étoiles vides
+        starImg.src = '/assets/icons/star_outline_pink.svg';
+      }
+    });
+  }
+
+  // Fonction pour gérer le survol des étoiles
+  function handleStarHover(hoveredValue, isDesktop = false) {
+    const starsToUpdate = isDesktop ? desktopNoteStars : noteStars;
+
+    starsToUpdate.forEach((star, index) => {
+      const starValue = index + 1;
+      const starImg = star;
+
+      if (starValue <= hoveredValue) {
+        starImg.src = '/assets/icons/star_pink.svg';
+      } else {
+        starImg.src = '/assets/icons/star_outline_pink.svg';
+      }
+    });
+  }
+
+  // Fonction pour restaurer l'affichage après le survol
+  function restoreStarDisplay() {
+    const currentNote = filterManager.getFilter('note') || 0;
+    updateStarDisplay(currentNote);
+  }
+
+  // Fonction pour mettre à jour le label de note
+  function updateSelectedNoteLabel(noteValue) {
+    if (!selectedNoteLabel) return;
+
+    if (!noteValue || noteValue === 0) {
+      selectedNoteLabel.textContent = '';
+    } else {
+      const starText = noteValue === 1 ? 'étoile' : 'étoiles';
+      selectedNoteLabel.textContent = `: ≥ ${noteValue} ${starText}`;
+    }
+  }
+
   // --- LISTENERS ---
 
   // Texte
@@ -795,6 +929,82 @@ export function setupFilterUI(filterManager, displayManager) {
     }
   });
 
+  if (noteStars && noteStars.length > 0) {
+    noteStars.forEach((star, index) => {
+      const starValue = index + 1;
+
+      // Gestion du clic
+      star.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        handleStarSelection(starValue, false);
+      });
+
+      // Gestion du survol
+      star.addEventListener('mouseenter', () => {
+        handleStarHover(starValue, false);
+      });
+
+      // Restaurer l'affichage quand on quitte la zone des étoiles
+      star.addEventListener('mouseleave', () => {
+        restoreStarDisplay();
+      });
+
+      // Ajouter un style de curseur pointer
+      star.style.cursor = 'pointer';
+    });
+  }
+
+  // Gestion des étoiles pour le filtre de note (desktop)
+  if (desktopNoteStars && desktopNoteStars.length > 0) {
+    desktopNoteStars.forEach((star, index) => {
+      const starValue = index + 1;
+
+      // Gestion du clic
+      star.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        handleStarSelection(starValue, true);
+      });
+
+      // Gestion du survol
+      star.addEventListener('mouseenter', () => {
+        handleStarHover(starValue, true);
+      });
+
+      // Restaurer l'affichage quand on quitte la zone des étoiles
+      star.addEventListener('mouseleave', () => {
+        restoreStarDisplay();
+      });
+
+      // Ajouter un style de curseur pointer
+      star.style.cursor = 'pointer';
+    });
+  }
+
+  // Toggle du dropdown note desktop
+  if (noteDropdownButton) {
+    noteDropdownButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleNoteDropdown();
+    });
+  }
+
+  // Fermer les dropdowns quand on clique ailleurs
+  document.addEventListener('click', (e) => {
+    // ...existing code...
+
+    if (
+      noteDropdownButton &&
+      noteDropdownOptions &&
+      !noteDropdownButton.contains(e.target) &&
+      !noteDropdownOptions.contains(e.target)
+    ) {
+      noteDropdownOptions.style.display = 'none';
+    }
+  });
+
   // --- FONCTION CATÉGORIE ---
   function handleCategorySelection(category, isFromDesktop = true) {
     const isCurrentlySelected =
@@ -852,6 +1062,8 @@ export function setupFilterUI(filterManager, displayManager) {
     refreshDisplay();
   }
 
+
+
   // --- RAFRAICHISSEMENT ---
   function refreshDisplay() {
     if (window.sortManager) {
@@ -882,4 +1094,10 @@ export function setupFilterUI(filterManager, displayManager) {
   if (dateDropdownOptions) {
     dateDropdownOptions.style.display = 'none';
   }
+  if (noteDropdownOptions) {
+    noteDropdownOptions.style.display = 'none';
+  }
+
+  // Initialiser l'affichage des étoiles
+  updateStarDisplay(0);
 }
