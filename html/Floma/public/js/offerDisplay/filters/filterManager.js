@@ -1,6 +1,7 @@
 import { filterByCategory } from './categoryFilter.js';
 import { filterBySearch } from './searchFilter.js';
 import { filterByPrice } from './priceFilter.js';
+import { filterByDate } from './dateFilter.js';
 
 export function setupFilterManager(initialOffers) {
 
@@ -8,6 +9,7 @@ export function setupFilterManager(initialOffers) {
         search: '',
         category: null,
         price: null,
+        date: null,
     };
 
     const applyFilters = (offers) => {
@@ -39,6 +41,11 @@ export function setupFilterManager(initialOffers) {
             } else {
                 filtered = filterByPrice(filtered, filters.price);
             }
+        }
+
+        // Filtre de date
+        if (filters.date) {
+            filtered = filterByDate(filtered, filters.date);
         }
 
         return filtered;
