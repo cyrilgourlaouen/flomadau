@@ -139,12 +139,6 @@ $highlightedOffers = array_filter($data["offers"], function ($offer) {
                     </div>
                 </div>
             </div>
-            <div id="filter-modal-location">
-                <h3>Lieu</h3>
-                <div>
-
-                </div>
-            </div>
             <div class="filter-modal-sort" id="filter-modal-price">
                 <h3>Prix</h3>
                 <div class="filter-modal-price-options">
@@ -177,13 +171,29 @@ $highlightedOffers = array_filter($data["offers"], function ($offer) {
 
 
             <div class="filter-modal-sort" id="filter-modal-note">
-                <h3>Note</h3>
                 <div>
-
+                    <h3>Note</h3>
+                    <p id="filter-note-text">Sélectionnez la note minimale</p>
+                </div>
+                <div class="filter-modal-note-options">
+                    <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="1">
+                    <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="2">
+                    <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="3">
+                    <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="4">
+                    <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="5">
                 </div>
             </div>
+
             <div class="filter-modal-sort" id="filter-modal-status">
                 <h3>Statut</h3>
+                <div class="filter-modal-status-options">
+                    <p class="filter-modal-status-option" data-status-value="open">Ouvert</p>
+                    <p class="filter-modal-status-option" data-status-value="close">Fermé</p>
+                </div>
+            </div>
+
+            <div id="filter-modal-location">
+                <h3>Lieu</h3>
                 <div>
 
                 </div>
@@ -265,12 +275,30 @@ $highlightedOffers = array_filter($data["offers"], function ($offer) {
                     </div>
                 </div>
 
-                <select name="Statut" id="">
-                    <option value="">Statut</option>
-                </select>
-                <select name="Note" id="">
-                    <option value="">Note</option>
-                </select>
+                <!-- Statut -->
+                <div class="desktop-filter-dropdown">
+                    <button class="desktop-filter-button" id="desktop-status-button">
+                        Statut <span id="selected-status-label"></span>
+                    </button>
+                    <div id="desktop-status-options">
+                        <p data-status-value="open">Ouvert</p>
+                        <p data-status-value="close">Fermé</p>
+                    </div>
+                </div>
+
+                <!-- Note -->
+                <div class="desktop-filter-dropdown">
+                    <button class="desktop-filter-button" id="desktop-note-button">
+                        Note <span id="selected-note-label"></span>
+                    </button>
+                    <div id="desktop-note-options">
+                        <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="1">
+                        <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="2">
+                        <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="3">
+                        <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="4">
+                        <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="5">
+                    </div>
+                </div>
 
                 <!-- Tri -->
                 <div class="offer-sort-desktop">
