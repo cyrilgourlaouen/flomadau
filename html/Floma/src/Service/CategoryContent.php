@@ -32,9 +32,9 @@ class CategoryContent
             }
         }
         elseif ($nameCate === OfferCategoryEnum::Restauration->value) {
-            $content .= "<div class='align'><img src='./assets/icons/accessibility_primary.svg' alt='accessibility'><p>$accessibility</p></div>" .
-            "<div class='align'><img src='./assets/icons/restaurant_primary.svg' alt='restaurant'><p>" . $this->getStringMoments($more) .  "</p></div>" .
-            "<div class='align'>" . str_repeat("<img src='/assets/icons/paid_primary.svg' alt='Icone d'euro'>", $cate["gamme_de_prix"]) .  "</div>";
+            $content .= "<div class='align'><img src='./assets/icons/accessibility_primary.svg' alt='accessibility'><p>$accessibility</p></div>";
+            $content .= $this->getStringMoments($more) ?? "<div class='align'><img src='./assets/icons/restaurant_primary.svg' alt='restaurant'><p>" . $this->getStringMoments($more) .  "</p></div>";
+            $content .= "<div class='align'>" . str_repeat("<img src='/assets/icons/paid_primary.svg' alt='Icone d'euro'>", $cate["gamme_de_prix"]) .  "</div>";
             if ($cate["url_carte_restaurant"]) {
                 $content .= "<h3>Carte du restaurant</h3>" .
                 "<a class='carteRestau' href='./uploads/restaurant/" . $cate["url_carte_restaurant"] . "'download='./uploads/restaurant/" . $cate["url_carte_restaurant"] . "' alt='carte'>Télécharger la carte du restaurant</a>";
@@ -66,8 +66,11 @@ class CategoryContent
         return "<ul><li>$presta</li></ul>";
     }
 
-    private function getStringMoments(array $momentArray) 
+    private function getStringMoments(array|null $momentArray) 
     {
+        if (!isset($momentArray)) {
+            return null;
+        }
         $ret = "";
         foreach($momentArray as $moment) {
             $ret .= $moment['nom_type'] . ", ";
@@ -75,8 +78,11 @@ class CategoryContent
         return $ret;
     }
 
-    private function getStringLanguages(array $momentArray) 
+    private function getStringLanguages(array|null $momentArray) 
     {
+        if (!isset($momentArray)) {
+            return null;
+        }
         $ret = "";
         foreach($momentArray as $moment) {
             $ret .= $moment['nom_langue'] . ", ";
