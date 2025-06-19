@@ -80,6 +80,38 @@ const ROUTES = [
         'controller' => App\Controller\ModificationMembreController::class,
         'method' => 'checkEmail',
     ],
+    '/pro/2fa/setup' => [
+        'controller' => App\Controller\TwoFactorAuthController::class,
+        'method' => 'setup',
+        'layout' => Layout::BACK,
+    ],
+    '/pro/2fa/setup/verify' => [
+        'controller' => App\Controller\TwoFactorAuthController::class,
+        'method' => 'verifySetup',
+        'layout' => Layout::BACK,
+        'view' => false,
+    ],
+    '/pro/2fa/verify' => [
+        'controller' => App\Controller\TwoFactorAuthController::class,
+        'method' => 'loginVerification',
+        'layout' => Layout::BACK,
+    ],
+    '/pro/2fa/verify/submit' => [
+        'controller' => App\Controller\TwoFactorAuthController::class,
+        'method' => 'verifyLogin',
+        'layout' => Layout::BACK,
+        'view' => false,
+    ],
+    '/pro/2fa/disable' => [
+        'controller' => App\Controller\TwoFactorAuthController::class,
+        'method' => 'disable',
+        'layout' => Layout::BACK,
+    ],
+    '/pro/2fa/ajax/verify' => [
+        'controller' => App\Controller\TwoFactorAuthController::class,
+        'method' => 'ajaxVerify',
+        'view' => false,
+    ],
 ];
 
 ?>
