@@ -4,24 +4,28 @@
         <div id="menuTextContainer">
             <h2>MENU</h2>
             <ul id="sidebar-menu">
-                <li id="menu-home">
-                    <a href="index.php?path=/pro">Accueil</a>
-                </li>
-                <?php
-                    if(isset($_SESSION['code_pro'])){
-                        ?>
-                            <li id="menu-info">
-                                <a href="index.php?path=/pro/check">Informations</a>
-                            </li>
-                            <li id="menu-logout">
-                                <a href="index.php?path=/pro/connexion/logout">Déconnexion</a>
-                            </li>
-                        <?php
-                    }
-                ?>
-                <li id="menu-return">
-                    <a href="index.php?path=/">Retour au site</a>
-                </li>
+                <div>
+                    <li id="menu-home">
+                        <a href="index.php?path=/pro">Accueil</a>
+                    </li>
+                    <?php
+                        if(isset($_SESSION['code_pro'])){
+                            ?>
+                                <li id="menu-info">
+                                    <a href="index.php?path=/pro/check">Informations</a>
+                                </li>
+                                <li id="menu-logout">
+                                    <a href="index.php?path=/pro/connexion/logout">Déconnexion</a>
+                                </li>
+                            <?php
+                        }
+                    ?>
+                </div>
+                <div>
+                    <li id="menu-return">
+                        <a href="index.php?path=/">Accueil client</a>
+                    </li>
+                </div>
                 <!-- <li id="menu-offers"><a href="#"> -->
                 <!--         <h2>Offres</h2> -->
                 <!--     </a></li> -->
