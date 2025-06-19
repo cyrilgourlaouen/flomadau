@@ -9,7 +9,7 @@
 			</a>
 			<a href="#" class="search"><img src="/assets/icons/search_white.svg" alt="loupe" class="ImgSearch"></a>
 			<?php if (!isset($_SESSION['email'])) { ?>
-				<img class="imgLog" id="logBtn" src="/assets/icons/menu_logIn_white.svg" alt="Icon de connexion">
+				<img class="imgLog" id="logBtn" src="/assets/icons/login_white.svg" alt="Icon de connexion">
 				<div id="logMenu" class="logMenu hidden">
 					<ul>
 						<li><a href="?path=/connexion">Se connecter</a></li>
