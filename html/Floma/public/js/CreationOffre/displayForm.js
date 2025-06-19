@@ -59,7 +59,7 @@ jours.forEach(jour => {
     <div id="${jourId}-slots" class="slots">
       ${createSlotHTML(jourId, 0)}
     </div>
-    <button type="button" onclick="ajouterCreneau('${jourId}')">+ Ajouter un créneau</button>`;
+    <button type="button" class="btn-creation" onclick="ajouterCreneau('${jourId}')">+ Ajouter un créneau</button>`;
   if (jour != 'Dimanche') {
       row.innerHTML += `<hr>`;
   }
@@ -71,7 +71,7 @@ function createSlotHTML(jourId, index) {
     <div class="slot">
       <input type="time" name="${jourId}_ouverture[]" id="${jourId}_ouverture_${index}">
       <input type="time" name="${jourId}_fermeture[]" id="${jourId}_fermeture_${index}">
-      <button type="button" onclick="this.parentNode.remove()">❌</button>
+      <button type="button" class="btn_close" onclick="this.parentNode.remove()"><img src="./assets/icons/close_red.svg"></button>
     </div>
   `;
 }

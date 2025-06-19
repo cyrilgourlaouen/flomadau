@@ -110,7 +110,7 @@ if(!isset($_SESSION['code_pro'])){
             <div id="champs-restaurant" class="hidden formInline">
                 <div class="gap-vsm flex-col">
                     <label for="type_cuisine">Gamme de prix *</label>
-                    <select name="gamme_de_prix" id="gamme_de_prix">
+                    <select name="gamme_de_prix" class="text-center" id="gamme_de_prix">
                         <option value="" selected disabled hidden>-- Gamme --</option>
                         <option value="1">Moins de 25 euros</option>
                         <option value="2">Entre 25 et 40 euros</option>
@@ -310,10 +310,54 @@ if(!isset($_SESSION['code_pro'])){
             </label>
         </div>
     </section>
+    <section class="formSectionContainer">
+        <div class="h3-section">
+            <h3>Mise en avant de votre offre 
+                <span class="tooltip-trigger"><img src="./assets/icons/info_black.svg">
+                    <span class="tooltip-text">
+                        Prix mensuel
+                    </span>
+                </span>
+            </h3>
+            <hr>
+        </div>
+        <div class="toggle-wrapper">
+            <label class="toggle-label">
+                <div>
+                    Offre à la une
+                    <span class="tooltip-trigger"><img src="./assets/icons/info_black.svg">
+                        <span class="tooltip-text">
+                            Votre offre sera visible dans le carrousel principal de la page d’accueil – idéal pour maximiser la visibilité.
+                        </span>
+                    </span>
+                </div>
+                <input type="checkbox" id="featured" name="a_la_une">
+                <span class="toggle-switch"></span>
+            </label>
+
+            <label class="toggle-label">
+                <div>
+                    Offre en relief
+                    <span class="tooltip-trigger"><img src="./assets/icons/info_black.svg">
+                        <span class="tooltip-text">
+                            Votre offre sera marquée par un tag spécial pour attirer l’œil
+                        </span>
+                    </span>
+                </div>
+                <input type="checkbox" id="highlighted" name="en_relief">
+                <span class="toggle-switch"></span>
+            </label>
+            <div class="price-display" id="price">
+                Prix total : 0.00 €
+            </div>
+        </div>
+
+    </section>
     <div class="buttonContainer">
         <?= black_button("Créer l'offre"); ?>
     </div>
 </form>
 <script src="./js/CreationOffre/displayForm.js"></script>
 <script src="./js/CreationOffre/verifFields.js"></script>
+<script src="./js/CalculateTarif.js"></script>
 <?php } ?>
