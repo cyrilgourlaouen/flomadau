@@ -174,7 +174,7 @@ abstract class AbstractManager
 	 * @param int $id
 	 * @return PDOStatement
 	 */
-	protected function update(string $class, array $fields, int $id): PDOStatement
+	protected function update(string $class, array $fields, int $id, bool $pro = false, bool $proPrive = false): PDOStatement
 	{
 		$query = "UPDATE " . $this->getTableName($class) . " SET ";
 		foreach (array_keys($fields) as $field) {
@@ -182,7 +182,13 @@ abstract class AbstractManager
 			if ($field != array_key_last($fields))
 				$query .= ', ';
 		}
-		$query .= ' WHERE id = :id';
+		if($pro){
+			$query .= ' WHERE code = :id';
+		}else if($proPrive) {
+			$query .= ' WHERE code_professionnel = :id';
+		}else{
+			$query .= ' WHERE id = :id';
+		}
 		$fields['id'] = $id;
 		return $this->executeQuery($query, $fields);
 	}

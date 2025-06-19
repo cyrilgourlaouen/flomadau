@@ -52,14 +52,14 @@ class ProfessionnelManager extends AbstractManager
     /**
      * @param Professionnel $pro
      * @param int $id
-     * @return PDOStatement
+     * @return \PDOStatement
      */
-    public function updateCompte(Professionnel $pro, int $id): PDOStatement
+    public function updateCompte(Professionnel $pro, int $id): \PDOStatement
     {
         $fields = [
             'raison_sociale' => $pro->getRaisonSociale(),
         ];
 
-        return $this->update(Professionnel::class, $fields, $id);
+        return $this->update(Professionnel::class, $fields, $id, true);
     }
 }

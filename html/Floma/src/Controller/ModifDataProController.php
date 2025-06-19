@@ -16,13 +16,17 @@ use Floma\View\Layout;
 class ModifDataProController extends AbstractController
 {
     private int $idCompte;
+    private string $photo;
 
     public function updateData() {
         $dataJson = ['success' => true];
         $proManager = new ProfessionnelManager();
-        $infosPro = ProfessionnelResource::buildAll($proManager->findBy(['code' => $_SESSION['code_pro']]));
+        $infosPro = ProfessionnelResource::buildAll($proManager->findBy(['code' => $_SESSION['code_pro']]), [
+            'compte' => ['isMultiple' => false],
+        ]);
 
         $this->idCompte = $infosPro[0]['id_compte'];
+        $this->photo = $infosPro[0]['compteData'][0]['url_photo_profil'];
 
         //Verif méthode
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -45,7 +49,9 @@ class ModifDataProController extends AbstractController
         }
 
         //Vérif email
+
         $email = $_POST['email'];
+
         $emailValide = $this->valide($email, 'email');
 
         if(!$emailValide){
@@ -70,21 +76,26 @@ class ModifDataProController extends AbstractController
 
         $compte->setNom(str_replace(' ', '', $_POST['nom']));
         $compte->setPrenom(str_replace(' ', '', $_POST['prenom']));
-        $compte->setEmail(str_replace(' ', '', $_POST['telephone']));
-        $compte->setTelephone(str_replace(' ', '', $_POST['email']));
+        $compte->setEmail(str_replace(' ', '', $_POST['email']));
+        $compte->setTelephone(str_replace(' ', '', $_POST['telephone']));
         $compte->setMotDePasse($_POST['confirm-password']);
         $compte->setVille(str_replace(' ', '', $_POST['ville']));
         $compte->setCodePostal(str_replace(' ', '', $_POST['code-postal']));
-        $compte->setNomRue(str_replace(' ', '', $_POST['rue']));
+        $compte->setNomRue($_POST['rue']);
         $compte->setNumeroRue(str_replace(' ', '', $_POST['numero']));
-        $compte->setComplementAdresse(str_replace(' ', '', $_POST['complement']));
+        $compte->setComplementAdresse($_POST['complement']);
 
-        $dataJsonImg = uploadImg();
-        if($dataJsonImg['successUpload']){
-            $compte->setUrlPhotoProfil($dataJsonImg['name']);
+        if(!empty($_FILES['photo']['name'])){
+            $dataJsonImg = $this->uploadImg();
+
+            if($dataJsonImg['successUpload']){
+                $compte->setUrlPhotoProfil(explode('.', $dataJsonImg['name'])[0]);
+            }else{
+                echo json_encode($dataJsonImg);
+                exit;
+            }
         }else{
-            echo json_encode($dataJsonImg);
-            exit;
+            $compte->setUrlPhotoProfil($this->photo);
         }
 
         $compteManager->updateCompte($compte, $this->idCompte);
@@ -93,7 +104,7 @@ class ModifDataProController extends AbstractController
         $pro = new Professionnel();
         $proManager = new ProfessionnelManager();
 
-        $pro->setRaisonSociale(str_replace(' ', '', $_POST['denomination']));
+        $pro->setRaisonSociale($_POST['denomination']);
         $proManager->updateCompte($pro, $_SESSION['code_pro']);
 
         //Update dans pro privé
@@ -101,13 +112,15 @@ class ModifDataProController extends AbstractController
         $proPriveManger = new ProPriveManager();
 
         $proPrive->setSiren(str_replace(' ', '', $_POST['siren']));
-        $proPrive->setNumeroCarte(str_replace(' ', '', $_POST['card-number']));
-        $proPrive->setCodeSecurite(str_replace(' ', '', $_POST['cvv']));
-        $proPrive->setDateExpiration($_POST['expiration-date']);
+        if(!empty($_POST['card-number'])){
+            $proPrive->setNumeroCarte(str_replace(' ', '', $_POST['card-number']));
+            $proPrive->setCodeSecurite(str_replace(' ', '', $_POST['cvv']));
+            $proPrive->setDateExpiration($_POST['expiration-date']);
+        }
 
         $proPriveManger->updateCompte($proPrive, $_SESSION['code_pro']);
 
-        return $this->redirectToRoute('/consultation/membre', ["state" => "success"]);
+        return $this->redirectToRoute('/pro/check', ["state" => "success"]);
     }
 
 
@@ -148,17 +161,17 @@ class ModifDataProController extends AbstractController
 
 
     private function uploadImg(){
-        if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+        if (!empty($_FILES['photo']['name']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
             $cheminTemp = $_FILES['photo']['tmp_name'];
             $AncienNomFichier = $_FILES['photo']['name'];
 
             $infosFichier = pathinfo($AncienNomFichier);
             $extensionFichier = strtolower($infosFichier['extension']);
 
-            $nouveauNomFichier = 'pp_compte'.$this->id_compte.'.'. $extensionFichier;
+            $nouveauNomFichier = 'pp_compte'.'_'.$this->idCompte.'.'. $extensionFichier;
             $cheminDestination = 'uploads/profilePicture/'.$nouveauNomFichier;
 
-            if (!move_uploaded_file($fichierTmpPath, $cheminDestination)) {
+            if (!move_uploaded_file($cheminTemp , $cheminDestination)) {
                 $dataJson['success'] = false;
                 $dataJson['erreur']['photo'] = 'Erreur de transfert de l\'image';
                 return ['successUpload' => false, 'erreur'['photo'] => 'Erreur de transfert de l\'image'];

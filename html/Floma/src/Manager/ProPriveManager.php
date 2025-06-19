@@ -53,17 +53,17 @@ class ProPriveManager extends AbstractManager
     /**
      * @param ProPrive $proPrive
      * @param int $id
-     * @return PDOStatement
+     * @return \PDOStatement
      */
-    public function updateCompte(ProPrive $proPrive, int $id): PDOStatement
+    public function updateCompte(ProPrive $proPrive, int $id): \PDOStatement
     {
         $fields = [
-            'raison_sociale' => $proPrive->getSiren(),
+            'siren' => $proPrive->getSiren(),
             'numero_carte' => $proPrive->getNumeroCarte(),
             'code_securite' => $proPrive->getCodeSecurite(),
             'date_expiration' => $proPrive->getDateExpiration(),
         ];
 
-        return $this->update(ProPrive::class, $fields, $id);
+        return $this->update(ProPrive::class, $fields, $id, false, true);
     }
 }
