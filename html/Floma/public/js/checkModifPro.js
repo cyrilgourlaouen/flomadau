@@ -318,6 +318,7 @@ form.addEventListener('input', function(event) {
   const spansErreur = document.querySelectorAll('.erreur');
   
   let formulaireEstValide = true;
+  console.log(spansErreur);
 
   spansErreur.forEach(function(span) {
     if (span.textContent.trim() !== '') {
