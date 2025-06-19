@@ -21,6 +21,7 @@ class OfferController extends AbstractController
             'langueGuideVisite' => ['isMultiple' => true],
             'typeRepasRestaurant' => ['isMultiple' => true],
             'image' => ['isMultiple' => false],
+            'calendar' => ['isMultiple' => true],
         ]);
         $avisManager = new AvisManager();
         $avis = $avisManager->findBy(['id_offre' => $id]);
