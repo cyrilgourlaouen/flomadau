@@ -92,3 +92,39 @@ function removeGuide() {
     selectedList.removeChild(option);
   });
 }
+
+function addTag() {
+    const sourceSelects = [
+        document.getElementById('isNotRestauration'),
+        document.getElementById('isRestauration')
+    ];
+    const destination = document.getElementById('selectedTag');
+
+    sourceSelects.forEach(source => {
+        Array.from(source.selectedOptions).forEach(option => {
+            // Ne pas dupliquer si déjà présent
+            if (!Array.from(destination.options).some(o => o.value === option.value)) {
+                const newOption = new Option(option.text, option.value, true, true);
+                destination.add(newOption);
+            }
+            // Supprimer de la liste source
+            source.removeChild(option);
+        });
+    });
+}
+
+function removeTag() {
+    const selected = document.getElementById('selectedTag');
+    const isNotRestauration = document.getElementById('isNotRestauration');
+    const isRestauration = document.getElementById('isRestauration');
+
+    Array.from(selected.selectedOptions).forEach(option => {
+        // On suppose que le tag supprimé va dans isNotRestauration par défaut.
+        // Si tu as une logique métier pour savoir s’il doit aller dans isRestauration, adapte ici.
+        const target = option.value.toLowerCase().includes('restaurant') ? isRestauration : isNotRestauration;
+
+        const newOption = new Option(option.text, option.value);
+        target.add(newOption);
+        selected.removeChild(option);
+    });
+}

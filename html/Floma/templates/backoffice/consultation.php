@@ -16,7 +16,7 @@ $head_svg = "/assets/icons/account_white.svg";
 include 'head_title.php';
 include 'black_button.php';
 $offer = $data['offer'];
-print_r($offer['tagData']);
+print_r($offer);
 //print_r($offer['langueGuideData']);
 
 if (!isset($_SESSION['code_pro'])) {
@@ -77,7 +77,7 @@ if (!isset($_SESSION['code_pro'])) {
                         </div>
                         <div>
                             <label class="checkbox-item">
-                                <input type="checkbox" id="guideCheckbox" name="guide" id="guide" value="true">
+                                <input type="checkbox" id="guideCheckbox" name="guide" id="guide" value="true" checked>
                                 <span>Guide</span>
                             </label>
                         </div>
@@ -97,7 +97,7 @@ if (!isset($_SESSION['code_pro'])) {
                             $enrichedOffer = LangueGuideResource::buildAll($guideManager->findAll());
                             $guide = $offer['langueGuideData'];
 
-                            $usedLangues = array_map(fn($item) => $item['nom_langue'], $guide);
+                            $usedLangues = is_array($guide) ? array_map(fn($item) => $item['nom_langue'], $guide) : [];
                             $filteredEnrichedOffer = array_filter($enrichedOffer, function ($langue) use ($usedLangues) {
                                 return !in_array($langue['nom_langue'], $usedLangues);
                             });
@@ -120,13 +120,12 @@ if (!isset($_SESSION['code_pro'])) {
                             </select>
 
                             <!-- Boutons -->
-                            <div style="margin-top:10px; display: flex; gap: 10px;">
-                                <button type="button" onclick="addGuide()">Ajouter une langue</button>
-                                <button type="button" onclick="removeGuide()">Retirer la langue</button>
+                            <div class="containerBtnTagGuide">
+                                <button type="button" onclick="addGuide()" class="BtnTagGuide">Ajouter une langue</button>
+                                <button type="button" onclick="removeGuide()" class="BtnTagGuide">Retirer la langue</button>
                             </div>
                         </div>
                     </div>
-
                     <div class="formInline hidden" id="champs-spectacle">
                         <div class="gap-vsm flex-col">
                             <label for="duree_show">Duree *</label>
@@ -139,13 +138,11 @@ if (!isset($_SESSION['code_pro'])) {
                             <input type="number" name="prix_minimal_show" id="prix_minimal_show"
                                 value="<?= htmlspecialchars($offer['categoryData']['prix_minimal']) ?>" disabled>
                         </div>
-
                         <div class=" gap-vsm flex-col">
                             <label for="capacite">Capacite *</label>
                             <input type="number" name="capacite" id="capacite" placeholder="500">
                         </div>
                     </div>
-
                     <div id="champs-restaurant" class="hidden formInline">
                         <div class="gap-vsm flex-col">
                             <label for="type_cuisine">Gamme de prix *</label>
@@ -247,10 +244,7 @@ if (!isset($_SESSION['code_pro'])) {
                             <input name="conditions_accesibilite" id="conditions_accesibilite" type="text"
                                 value="<?= htmlentities($offer['conditions_accessibilite']) ?>" disabled>
                         </div>
-                        <?php
-                        $tags = $offer['tagData'];
-                        ?>
-                        <div class="gap-vsm flex-col">
+                        <div class="gap-vsm flex-col" id="selectGuides">
                             <label>Tags *
                                 <span class="tooltip-trigger">
                                     <img src="./assets/icons/info_black.svg">
@@ -259,13 +253,45 @@ if (!isset($_SESSION['code_pro'])) {
                                     </span>
                                 </span>
                             </label>
-                            <select multiple name="tag[]" id="categoryAll" disabled>
-                                <?php for ($i = 0; $i < sizeof($tags); $i++) { ?>
-                                    <option value="<?= $tags[$i]['nom_tag'] ?>"><?= htmlentities($tags[$i]['nom_tag']) ?>
+                            <?php
+                            $tagManager = new TagManager();
+                            $manageOptionTag = new ManageOption();
+                            $enrichedTag = TagResource::buildAll($tagManager->findAll());
+                            $tag = $offer['tagData'];
+
+                            $usedTag = is_array($tag) ? array_map(fn($item) => $item['nom_tag'], $tag) : [];
+                            $filteredEnrichedTags = array_filter($enrichedTag, function ($tag) use ($usedTag) {
+                                return !in_array($tag['nom_tag'], $usedTag);
+                            });
+
+                            $tags = $manageOptionTag->getTags($filteredEnrichedTags);
+                            ?>
+
+                            <select id="isNotRestauration" style="display:block; margin-top:10px;">
+                                <?= $tags['isNotRestauration'] ?>
+                            </select>
+                            <select style="display:block; margin-top:10px;" id="isRestauration">
+                                <?= $tags['isRestauration'] ?>
+                            </select>
+                            <select name="tag[]" id="selectedTag" multiple style="margin-top:10px; min-height:100px;">
+                                <?php foreach ($tag as $value) { ?>
+                                    <option value="<?= $value['nom_tag'] ?>" selected>
+                                        <?= htmlentities($value['nom_tag']) ?>
                                     </option>
                                 <?php } ?>
                             </select>
+
+                            <!-- Boutons -->
+                            <div class="containerBtnTagGuide">
+                                <button type="button" onclick="addTag()" class="BtnTagGuide">
+                                    Ajouter un tag
+                                </button>
+                                <button type="button" onclick="removeTag()" class="BtnTagGuide">
+                                    Retirer un tag
+                                </button>
+                            </div>
                         </div>
+                    </div>
             </section>
             <section class="formSectionContainer">
                 <div class="h3-section">

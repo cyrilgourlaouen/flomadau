@@ -1048,3 +1048,19 @@ input.bigField[type="file"]:focus {
 input[type=file] {
   cursor: pointer;
 }
+
+.containerBtnTagGuide {
+  margin-top:10px; 
+  display: flex; 
+  gap: 10px;
+}
+
+.BtnTagGuide {
+  padding:6px 12px; 
+  font-size:14px; 
+  border-radius:4px; 
+  border:1px solid #ccc; 
+  background:#f0f0f0; 
+  cursor:pointer;
+  
+}

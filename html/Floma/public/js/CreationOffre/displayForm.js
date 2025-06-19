@@ -18,6 +18,28 @@ function afficherChamps() {
         document.getElementById(champs[value]).classList.remove("hidden");
         document.getElementById(champs[value]).disabled = false;
     }
+    afficherTag(value);
+}
+
+function afficherTag(value)
+{
+    const champs = {
+        "Visite": "isNotRestauration",
+        "Spectacle": "isNotRestauration",
+        "Restaurant": "isRestauration",
+        "Activite": "isNotRestauration",
+        "Parc d'attraction": "isNotRestauration"
+    }; 
+
+    for (const id of Object.values(champs)) {
+        document.getElementById(id).classList.add("hidden");
+        document.getElementById(id).disabled = true;
+    }
+
+    if (champs[value]) {
+        document.getElementById(champs[value]).classList.remove("hidden");
+        document.getElementById(champs[value]).disabled = false;
+    }
 }
 
 const guideCheckbox = document.getElementById('guideCheckbox');
