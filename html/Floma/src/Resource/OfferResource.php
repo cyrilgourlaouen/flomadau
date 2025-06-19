@@ -2,6 +2,7 @@
 
 namespace App\Resource;
 
+use App\Entity\JourOuvertureOffre;
 use App\Entity\LangueGuideVisite;
 use App\Entity\Offer;
 use App\Entity\Tag;
@@ -22,6 +23,8 @@ use App\Manager\OptionVisibiliteManager;
 use App\Manager\AvisManager;
 use App\Entity\OptionSouscrite;
 use App\Entity\OptionVisibilite;
+use App\Manager\JourOuvertureManager;
+use App\Manager\JourOuvertureOffreManager;
 use Floma\Resource\AbstractResource;
 
 class OfferResource extends AbstractResource
@@ -185,6 +188,41 @@ class OfferResource extends AbstractResource
 
             if ($visibiliteResources) {
                 $this->add('optionVisibiliteData', $visibiliteResources);
+            }
+        }
+
+        if (isset($context['calendar'])) {
+            $isMultiple = (bool) ($context['calendar']['isMultiple'] ?? false);
+
+            $jourOuvertureManager = new JourOuvertureManager();
+            $jourOuvertureOffreManager = new JourOuvertureOffreManager();
+
+            $jourOuvertureOffre = $jourOuvertureOffreManager->findBy([
+                'id_offre' => $this->offer->getId(),
+            ]);
+
+            /** @var array|JourOuvertureManager[]|JourOuvertureOffreManager|null $JourOuvertureResources */
+            if ($isMultiple) {
+                $JourOuvertureResources = array_values(array_filter(array_map(
+                    function (JourOuvertureOffre $jourOuvertureOffre) use ($jourOuvertureManager) {
+                        $jourOuverture = $jourOuvertureManager->find($jourOuvertureOffre->getIdJour());
+                        return $jourOuverture ? JourOuvertureResource::build($jourOuverture, [
+                            'jour_ouverture_offre' => $jourOuvertureOffre
+                        ]) : null;
+                    },
+                    $jourOuvertureOffre
+                )));
+            } else {
+                $firstJourOuvertureOffre = $jourOuvertureOffre[0] ?? null;
+                $jourOuverture = $firstJourOuvertureOffre ? $jourOuvertureManager->find($firstJourOuvertureOffre->getIdJour()) : null;
+                $JourOuvertureResources = $jourOuverture ? JourOuvertureResource::build($jourOuverture, [
+                    'jour_ouverture_offre' => $firstJourOuvertureOffre
+                ]) : null;
+            }
+
+
+            if ($JourOuvertureResources) {
+                $this->add('calendar', $JourOuvertureResources);
             }
         }
 

@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use App\Manager\CompteManager;
 use App\Manager\CompteProManager;
+use App\Manager\MembreManager;
+use App\Resource\MembreResource;
 use Floma\Controller\AbstractController;
 use App\Resource\CompteResource;
 use App\Service\MetricMembreAccount;
@@ -18,37 +20,36 @@ class ConnexionController extends AbstractController
      * @return void
      */
     public function logIn()
-{
-    if (!empty($_POST)) {
-        $compteManager = new CompteManager();
-        $pro = new CompteProManager();
-        $metricMembreAccount = new MetricMembreAccount();
+    {
+        if (!empty($_POST)) {
+            $compteManager = new CompteManager();
+            $proManager = new CompteProManager();
+            $metricMembreAccount = new MetricMembreAccount();
 
-        $enrichedAccounts = CompteResource::buildAll($compteManager->findAll(), [
-            'userName' => ['isMultiple' => true],
-        ]);
+            $enrichedAccounts = CompteResource::buildAll($compteManager->findAll(), [
+                'userName' => ['isMultiple' => true],
+            ]);
 
-        $id = $metricMembreAccount->isMembreExist($enrichedAccounts, $_POST["email"], $_POST["password"]);
+            $index = $metricMembreAccount->isMembreExist($enrichedAccounts, $_POST["email"], $_POST["password"]);
+            if ($index === false) {
+                return $this->redirectToRoute('/connexion', ["state" => "failure"]);
+            }
+            $id = $enrichedAccounts[$index]["id"];
+            $isPro = $proManager->findOneBy(['id' => $id]);
 
-        if ($id === false) {
-            return $this->redirectToRoute('/connexion', ["state" => "failure"]);
+            if ($isPro && $isPro->isPro()) {
+                return $this->redirectToRoute('/connexion', ["state" => "notMember"]);
+            }
+
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+
+            $_SESSION = $enrichedAccounts[$index];
+            session_regenerate_id(true);
+            return $this->redirectToRoute('/');
         }
-
-        $isPro = $pro->findOneBy(['id' => $id]);
-
-        if ($isPro !== null && $isPro !== false && $isPro !== "") {
-            return $this->redirectToRoute('/connexion', ["state" => "notMember"]);
-        }
-
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        $_SESSION = $enrichedAccounts[$id];
-        session_regenerate_id(true);
-        return $this->redirectToRoute('/');
     }
-}
 
     public function logOut()
     {
