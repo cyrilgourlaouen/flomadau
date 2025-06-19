@@ -178,12 +178,6 @@ p.placeholder {
   gap: 1.875rem;
 }
 
-#sidebar-menu div {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-}
-
 #sidebar-menu li a {
   text-decoration: none;
   font-family: var(--raleway);
