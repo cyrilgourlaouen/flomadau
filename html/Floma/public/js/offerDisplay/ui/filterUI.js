@@ -33,6 +33,17 @@ export function setupFilterUI(filterManager, displayManager) {
   const desktopPriceRangeOptions = document.querySelector("#desktop-price-range-options");
   const desktopPriceRangeItems = document.querySelectorAll("#desktop-price-range-options .desktop-price-range-option");
 
+  // Date modal/mobile
+  const startDateInput = document.getElementById("start-date");
+  const endDateInput = document.getElementById("end-date");
+
+  // Date desktop
+  const dateDropdownButton = document.querySelector("#offer-date-desktop-button");
+  const dateDropdownOptions = document.querySelector("#desktop-date-options");
+  const selectedDateLabel = document.getElementById("selected-date-label");
+  const startDesktopDateInput = document.getElementById("desktop-start-date");
+  const endDesktopDateInput = document.getElementById("desktop-end-date");
+
   // --- FONCTIONS DE GESTION DES DROPDOWNS ---
 
   function closeAllDropdowns() {
@@ -45,15 +56,21 @@ export function setupFilterUI(filterManager, displayManager) {
     if (desktopPriceRangeOptions) {
       desktopPriceRangeOptions.style.display = "none";
     }
+    if (dateDropdownOptions) {
+      dateDropdownOptions.style.display = "none";
+    }
   }
 
   function toggleCategoryDropdown() {
-    // Fermer les dropdowns de prix s'ils sont ouverts
+    // Fermer les autres dropdowns
     if (priceDropdownOptions) {
       priceDropdownOptions.style.display = "none";
     }
     if (desktopPriceRangeOptions) {
       desktopPriceRangeOptions.style.display = "none";
+    }
+    if (dateDropdownOptions) {
+      dateDropdownOptions.style.display = "none";
     }
 
     // Toggle le dropdown de catégorie
@@ -66,9 +83,12 @@ export function setupFilterUI(filterManager, displayManager) {
   function togglePriceDropdown() {
     const currentCategory = filterManager.getFilter("category");
 
-    // Fermer le dropdown de catégorie s'il est ouvert
+    // Fermer les autres dropdowns
     if (categoryDropdownOptions) {
       categoryDropdownOptions.style.display = "none";
+    }
+    if (dateDropdownOptions) {
+      dateDropdownOptions.style.display = "none";
     }
 
     if (currentCategory === "Restaurant") {
@@ -91,6 +111,25 @@ export function setupFilterUI(filterManager, displayManager) {
       if (desktopPriceRangeOptions) {
         desktopPriceRangeOptions.style.display = "none";
       }
+    }
+  }
+
+  function toggleDateDropdown() {
+    // Fermer les autres dropdowns
+    if (categoryDropdownOptions) {
+      categoryDropdownOptions.style.display = "none";
+    }
+    if (priceDropdownOptions) {
+      priceDropdownOptions.style.display = "none";
+    }
+    if (desktopPriceRangeOptions) {
+      desktopPriceRangeOptions.style.display = "none";
+    }
+
+    // Toggle le dropdown de date
+    if (dateDropdownOptions) {
+      const isVisible = dateDropdownOptions.style.display === "flex";
+      dateDropdownOptions.style.display = isVisible ? "none" : "flex";
     }
   }
 
@@ -217,6 +256,39 @@ export function setupFilterUI(filterManager, displayManager) {
     }
   }
 
+  function updateSelectedDateLabel(startDate, endDate) {
+    const startValid = startDate && !isNaN(new Date(startDate));
+    const endValid = endDate && !isNaN(new Date(endDate));
+
+    if (!startValid && !endValid) {
+      if (selectedDateLabel) selectedDateLabel.textContent = "";
+    } else if (startValid && endValid) {
+      const start = new Date(startDate).toLocaleDateString('fr-FR');
+      const end = new Date(endDate).toLocaleDateString('fr-FR');
+      if (selectedDateLabel) selectedDateLabel.textContent = `: ${start} - ${end}`;
+    } else if (startValid) {
+      const start = new Date(startDate).toLocaleDateString('fr-FR');
+      if (selectedDateLabel) selectedDateLabel.textContent = `: < ${start}`;
+    } else if (endValid) {
+      const end = new Date(endDate).toLocaleDateString('fr-FR');
+      if (selectedDateLabel) selectedDateLabel.textContent = `: > ${end}`;
+    }
+
+    // Synchroniser les inputs
+    if (startDesktopDateInput) {
+      startDesktopDateInput.value = startValid ? startDate : "";
+    }
+    if (endDesktopDateInput) {
+      endDesktopDateInput.value = endValid ? endDate : "";
+    }
+    if (startDateInput) {
+      startDateInput.value = startValid ? startDate : "";
+    }
+    if (endDateInput) {
+      endDateInput.value = endValid ? endDate : "";
+    }
+  }
+
   function resetPriceFilter() {
     filterManager.setFilter("price", null);
 
@@ -243,6 +315,25 @@ export function setupFilterUI(filterManager, displayManager) {
         input.parentElement.classList.remove("filter-modal-price-icon-wrapper-error");
       }
     });
+  }
+
+  function resetDateFilter() {
+    filterManager.setFilter("date", null);
+
+    // Reset des inputs
+    if (startDateInput) startDateInput.value = "";
+    if (endDateInput) endDateInput.value = "";
+    if (startDesktopDateInput) startDesktopDateInput.value = "";
+    if (endDesktopDateInput) endDesktopDateInput.value = "";
+
+    // Reset du label
+    if (selectedDateLabel) selectedDateLabel.textContent = "";
+
+    // Reset des classes d'erreur
+    if (startDateInput) startDateInput.classList.remove("date-error");
+    if (endDateInput) endDateInput.classList.remove("date-error");
+    if (startDesktopDateInput) startDesktopDateInput.classList.remove("date-error");
+    if (endDesktopDateInput) endDesktopDateInput.classList.remove("date-error");
   }
 
   // Mettre à jour l'affichage des options de prix selon la catégorie
@@ -278,6 +369,29 @@ export function setupFilterUI(filterManager, displayManager) {
       valid: true,
       min: min !== "" ? Number(min) : undefined,
       max: max !== "" ? Number(max) : undefined,
+    };
+  }
+
+  function validateDateRange(startDate, endDate) {
+    if (!startDate && !endDate) {
+      return { valid: false, startDate: undefined, endDate: undefined, reason: "empty" };
+    }
+
+    const start = startDate ? new Date(startDate) : null;
+    const end = endDate ? new Date(endDate) : null;
+
+    if ((startDate && isNaN(start)) || (endDate && isNaN(end))) {
+      return { valid: false, startDate: undefined, endDate: undefined, reason: "invalid_date" };
+    }
+
+    if (start && end && end < start) {
+      return { valid: false, startDate: undefined, endDate: undefined, reason: "end_before_start" };
+    }
+
+    return {
+      valid: true,
+      startDate: start,
+      endDate: end,
     };
   }
 
@@ -336,6 +450,70 @@ export function setupFilterUI(filterManager, displayManager) {
 
     filterManager.setFilter("price", { min: validation.min, max: validation.max });
     updateSelectedPriceLabel(validation.min, validation.max);
+    refreshDisplay();
+  }
+
+  function handleDesktopDateChange() {
+    const startDate = startDesktopDateInput?.value || undefined;
+    const endDate = endDesktopDateInput?.value || undefined;
+    const validation = validateDateRange(startDate, endDate);
+
+    // Reset des classes d'erreur
+    if (startDesktopDateInput) startDesktopDateInput.classList.remove("date-error");
+    if (endDesktopDateInput) endDesktopDateInput.classList.remove("date-error");
+
+    if (!validation.valid) {
+      if (validation.reason === "end_before_start") {
+        if (startDesktopDateInput) startDesktopDateInput.classList.add("date-error");
+        if (endDesktopDateInput) endDesktopDateInput.classList.add("date-error");
+      }
+      if (selectedDateLabel) selectedDateLabel.textContent = "";
+      // Si les dates ne sont pas valides, on ignore le filtre (affiche toutes les offres)
+      filterManager.setFilter("date", null);
+      refreshDisplay();
+      return;
+    }
+
+    if (validation.reason === "empty") {
+      filterManager.setFilter("date", null);
+      updateSelectedDateLabel(undefined, undefined);
+    } else {
+      filterManager.setFilter("date", { startDate: validation.startDate, endDate: validation.endDate });
+      updateSelectedDateLabel(startDate, endDate);
+    }
+    
+    refreshDisplay();
+  }
+
+  function handleDateChange() {
+    const startDate = startDateInput?.value || undefined;
+    const endDate = endDateInput?.value || undefined;
+    const validation = validateDateRange(startDate, endDate);
+
+    // Reset des classes d'erreur
+    if (startDateInput) startDateInput.classList.remove("date-error");
+    if (endDateInput) endDateInput.classList.remove("date-error");
+
+    if (!validation.valid) {
+      if (validation.reason === "end_before_start") {
+        if (startDateInput) startDateInput.classList.add("date-error");
+        if (endDateInput) endDateInput.classList.add("date-error");
+      }
+      if (selectedDateLabel) selectedDateLabel.textContent = "";
+      // Si les dates ne sont pas valides, on ignore le filtre (affiche toutes les offres)
+      filterManager.setFilter("date", null);
+      refreshDisplay();
+      return;
+    }
+
+    if (validation.reason === "empty") {
+      filterManager.setFilter("date", null);
+      updateSelectedDateLabel(undefined, undefined);
+    } else {
+      filterManager.setFilter("date", { startDate: validation.startDate, endDate: validation.endDate });
+      updateSelectedDateLabel(startDate, endDate);
+    }
+    
     refreshDisplay();
   }
 
@@ -413,12 +591,31 @@ export function setupFilterUI(filterManager, displayManager) {
   if (minDesktopPriceInput) minDesktopPriceInput.addEventListener("input", debouncedHandleDesktopPriceChange);
   if (maxDesktopPriceInput) maxDesktopPriceInput.addEventListener("input", debouncedHandleDesktopPriceChange);
 
+  // Date modal/mobile inputs
+  const debouncedHandleDateChange = debounce(handleDateChange, 500);
+  if (startDateInput) startDateInput.addEventListener("input", debouncedHandleDateChange);
+  if (endDateInput) endDateInput.addEventListener("input", debouncedHandleDateChange);
+
+  // Date desktop inputs
+  const debouncedHandleDesktopDateChange = debounce(handleDesktopDateChange, 500);
+  if (startDesktopDateInput) startDesktopDateInput.addEventListener("input", debouncedHandleDesktopDateChange);
+  if (endDesktopDateInput) endDesktopDateInput.addEventListener("input", debouncedHandleDesktopDateChange);
+
   // Toggle du dropdown prix desktop
   if (priceDropdownButton) {
     priceDropdownButton.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
       togglePriceDropdown();
+    });
+  }
+
+  // Toggle du dropdown date desktop
+  if (dateDropdownButton) {
+    dateDropdownButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleDateDropdown();
     });
   }
 
@@ -440,6 +637,12 @@ export function setupFilterUI(filterManager, displayManager) {
       !priceDropdownButton.contains(e.target) &&
       !desktopPriceRangeOptions.contains(e.target)) {
       desktopPriceRangeOptions.style.display = "none";
+    }
+
+    if (dateDropdownButton && dateDropdownOptions &&
+      !dateDropdownButton.contains(e.target) &&
+      !dateDropdownOptions.contains(e.target)) {
+      dateDropdownOptions.style.display = "none";
     }
   });
 
@@ -516,5 +719,8 @@ export function setupFilterUI(filterManager, displayManager) {
   }
   if (desktopPriceRangeOptions) {
     desktopPriceRangeOptions.style.display = "none";
+  }
+  if (dateDropdownOptions) {
+    dateDropdownOptions.style.display = "none";
   }
 }

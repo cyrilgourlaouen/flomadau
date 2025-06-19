@@ -126,6 +126,19 @@ $highlightedOffers = array_filter($data["offers"], function ($offer) {
                     <?php } ?>
                 </div>
             </div>
+            <div class="filter-modal-sort" id="filter-modal-date">
+                <h3>Date</h3>
+                <div class="filter-modal-date-options">
+                    <div class="filter-modal-date-option">
+                        <label for="start-date">Début</label>
+                        <input type="date" id="start-date">
+                    </div>
+                    <div class="filter-modal-date-option">
+                        <label for="end-date">Fin</label>
+                        <input type="date" id="end-date">
+                    </div>
+                </div>
+            </div>
             <div id="filter-modal-location">
                 <h3>Lieu</h3>
                 <div>
@@ -232,6 +245,23 @@ $highlightedOffers = array_filter($data["offers"], function ($offer) {
                         <p class="desktop-price-range-option" data-price-range="1">Moins de 25€</p>
                         <p class="desktop-price-range-option" data-price-range="2">Entre 25 - 40€</p>
                         <p class="desktop-price-range-option" data-price-range="3">Plus de 40€</p>
+                    </div>
+                </div>
+
+                <!-- Date -->
+                <div class="desktop-filter-dropdown">
+                    <button class="desktop-filter-button" id="offer-date-desktop-button">
+                        Date <span id="selected-date-label"></span>
+                    </button>
+                    <div id="desktop-date-options">
+                        <div class="desktop-date-option">
+                            <label for="start-date">Début</label>
+                            <input type="date" id="desktop-start-date">
+                        </div>
+                        <div class="desktop-date-option">
+                            <label for="end-date">Fin</label>
+                            <input type="date" id="desktop-end-date">
+                        </div>
                     </div>
                 </div>
 
