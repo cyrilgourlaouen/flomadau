@@ -5,7 +5,7 @@ use App\Enum\OptionVisibiliteEnum;
 
 $starCalculator = new MetricStarsCalculator();
 
-$highlightedOffers = array_filter($data["offers"], function($offer) {
+$highlightedOffers = array_filter($data["offers"], function ($offer) {
     return !empty($offer['optionVisibiliteData']) &&
         in_array(
             OptionVisibiliteEnum::ALaUne->value,
@@ -15,15 +15,15 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
 ?>
 
 <!-- Selection du moment -->
-<?php if($highlightedOffers) { ?>
-<section class="highlighted-offers-section">
-    <h2>Sélection du moment</h2>
-    <div class="highlighted-offers-list-arrows">
-        <img src="/assets/icons/left_square_chevron_black.png" id="highlighted-arrow-left" alt="">
-        <img src="/assets/icons/right_square_chevron_black.png" id="highlighted-arrow-right" alt="">
-    </div>
-    <div class="highlighted-offers-list">
-        <?php foreach ($highlightedOffers as $offer) { ?>
+<?php if ($highlightedOffers) { ?>
+    <section class="highlighted-offers-section">
+        <h2>Sélection du moment</h2>
+        <div class="highlighted-offers-list-arrows">
+            <img src="/assets/icons/left_square_chevron_black.png" id="highlighted-arrow-left" alt="">
+            <img src="/assets/icons/right_square_chevron_black.png" id="highlighted-arrow-right" alt="">
+        </div>
+        <div class="highlighted-offers-list">
+            <?php foreach ($highlightedOffers as $offer) { ?>
                 <a href="?path=offer/<?= $offer['id'] ?>" class="highlighted-card">
                     <!-- Image -->
                     <div class="highlighted-card-img">
@@ -32,7 +32,8 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
                         $icon = OfferCategoryEnum::tryFrom($offer['categorie'])?->getIcon();
                         if ($icon) { ?>
                             <div class="highlighted-card-img-category-icon">
-                                <img class="highlighted-card-img-category-icon-img" src="<?= $icon['path'] ?>" alt="<?= $icon['alt'] ?>">
+                                <img class="highlighted-card-img-category-icon-img" src="<?= $icon['path'] ?>"
+                                    alt="<?= $icon['alt'] ?>">
                             </div>
                         <?php } ?>
 
@@ -54,7 +55,8 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
                         }
                         ?>
                         <?php if ($imageUrl) { ?>
-                            <img src="/uploads/offers/<?= htmlspecialchars($imageUrl) ?>" alt="Image de l'offre" class="offer-card-img-main">
+                            <img src="/uploads/offers/<?= htmlspecialchars($imageUrl) ?>" alt="Image de l'offre"
+                                class="offer-card-img-main">
                         <?php } else { ?>
                             <img src="assets/images/no-image.png" alt="Image de l'offre" class="offer-card-img-main">
                         <?php } ?>
@@ -64,7 +66,7 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
                     <div class="highlighted-card-info">
                         <!-- Titre -->
                         <h3><?= htmlspecialchars($offer['titre']) ?></h3>
-                        
+
                         <!-- Note -->
                         <div class="highlighted-card-note">
                             <div class="highlighted-card-note-stars">
@@ -101,8 +103,8 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
                     </div>
                 </a>
             <?php } ?>
-    </div>
-</section>
+        </div>
+    </section>
 <?php } ?>
 
 
@@ -124,10 +126,23 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
                     <?php } ?>
                 </div>
             </div>
+            <div class="filter-modal-sort" id="filter-modal-date">
+                <h3>Date</h3>
+                <div class="filter-modal-date-options">
+                    <div class="filter-modal-date-option">
+                        <label for="start-date">Début</label>
+                        <input type="date" id="start-date">
+                    </div>
+                    <div class="filter-modal-date-option">
+                        <label for="end-date">Fin</label>
+                        <input type="date" id="end-date">
+                    </div>
+                </div>
+            </div>
             <div id="filter-modal-location">
                 <h3>Lieu</h3>
                 <div>
-    
+
                 </div>
             </div>
             <div class="filter-modal-sort" id="filter-modal-price">
@@ -152,17 +167,25 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
                         </div>
                     </div>
                 </div>
+
+                <div class="filter-modal-price-range-options">
+                    <p class="filter-modal-price-range-option" data-price-range="1">Moins de 25€</p>
+                    <p class="filter-modal-price-range-option" data-price-range="2">Entre 25 - 40€</p>
+                    <p class="filter-modal-price-range-option" data-price-range="3">Plus de 40€</p>
+                </div>
             </div>
+
+
             <div class="filter-modal-sort" id="filter-modal-note">
                 <h3>Note</h3>
                 <div>
-    
+
                 </div>
             </div>
             <div class="filter-modal-sort" id="filter-modal-status">
                 <h3>Statut</h3>
                 <div>
-    
+
                 </div>
             </div>
         </div>
@@ -183,10 +206,12 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
 
                 <!-- Catégorie -->
                 <div class="desktop-filter-dropdown">
-                    <button class="desktop-filter-button" id="desktop-categorie-button">Catégorie <span id="selected-category-label"></span></button>
+                    <button class="desktop-filter-button" id="desktop-categorie-button">Catégorie <span
+                            id="selected-category-label"></span></button>
                     <div class="desktop-filter-options" id="desktop-categorie-options">
                         <?php foreach (OfferCategoryEnum::cases() as $category) { ?>
-                            <p class="desktop-filter-option" data-category="<?= $category->value ?>"><?= $category->value ?></p>
+                            <p class="desktop-filter-option" data-category="<?= $category->value ?>"><?= $category->value ?>
+                            </p>
                         <?php } ?>
                     </div>
                 </div>
@@ -214,6 +239,28 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
                                 </div>
                                 <input type="number" name="Maximum" id="max-price-desktop">
                             </div>
+                        </div>
+                    </div>
+                    <div id="desktop-price-range-options">
+                        <p class="desktop-price-range-option" data-price-range="1">Moins de 25€</p>
+                        <p class="desktop-price-range-option" data-price-range="2">Entre 25 - 40€</p>
+                        <p class="desktop-price-range-option" data-price-range="3">Plus de 40€</p>
+                    </div>
+                </div>
+
+                <!-- Date -->
+                <div class="desktop-filter-dropdown">
+                    <button class="desktop-filter-button" id="offer-date-desktop-button">
+                        Date <span id="selected-date-label"></span>
+                    </button>
+                    <div id="desktop-date-options">
+                        <div class="desktop-date-option">
+                            <label for="start-date">Début</label>
+                            <input type="date" id="desktop-start-date">
+                        </div>
+                        <div class="desktop-date-option">
+                            <label for="end-date">Fin</label>
+                            <input type="date" id="desktop-end-date">
                         </div>
                     </div>
                 </div>
@@ -332,7 +379,8 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
                     }
                     ?>
                     <?php if ($imageUrl) { ?>
-                        <img src="/uploads/offers/<?= htmlspecialchars($imageUrl) ?>" alt="Image de l'offre" class="offer-card-img-main">
+                        <img src="/uploads/offers/<?= htmlspecialchars($imageUrl) ?>" alt="Image de l'offre"
+                            class="offer-card-img-main">
                     <?php } else { ?>
                         <img src="assets/images/no-image.png" alt="Image de l'offre" class="offer-card-img-main">
                     <?php } ?>
@@ -372,7 +420,7 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
                                 <?php } ?>
                             <?php } else { ?>
                                 <div class="offer-card-price-euros">
-                                    <?= str_repeat("<img src='/assets/icons/euro_symbol_primary.svg' alt='Icone d'euro'>", $offer["categoryData"]["gamme_de_prix"]) ?>
+                                    <?= str_repeat("<img src='/assets/icons/paid_primary.svg' alt='Icone d'une pièce de monnaie'>", $offer["categoryData"]["gamme_de_prix"]) ?>
                                 </div>
                             <?php } ?>
                         </div>

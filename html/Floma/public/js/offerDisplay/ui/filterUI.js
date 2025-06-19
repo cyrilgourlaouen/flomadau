@@ -1,270 +1,725 @@
 export function setupFilterUI(filterManager, displayManager) {
-    // Accessibilité globale
-    window.filterManager = filterManager;
+  // Accessibilité globale
+  window.filterManager = filterManager;
 
-    // --- VARIABLES GLOBALES ---
-    // Texte
-    const searchInput = document.getElementById('offer-search-input');
+  // --- VARIABLES GLOBALES ---
+  // Texte
+  const searchInput = document.getElementById("offer-search-input");
 
-    // Catégorie desktop
-    const categoryDropdownButton = document.querySelector('#desktop-categorie-button');
-    const categoryDropdownOptions = document.querySelector('#desktop-categorie-options');
-    const desktopCategoryOptions = document.querySelectorAll('#desktop-categorie-options .desktop-filter-option');
-    const selectedCategoryLabel = document.getElementById('selected-category-label');
+  // Catégorie desktop
+  const categoryDropdownButton = document.querySelector("#desktop-categorie-button");
+  const categoryDropdownOptions = document.querySelector("#desktop-categorie-options");
+  const desktopCategoryOptions = document.querySelectorAll("#desktop-categorie-options .desktop-filter-option");
+  const selectedCategoryLabel = document.getElementById("selected-category-label");
 
-    // Catégorie mobile/modal
-    const modalCategoryOptions = document.querySelectorAll('.filter-modal-category-option');
+  // Catégorie mobile/modal
+  const modalCategoryOptions = document.querySelectorAll(".filter-modal-category-option");
 
-    // Prix modal/mobile
-    const minPriceInput = document.getElementById('min-price');
-    const maxPriceInput = document.getElementById('max-price');
+  // Prix modal/mobile
+  const minPriceInput = document.getElementById("min-price");
+  const maxPriceInput = document.getElementById("max-price");
+  const priceInputOptions = document.querySelector(".filter-modal-price-options");
+  const priceRangeOptions = document.querySelector(".filter-modal-price-range-options");
+  const priceRangeOptionItems = document.querySelectorAll(".filter-modal-price-range-option");
 
-    // Prix desktop
-    const priceDropdownButton = document.querySelector('#offer-price-desktop-button');
-    const priceDropdownOptions = document.querySelector('#desktop-price-options');
-    const selectedPriceLabel = document.getElementById('selected-price-label');
-    const minDesktopPriceInput = document.getElementById('min-price-desktop');
-    const maxDesktopPriceInput = document.getElementById('max-price-desktop');
+  // Prix desktop
+  const priceDropdownButton = document.querySelector("#offer-price-desktop-button");
+  const priceDropdownOptions = document.querySelector("#desktop-price-options");
+  const selectedPriceLabel = document.getElementById("selected-price-label");
+  const minDesktopPriceInput = document.getElementById("min-price-desktop");
+  const maxDesktopPriceInput = document.getElementById("max-price-desktop");
 
-    // --- FONCTIONS ---
+  // Gammes de prix desktop
+  const desktopPriceRangeOptions = document.querySelector("#desktop-price-range-options");
+  const desktopPriceRangeItems = document.querySelectorAll("#desktop-price-range-options .desktop-price-range-option");
 
-    function debounce(fn, delay) {
-        let timeoutId;
-        return function (...args) {
-            clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => fn.apply(this, args), delay);
-        };
+  // Date modal/mobile
+  const startDateInput = document.getElementById("start-date");
+  const endDateInput = document.getElementById("end-date");
+
+  // Date desktop
+  const dateDropdownButton = document.querySelector("#offer-date-desktop-button");
+  const dateDropdownOptions = document.querySelector("#desktop-date-options");
+  const selectedDateLabel = document.getElementById("selected-date-label");
+  const startDesktopDateInput = document.getElementById("desktop-start-date");
+  const endDesktopDateInput = document.getElementById("desktop-end-date");
+
+  // --- FONCTIONS DE GESTION DES DROPDOWNS ---
+
+  function closeAllDropdowns() {
+    if (categoryDropdownOptions) {
+      categoryDropdownOptions.style.display = "none";
+    }
+    if (priceDropdownOptions) {
+      priceDropdownOptions.style.display = "none";
+    }
+    if (desktopPriceRangeOptions) {
+      desktopPriceRangeOptions.style.display = "none";
+    }
+    if (dateDropdownOptions) {
+      dateDropdownOptions.style.display = "none";
+    }
+  }
+
+  function toggleCategoryDropdown() {
+    // Fermer les autres dropdowns
+    if (priceDropdownOptions) {
+      priceDropdownOptions.style.display = "none";
+    }
+    if (desktopPriceRangeOptions) {
+      desktopPriceRangeOptions.style.display = "none";
+    }
+    if (dateDropdownOptions) {
+      dateDropdownOptions.style.display = "none";
     }
 
-    function updateSelectedPriceLabel(min, max) {
-        const minValid = min !== undefined && min !== '' && !isNaN(Number(min));
-        const maxValid = max !== undefined && max !== '' && !isNaN(Number(max));
+    // Toggle le dropdown de catégorie
+    if (categoryDropdownOptions) {
+      const isVisible = categoryDropdownOptions.style.display === "block";
+      categoryDropdownOptions.style.display = isVisible ? "none" : "block";
+    }
+  }
 
-        // Si aucun champ n'est valide, ou si une erreur de validation est détectée, on vide le label
-        if (!minValid && !maxValid) {
-            selectedPriceLabel.textContent = '';
-        } else if (minValid && maxValid) {
-            selectedPriceLabel.textContent = `: ${Number(min)} - ${Number(max)}`;
-        } else if (minValid) {
-            selectedPriceLabel.textContent = `: ${Number(min)} min`;
-        } else if (maxValid) {
-            selectedPriceLabel.textContent = `: ${Number(max)} max`;
-        }
+  function togglePriceDropdown() {
+    const currentCategory = filterManager.getFilter("category");
 
-        // Synchronise les inputs desktop
-        if (minDesktopPriceInput) {
-            minDesktopPriceInput.value = (min !== undefined && min !== '' && !isNaN(Number(min))) ? Number(min) : '';
-        }
-        if (maxDesktopPriceInput) {
-            maxDesktopPriceInput.value = (max !== undefined && max !== '' && !isNaN(Number(max))) ? Number(max) : '';
-        }
-
-        // Synchronise les inputs mobile
-        if (minPriceInput) {
-            minPriceInput.value = (min !== undefined && min !== '' && !isNaN(Number(min))) ? Number(min) : '';
-        }
-        if (maxPriceInput) {
-            maxPriceInput.value = (max !== undefined && max !== '' && !isNaN(Number(max))) ? Number(max) : '';
-        }
+    // Fermer les autres dropdowns
+    if (categoryDropdownOptions) {
+      categoryDropdownOptions.style.display = "none";
+    }
+    if (dateDropdownOptions) {
+      dateDropdownOptions.style.display = "none";
     }
 
-    function validatePriceRange(min, max) {
-        // Si aucun des deux n'est défini, pas de filtre
-        if ((min === undefined || min === '') && (max === undefined || max === '')) {
-            return { valid: false, min: undefined, max: undefined, reason: 'empty' };
-        }
-        // Si min ou max n'est pas un nombre valide
-        if ((min !== undefined && min !== '' && isNaN(min)) || (max !== undefined && max !== '' && isNaN(max))) {
-            return { valid: false, min: undefined, max: undefined, reason: 'not_a_number' };
-        }
-        // Si max < min, filtre invalide
-        if (min !== undefined && min !== '' && max !== undefined && max !== '' && Number(max) < Number(min)) {
-            return { valid: false, min: undefined, max: undefined, reason: 'max_lt_min' };
-        }
-        // Sinon, filtre valide
-        return { valid: true, min: min !== '' ? Number(min) : undefined, max: max !== '' ? Number(max) : undefined };
+    if (currentCategory === "Restaurant") {
+      // Pour Restaurant : afficher les gammes de prix
+      if (desktopPriceRangeOptions) {
+        const isVisible = desktopPriceRangeOptions.style.display === "block";
+        desktopPriceRangeOptions.style.display = isVisible ? "none" : "block";
+      }
+      // S'assurer que les inputs min/max sont cachés
+      if (priceDropdownOptions) {
+        priceDropdownOptions.style.display = "none";
+      }
+    } else {
+      // Pour les autres catégories OU aucune catégorie : afficher les inputs min/max
+      if (priceDropdownOptions) {
+        const isVisible = priceDropdownOptions.style.display === "flex";
+        priceDropdownOptions.style.display = isVisible ? "none" : "flex";
+      }
+      // S'assurer que les gammes de prix sont cachées
+      if (desktopPriceRangeOptions) {
+        desktopPriceRangeOptions.style.display = "none";
+      }
+    }
+  }
+
+  function toggleDateDropdown() {
+    // Fermer les autres dropdowns
+    if (categoryDropdownOptions) {
+      categoryDropdownOptions.style.display = "none";
+    }
+    if (priceDropdownOptions) {
+      priceDropdownOptions.style.display = "none";
+    }
+    if (desktopPriceRangeOptions) {
+      desktopPriceRangeOptions.style.display = "none";
     }
 
-    function handleDesktopPriceChange() {
-        const min = minDesktopPriceInput?.value || undefined;
-        const max = maxDesktopPriceInput?.value || undefined;
+    // Toggle le dropdown de date
+    if (dateDropdownOptions) {
+      const isVisible = dateDropdownOptions.style.display === "flex";
+      dateDropdownOptions.style.display = isVisible ? "none" : "flex";
+    }
+  }
 
-        const validation = validatePriceRange(min, max);
+  // --- FONCTIONS ---
 
-        // Réinitialise les classes d’erreur
-        minDesktopPriceInput?.parentElement.classList.remove('filter-modal-price-icon-wrapper-error');
-        maxDesktopPriceInput?.parentElement.classList.remove('filter-modal-price-icon-wrapper-error');
+  function debounce(fn, delay) {
+    let timeoutId;
+    return function (...args) {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => fn.apply(this, args), delay);
+    };
+  }
 
-        // ...existing code...
+  // Fonction pour gérer la sélection d'une gamme de prix (mobile et desktop)
+  function handlePriceRangeSelection(rangeValue, isFromDesktop = false) {
+    const currentFilter = filterManager.getFilter("price");
+    const isCurrentlySelected = currentFilter === rangeValue;
 
-        if (!validation.valid) {
-            // Marque les champs invalides
-            if (min !== undefined && min !== '' && isNaN(min)) minDesktopPriceInput?.parentElement.classList.add('filter-modal-price-icon-wrapper-error');
-            if (max !== undefined && max !== '' && isNaN(max)) maxDesktopPriceInput?.parentElement.classList.add('filter-modal-price-icon-wrapper-error');
-            if (validation.reason === 'max_lt_min') {
-                minDesktopPriceInput?.parentElement.classList.add('filter-modal-price-icon-wrapper-error');
-                maxDesktopPriceInput?.parentElement.classList.add('filter-modal-price-icon-wrapper-error');
-            }
+    if (isCurrentlySelected) {
+      // Désélectionner
+      filterManager.setFilter("price", null);
 
-            // Vide SEULEMENT le label prix en cas d'erreur
-            if (selectedPriceLabel) selectedPriceLabel.textContent = '';
-            // Ne touche pas aux champs ni au filtre
-            return;
-        }
+      // Réinitialiser les sélections visuelles
+      priceRangeOptionItems.forEach(option => {
+        option.classList.remove('selected-price-range');
+      });
+      desktopPriceRangeItems.forEach(option => {
+        option.classList.remove('selected-price-range-desktop');
+      });
 
-        filterManager.setFilter('price', { min: validation.min, max: validation.max });
-        updateSelectedPriceLabel(validation.min, validation.max);
-        refreshDisplay();
+      if (selectedPriceLabel) selectedPriceLabel.textContent = "";
+
+    } else {
+      // Sélectionner
+      filterManager.setFilter("price", rangeValue);
+
+      // Synchroniser les sélections visuelles
+      syncPriceRangeSelections(rangeValue);
+
+      // Mettre à jour le label
+      updatePriceRangeLabel(rangeValue);
     }
 
-    function handlePriceChange() {
-        const min = minPriceInput?.value || undefined;
-        const max = maxPriceInput?.value || undefined;
-
-        const validation = validatePriceRange(min, max);
-
-        // Réinitialise les classes d’erreur
-        minPriceInput?.parentElement.classList.remove('filter-modal-price-icon-wrapper-error');
-        maxPriceInput?.parentElement.classList.remove('filter-modal-price-icon-wrapper-error');
-
-        if (!validation.valid) {
-            // Marque les champs invalides
-            if (min !== undefined && min !== '' && isNaN(min)) minPriceInput?.parentElement.classList.add('filter-modal-price-icon-wrapper-error');
-            if (max !== undefined && max !== '' && isNaN(max)) maxPriceInput?.parentElement.classList.add('filter-modal-price-icon-wrapper-error');
-            if (validation.reason === 'max_lt_min') {
-                minPriceInput?.parentElement.classList.add('filter-modal-price-icon-wrapper-error');
-                maxPriceInput?.parentElement.classList.add('filter-modal-price-icon-wrapper-error');
-            }
-
-            // Vide SEULEMENT le label prix en cas d'erreur
-            if (selectedPriceLabel) selectedPriceLabel.textContent = '';
-            // Ne touche pas aux champs ni au filtre
-            return;
-        }
-
-        filterManager.setFilter('price', { min: validation.min, max: validation.max });
-        updateSelectedPriceLabel(validation.min, validation.max);
-        refreshDisplay();
+    // Fermer le dropdown desktop si la sélection vient du desktop
+    if (isFromDesktop && desktopPriceRangeOptions) {
+      desktopPriceRangeOptions.style.display = "none";
     }
 
+    refreshDisplay();
+  }
 
-    // --- LISTENERS ---
-
-    // Texte
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            filterManager.setFilter('search', e.target.value);
-            refreshDisplay();
-        });
-    }
-
-    // Catégorie desktop
-    if (categoryDropdownButton && categoryDropdownOptions) {
-        categoryDropdownOptions.style.display = 'none';
-
-        categoryDropdownButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            categoryDropdownOptions.style.display = categoryDropdownOptions.style.display === 'none' ? 'block' : 'none';
-        });
-
-        document.addEventListener('click', (e) => {
-            if (categoryDropdownOptions.style.display !== 'none' &&
-                !categoryDropdownButton.contains(e.target) &&
-                !categoryDropdownOptions.contains(e.target)) {
-                categoryDropdownOptions.style.display = 'none';
-            }
-        });
-    }
-
-    // Catégorie desktop options
-    desktopCategoryOptions.forEach(option => {
-        option.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const category = option.dataset.category;
-            handleCategorySelection(category, true);
-
-            if (categoryDropdownOptions) {
-                categoryDropdownOptions.style.display = 'none';
-            }
-        });
+  // Synchroniser les sélections de gamme de prix entre mobile et desktop
+  function syncPriceRangeSelections(rangeValue) {
+    // Désélectionner tout d'abord
+    priceRangeOptionItems.forEach(option => {
+      option.classList.remove('selected-price-range');
+    });
+    desktopPriceRangeItems.forEach(option => {
+      option.classList.remove('selected-price-range-desktop');
     });
 
-    // Catégorie mobile/modal options
-    modalCategoryOptions.forEach(option => {
-        option.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            const category = option.dataset.category;
-            handleCategorySelection(category, false);
-        });
+    if (rangeValue) {
+      // Sélectionner la bonne option mobile
+      priceRangeOptionItems.forEach(option => {
+        if (option.getAttribute('data-price-range') === rangeValue) {
+          option.classList.add('selected-price-range');
+        }
+      });
+
+      // Sélectionner la bonne option desktop
+      desktopPriceRangeItems.forEach(option => {
+        if (option.getAttribute('data-price-range') === rangeValue) {
+          option.classList.add('selected-price-range-desktop');
+        }
+      });
+    }
+  }
+
+  // Mettre à jour le label de prix pour les gammes
+  function updatePriceRangeLabel(rangeValue) {
+    if (!selectedPriceLabel) return;
+
+    let rangeText = "";
+    switch (rangeValue) {
+      case "1":
+        rangeText = ": < 25€";
+        break;
+      case "2":
+        rangeText = ": 25-40€";
+        break;
+      case "3":
+        rangeText = ": > 40€";
+        break;
+    }
+    selectedPriceLabel.textContent = rangeText;
+  }
+
+  function updateSelectedPriceLabel(min, max) {
+    const minValid = min !== undefined && min !== "" && !isNaN(Number(min));
+    const maxValid = max !== undefined && max !== "" && !isNaN(Number(max));
+
+    if (!minValid && !maxValid) {
+      if (selectedPriceLabel) selectedPriceLabel.textContent = "";
+    } else if (minValid && maxValid) {
+      if (selectedPriceLabel) selectedPriceLabel.textContent = `: ${Number(min)} - ${Number(max)}`;
+    } else if (minValid) {
+      if (selectedPriceLabel) selectedPriceLabel.textContent = `: ${Number(min)} min`;
+    } else if (maxValid) {
+      if (selectedPriceLabel) selectedPriceLabel.textContent = `: ${Number(max)} max`;
+    }
+
+    // Synchroniser les inputs
+    if (minDesktopPriceInput) {
+      minDesktopPriceInput.value = minValid ? Number(min) : "";
+    }
+    if (maxDesktopPriceInput) {
+      maxDesktopPriceInput.value = maxValid ? Number(max) : "";
+    }
+    if (minPriceInput) {
+      minPriceInput.value = minValid ? Number(min) : "";
+    }
+    if (maxPriceInput) {
+      maxPriceInput.value = maxValid ? Number(max) : "";
+    }
+  }
+
+  function updateSelectedDateLabel(startDate, endDate) {
+    const startValid = startDate && !isNaN(new Date(startDate));
+    const endValid = endDate && !isNaN(new Date(endDate));
+
+    if (!startValid && !endValid) {
+      if (selectedDateLabel) selectedDateLabel.textContent = "";
+    } else if (startValid && endValid) {
+      const start = new Date(startDate).toLocaleDateString('fr-FR');
+      const end = new Date(endDate).toLocaleDateString('fr-FR');
+      if (selectedDateLabel) selectedDateLabel.textContent = `: ${start} - ${end}`;
+    } else if (startValid) {
+      const start = new Date(startDate).toLocaleDateString('fr-FR');
+      if (selectedDateLabel) selectedDateLabel.textContent = `: < ${start}`;
+    } else if (endValid) {
+      const end = new Date(endDate).toLocaleDateString('fr-FR');
+      if (selectedDateLabel) selectedDateLabel.textContent = `: > ${end}`;
+    }
+
+    // Synchroniser les inputs
+    if (startDesktopDateInput) {
+      startDesktopDateInput.value = startValid ? startDate : "";
+    }
+    if (endDesktopDateInput) {
+      endDesktopDateInput.value = endValid ? endDate : "";
+    }
+    if (startDateInput) {
+      startDateInput.value = startValid ? startDate : "";
+    }
+    if (endDateInput) {
+      endDateInput.value = endValid ? endDate : "";
+    }
+  }
+
+  function resetPriceFilter() {
+    filterManager.setFilter("price", null);
+
+    // Reset des inputs
+    if (minPriceInput) minPriceInput.value = "";
+    if (maxPriceInput) maxPriceInput.value = "";
+    if (minDesktopPriceInput) minDesktopPriceInput.value = "";
+    if (maxDesktopPriceInput) maxDesktopPriceInput.value = "";
+
+    // Reset du label
+    if (selectedPriceLabel) selectedPriceLabel.textContent = "";
+
+    // Reset des gammes de prix sélectionnées (mobile et desktop)
+    priceRangeOptionItems.forEach(option => {
+      option.classList.remove('selected-price-range');
+    });
+    desktopPriceRangeItems.forEach(option => {
+      option.classList.remove('selected-price-range-desktop');
     });
 
-    // Prix modal/mobile
-    const debouncedHandlePriceChange = debounce(handlePriceChange, 500);
-    if (minPriceInput) minPriceInput.addEventListener('input', debouncedHandlePriceChange);
-    if (maxPriceInput) maxPriceInput.addEventListener('input', debouncedHandlePriceChange);
+    // Reset des classes d'erreur
+    [minPriceInput, maxPriceInput, minDesktopPriceInput, maxDesktopPriceInput].forEach(input => {
+      if (input?.parentElement) {
+        input.parentElement.classList.remove("filter-modal-price-icon-wrapper-error");
+      }
+    });
+  }
 
-    // Prix desktop
-    const debouncedHandleDesktopPriceChange = debounce(handleDesktopPriceChange, 500);
-    if (minDesktopPriceInput) minDesktopPriceInput.addEventListener('input', debouncedHandleDesktopPriceChange);
-    if (maxDesktopPriceInput) maxDesktopPriceInput.addEventListener('input', debouncedHandleDesktopPriceChange);
+  function resetDateFilter() {
+    filterManager.setFilter("date", null);
 
-    // Toggle du dropdown prix desktop
-    if (priceDropdownButton && priceDropdownOptions) {
-        priceDropdownOptions.style.display = 'none';
+    // Reset des inputs
+    if (startDateInput) startDateInput.value = "";
+    if (endDateInput) endDateInput.value = "";
+    if (startDesktopDateInput) startDesktopDateInput.value = "";
+    if (endDesktopDateInput) endDesktopDateInput.value = "";
 
-        priceDropdownButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            priceDropdownOptions.style.display = priceDropdownOptions.style.display === 'none' ? 'flex' : 'none';
-        });
+    // Reset du label
+    if (selectedDateLabel) selectedDateLabel.textContent = "";
 
-        document.addEventListener('click', (e) => {
-            if (
-                priceDropdownOptions.style.display !== 'none' &&
-                !priceDropdownButton.contains(e.target) &&
-                !priceDropdownOptions.contains(e.target)
-            ) {
-                priceDropdownOptions.style.display = 'none';
-            }
-        });
+    // Reset des classes d'erreur
+    if (startDateInput) startDateInput.classList.remove("date-error");
+    if (endDateInput) endDateInput.classList.remove("date-error");
+    if (startDesktopDateInput) startDesktopDateInput.classList.remove("date-error");
+    if (endDesktopDateInput) endDesktopDateInput.classList.remove("date-error");
+  }
+
+  // Mettre à jour l'affichage des options de prix selon la catégorie
+  function updatePriceFilterDisplay(category) {
+    const isRestaurant = category === "Restaurant";
+
+    // Mobile
+    if (priceInputOptions && priceRangeOptions) {
+      if (isRestaurant) {
+        priceInputOptions.style.display = "none";
+        priceRangeOptions.style.display = "flex";
+      } else {
+        priceInputOptions.style.display = "flex";
+        priceRangeOptions.style.display = "none";
+      }
     }
 
-    // --- FONCTION CATÉGORIE ---
-    function handleCategorySelection(category, isFromDesktop = true) {
-        const isCurrentlySelected = filterManager.getFilter('category') === category;
+    // Desktop - Pas d'affichage automatique, juste préparation
+    // Les dropdowns s'ouvriront via togglePriceDropdown() selon la catégorie
+  }
 
-        filterManager.setFilter('category', isCurrentlySelected ? null : category);
+  function validatePriceRange(min, max) {
+    if ((min === undefined || min === "") && (max === undefined || max === "")) {
+      return { valid: false, min: undefined, max: undefined, reason: "empty" };
+    }
+    if ((min !== undefined && min !== "" && isNaN(min)) || (max !== undefined && max !== "" && isNaN(max))) {
+      return { valid: false, min: undefined, max: undefined, reason: "not_a_number" };
+    }
+    if (min !== undefined && min !== "" && max !== undefined && max !== "" && Number(max) < Number(min)) {
+      return { valid: false, min: undefined, max: undefined, reason: "max_lt_min" };
+    }
+    return {
+      valid: true,
+      min: min !== "" ? Number(min) : undefined,
+      max: max !== "" ? Number(max) : undefined,
+    };
+  }
 
-        desktopCategoryOptions.forEach(opt => {
-            opt.classList.remove('selected-category-desktop');
-            if (!isCurrentlySelected && opt.dataset.category === category) {
-                opt.classList.add('selected-category-desktop');
-            }
-        });
-
-        if (selectedCategoryLabel) {
-            selectedCategoryLabel.textContent = !isCurrentlySelected && category ? `: ${category}` : '';
-        }
-
-        modalCategoryOptions.forEach(opt => {
-            opt.classList.remove('selected-category');
-            if (!isCurrentlySelected && opt.dataset.category === category) {
-                opt.classList.add('selected-category');
-            }
-        });
-
-        refreshDisplay();
+  function validateDateRange(startDate, endDate) {
+    if (!startDate && !endDate) {
+      return { valid: false, startDate: undefined, endDate: undefined, reason: "empty" };
     }
 
-    // --- RAFRAICHISSEMENT ---
-    function refreshDisplay() {
-        if (window.sortManager) {
-            displayManager.refreshWithFiltersAndSort(filterManager, window.sortManager);
-        } else {
-            displayManager.refreshWithFiltersAndSort(filterManager, { sortOffers: (offers) => offers });
-        }
+    const start = startDate ? new Date(startDate) : null;
+    const end = endDate ? new Date(endDate) : null;
+
+    if ((startDate && isNaN(start)) || (endDate && isNaN(end))) {
+      return { valid: false, startDate: undefined, endDate: undefined, reason: "invalid_date" };
     }
+
+    if (start && end && end < start) {
+      return { valid: false, startDate: undefined, endDate: undefined, reason: "end_before_start" };
+    }
+
+    return {
+      valid: true,
+      startDate: start,
+      endDate: end,
+    };
+  }
+
+  function handleDesktopPriceChange() {
+    const min = minDesktopPriceInput?.value || undefined;
+    const max = maxDesktopPriceInput?.value || undefined;
+    const validation = validatePriceRange(min, max);
+
+    // Réinitialiser les gammes de prix sélectionnées car on utilise les inputs
+    syncPriceRangeSelections(null);
+
+    minDesktopPriceInput?.parentElement.classList.remove("filter-modal-price-icon-wrapper-error");
+    maxDesktopPriceInput?.parentElement.classList.remove("filter-modal-price-icon-wrapper-error");
+
+    if (!validation.valid) {
+      if (min !== undefined && min !== "" && isNaN(min))
+        minDesktopPriceInput?.parentElement.classList.add("filter-modal-price-icon-wrapper-error");
+      if (max !== undefined && max !== "" && isNaN(max))
+        maxDesktopPriceInput?.parentElement.classList.add("filter-modal-price-icon-wrapper-error");
+      if (validation.reason === "max_lt_min") {
+        minDesktopPriceInput?.parentElement.classList.add("filter-modal-price-icon-wrapper-error");
+        maxDesktopPriceInput?.parentElement.classList.add("filter-modal-price-icon-wrapper-error");
+      }
+      if (selectedPriceLabel) selectedPriceLabel.textContent = "";
+      return;
+    }
+
+    filterManager.setFilter("price", { min: validation.min, max: validation.max });
+    updateSelectedPriceLabel(validation.min, validation.max);
+    refreshDisplay();
+  }
+
+  function handlePriceChange() {
+    const min = minPriceInput?.value || undefined;
+    const max = maxPriceInput?.value || undefined;
+    const validation = validatePriceRange(min, max);
+
+    // Réinitialiser les gammes de prix sélectionnées car on utilise les inputs
+    syncPriceRangeSelections(null);
+
+    minPriceInput?.parentElement.classList.remove("filter-modal-price-icon-wrapper-error");
+    maxPriceInput?.parentElement.classList.remove("filter-modal-price-icon-wrapper-error");
+
+    if (!validation.valid) {
+      if (min !== undefined && min !== "" && isNaN(min))
+        minPriceInput?.parentElement.classList.add("filter-modal-price-icon-wrapper-error");
+      if (max !== undefined && max !== "" && isNaN(max))
+        maxPriceInput?.parentElement.classList.add("filter-modal-price-icon-wrapper-error");
+      if (validation.reason === "max_lt_min") {
+        minPriceInput?.parentElement.classList.add("filter-modal-price-icon-wrapper-error");
+        maxPriceInput?.parentElement.classList.add("filter-modal-price-icon-wrapper-error");
+      }
+      if (selectedPriceLabel) selectedPriceLabel.textContent = "";
+      return;
+    }
+
+    filterManager.setFilter("price", { min: validation.min, max: validation.max });
+    updateSelectedPriceLabel(validation.min, validation.max);
+    refreshDisplay();
+  }
+
+  function handleDesktopDateChange() {
+    const startDate = startDesktopDateInput?.value || undefined;
+    const endDate = endDesktopDateInput?.value || undefined;
+    const validation = validateDateRange(startDate, endDate);
+
+    // Reset des classes d'erreur
+    if (startDesktopDateInput) startDesktopDateInput.classList.remove("date-error");
+    if (endDesktopDateInput) endDesktopDateInput.classList.remove("date-error");
+
+    if (!validation.valid) {
+      if (validation.reason === "end_before_start") {
+        if (startDesktopDateInput) startDesktopDateInput.classList.add("date-error");
+        if (endDesktopDateInput) endDesktopDateInput.classList.add("date-error");
+      }
+      if (selectedDateLabel) selectedDateLabel.textContent = "";
+      // Si les dates ne sont pas valides, on ignore le filtre (affiche toutes les offres)
+      filterManager.setFilter("date", null);
+      refreshDisplay();
+      return;
+    }
+
+    if (validation.reason === "empty") {
+      filterManager.setFilter("date", null);
+      updateSelectedDateLabel(undefined, undefined);
+    } else {
+      filterManager.setFilter("date", { startDate: validation.startDate, endDate: validation.endDate });
+      updateSelectedDateLabel(startDate, endDate);
+    }
+
+    refreshDisplay();
+  }
+
+  function handleDateChange() {
+    const startDate = startDateInput?.value || undefined;
+    const endDate = endDateInput?.value || undefined;
+    const validation = validateDateRange(startDate, endDate);
+
+    // Reset des classes d'erreur
+    if (startDateInput) startDateInput.classList.remove("date-error");
+    if (endDateInput) endDateInput.classList.remove("date-error");
+
+    if (!validation.valid) {
+      if (validation.reason === "end_before_start") {
+        if (startDateInput) startDateInput.classList.add("date-error");
+        if (endDateInput) endDateInput.classList.add("date-error");
+      }
+      if (selectedDateLabel) selectedDateLabel.textContent = "";
+      // Si les dates ne sont pas valides, on ignore le filtre (affiche toutes les offres)
+      filterManager.setFilter("date", null);
+      refreshDisplay();
+      return;
+    }
+
+    if (validation.reason === "empty") {
+      filterManager.setFilter("date", null);
+      updateSelectedDateLabel(undefined, undefined);
+    } else {
+      filterManager.setFilter("date", { startDate: validation.startDate, endDate: validation.endDate });
+      updateSelectedDateLabel(startDate, endDate);
+    }
+
+    refreshDisplay();
+  }
+
+  // --- LISTENERS ---
+
+  // Texte
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      filterManager.setFilter("search", e.target.value);
+      refreshDisplay();
+    });
+  }
+
+  // Gammes de prix mobile
+  if (priceRangeOptionItems && priceRangeOptionItems.length > 0) {
+    priceRangeOptionItems.forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const rangeValue = option.getAttribute('data-price-range');
+        handlePriceRangeSelection(rangeValue, false);
+      });
+    });
+  }
+
+  // Gammes de prix desktop
+  if (desktopPriceRangeItems && desktopPriceRangeItems.length > 0) {
+    desktopPriceRangeItems.forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const rangeValue = option.getAttribute('data-price-range');
+        handlePriceRangeSelection(rangeValue, true);
+      });
+    });
+  }
+
+  // Catégorie desktop
+  if (categoryDropdownButton) {
+    categoryDropdownButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleCategoryDropdown();
+    });
+  }
+
+  // Catégorie desktop options
+  desktopCategoryOptions.forEach((option) => {
+    option.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const category = option.dataset.category;
+      handleCategorySelection(category, true);
+      closeAllDropdowns();
+    });
+  });
+
+  // Catégorie mobile/modal options
+  modalCategoryOptions.forEach((option) => {
+    option.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const category = option.dataset.category;
+      handleCategorySelection(category, false);
+    });
+  });
+
+  // Prix modal/mobile inputs
+  const debouncedHandlePriceChange = debounce(handlePriceChange, 500);
+  if (minPriceInput) minPriceInput.addEventListener("input", debouncedHandlePriceChange);
+  if (maxPriceInput) maxPriceInput.addEventListener("input", debouncedHandlePriceChange);
+
+  // Prix desktop inputs
+  const debouncedHandleDesktopPriceChange = debounce(handleDesktopPriceChange, 500);
+  if (minDesktopPriceInput) minDesktopPriceInput.addEventListener("input", debouncedHandleDesktopPriceChange);
+  if (maxDesktopPriceInput) maxDesktopPriceInput.addEventListener("input", debouncedHandleDesktopPriceChange);
+
+  // Date modal/mobile inputs
+  const debouncedHandleDateChange = debounce(handleDateChange, 500);
+  if (startDateInput) startDateInput.addEventListener("input", debouncedHandleDateChange);
+  if (endDateInput) endDateInput.addEventListener("input", debouncedHandleDateChange);
+
+  // Date desktop inputs
+  const debouncedHandleDesktopDateChange = debounce(handleDesktopDateChange, 500);
+  if (startDesktopDateInput) startDesktopDateInput.addEventListener("input", debouncedHandleDesktopDateChange);
+  if (endDesktopDateInput) endDesktopDateInput.addEventListener("input", debouncedHandleDesktopDateChange);
+
+  // Toggle du dropdown prix desktop
+  if (priceDropdownButton) {
+    priceDropdownButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      togglePriceDropdown();
+    });
+  }
+
+  // Toggle du dropdown date desktop
+  if (dateDropdownButton) {
+    dateDropdownButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleDateDropdown();
+    });
+  }
+
+  // Fermer les dropdowns quand on clique ailleurs
+  document.addEventListener("click", (e) => {
+    if (categoryDropdownButton && categoryDropdownOptions &&
+      !categoryDropdownButton.contains(e.target) &&
+      !categoryDropdownOptions.contains(e.target)) {
+      categoryDropdownOptions.style.display = "none";
+    }
+
+    if (priceDropdownButton && priceDropdownOptions &&
+      !priceDropdownButton.contains(e.target) &&
+      !priceDropdownOptions.contains(e.target)) {
+      priceDropdownOptions.style.display = "none";
+    }
+
+    if (priceDropdownButton && desktopPriceRangeOptions &&
+      !priceDropdownButton.contains(e.target) &&
+      !desktopPriceRangeOptions.contains(e.target)) {
+      desktopPriceRangeOptions.style.display = "none";
+    }
+
+    if (dateDropdownButton && dateDropdownOptions &&
+      !dateDropdownButton.contains(e.target) &&
+      !dateDropdownOptions.contains(e.target)) {
+      dateDropdownOptions.style.display = "none";
+    }
+  });
+
+  // --- FONCTION CATÉGORIE ---
+  function handleCategorySelection(category, isFromDesktop = true) {
+    const isCurrentlySelected = filterManager.getFilter("category") === category;
+    const previousCategory = filterManager.getFilter("category");
+
+    // RESET UNIQUEMENT lors du passage Restaurant ↔ autre catégorie
+    if (!isCurrentlySelected && previousCategory && previousCategory !== category) {
+      const wasRestaurant = previousCategory === "Restaurant";
+      const isRestaurant = category === "Restaurant";
+
+      // Reset seulement si on change entre Restaurant et non-Restaurant
+      if (wasRestaurant !== isRestaurant) {
+        resetPriceFilter();
+
+        // Fermer tous les dropdowns prix lors de ce type de transition
+        closeAllDropdowns();
+      }
+    }
+
+    // Reset si on désélectionne Restaurant pour aller vers "aucune catégorie"
+    if (isCurrentlySelected && previousCategory === "Restaurant") {
+      resetPriceFilter();
+      closeAllDropdowns();
+    }
+
+    filterManager.setFilter("category", isCurrentlySelected ? null : category);
+    const selectedCategory = isCurrentlySelected ? null : category;
+    updatePriceFilterDisplay(selectedCategory);
+
+    // Synchroniser les sélections de catégorie entre desktop et mobile
+    desktopCategoryOptions.forEach((opt) => {
+      opt.classList.remove("selected-category-desktop");
+      if (!isCurrentlySelected && opt.dataset.category === category) {
+        opt.classList.add("selected-category-desktop");
+      }
+    });
+
+    modalCategoryOptions.forEach((opt) => {
+      opt.classList.remove("selected-category");
+      if (!isCurrentlySelected && opt.dataset.category === category) {
+        opt.classList.add("selected-category");
+      }
+    });
+
+    if (selectedCategoryLabel) {
+      selectedCategoryLabel.textContent = !isCurrentlySelected && category ? `: ${category}` : "";
+    }
+
+    refreshDisplay();
+  }
+
+  // --- RAFRAICHISSEMENT ---
+  function refreshDisplay() {
+    if (window.sortManager) {
+      displayManager.refreshWithFiltersAndSort(filterManager, window.sortManager);
+    } else {
+      displayManager.refreshWithFiltersAndSort(filterManager, { sortOffers: (offers) => offers });
+    }
+  }
+
+  // --- INITIALISATION ---
+  updatePriceFilterDisplay(null);
+
+  // Initialiser tous les dropdowns comme fermés
+  if (categoryDropdownOptions) {
+    categoryDropdownOptions.style.display = "none";
+  }
+  if (priceDropdownOptions) {
+    priceDropdownOptions.style.display = "none";
+  }
+  if (desktopPriceRangeOptions) {
+    desktopPriceRangeOptions.style.display = "none";
+  }
+  if (dateDropdownOptions) {
+    dateDropdownOptions.style.display = "none";
+  }
 }

@@ -372,6 +372,7 @@ footer div nav :any-link {
   flex-direction: row;
   align-items: self-start;
   justify-items: center;
+  align-items: center;
   width: 100%;
   gap: 0.625rem;
   flex-wrap: nowrap;
@@ -394,9 +395,9 @@ footer div nav :any-link {
   width: fit-content;
 }
 
-#offer-sort-mobile-options, #offer-sort-desktop-options {
+#offer-sort-mobile-options, #offer-sort-desktop-options, #desktop-price-range-options {
   z-index: 5;
-  top: 3rem;
+  top: 2.5rem;
   position: absolute;
   display: flex;
   width: 100%;
@@ -409,8 +410,12 @@ footer div nav :any-link {
   border-radius: 10px;
 }
 
+#desktop-price-range-options {
+  width: max-content;
+}
 
-#offer-sort-mobile-options p , #offer-sort-desktop-options p {
+
+#offer-sort-mobile-options p , #offer-sort-desktop-options p, #desktop-price-range-options p {
   width: 100%;
   padding: 0.625rem;
   text-align: center;
@@ -419,7 +424,7 @@ footer div nav :any-link {
   cursor: pointer;
 }
 
-#offer-sort-mobile-options p:hover, #offer-sort-desktop-options p:hover {
+#offer-sort-mobile-options p:hover, #offer-sort-desktop-options p:hover, #desktop-price-range-options p:hover {
   cursor: pointer;
   background-color: var(--background-color);
 }
@@ -1023,14 +1028,14 @@ footer div nav :any-link {
   display: none;
 }
 
-.filter-modal-price-options {
+.filter-modal-price-options, .filter-modal-date-options {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   gap: 0.625rem;
 }
 
-.filter-modal-price-minimum, .filter-modal-price-maximum {
+.filter-modal-price-minimum, .filter-modal-price-maximum, .filter-modal-date-option {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -1097,6 +1102,86 @@ footer div nav :any-link {
   background-color: red;
 }
 
+.filter-modal-price-range-options {
+  display: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.filter-modal-price-range-option {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-items: center;
+  align-items: center;
+  border: #000 solid 1px;
+  border-radius: 100px;
+  gap: 0.313rem;
+  padding: 0.313rem 0.625rem;
+  cursor: pointer;
+}
+
+.filter-modal-price-range-option:hover {
+  background-color: var(--background-color);
+}
+
+.selected-price-range {
+  border: #000 solid 2px;
+  background-color: var(--background-color);
+}
+
+.filter-modal-date-option input {
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 1.5rem;
+  border-radius: 8px;
+  background-size: 1.75rem;
+  background-color: var(--white-color);
+  font-size: var(--text-size);
+  border: #000 solid 1px;
+  color: var(--black-color);
+}
+
+#desktop-date-options {
+    z-index: 5;
+    top: 3rem;
+    position: absolute;
+    display: flex;
+    width: max-content;
+    flex-direction: column;
+    justify-items: center;
+    align-items: baseline;
+    gap: 0.325rem;
+    background-color: var(--white-color);
+    border: #000 solid 1px;
+    border-radius: 10px;
+    top: 2.5rem;
+    padding: 0.625rem;
+}
+
+.desktop-date-option {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  gap: 0.313rem;
+}
+
+.desktop-date-option input {
+  width: 100%;
+  height: 35px;
+  padding: 0 1rem;
+  border-radius: 8px;
+  background-size: 1.75rem;
+  background-color: var(--white-color);
+  font-size: var(--text-size);
+  border: #000 solid 1px;
+  color: var(--black-color);
+}
+
+.date-error {
+  border: red  solid 2px !important;
+}
 
 .avis .imgProfil {
   border-radius: 50%;
@@ -1583,11 +1668,6 @@ footer div nav :any-link {
     top: 2.5rem;
   }
 
-  .offer-search-filters {
-    position: relative;
-    overflow: visible;
-  }
-
   .offer-sort-desktop {
     display: flex;
     gap: 0.625rem;
@@ -1620,9 +1700,12 @@ footer div nav :any-link {
   .offer-search-filters {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: 0.625rem;
     width: fit-content;
+    overflow: visible;
   }
 
   .offer-search-filters select, #offer-sort-desktop-button {
@@ -1678,7 +1761,7 @@ footer div nav :any-link {
     pointer-events: auto;
   }
 
-  .selected-category-desktop {
+  .selected-category-desktop,  .selected-price-range-desktop {
     background-color: var(--background-color);
   }
 
