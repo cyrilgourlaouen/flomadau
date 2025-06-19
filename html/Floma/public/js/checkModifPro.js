@@ -211,7 +211,7 @@ const validateurs = {
     const anneeActuelle = dateActuelle.getFullYear();
     const moisActuel = dateActuelle.getMonth()+1;
     
-    if (dateSplit[1] < anneeActuelle || (dateSplit[1] == anneeActuelle && dateSplit[0].substr(1) < moisActuel)) {
+    if (dateSplit[1] < anneeActuelle || (dateSplit[1] == anneeActuelle && dateSplit[0] < moisActuel)) {
         return "Cette carte est expirée";
     }
 

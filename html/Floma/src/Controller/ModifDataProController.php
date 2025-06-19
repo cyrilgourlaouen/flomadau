@@ -186,7 +186,7 @@ class ModifDataProController extends AbstractController
             if (!move_uploaded_file($cheminTemp , $cheminDestination)) {
                 $dataJson['success'] = false;
                 $dataJson['erreur']['photo'] = 'Erreur de transfert de l\'image';
-                return ['successUpload' => false, 'erreur'['photo'] => 'Erreur de transfert de l\'image'];
+                return ['successUpload' => false, 'erreur' => ['photo' => 'Erreur de transfert de l\'image']];
             }else{
                 return ['successUpload' => true, 'name' => $nouveauNomFichier];
             }
