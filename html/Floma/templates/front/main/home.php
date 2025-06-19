@@ -139,12 +139,6 @@ $highlightedOffers = array_filter($data["offers"], function ($offer) {
                     </div>
                 </div>
             </div>
-            <div id="filter-modal-location">
-                <h3>Lieu</h3>
-                <div>
-
-                </div>
-            </div>
             <div class="filter-modal-sort" id="filter-modal-price">
                 <h3>Prix</h3>
                 <div class="filter-modal-price-options">
@@ -192,6 +186,14 @@ $highlightedOffers = array_filter($data["offers"], function ($offer) {
 
             <div class="filter-modal-sort" id="filter-modal-status">
                 <h3>Statut</h3>
+                <div class="filter-modal-status-options">
+                    <p class="filter-modal-status-option" data-status-value="open">Ouvert</p>
+                    <p class="filter-modal-status-option" data-status-value="close">Fermé</p>
+                </div>
+            </div>
+
+            <div id="filter-modal-location">
+                <h3>Lieu</h3>
                 <div>
 
                 </div>
@@ -273,9 +275,16 @@ $highlightedOffers = array_filter($data["offers"], function ($offer) {
                     </div>
                 </div>
 
-                <select name="Statut" id="">
-                    <option value="">Statut</option>
-                </select>
+                <!-- Statut -->
+                <div class="desktop-filter-dropdown">
+                    <button class="desktop-filter-button" id="desktop-status-button">
+                        Statut <span id="selected-status-label"></span>
+                    </button>
+                    <div id="desktop-status-options">
+                        <p data-status-value="open">Ouvert</p>
+                        <p data-status-value="close">Fermé</p>
+                    </div>
+                </div>
 
                 <!-- Note -->
                 <div class="desktop-filter-dropdown">

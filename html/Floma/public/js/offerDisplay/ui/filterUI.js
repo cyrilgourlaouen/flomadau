@@ -77,6 +77,21 @@ export function setupFilterUI(filterManager, displayManager) {
   const selectedNoteLabel = document.getElementById('selected-note-label');
   const desktopNoteStars = document.querySelectorAll('#desktop-note-options img[data-star-value]');
 
+  // Statut modal/mobile
+  const modalStatusOptions = document.querySelectorAll(
+    '.filter-modal-status-option'
+  );
+
+  // Statut desktop
+  const statusDropdownButton = document.querySelector('#desktop-status-button');
+  const statusDropdownOptions = document.querySelector('#desktop-status-options');
+  const selectedStatusLabel = document.getElementById('selected-status-label');
+  const desktopStatusOptions = document.querySelectorAll('#desktop-status-options p');
+
+  // Tri
+  const sortDropdownOptions = document.querySelector('#offer-sort-desktop-options');
+  const sortDropdownButton = document.querySelector('#offer-sort-desktop-button');
+
   // --- FONCTIONS DE GESTION DES DROPDOWNS ---
 
   function closeAllDropdowns() {
@@ -95,45 +110,46 @@ export function setupFilterUI(filterManager, displayManager) {
     if (noteDropdownOptions) {
       noteDropdownOptions.style.display = 'none';
     }
+    if (statusDropdownOptions) {
+      statusDropdownOptions.style.display = 'none';
+    }
+    if (sortDropdownOptions) {
+      sortDropdownOptions.style.display = 'none';
+    }
   }
 
-  function toggleNoteDropdown() {
-    // Fermer les autres dropdowns
-    if (categoryDropdownOptions) {
+  function closeAllDropdownsExcept(exceptElement) {
+    if (categoryDropdownOptions && categoryDropdownOptions !== exceptElement) {
       categoryDropdownOptions.style.display = 'none';
     }
-    if (priceDropdownOptions) {
+    if (priceDropdownOptions && priceDropdownOptions !== exceptElement) {
       priceDropdownOptions.style.display = 'none';
     }
-    if (desktopPriceRangeOptions) {
+    if (desktopPriceRangeOptions && desktopPriceRangeOptions !== exceptElement) {
       desktopPriceRangeOptions.style.display = 'none';
     }
-    if (dateDropdownOptions) {
+    if (dateDropdownOptions && dateDropdownOptions !== exceptElement) {
       dateDropdownOptions.style.display = 'none';
     }
-
-    // Toggle le dropdown de note
-    if (noteDropdownOptions) {
-      const isVisible = noteDropdownOptions.style.display === 'flex';
-      noteDropdownOptions.style.display = isVisible ? 'none' : 'flex';
+    if (noteDropdownOptions && noteDropdownOptions !== exceptElement) {
+      noteDropdownOptions.style.display = 'none';
+    }
+    if (statusDropdownOptions && statusDropdownOptions !== exceptElement) {
+      statusDropdownOptions.style.display = 'none';
+    }
+    if (sortDropdownOptions && sortDropdownOptions !== exceptElement) {
+      sortDropdownOptions.style.display = 'none';
     }
   }
 
   function toggleCategoryDropdown() {
-    // Fermer les autres dropdowns
-    if (priceDropdownOptions) {
-      priceDropdownOptions.style.display = 'none';
-    }
-    if (desktopPriceRangeOptions) {
-      desktopPriceRangeOptions.style.display = 'none';
-    }
-    if (dateDropdownOptions) {
-      dateDropdownOptions.style.display = 'none';
-    }
+    const isVisible = categoryDropdownOptions && categoryDropdownOptions.style.display === 'block';
+
+    // Fermer tous les autres dropdowns sauf celui-ci
+    closeAllDropdownsExcept(categoryDropdownOptions);
 
     // Toggle le dropdown de catégorie
     if (categoryDropdownOptions) {
-      const isVisible = categoryDropdownOptions.style.display === 'block';
       categoryDropdownOptions.style.display = isVisible ? 'none' : 'block';
     }
   }
@@ -141,53 +157,59 @@ export function setupFilterUI(filterManager, displayManager) {
   function togglePriceDropdown() {
     const currentCategory = filterManager.getFilter('category');
 
-    // Fermer les autres dropdowns
-    if (categoryDropdownOptions) {
-      categoryDropdownOptions.style.display = 'none';
-    }
-    if (dateDropdownOptions) {
-      dateDropdownOptions.style.display = 'none';
-    }
-
     if (currentCategory === 'Restaurant') {
       // Pour Restaurant : afficher les gammes de prix
+      const isVisible = desktopPriceRangeOptions && desktopPriceRangeOptions.style.display === 'block';
+
+      // Fermer tous les autres dropdowns sauf celui-ci
+      closeAllDropdownsExcept(desktopPriceRangeOptions);
+
       if (desktopPriceRangeOptions) {
-        const isVisible = desktopPriceRangeOptions.style.display === 'block';
         desktopPriceRangeOptions.style.display = isVisible ? 'none' : 'block';
       }
-      // S'assurer que les inputs min/max sont cachés
-      if (priceDropdownOptions) {
-        priceDropdownOptions.style.display = 'none';
-      }
     } else {
-      // Pour les autres catégories OU aucune catégorie : afficher les inputs min/max
+      // Pour les autres catégories : afficher les inputs min/max
+      const isVisible = priceDropdownOptions && priceDropdownOptions.style.display === 'flex';
+
+      // Fermer tous les autres dropdowns sauf celui-ci
+      closeAllDropdownsExcept(priceDropdownOptions);
+
       if (priceDropdownOptions) {
-        const isVisible = priceDropdownOptions.style.display === 'flex';
         priceDropdownOptions.style.display = isVisible ? 'none' : 'flex';
-      }
-      // S'assurer que les gammes de prix sont cachées
-      if (desktopPriceRangeOptions) {
-        desktopPriceRangeOptions.style.display = 'none';
       }
     }
   }
 
   function toggleDateDropdown() {
-    // Fermer les autres dropdowns
-    if (categoryDropdownOptions) {
-      categoryDropdownOptions.style.display = 'none';
-    }
-    if (priceDropdownOptions) {
-      priceDropdownOptions.style.display = 'none';
-    }
-    if (desktopPriceRangeOptions) {
-      desktopPriceRangeOptions.style.display = 'none';
-    }
+    const isVisible = dateDropdownOptions && dateDropdownOptions.style.display === 'flex';
 
-    // Toggle le dropdown de date
+    // Fermer tous les autres dropdowns sauf celui-ci
+    closeAllDropdownsExcept(dateDropdownOptions);
+
     if (dateDropdownOptions) {
-      const isVisible = dateDropdownOptions.style.display === 'flex';
       dateDropdownOptions.style.display = isVisible ? 'none' : 'flex';
+    }
+  }
+
+  function toggleNoteDropdown() {
+    const isVisible = noteDropdownOptions && noteDropdownOptions.style.display === 'flex';
+
+    // Fermer tous les autres dropdowns sauf celui-ci
+    closeAllDropdownsExcept(noteDropdownOptions);
+
+    if (noteDropdownOptions) {
+      noteDropdownOptions.style.display = isVisible ? 'none' : 'flex';
+    }
+  }
+
+  function toggleStatusDropdown() {
+    const isVisible = statusDropdownOptions && statusDropdownOptions.style.display === 'block';
+
+    // Fermer tous les autres dropdowns sauf celui-ci
+    closeAllDropdownsExcept(statusDropdownOptions);
+
+    if (statusDropdownOptions) {
+      statusDropdownOptions.style.display = isVisible ? 'none' : 'block';
     }
   }
 
@@ -762,6 +784,101 @@ export function setupFilterUI(filterManager, displayManager) {
     }
   }
 
+  function handleStatusSelection(status, isFromDesktop = true) {
+    const isCurrentlySelected = filterManager.getFilter('status') === status;
+
+    filterManager.setFilter('status', isCurrentlySelected ? null : status);
+    const selectedStatus = isCurrentlySelected ? null : status;
+
+    // Synchroniser les sélections de statut entre desktop et mobile
+    desktopStatusOptions.forEach((opt) => {
+      opt.classList.remove('selected-status-desktop');
+      if (!isCurrentlySelected && opt.getAttribute('data-status-value') === status) {
+        opt.classList.add('selected-status-desktop');
+      }
+    });
+
+    modalStatusOptions.forEach((opt) => {
+      opt.classList.remove('selected-status');
+      if (!isCurrentlySelected && opt.getAttribute('data-status-value') === status) {
+        opt.classList.add('selected-status');
+      }
+    });
+
+    // Mettre à jour le label
+    if (selectedStatusLabel) {
+      let statusText = '';
+      if (!isCurrentlySelected && status) {
+        statusText = status === 'open' ? ': Ouvert' : ': Fermé';
+      }
+      selectedStatusLabel.textContent = statusText;
+    }
+
+    // Fermer le dropdown desktop si la sélection vient du desktop
+    if (isFromDesktop && statusDropdownOptions) {
+      statusDropdownOptions.style.display = 'none';
+    }
+
+    refreshDisplay();
+  }
+
+  // --- FONCTION CATÉGORIE ---
+  function handleCategorySelection(category, isFromDesktop = true) {
+    const isCurrentlySelected =
+      filterManager.getFilter('category') === category;
+    const previousCategory = filterManager.getFilter('category');
+
+    // RESET UNIQUEMENT lors du passage Restaurant ↔ autre catégorie
+    if (
+      !isCurrentlySelected &&
+      previousCategory &&
+      previousCategory !== category
+    ) {
+      const wasRestaurant = previousCategory === 'Restaurant';
+      const isRestaurant = category === 'Restaurant';
+
+      // Reset seulement si on change entre Restaurant et non-Restaurant
+      if (wasRestaurant !== isRestaurant) {
+        resetPriceFilter();
+
+        // Fermer tous les dropdowns prix lors de ce type de transition
+        closeAllDropdowns();
+      }
+    }
+
+    // Reset si on désélectionne Restaurant pour aller vers "aucune catégorie"
+    if (isCurrentlySelected && previousCategory === 'Restaurant') {
+      resetPriceFilter();
+      closeAllDropdowns();
+    }
+
+    filterManager.setFilter('category', isCurrentlySelected ? null : category);
+    const selectedCategory = isCurrentlySelected ? null : category;
+    updatePriceFilterDisplay(selectedCategory);
+
+    // Synchroniser les sélections de catégorie entre desktop et mobile
+    desktopCategoryOptions.forEach((opt) => {
+      opt.classList.remove('selected-category-desktop');
+      if (!isCurrentlySelected && opt.dataset.category === category) {
+        opt.classList.add('selected-category-desktop');
+      }
+    });
+
+    modalCategoryOptions.forEach((opt) => {
+      opt.classList.remove('selected-category');
+      if (!isCurrentlySelected && opt.dataset.category === category) {
+        opt.classList.add('selected-category');
+      }
+    });
+
+    if (selectedCategoryLabel) {
+      selectedCategoryLabel.textContent =
+        !isCurrentlySelected && category ? `: ${category}` : '';
+    }
+
+    refreshDisplay();
+  }
+
   // --- LISTENERS ---
 
   // Texte
@@ -890,45 +1007,45 @@ export function setupFilterUI(filterManager, displayManager) {
     });
   }
 
-  // Fermer les dropdowns quand on clique ailleurs
-  document.addEventListener('click', (e) => {
-    if (
-      categoryDropdownButton &&
-      categoryDropdownOptions &&
-      !categoryDropdownButton.contains(e.target) &&
-      !categoryDropdownOptions.contains(e.target)
-    ) {
-      categoryDropdownOptions.style.display = 'none';
-    }
+  // Toggle du dropdown note desktop
+  if (noteDropdownButton) {
+    noteDropdownButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleNoteDropdown();
+    });
+  }
 
-    if (
-      priceDropdownButton &&
-      priceDropdownOptions &&
-      !priceDropdownButton.contains(e.target) &&
-      !priceDropdownOptions.contains(e.target)
-    ) {
-      priceDropdownOptions.style.display = 'none';
-    }
+  // Statut desktop
+  if (statusDropdownButton) {
+    statusDropdownButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleStatusDropdown();
+    });
+  }
 
-    if (
-      priceDropdownButton &&
-      desktopPriceRangeOptions &&
-      !priceDropdownButton.contains(e.target) &&
-      !desktopPriceRangeOptions.contains(e.target)
-    ) {
-      desktopPriceRangeOptions.style.display = 'none';
-    }
-
-    if (
-      dateDropdownButton &&
-      dateDropdownOptions &&
-      !dateDropdownButton.contains(e.target) &&
-      !dateDropdownOptions.contains(e.target)
-    ) {
-      dateDropdownOptions.style.display = 'none';
-    }
+  // Statut desktop options
+  desktopStatusOptions.forEach((option) => {
+    option.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const status = option.getAttribute('data-status-value');
+      handleStatusSelection(status, true);
+    });
   });
 
+  // Statut mobile/modal options
+  modalStatusOptions.forEach((option) => {
+    option.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const status = option.getAttribute('data-status-value');
+      handleStatusSelection(status, false);
+    });
+  });
+
+  // Gestion des étoiles pour le filtre de note (mobile)
   if (noteStars && noteStars.length > 0) {
     noteStars.forEach((star, index) => {
       const starValue = index + 1;
@@ -982,19 +1099,49 @@ export function setupFilterUI(filterManager, displayManager) {
     });
   }
 
-  // Toggle du dropdown note desktop
-  if (noteDropdownButton) {
-    noteDropdownButton.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      toggleNoteDropdown();
-    });
-  }
-
   // Fermer les dropdowns quand on clique ailleurs
   document.addEventListener('click', (e) => {
-    // ...existing code...
+    // Dropdown catégorie
+    if (
+      categoryDropdownButton &&
+      categoryDropdownOptions &&
+      !categoryDropdownButton.contains(e.target) &&
+      !categoryDropdownOptions.contains(e.target)
+    ) {
+      categoryDropdownOptions.style.display = 'none';
+    }
 
+    // Dropdown prix
+    if (
+      priceDropdownButton &&
+      priceDropdownOptions &&
+      !priceDropdownButton.contains(e.target) &&
+      !priceDropdownOptions.contains(e.target)
+    ) {
+      priceDropdownOptions.style.display = 'none';
+    }
+
+    // Dropdown prix range
+    if (
+      priceDropdownButton &&
+      desktopPriceRangeOptions &&
+      !priceDropdownButton.contains(e.target) &&
+      !desktopPriceRangeOptions.contains(e.target)
+    ) {
+      desktopPriceRangeOptions.style.display = 'none';
+    }
+
+    // Dropdown date
+    if (
+      dateDropdownButton &&
+      dateDropdownOptions &&
+      !dateDropdownButton.contains(e.target) &&
+      !dateDropdownOptions.contains(e.target)
+    ) {
+      dateDropdownOptions.style.display = 'none';
+    }
+
+    // Dropdown note
     if (
       noteDropdownButton &&
       noteDropdownOptions &&
@@ -1003,66 +1150,25 @@ export function setupFilterUI(filterManager, displayManager) {
     ) {
       noteDropdownOptions.style.display = 'none';
     }
-  });
 
-  // --- FONCTION CATÉGORIE ---
-  function handleCategorySelection(category, isFromDesktop = true) {
-    const isCurrentlySelected =
-      filterManager.getFilter('category') === category;
-    const previousCategory = filterManager.getFilter('category');
-
-    // RESET UNIQUEMENT lors du passage Restaurant ↔ autre catégorie
+    // Dropdown statut
     if (
-      !isCurrentlySelected &&
-      previousCategory &&
-      previousCategory !== category
+      statusDropdownButton &&
+      statusDropdownOptions &&
+      !statusDropdownButton.contains(e.target) &&
+      !statusDropdownOptions.contains(e.target)
     ) {
-      const wasRestaurant = previousCategory === 'Restaurant';
-      const isRestaurant = category === 'Restaurant';
-
-      // Reset seulement si on change entre Restaurant et non-Restaurant
-      if (wasRestaurant !== isRestaurant) {
-        resetPriceFilter();
-
-        // Fermer tous les dropdowns prix lors de ce type de transition
-        closeAllDropdowns();
-      }
+      statusDropdownOptions.style.display = 'none';
     }
-
-    // Reset si on désélectionne Restaurant pour aller vers "aucune catégorie"
-    if (isCurrentlySelected && previousCategory === 'Restaurant') {
-      resetPriceFilter();
-      closeAllDropdowns();
+    if (
+      sortDropdownButton &&
+      sortDropdownOptions &&
+      !sortDropdownButton.contains(e.target) &&
+      !sortDropdownOptions.contains(e.target)
+    ) {
+      sortDropdownOptions.style.display = 'none';
     }
-
-    filterManager.setFilter('category', isCurrentlySelected ? null : category);
-    const selectedCategory = isCurrentlySelected ? null : category;
-    updatePriceFilterDisplay(selectedCategory);
-
-    // Synchroniser les sélections de catégorie entre desktop et mobile
-    desktopCategoryOptions.forEach((opt) => {
-      opt.classList.remove('selected-category-desktop');
-      if (!isCurrentlySelected && opt.dataset.category === category) {
-        opt.classList.add('selected-category-desktop');
-      }
-    });
-
-    modalCategoryOptions.forEach((opt) => {
-      opt.classList.remove('selected-category');
-      if (!isCurrentlySelected && opt.dataset.category === category) {
-        opt.classList.add('selected-category');
-      }
-    });
-
-    if (selectedCategoryLabel) {
-      selectedCategoryLabel.textContent =
-        !isCurrentlySelected && category ? `: ${category}` : '';
-    }
-
-    refreshDisplay();
-  }
-
-
+  });
 
   // --- RAFRAICHISSEMENT ---
   function refreshDisplay() {
@@ -1096,6 +1202,9 @@ export function setupFilterUI(filterManager, displayManager) {
   }
   if (noteDropdownOptions) {
     noteDropdownOptions.style.display = 'none';
+  }
+  if (statusDropdownOptions) {
+    statusDropdownOptions.style.display = 'none';
   }
 
   // Initialiser l'affichage des étoiles
