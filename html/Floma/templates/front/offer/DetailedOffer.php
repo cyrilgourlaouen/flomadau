@@ -4,21 +4,23 @@ use App\Entity\ReponsePro;
 use App\Manager\MembreManager;
 use App\Manager\OfferManager;
 use App\Entity\Compte;
+use App\Enum\DayEnum;
 use App\Manager\CompteManager;
 use App\Manager\ReponseProManager;
+use App\Service\CalendarCalculator;
 use App\Service\CategoryContent;
 use App\Service\MetricStarsCalculator;
 
 $stars = new MetricStarsCalculator();
 $offerManager = new OfferManager();
 $categoryContent = new CategoryContent();
+$calendarCalculator = new CalendarCalculator();
 $offer = $data["offer"];
 $avis = $data['avis'];
 $InfoOffer = isset($offer["typeRepasData"]) || isset($offer["langueGuideData"])
     ? $categoryContent->getContentCategory($offer["categoryData"], $offer["categorie"], $offer["conditions_accessibilite"], isset($offer["typeRepasData"]) ? $offer["typeRepasData"] : $offer["langueGuideData"])
     : $categoryContent->getContentCategory($offer["categoryData"], $offer["categorie"], $offer["conditions_accessibilite"]);
-$fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $offer["numero_rue"] . " " . $offer["nom_rue"];
-
+$fullAdresse =  isset($offer["numero_rue"]) && isset($offer["nom_rue"]) ? $fullAdresse = $offer["numero_rue"] . " " . $offer["nom_rue"] : $offer["ville"];
 $compte = new Compte();
 $compteManager = new CompteManager();
 
@@ -33,8 +35,13 @@ $proManager = new ReponseProManager();
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <div class="contentMob hideMob flex-col align-start gap-lg">
-    <div>
-        <img src="./uploads/offers/<?= $offer["imageData"][0]["url_img"] ?>" alt="image" class="full-height full-width">
+    <div class="horizontal-slider-mob">
+        <?php foreach ($offer["imageData"] as $index => $img) { ?>
+            <div class="slider-item-wrapper images">
+                <img src="./uploads/offers/<?= htmlspecialchars($img["url_img"]) ?>" class="slider-item-mob" alt="image">
+                <div class="image-counter"><?= $index + 1 ?>/<?= count($offer["imageData"]) ?></div>
+            </div>
+        <?php } ?>
     </div>
     <div class="content no-pad-top flex-col align-start gap-sm full-width">
         <section class="sectionOffreDetaille">
@@ -81,20 +88,39 @@ $proManager = new ReponseProManager();
                 </div>
             </section>
         <?php } ?>
+        <div class="calendar flex-col gap-sm">
+            <?php foreach (DayEnum::cases() as $day) { 
+                $horaire = $calendarCalculator->getHoraireForDay($offer["calendar"], $day->value);
+                $isOpen = $calendarCalculator->isOpen($offer["calendar"], $day->value);
+            ?>
+                <div class="flex-row gap-lg flex-1">
+                    <p><?= $day->name ?></p>
+                    <span class="margin-left-auto <?= $isOpen ? 'tooltip-parent' : '' ?>">
+                        <?= $horaire ?>
+                        <?php if ($isOpen) { ?>
+                            <span class="tooltip">
+                                <?= $calendarCalculator->getHoraireForDay($offer["calendar"], $day->value, "full") ?>
+                            </span>
+                        <?php } ?>
+                    </span>
+                </div>
+            <?php }; ?>
+            <div class="flex-1">
+                <p class="italic very-small-text ">
+                    Survoler les horaires pour plus d'informations
+                </p>
+            </div>
+        </div>
         <section class="sectionOffreDetaille">
             <h3>
                 Comment nous rejoindre ?
             </h3>
-            <?php if ($fullAdresse) { ?>
-                <div id="map" city="<?= $fullAdresse ?>" style="width: 100%; height: 300px;"></div>
-            <?php } ?>
+            <div id="map" city="<?= $fullAdresse ?>"></div>
             <div class="align">
-                <?php if ($offer["code_postal"]) { ?>
                     <img src="./assets/icons/location_primary.svg" alt="location">
                     <p>
                         <?= $fullAdresse ?>
                     </p>
-                <?php } ?>
             </div>
         </section>
         <section class="sectionOffreDetaille">
@@ -141,8 +167,16 @@ $proManager = new ReponseProManager();
     </div>
     <div class="content no-pad-side flex-col align-start gap-lg">
         <section class="sectionOffreDetaille flex-row gap-lg">
-            <div class="images">
-                <img src="./uploads/offers/<?= $offer["imageData"][0]["url_img"] ?>" alt="croisiere">
+            <div class="highlighted-offers-section">
+                <div class="highlighted-offers-list-arrows-detail">
+                    <img src="/assets/icons/left_square_chevron_black.png" id="highlighted-arrow-left-detail" alt="">
+                    <img src="/assets/icons/right_square_chevron_black.png" id="highlighted-arrow-right-detail" alt="">
+                </div>
+                <div class="horizontal-slider images">
+                    <?php foreach ($offer["imageData"] as $img) { ?>
+                        <img src="./uploads/offers/<?= htmlspecialchars($img["url_img"]) ?>" class="slider-item" alt="image">
+                    <?php } ?>
+                </div>
             </div>
             <div class="rightPart flex-col align-start gap-sm">
                 <div class="flex-row align-start">
@@ -228,12 +262,42 @@ $proManager = new ReponseProManager();
                 <h3>
                     Comment nous rejoindre ?
                 </h3>
-                <div id="mapTab" city="<?= $fullAdresse ?>" style="width: 100%; height: 300px;"></div>
+                <div class="flex-row gap-lg container-map">
+                    <div id="mapTab" city="<?= $fullAdresse ?>"></div>
+                    <div class="calendar flex-col gap-sm">
+                        <?php foreach (DayEnum::cases() as $day) { 
+                            $horaire = $calendarCalculator->getHoraireForDay($offer["calendar"], $day->value);
+                            $isOpen = $calendarCalculator->isOpen($offer["calendar"], $day->value);
+                        ?>
+                            <div class="flex-row gap-lg flex-1">
+                                <p><?= $day->name ?></p>
+                                <span class="margin-left-auto <?= $isOpen ? 'tooltip-parent' : '' ?>">
+                                    <?= $horaire ?>
+                                    <?php if ($isOpen) { ?>
+                                        <span class="tooltip">
+                                            <?= $calendarCalculator->getHoraireForDay($offer["calendar"], $day->value, "full") ?>
+                                        </span>
+                                    <?php } ?>
+                                </span>
+                            </div>
+                        <?php }; ?>
+                        <div class="flex-1">
+                            <p class="italic very-small-text ">
+                                Survoler les horaires pour plus d'informations
+                            </p>
+                        </div>
+                    </div>
+                </div>
                 <div class="align">
                     <?php if ($offer["code_postal"]) { ?>
                         <img src="./assets/icons/location_primary.svg" alt="location">
                         <p>
-                            <?= $fullAdresse ?>
+                            <?= implode(' ', array_filter([
+                                $offer["numero_rue"] ?? null,
+                                $offer["nom_rue"]  ?? null,
+                                $offer["complement_adresse"] ?? null,
+                                $offer["ville"] ?? null,
+                            ])) ?>
                         </p>
                     <?php } ?>
                 </div>
@@ -289,6 +353,7 @@ $proManager = new ReponseProManager();
             </div>
         <?php }
         ; ?>
-    </section>
+    
 <?php } ?>
 <script src="./js/MapCalculator.js"></script>
+<script src="/js/highlightedImagesDetailsOffer.js"></script>

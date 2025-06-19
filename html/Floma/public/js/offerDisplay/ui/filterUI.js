@@ -68,6 +68,30 @@ export function setupFilterUI(filterManager, displayManager) {
   const startDesktopDateInput = document.getElementById('desktop-start-date');
   const endDesktopDateInput = document.getElementById('desktop-end-date');
 
+  // Note modal/mobile
+  const noteStars = document.querySelectorAll('.filter-modal-note-options img[data-star-value]');
+
+  // Note desktop
+  const noteDropdownButton = document.querySelector('#desktop-note-button');
+  const noteDropdownOptions = document.querySelector('#desktop-note-options');
+  const selectedNoteLabel = document.getElementById('selected-note-label');
+  const desktopNoteStars = document.querySelectorAll('#desktop-note-options img[data-star-value]');
+
+  // Statut modal/mobile
+  const modalStatusOptions = document.querySelectorAll(
+    '.filter-modal-status-option'
+  );
+
+  // Statut desktop
+  const statusDropdownButton = document.querySelector('#desktop-status-button');
+  const statusDropdownOptions = document.querySelector('#desktop-status-options');
+  const selectedStatusLabel = document.getElementById('selected-status-label');
+  const desktopStatusOptions = document.querySelectorAll('#desktop-status-options p');
+
+  // Tri
+  const sortDropdownOptions = document.querySelector('#offer-sort-desktop-options');
+  const sortDropdownButton = document.querySelector('#offer-sort-desktop-button');
+
   // --- FONCTIONS DE GESTION DES DROPDOWNS ---
 
   function closeAllDropdowns() {
@@ -83,23 +107,49 @@ export function setupFilterUI(filterManager, displayManager) {
     if (dateDropdownOptions) {
       dateDropdownOptions.style.display = 'none';
     }
+    if (noteDropdownOptions) {
+      noteDropdownOptions.style.display = 'none';
+    }
+    if (statusDropdownOptions) {
+      statusDropdownOptions.style.display = 'none';
+    }
+    if (sortDropdownOptions) {
+      sortDropdownOptions.style.display = 'none';
+    }
+  }
+
+  function closeAllDropdownsExcept(exceptElement) {
+    if (categoryDropdownOptions && categoryDropdownOptions !== exceptElement) {
+      categoryDropdownOptions.style.display = 'none';
+    }
+    if (priceDropdownOptions && priceDropdownOptions !== exceptElement) {
+      priceDropdownOptions.style.display = 'none';
+    }
+    if (desktopPriceRangeOptions && desktopPriceRangeOptions !== exceptElement) {
+      desktopPriceRangeOptions.style.display = 'none';
+    }
+    if (dateDropdownOptions && dateDropdownOptions !== exceptElement) {
+      dateDropdownOptions.style.display = 'none';
+    }
+    if (noteDropdownOptions && noteDropdownOptions !== exceptElement) {
+      noteDropdownOptions.style.display = 'none';
+    }
+    if (statusDropdownOptions && statusDropdownOptions !== exceptElement) {
+      statusDropdownOptions.style.display = 'none';
+    }
+    if (sortDropdownOptions && sortDropdownOptions !== exceptElement) {
+      sortDropdownOptions.style.display = 'none';
+    }
   }
 
   function toggleCategoryDropdown() {
-    // Fermer les autres dropdowns
-    if (priceDropdownOptions) {
-      priceDropdownOptions.style.display = 'none';
-    }
-    if (desktopPriceRangeOptions) {
-      desktopPriceRangeOptions.style.display = 'none';
-    }
-    if (dateDropdownOptions) {
-      dateDropdownOptions.style.display = 'none';
-    }
+    const isVisible = categoryDropdownOptions && categoryDropdownOptions.style.display === 'block';
+
+    // Fermer tous les autres dropdowns sauf celui-ci
+    closeAllDropdownsExcept(categoryDropdownOptions);
 
     // Toggle le dropdown de catégorie
     if (categoryDropdownOptions) {
-      const isVisible = categoryDropdownOptions.style.display === 'block';
       categoryDropdownOptions.style.display = isVisible ? 'none' : 'block';
     }
   }
@@ -107,53 +157,59 @@ export function setupFilterUI(filterManager, displayManager) {
   function togglePriceDropdown() {
     const currentCategory = filterManager.getFilter('category');
 
-    // Fermer les autres dropdowns
-    if (categoryDropdownOptions) {
-      categoryDropdownOptions.style.display = 'none';
-    }
-    if (dateDropdownOptions) {
-      dateDropdownOptions.style.display = 'none';
-    }
-
     if (currentCategory === 'Restaurant') {
       // Pour Restaurant : afficher les gammes de prix
+      const isVisible = desktopPriceRangeOptions && desktopPriceRangeOptions.style.display === 'block';
+
+      // Fermer tous les autres dropdowns sauf celui-ci
+      closeAllDropdownsExcept(desktopPriceRangeOptions);
+
       if (desktopPriceRangeOptions) {
-        const isVisible = desktopPriceRangeOptions.style.display === 'block';
         desktopPriceRangeOptions.style.display = isVisible ? 'none' : 'block';
       }
-      // S'assurer que les inputs min/max sont cachés
-      if (priceDropdownOptions) {
-        priceDropdownOptions.style.display = 'none';
-      }
     } else {
-      // Pour les autres catégories OU aucune catégorie : afficher les inputs min/max
+      // Pour les autres catégories : afficher les inputs min/max
+      const isVisible = priceDropdownOptions && priceDropdownOptions.style.display === 'flex';
+
+      // Fermer tous les autres dropdowns sauf celui-ci
+      closeAllDropdownsExcept(priceDropdownOptions);
+
       if (priceDropdownOptions) {
-        const isVisible = priceDropdownOptions.style.display === 'flex';
         priceDropdownOptions.style.display = isVisible ? 'none' : 'flex';
-      }
-      // S'assurer que les gammes de prix sont cachées
-      if (desktopPriceRangeOptions) {
-        desktopPriceRangeOptions.style.display = 'none';
       }
     }
   }
 
   function toggleDateDropdown() {
-    // Fermer les autres dropdowns
-    if (categoryDropdownOptions) {
-      categoryDropdownOptions.style.display = 'none';
-    }
-    if (priceDropdownOptions) {
-      priceDropdownOptions.style.display = 'none';
-    }
-    if (desktopPriceRangeOptions) {
-      desktopPriceRangeOptions.style.display = 'none';
-    }
+    const isVisible = dateDropdownOptions && dateDropdownOptions.style.display === 'flex';
 
-    // Toggle le dropdown de date
+    // Fermer tous les autres dropdowns sauf celui-ci
+    closeAllDropdownsExcept(dateDropdownOptions);
+
     if (dateDropdownOptions) {
-      const isVisible = dateDropdownOptions.style.display === 'flex';
       dateDropdownOptions.style.display = isVisible ? 'none' : 'flex';
+    }
+  }
+
+  function toggleNoteDropdown() {
+    const isVisible = noteDropdownOptions && noteDropdownOptions.style.display === 'flex';
+
+    // Fermer tous les autres dropdowns sauf celui-ci
+    closeAllDropdownsExcept(noteDropdownOptions);
+
+    if (noteDropdownOptions) {
+      noteDropdownOptions.style.display = isVisible ? 'none' : 'flex';
+    }
+  }
+
+  function toggleStatusDropdown() {
+    const isVisible = statusDropdownOptions && statusDropdownOptions.style.display === 'block';
+
+    // Fermer tous les autres dropdowns sauf celui-ci
+    closeAllDropdownsExcept(statusDropdownOptions);
+
+    if (statusDropdownOptions) {
+      statusDropdownOptions.style.display = isVisible ? 'none' : 'block';
     }
   }
 
@@ -628,6 +684,201 @@ export function setupFilterUI(filterManager, displayManager) {
     refreshDisplay();
   }
 
+  // Fonction pour gérer la sélection des étoiles (mobile et desktop)
+  function handleStarSelection(selectedValue, isFromDesktop = false) {
+    const currentNote = filterManager.getFilter('note');
+
+    // Si on clique sur la même note, on désélectionne
+    if (currentNote === selectedValue) {
+      filterManager.setFilter('note', null);
+      updateStarDisplay(0);
+      updateSelectedNoteLabel(null);
+    } else {
+      filterManager.setFilter('note', selectedValue);
+      updateStarDisplay(selectedValue);
+      updateSelectedNoteLabel(selectedValue);
+    }
+
+    // Fermer le dropdown desktop si la sélection vient du desktop
+    if (isFromDesktop && noteDropdownOptions) {
+      noteDropdownOptions.style.display = 'none';
+    }
+
+    refreshDisplay();
+  }
+
+  // Fonction pour mettre à jour l'affichage des étoiles (mobile et desktop)
+  function updateStarDisplay(selectedNote) {
+    // Mettre à jour les étoiles mobiles
+    noteStars.forEach((star, index) => {
+      const starValue = index + 1;
+      const starImg = star;
+
+      if (selectedNote === 0) {
+        // Aucune sélection - toutes les étoiles en outline
+        starImg.src = '/assets/icons/star_outline_pink.svg';
+      } else if (starValue <= Math.floor(selectedNote)) {
+        // Étoiles pleines
+        starImg.src = '/assets/icons/star_pink.svg';
+      } else if (starValue === Math.ceil(selectedNote) && selectedNote % 1 !== 0) {
+        // Demi-étoile
+        starImg.src = '/assets/icons/star_half_pink.svg';
+      } else {
+        // Étoiles vides
+        starImg.src = '/assets/icons/star_outline_pink.svg';
+      }
+    });
+
+    // Mettre à jour les étoiles desktop
+    desktopNoteStars.forEach((star, index) => {
+      const starValue = index + 1;
+      const starImg = star;
+
+      if (selectedNote === 0) {
+        // Aucune sélection - toutes les étoiles en outline
+        starImg.src = '/assets/icons/star_outline_pink.svg';
+      } else if (starValue <= Math.floor(selectedNote)) {
+        // Étoiles pleines
+        starImg.src = '/assets/icons/star_pink.svg';
+      } else if (starValue === Math.ceil(selectedNote) && selectedNote % 1 !== 0) {
+        // Demi-étoile
+        starImg.src = '/assets/icons/star_half_pink.svg';
+      } else {
+        // Étoiles vides
+        starImg.src = '/assets/icons/star_outline_pink.svg';
+      }
+    });
+  }
+
+  // Fonction pour gérer le survol des étoiles
+  function handleStarHover(hoveredValue, isDesktop = false) {
+    const starsToUpdate = isDesktop ? desktopNoteStars : noteStars;
+
+    starsToUpdate.forEach((star, index) => {
+      const starValue = index + 1;
+      const starImg = star;
+
+      if (starValue <= hoveredValue) {
+        starImg.src = '/assets/icons/star_pink.svg';
+      } else {
+        starImg.src = '/assets/icons/star_outline_pink.svg';
+      }
+    });
+  }
+
+  // Fonction pour restaurer l'affichage après le survol
+  function restoreStarDisplay() {
+    const currentNote = filterManager.getFilter('note') || 0;
+    updateStarDisplay(currentNote);
+  }
+
+  // Fonction pour mettre à jour le label de note
+  function updateSelectedNoteLabel(noteValue) {
+    if (!selectedNoteLabel) return;
+
+    if (!noteValue || noteValue === 0) {
+      selectedNoteLabel.textContent = '';
+    } else {
+      const starText = noteValue === 1 ? 'étoile' : 'étoiles';
+      selectedNoteLabel.textContent = `: ≥ ${noteValue} ${starText}`;
+    }
+  }
+
+  function handleStatusSelection(status, isFromDesktop = true) {
+    const isCurrentlySelected = filterManager.getFilter('status') === status;
+
+    filterManager.setFilter('status', isCurrentlySelected ? null : status);
+    const selectedStatus = isCurrentlySelected ? null : status;
+
+    // Synchroniser les sélections de statut entre desktop et mobile
+    desktopStatusOptions.forEach((opt) => {
+      opt.classList.remove('selected-status-desktop');
+      if (!isCurrentlySelected && opt.getAttribute('data-status-value') === status) {
+        opt.classList.add('selected-status-desktop');
+      }
+    });
+
+    modalStatusOptions.forEach((opt) => {
+      opt.classList.remove('selected-status');
+      if (!isCurrentlySelected && opt.getAttribute('data-status-value') === status) {
+        opt.classList.add('selected-status');
+      }
+    });
+
+    // Mettre à jour le label
+    if (selectedStatusLabel) {
+      let statusText = '';
+      if (!isCurrentlySelected && status) {
+        statusText = status === 'open' ? ': Ouvert' : ': Fermé';
+      }
+      selectedStatusLabel.textContent = statusText;
+    }
+
+    // Fermer le dropdown desktop si la sélection vient du desktop
+    if (isFromDesktop && statusDropdownOptions) {
+      statusDropdownOptions.style.display = 'none';
+    }
+
+    refreshDisplay();
+  }
+
+  // --- FONCTION CATÉGORIE ---
+  function handleCategorySelection(category, isFromDesktop = true) {
+    const isCurrentlySelected =
+      filterManager.getFilter('category') === category;
+    const previousCategory = filterManager.getFilter('category');
+
+    // RESET UNIQUEMENT lors du passage Restaurant ↔ autre catégorie
+    if (
+      !isCurrentlySelected &&
+      previousCategory &&
+      previousCategory !== category
+    ) {
+      const wasRestaurant = previousCategory === 'Restaurant';
+      const isRestaurant = category === 'Restaurant';
+
+      // Reset seulement si on change entre Restaurant et non-Restaurant
+      if (wasRestaurant !== isRestaurant) {
+        resetPriceFilter();
+
+        // Fermer tous les dropdowns prix lors de ce type de transition
+        closeAllDropdowns();
+      }
+    }
+
+    // Reset si on désélectionne Restaurant pour aller vers "aucune catégorie"
+    if (isCurrentlySelected && previousCategory === 'Restaurant') {
+      resetPriceFilter();
+      closeAllDropdowns();
+    }
+
+    filterManager.setFilter('category', isCurrentlySelected ? null : category);
+    const selectedCategory = isCurrentlySelected ? null : category;
+    updatePriceFilterDisplay(selectedCategory);
+
+    // Synchroniser les sélections de catégorie entre desktop et mobile
+    desktopCategoryOptions.forEach((opt) => {
+      opt.classList.remove('selected-category-desktop');
+      if (!isCurrentlySelected && opt.dataset.category === category) {
+        opt.classList.add('selected-category-desktop');
+      }
+    });
+
+    modalCategoryOptions.forEach((opt) => {
+      opt.classList.remove('selected-category');
+      if (!isCurrentlySelected && opt.dataset.category === category) {
+        opt.classList.add('selected-category');
+      }
+    });
+
+    if (selectedCategoryLabel) {
+      selectedCategoryLabel.textContent =
+        !isCurrentlySelected && category ? `: ${category}` : '';
+    }
+
+    refreshDisplay();
+  }
+
   // --- LISTENERS ---
 
   // Texte
@@ -756,8 +1007,101 @@ export function setupFilterUI(filterManager, displayManager) {
     });
   }
 
+  // Toggle du dropdown note desktop
+  if (noteDropdownButton) {
+    noteDropdownButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleNoteDropdown();
+    });
+  }
+
+  // Statut desktop
+  if (statusDropdownButton) {
+    statusDropdownButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleStatusDropdown();
+    });
+  }
+
+  // Statut desktop options
+  desktopStatusOptions.forEach((option) => {
+    option.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const status = option.getAttribute('data-status-value');
+      handleStatusSelection(status, true);
+    });
+  });
+
+  // Statut mobile/modal options
+  modalStatusOptions.forEach((option) => {
+    option.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const status = option.getAttribute('data-status-value');
+      handleStatusSelection(status, false);
+    });
+  });
+
+  // Gestion des étoiles pour le filtre de note (mobile)
+  if (noteStars && noteStars.length > 0) {
+    noteStars.forEach((star, index) => {
+      const starValue = index + 1;
+
+      // Gestion du clic
+      star.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        handleStarSelection(starValue, false);
+      });
+
+      // Gestion du survol
+      star.addEventListener('mouseenter', () => {
+        handleStarHover(starValue, false);
+      });
+
+      // Restaurer l'affichage quand on quitte la zone des étoiles
+      star.addEventListener('mouseleave', () => {
+        restoreStarDisplay();
+      });
+
+      // Ajouter un style de curseur pointer
+      star.style.cursor = 'pointer';
+    });
+  }
+
+  // Gestion des étoiles pour le filtre de note (desktop)
+  if (desktopNoteStars && desktopNoteStars.length > 0) {
+    desktopNoteStars.forEach((star, index) => {
+      const starValue = index + 1;
+
+      // Gestion du clic
+      star.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        handleStarSelection(starValue, true);
+      });
+
+      // Gestion du survol
+      star.addEventListener('mouseenter', () => {
+        handleStarHover(starValue, true);
+      });
+
+      // Restaurer l'affichage quand on quitte la zone des étoiles
+      star.addEventListener('mouseleave', () => {
+        restoreStarDisplay();
+      });
+
+      // Ajouter un style de curseur pointer
+      star.style.cursor = 'pointer';
+    });
+  }
+
   // Fermer les dropdowns quand on clique ailleurs
   document.addEventListener('click', (e) => {
+    // Dropdown catégorie
     if (
       categoryDropdownButton &&
       categoryDropdownOptions &&
@@ -767,6 +1111,7 @@ export function setupFilterUI(filterManager, displayManager) {
       categoryDropdownOptions.style.display = 'none';
     }
 
+    // Dropdown prix
     if (
       priceDropdownButton &&
       priceDropdownOptions &&
@@ -776,6 +1121,7 @@ export function setupFilterUI(filterManager, displayManager) {
       priceDropdownOptions.style.display = 'none';
     }
 
+    // Dropdown prix range
     if (
       priceDropdownButton &&
       desktopPriceRangeOptions &&
@@ -785,6 +1131,7 @@ export function setupFilterUI(filterManager, displayManager) {
       desktopPriceRangeOptions.style.display = 'none';
     }
 
+    // Dropdown date
     if (
       dateDropdownButton &&
       dateDropdownOptions &&
@@ -793,64 +1140,35 @@ export function setupFilterUI(filterManager, displayManager) {
     ) {
       dateDropdownOptions.style.display = 'none';
     }
-  });
 
-  // --- FONCTION CATÉGORIE ---
-  function handleCategorySelection(category, isFromDesktop = true) {
-    const isCurrentlySelected =
-      filterManager.getFilter('category') === category;
-    const previousCategory = filterManager.getFilter('category');
-
-    // RESET UNIQUEMENT lors du passage Restaurant ↔ autre catégorie
+    // Dropdown note
     if (
-      !isCurrentlySelected &&
-      previousCategory &&
-      previousCategory !== category
+      noteDropdownButton &&
+      noteDropdownOptions &&
+      !noteDropdownButton.contains(e.target) &&
+      !noteDropdownOptions.contains(e.target)
     ) {
-      const wasRestaurant = previousCategory === 'Restaurant';
-      const isRestaurant = category === 'Restaurant';
-
-      // Reset seulement si on change entre Restaurant et non-Restaurant
-      if (wasRestaurant !== isRestaurant) {
-        resetPriceFilter();
-
-        // Fermer tous les dropdowns prix lors de ce type de transition
-        closeAllDropdowns();
-      }
+      noteDropdownOptions.style.display = 'none';
     }
 
-    // Reset si on désélectionne Restaurant pour aller vers "aucune catégorie"
-    if (isCurrentlySelected && previousCategory === 'Restaurant') {
-      resetPriceFilter();
-      closeAllDropdowns();
+    // Dropdown statut
+    if (
+      statusDropdownButton &&
+      statusDropdownOptions &&
+      !statusDropdownButton.contains(e.target) &&
+      !statusDropdownOptions.contains(e.target)
+    ) {
+      statusDropdownOptions.style.display = 'none';
     }
-
-    filterManager.setFilter('category', isCurrentlySelected ? null : category);
-    const selectedCategory = isCurrentlySelected ? null : category;
-    updatePriceFilterDisplay(selectedCategory);
-
-    // Synchroniser les sélections de catégorie entre desktop et mobile
-    desktopCategoryOptions.forEach((opt) => {
-      opt.classList.remove('selected-category-desktop');
-      if (!isCurrentlySelected && opt.dataset.category === category) {
-        opt.classList.add('selected-category-desktop');
-      }
-    });
-
-    modalCategoryOptions.forEach((opt) => {
-      opt.classList.remove('selected-category');
-      if (!isCurrentlySelected && opt.dataset.category === category) {
-        opt.classList.add('selected-category');
-      }
-    });
-
-    if (selectedCategoryLabel) {
-      selectedCategoryLabel.textContent =
-        !isCurrentlySelected && category ? `: ${category}` : '';
+    if (
+      sortDropdownButton &&
+      sortDropdownOptions &&
+      !sortDropdownButton.contains(e.target) &&
+      !sortDropdownOptions.contains(e.target)
+    ) {
+      sortDropdownOptions.style.display = 'none';
     }
-
-    refreshDisplay();
-  }
+  });
 
   // --- RAFRAICHISSEMENT ---
   function refreshDisplay() {
@@ -882,4 +1200,13 @@ export function setupFilterUI(filterManager, displayManager) {
   if (dateDropdownOptions) {
     dateDropdownOptions.style.display = 'none';
   }
+  if (noteDropdownOptions) {
+    noteDropdownOptions.style.display = 'none';
+  }
+  if (statusDropdownOptions) {
+    statusDropdownOptions.style.display = 'none';
+  }
+
+  // Initialiser l'affichage des étoiles
+  updateStarDisplay(0);
 }
