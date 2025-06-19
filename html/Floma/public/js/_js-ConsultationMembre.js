@@ -70,7 +70,6 @@ document.getElementById('checkPasswordBtn').addEventListener('click', () => {
     const password = document.getElementById('inputPassword').value;
     const message = document.getElementById('message');
 
-    console.log(password);
     fetch('?path=/check/password', {
         method: 'POST',
         headers: {
