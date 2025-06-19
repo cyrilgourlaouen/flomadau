@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
 			logMenu.classList.toggle("hidden");
 		});
 
-		// Optionnel : Fermer le menu si on clique ailleurs
 		document.addEventListener("click", function (e) {
 			if (!logBtn.contains(e.target) && !logMenu.contains(e.target)) {
 				logMenu.classList.add("hidden");
