@@ -1,16 +1,17 @@
 /*GESTION DES BOUTONS*/
 
-let btnUpdate = document.getElementById('btn-update');
-let btnDeletePp = document.getElementById('btn-delete-pp');
-let btnCancelPp = document.getElementById('btn-cancel-pp');
-let btnCancel = document.getElementById('btn-cancel');
-let btnDeleteCard = document.getElementById('btn-delete-credit-card');
-let btnCancelCard = document.getElementById('btn-cancel-credit-card');
-let form = document.getElementById('form-pro');
+const btnUpdate = document.getElementById('btn-update');
+const btnDeletePp = document.getElementById('btn-delete-pp');
+const btnCancelPp = document.getElementById('btn-cancel-pp');
+const btnCancel = document.getElementById('btn-cancel');
+const btnDeleteCard = document.getElementById('btn-delete-credit-card');
+const btnCancelCard = document.getElementById('btn-cancel-credit-card');
+const form = document.getElementById('form-pro');
 
 /*Clic sur modifier*/
 
 btnUpdate.addEventListener('click', function() {
+
   //on affiche les elements cachés
   let hide = document.querySelectorAll('.hidden');;
   for(let i=0; i<hide.length; i++){
@@ -24,6 +25,18 @@ btnUpdate.addEventListener('click', function() {
     inputs[j].disabled = false;
     inputs[j].classList.remove('not-active');
     inputs[j].classList.add('active');
+  }
+
+  //Si img par défaut on propose l'input file
+  const photoProfil = document.getElementById('photo-profil');
+
+  if(photoProfil.src.includes('pp_compte_defaut')){
+    console.log('dans if');
+    document.getElementById('check-pp').classList.add('hidden');
+    document.getElementById('new-pp').classList.remove('hidden-pp');
+    btnDeletePp.classList.add('hidden');
+  }else{
+    console.log('dans else');
   }
 
   btnUpdate.classList.add('hidden');
@@ -70,7 +83,11 @@ btnCancel.addEventListener('click', function() {
   btnUpdate.classList.remove('hidden');
 });
 
-
+/*Clic sur le btn supprimer de la photo de profil*/
+btnDeletePp.addEventListener('click', function() {
+  //Pour savoir si la pp a été supprimée ou inchangée
+  document.getElementById('delete-picture').value = '1';
+});
 
 /*Suppression de la photo de profil + annulation de la suppression*/
 btnDeletePp.addEventListener('click', function(){
@@ -134,7 +151,7 @@ const validateurs = {
 
   telephone: function(valeur) {
     if (!valeur) return "Le téléphone est requis";
-    if (!/^0[1-9]\d{8}$/.test(valeur)) return "Format de téléphone invalide";
+    if (!/^0[1-9]\d{8}$/.test(valeur.replaceAll(' ', ''))) return "Format de téléphone invalide";
     return null;
   },
 
@@ -151,7 +168,7 @@ const validateurs = {
 
   siren: function(valeur) {
     if (!valeur) return "Le numéro SIREN est requis";
-    if (!/^\d{9}$/.test(valeur)) return "Le numéro SIREN doit être composé de 9 chiffres";
+    if (!/^\d{9}$/.test(valeur.replaceAll(' ', ''))) return "Le numéro SIREN doit être composé de 9 chiffres";
     return null;
   },
 
@@ -173,13 +190,12 @@ const validateurs = {
 
   'code-postal': function(valeur) {
     if (!valeur) return "Le code postal est requis";
-    if (!/^\d{5}$/.test(valeur)) return "Le code postal doit être composé de 5 chiffres";
+    if (!/^\d{5}$/.test(valeur.replaceAll(' ', ''))) return "Le code postal doit être composé de 5 chiffres";
     return null;
   },
 
   'card-number': function(valeur) {
-    const numeroSansEspaces = valeur.replace(/\s/g, '');
-    if (!/^\d{13,19}$/.test(numeroSansEspaces)) return "Numéro de carte invalide";
+    if (!/^\d{13,19}$/.test(valeur.replaceAll(' ', ''))) return "Numéro de carte invalide";
     return null;
   },
 
@@ -258,4 +274,15 @@ form.addEventListener('input', function(event) {
       spanErreur.textContent = messageErreur || '';
     }
   }
+
+  //On désactive la soumission si il y a des erreurs
+  const spansErreur = document.querySelectorAll('.erreur');
+  
+  let formulaireEstValide = true;
+
+  spansErreur.forEach(function(span) {
+    if (span.textContent.trim() !== '') {
+      formulaireEstValide = false;
+    }
+  });
 });
