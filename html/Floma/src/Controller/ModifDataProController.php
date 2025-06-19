@@ -95,17 +95,16 @@ class ModifDataProController extends AbstractController
 
         //Si il y a une nouvelle pp
         if(!empty($_FILES['photo']['name'])){
-            $dataJsonImg = $this->uploadImg();
+            $reussi = $this->uploadImg();
 
-            if($dataJsonImg['successUpload']){
+            if($reussi){
                 $compte->setUrlPhotoProfil(explode('.', $dataJsonImg['name'])[0]);
-            }else{
-                echo json_encode($dataJsonImg);
-                exit;
             }
+
         //Si la pp a été supprimée on met la defaut
         }else if($_POST['delete-picture'] === "1"){
             $compte->setUrlPhotoProfil('pp_compte_defaut');
+            
         //Sinon on remet l'ancienne
         }else{
             $compte->setUrlPhotoProfil($this->photo);
@@ -173,7 +172,7 @@ class ModifDataProController extends AbstractController
 
 
     private function uploadImg(){
-        if (!empty($_FILES['photo']['name']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+        if ($_FILES['photo']['error'] === UPLOAD_ERR_OK) {
             $cheminTemp = $_FILES['photo']['tmp_name'];
             $AncienNomFichier = $_FILES['photo']['name'];
 
@@ -184,14 +183,10 @@ class ModifDataProController extends AbstractController
             $cheminDestination = 'uploads/profilePicture/'.$nouveauNomFichier;
 
             if (!move_uploaded_file($cheminTemp , $cheminDestination)) {
-                $dataJson['success'] = false;
-                $dataJson['erreur']['photo'] = 'Erreur de transfert de l\'image';
-                return ['successUpload' => false, 'erreur' => ['photo' => 'Erreur de transfert de l\'image']];
+                return false;
             }else{
-                return ['successUpload' => true, 'name' => $nouveauNomFichier];
+                return true;
             }
-        }else{
-            return ['successUpload' => false, 'erreur' => 'Aucun fichier reçu'];
         }
     }
 }
