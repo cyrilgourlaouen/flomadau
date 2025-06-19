@@ -267,13 +267,13 @@ if (!isset($_SESSION['code_pro'])) {
                             $tags = $manageOptionTag->getTags($filteredEnrichedTags);
                             ?>
 
-                            <select id="isNotRestauration" style="display:block; margin-top:10px;">
+                            <select id="isNotRestauration" style="display:block;">
                                 <?= $tags['isNotRestauration'] ?>
                             </select>
-                            <select style="display:block; margin-top:10px;" id="isRestauration">
+                            <select style="display:block;" id="isRestauration">
                                 <?= $tags['isRestauration'] ?>
                             </select>
-                            <select name="tag[]" id="selectedTag" multiple style="margin-top:10px; min-height:100px;">
+                            <select name="tag[]" id="selectedTag" multiple style=" min-height:100px;">
                                 <?php foreach ($tag as $value) { ?>
                                     <option value="<?= $value['nom_tag'] ?>" selected>
                                         <?= htmlentities($value['nom_tag']) ?>
