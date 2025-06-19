@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+//header('Content-Type: application/json');
+
 use App\Manager\ProfessionnelManager;
 use App\Manager\CompteManager;
 use App\Manager\ProPriveManager;
@@ -116,16 +118,20 @@ class ModifDataProController extends AbstractController
         $proPrive = new ProPrive();
         $proPriveManger = new ProPriveManager();
 
-        $proPrive->setSiren(str_replace(' ', '', $_POST['siren']));
+        $oldDate = explode('/', $_POST['expiration-date']);
+        $newDate = new \DateTime($oldDate[1].'-'.$oldDate[0].'-01');
+        $newDate->format('Y-m-t');
+        var_dump($newDate);
+
+        /*$proPrive->setSiren(str_replace(' ', '', $_POST['siren']));
         if(!empty($_POST['card-number'])){
             $proPrive->setNumeroCarte(str_replace(' ', '', $_POST['card-number']));
-            $proPrive->setCodeSecurite(str_replace(' ', '', $_POST['cvv']));
             $proPrive->setDateExpiration($_POST['expiration-date']);
         }
 
-        $proPriveManger->updateCompte($proPrive, $_SESSION['code_pro']);
+        $proPriveManger->updateCompte($proPrive, $_SESSION['code_pro']);*/
 
-        return $this->redirectToRoute('/pro/check', ["state" => "success"]);
+        //return $this->redirectToRoute('/pro/check', ["state" => "success"]);
     }
 
 

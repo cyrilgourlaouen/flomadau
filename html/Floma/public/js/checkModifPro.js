@@ -6,6 +6,7 @@ const btnCancelPp = document.getElementById('btn-cancel-pp');
 const btnCancel = document.getElementById('btn-cancel');
 const btnDeleteCard = document.getElementById('btn-delete-credit-card');
 const btnCancelCard = document.getElementById('btn-cancel-credit-card');
+const btnSubmit = document.getElementById('btn-submit');
 const form = document.getElementById('form-pro');
 
 /*Clic sur modifier*/
@@ -31,12 +32,9 @@ btnUpdate.addEventListener('click', function() {
   const photoProfil = document.getElementById('photo-profil');
 
   if(photoProfil.src.includes('pp_compte_defaut')){
-    console.log('dans if');
     document.getElementById('check-pp').classList.add('hidden');
     document.getElementById('new-pp').classList.remove('hidden-pp');
     btnDeletePp.classList.add('hidden');
-  }else{
-    console.log('dans else');
   }
 
   btnUpdate.classList.add('hidden');
@@ -185,6 +183,7 @@ const validateurs = {
   numero: function(valeur) {
     if (!valeur) return "Le numéro de rue est requis";
     if (!/\d/.test(valeur)) return "Le numéro de rue doit contenir au moins un chiffre";
+    if (valeur.length > 10) return "Le code postal doit être composé de moins de 10 chiffres";
     return null;
   },
 
@@ -195,11 +194,17 @@ const validateurs = {
   },
 
   'card-number': function(valeur) {
+    if (!valeur) return null; 
     if (!/^\d{13,19}$/.test(valeur.replaceAll(' ', ''))) return "Numéro de carte invalide";
     return null;
   },
 
   'expiration-date': function(valeur) {
+    if (!valeur) return null; 
+
+    /^(0[1-9]|1[0-2])\/(\d{4})$/
+    if (!/^(0[1-9]|1[0-2])\/(\d{4})$/.test(valeur)) return "Le format n'est pas valide";
+
     const [annee, mois] = valeur.split('-').map(Number);
 
     const dateActuelle = new Date();
@@ -214,6 +219,7 @@ const validateurs = {
   },
 
   cvv: function(valeur) {
+    if (!valeur) return null; 
     if (!/^\d{3,4}$/.test(valeur)) return "Le CCV doit avoir 3 ou 4 chiffres";
     return null;
   }
@@ -233,35 +239,56 @@ function validerChampsMotDePasse() {
     erreurNewPassword.textContent = '';
     erreurConfirmPassword.textContent = '';
 
-    let estValide = true;
-
     if (oldPassword.value === '') {
-        erreurOldPassword.textContent = "L'ancien mot de passe doit être saisi";
-        estValide = false;
+      erreurOldPassword.textContent = "L'ancien mot de passe doit être saisi";
     }
 
     if (newPassword.value === '') {
-        erreurNewPassword.textContent = "Le nouveau mot de passe doit être saisi";
-        estValide = false;
+      erreurNewPassword.textContent = "Le nouveau mot de passe doit être saisi";
     }
 
     if (confirmPassword.value === '') {
-        erreurConfirmPassword.textContent = "La confirmation du mot de passe doit être saisie";
-        estValide = false;
+      erreurConfirmPassword.textContent = "La confirmation du mot de passe doit être saisie";
     }
 
     if (newPassword.value !== '' && confirmPassword.value !== '' && newPassword.value !== confirmPassword.value) {
-        erreurConfirmPassword.textContent = "Les mots de passe ne correspondent pas";
-        estValide = false;
+      erreurConfirmPassword.textContent = "Les mots de passe ne correspondent pas";
     }
-    
-    return estValide;
 }
+
+
+//Validateur pour vérifier que tous les champs cb sont remplis en même temps
+function validerChampsCarte() {
+  const numCarte = document.getElementById('card-number');
+  const dateExpiration = document.getElementById('expiration-date');
+  const cvv = document.getElementById('cvv');
+
+  const erreurNumCarte = document.getElementById('erreur-card-number');
+  const erreurDateExpiration = document.getElementById('erreur-expiration-date');
+  const erreurCvv = document.getElementById('erreur-cvv');
+  
+  if (numCarte.value === '') {
+    erreurNumCarte.textContent = "Le numéro de carte doit être saisi";
+  }
+
+  if (dateExpiration.value === '') {
+    erreurDateExpiration.textContent = "La date d'expiration doit être saisie";
+  }
+
+  if (cvv.value === '') {
+    erreurCvv.textContent = "le code de sécurité doit être saisi";
+  }
+}
+
 
 //EventListener qui surveille les input sur les champs du formulaire
 form.addEventListener('input', function(event) {
   const champ = event.target;
   const nomDuChamp = champ.name;
+
+  if (nomDuChamp === 'card-number' || nomDuChamp === 'expiration-date' || nomDuChamp === 'cvv'){
+    validerChampsCarte();
+  }
 
   if (nomDuChamp === 'old-password' || nomDuChamp === 'new-password' || nomDuChamp === 'confirm-password') {
     validerChampsMotDePasse();
@@ -274,4 +301,37 @@ form.addEventListener('input', function(event) {
       spanErreur.textContent = messageErreur || '';
     }
   }
+
+  //On désactive la soumission si il y a des erreurs
+  const spansErreur = document.querySelectorAll('.erreur');
+  
+  let formulaireEstValide = true;
+
+  spansErreur.forEach(function(span) {
+    if (span.textContent.trim() !== '') {
+      formulaireEstValide = false;
+    }
+  });
+
+  if(!formulaireEstValide){
+    btnSubmit.disabled = true;
+  }else{
+    btnSubmit.disabled = false;
+  }
 });
+
+/*form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    fetch('?path=/pro/update/account', {
+        method: 'POST',
+        body: new FormData(form)
+    })
+    .then(reponse => reponse.json())
+    .then(data => {
+        console.log("Données reçues :", data);
+    })
+    .catch(error => {
+        console.error('Erreur Fetch :', error);
+    });
+});*/

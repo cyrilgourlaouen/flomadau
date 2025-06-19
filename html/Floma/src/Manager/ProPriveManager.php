@@ -60,7 +60,6 @@ class ProPriveManager extends AbstractManager
         $fields = [
             'siren' => $proPrive->getSiren(),
             'numero_carte' => $proPrive->getNumeroCarte(),
-            'code_securite' => $proPrive->getCodeSecurite(),
             'date_expiration' => $proPrive->getDateExpiration(),
         ];
 

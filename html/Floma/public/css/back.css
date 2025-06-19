@@ -513,8 +513,30 @@ input {
   border: none;
 }
 
+#btn-submit:disabled{
+  background-color: rgb(0, 91, 181, 50%);
+  cursor: not-allowed;
+}
+
+#btn-submit:disabled:hover{
+  background-color: rgb(0, 91, 181, 50%);
+  border: none;
+  color: var(--background-color);
+}
+
+#btn-submit:disabled{
+  background-color: rgb(0, 91, 181, 50%);
+  cursor: not-allowed;
+}
+
+#btn-submit:disabled:hover{
+  background-color: rgb(0, 91, 181, 50%);
+  border: none;
+  color: var(--background-color);
+}
+
 #btn_connexion a,
-#btn_inscription a {
+#btn_inscription a{
   color: var(--background-color);
   text-decoration: none;
 }
