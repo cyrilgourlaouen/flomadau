@@ -1209,6 +1209,7 @@ footer div nav :any-link {
   font-size: var(--text-size);
   border: #000 solid 1px;
   color: var(--black-color);
+  font-family: var(--noto);
 }
 
 .date-error {
