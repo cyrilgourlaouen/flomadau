@@ -509,6 +509,8 @@ footer div nav :any-link {
   flex-direction: column;
   gap: 1rem;
   padding: 0.5rem;
+  width: 100%;
+  align-items: center;
 }
 
 .offer-card {
@@ -1155,13 +1157,18 @@ footer div nav :any-link {
 .filter-modal-date-option input {
   width: 100%;
   height: 2.75rem;
-  padding: 0 1.5rem;
+  padding: 0 1rem;
   border-radius: 8px;
   background-size: 1.75rem;
   background-color: var(--white-color);
   font-size: var(--text-size);
+  font-family: var(--noto);
   border: #000 solid 1px;
   color: var(--black-color);
+}
+
+.filter-modal-date-option input:hover {
+  cursor: pointer;
 }
 
 #desktop-date-options {
@@ -1202,6 +1209,53 @@ footer div nav :any-link {
 
 .date-error {
   border: red solid 2px !important;
+}
+
+.filter-modal-note-options {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.filter-modal-note-options img {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#desktop-note-options {
+  z-index: 5;
+  top: 3rem;
+  position: absolute;
+  display: flex;
+  width: max-content;
+  flex-direction: row;
+  justify-items: center;
+  align-items: baseline;
+  background-color: var(--white-color);
+  border: #000 solid 1px;
+  border-radius: 10px;
+  top: 2.5rem;
+  padding: 0.625rem;
+  overflow: hidden;
+}
+
+#desktop-note-options img {
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.filter-modal-note-options img:hover,
+#desktop-note-options img:hover {
+  transform: scale(1.1);
+}
+
+#filter-note-text {
+  font-size: var(--very-small-text-size);
+  color: var(--dark-grey-color);
 }
 
 .avis .imgProfil {

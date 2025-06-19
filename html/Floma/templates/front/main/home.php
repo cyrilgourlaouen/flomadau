@@ -177,11 +177,19 @@ $highlightedOffers = array_filter($data["offers"], function ($offer) {
 
 
             <div class="filter-modal-sort" id="filter-modal-note">
-                <h3>Note</h3>
                 <div>
-
+                    <h3>Note</h3>
+                    <p id="filter-note-text">Sélectionnez la note minimale</p>
+                </div>
+                <div class="filter-modal-note-options">
+                    <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="1">
+                    <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="2">
+                    <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="3">
+                    <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="4">
+                    <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="5">
                 </div>
             </div>
+
             <div class="filter-modal-sort" id="filter-modal-status">
                 <h3>Statut</h3>
                 <div>
@@ -268,9 +276,20 @@ $highlightedOffers = array_filter($data["offers"], function ($offer) {
                 <select name="Statut" id="">
                     <option value="">Statut</option>
                 </select>
-                <select name="Note" id="">
-                    <option value="">Note</option>
-                </select>
+
+                <!-- Note -->
+                <div class="desktop-filter-dropdown">
+                    <button class="desktop-filter-button" id="desktop-note-button">
+                        Note <span id="selected-note-label"></span>
+                    </button>
+                    <div id="desktop-note-options">
+                        <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="1">
+                        <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="2">
+                        <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="3">
+                        <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="4">
+                        <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="5">
+                    </div>
+                </div>
 
                 <!-- Tri -->
                 <div class="offer-sort-desktop">
