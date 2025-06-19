@@ -61,6 +61,11 @@ const ROUTES = [
         'method' => 'submit',
         'show' => false,
     ],
+    '/pro/check' => [
+        'controller' => App\Controller\CheckDataProController::class,
+        'method' => 'home',
+        'layout' => Layout::BACK,
+    ],
     '/connexion'=> [
         'controller' => App\Controller\ConnexionController::class,
         'method' => 'connection',
@@ -74,10 +79,26 @@ const ROUTES = [
         'controller' => App\Controller\ConnexionController::class,
         'method' => 'logOut',
     ],
-    '/consultationMembre' => [
+    '/consultation/membre' => [
         'controller' => App\Controller\ConsultationMController::class,
         'method' => 'consultation',
-    ]
+    ],
+    '/update/membre' => [
+        'controller' => App\Controller\ModificationMembreController::class,
+        'method' => 'updateData',
+    ],
+    '/check/password' => [
+        'controller' => App\Controller\ModificationMembreController::class,
+        'method' => 'checkPassword',
+    ],
+    '/update/password' => [
+        'controller' => App\Controller\ModificationMembreController::class,
+        'method' => 'updatePassword',
+    ],
+    '/check/email' => [
+        'controller' => App\Controller\ModificationMembreController::class,
+        'method' => 'checkEmail',
+    ],
 ];
 
 ?>

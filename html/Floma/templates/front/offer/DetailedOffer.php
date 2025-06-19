@@ -1,5 +1,11 @@
 <?php
+use App\Entity\Membre;
+use App\Entity\ReponsePro;
+use App\Manager\MembreManager;
 use App\Manager\OfferManager;
+use App\Entity\Compte;
+use App\Manager\CompteManager;
+use App\Manager\ReponseProManager;
 use App\Service\CategoryContent;
 use App\Service\MetricStarsCalculator;
 
@@ -7,10 +13,20 @@ $stars = new MetricStarsCalculator();
 $offerManager = new OfferManager();
 $categoryContent = new CategoryContent();
 $offer = $data["offer"];
+$avis = $data['avis'];
 $InfoOffer = isset($offer["typeRepasData"]) || isset($offer["langueGuideData"])
     ? $categoryContent->getContentCategory($offer["categoryData"], $offer["categorie"], $offer["conditions_accessibilite"], isset($offer["typeRepasData"]) ? $offer["typeRepasData"] : $offer["langueGuideData"])
     : $categoryContent->getContentCategory($offer["categoryData"], $offer["categorie"], $offer["conditions_accessibilite"]);
 $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $offer["numero_rue"] . " " . $offer["nom_rue"];
+
+$compte = new Compte();
+$compteManager = new CompteManager();
+
+$membre = new Membre();
+$membreManager = new MembreManager();
+
+$pro = new ReponsePro();
+$proManager = new ReponseProManager();
 ?>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -225,4 +241,54 @@ $fullAdresse = !$offer["numero_rue"] || !$offer["nom_rue"] ? $offer["ville"] : $
         </section>
     </div>
 </div>
+<?php if (!empty($avis)) { ?>
+    <h3 class="big-title-avis">Avis</h3>
+    <section class="avis avis-grid">
+        <?php foreach ($avis as $unAvis) { ?>
+            <?php
+            $pro = $proManager->findOneBy(['id_avis' => $unAvis->getId()]);
+            $membre = $membreManager->findBy(['id_compte' => $unAvis->getCodeMembre()]);
+            $compte = $compteManager->findBy(['id' => $unAvis->getCodeMembre()]);
+            ?>
+            <div class="container-avis">
+                <div class="avis-item">
+                    <h2 class="avis-title"><?= htmlspecialchars($unAvis->getTitre()) ?></h2>
+                    <section class="description-avis">
+                        <div class="account">
+                            <div class="profil">
+                                <?php
+                                $photo = $compte[0]->getUrlPhotoProfil();
+                                $photo = empty($photo) ? 'pp_compte_defaut' : $photo;
+                                ?>
+                                <img class="imgProfil" src="uploads/profilePicture/<?= htmlspecialchars($photo) ?>.jpg"
+                                    alt="Photo de profil">
+                                <p>
+                                    <?= htmlspecialchars($membre[0]->getPseudo()) ?>
+                                </p>
+                            </div>
+                            <p>
+                                <?= htmlspecialchars($unAvis->getDatePublication()) ?>
+                            </p>
+                        </div>
+                        <div class="note">
+                            <?= $stars->calculStars($unAvis->getNote()) ?>
+                        </div>
+                        <p>Contexte de la visite : <?= $unAvis->getContexteVisite() ?></p>
+                        <p>Date de participation : <?= $unAvis->getDateVisite() ?></p>
+                        <p><?= nl2br(htmlspecialchars($unAvis->getCommentaire() ?? '')) ?></p>
+                        <?php if ($pro && $pro->getReponse() !== null) { ?>
+                            <div class="container-reponse">
+                                <h3 class="title-reponse avisReponse">Réponse de
+                                    <?= $offer['professionnelData']['raison_sociale'] ?>
+                                </h3>
+                                <p class="text-reponse avisReponse"><?= htmlentities($pro->getReponse()) ?></p>
+                            </div>
+                        <?php } ?>
+                    </section>
+                </div>
+            </div>
+        <?php }
+        ; ?>
+    </section>
+<?php } ?>
 <script src="./js/MapCalculator.js"></script>

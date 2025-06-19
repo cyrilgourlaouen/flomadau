@@ -1,3 +1,10 @@
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  
+  if (urlParams.get('state') === 'notMember') {
+    alert("Accès refusé : seuls les membres non professionnels peuvent se connecter.");
+  }
+</script>
 <div class="main">
      <a href="/" class="undoBtn"><img src="/assets/icons/chevron_left_black.svg" alt="logo"></a>
     <div class="connection">

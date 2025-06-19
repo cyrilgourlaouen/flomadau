@@ -2,6 +2,9 @@
 namespace App\Controller;
 
 use App\Manager\CompteManager;
+use App\Manager\CompteProManager;
+use App\Manager\MembreManager;
+use App\Resource\MembreResource;
 use Floma\Controller\AbstractController;
 use App\Resource\CompteResource;
 use App\Service\MetricMembreAccount;
@@ -20,23 +23,34 @@ class ConnexionController extends AbstractController
     {
         if (!empty($_POST)) {
             $compteManager = new CompteManager();
+            $proManager = new CompteProManager();
             $metricMembreAccount = new MetricMembreAccount();
+
             $enrichedAccounts = CompteResource::buildAll($compteManager->findAll(), [
                 'userName' => ['isMultiple' => true],
             ]);
+
             $index = $metricMembreAccount->isMembreExist($enrichedAccounts, $_POST["email"], $_POST["password"]);
+            if ($index === false) {
+                return $this->redirectToRoute('/connexion', ["state" => "failure"]);
+            }
+            $id = $enrichedAccounts[$index]["id"];
+            $isPro = $proManager->findOneBy(['id' => $id]);
+
+            if ($isPro && $isPro->isPro()) {
+                return $this->redirectToRoute('/connexion', ["state" => "notMember"]);
+            }
+
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }
-            if($index !== false){
-                $_SESSION = $enrichedAccounts[$index];
-                session_regenerate_id(true);
-                return $this->redirectToRoute('/');
-            } else {
-                return $this->redirectToRoute('/connexion', ["state" => "failure"]);
-            }
+
+            $_SESSION = $enrichedAccounts[$index];
+            session_regenerate_id(true);
+            return $this->redirectToRoute('/');
         }
     }
+
     public function logOut()
     {
         // Clear session data

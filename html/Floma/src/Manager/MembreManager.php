@@ -57,4 +57,14 @@ class MembreManager extends AbstractManager
 		);
 	}
 
+
+    public function updateMembre(Membre $membre, int $id): \PDOStatement
+    {
+        $fields = [
+            'pseudo' => $membre->getPseudo(), 
+
+        ];
+
+        return $this->update(Membre::class, $fields, $id , 'id_compte');
+    }
 }
