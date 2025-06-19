@@ -158,3 +158,7 @@
       }
     ?>
 </div>
+
+<?php
+  include '2fa_status_component.php';
+?>
