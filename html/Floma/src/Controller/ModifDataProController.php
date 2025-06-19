@@ -80,11 +80,12 @@ class ModifDataProController extends AbstractController
         $compte->setTelephone(str_replace(' ', '', $_POST['telephone']));
         $compte->setMotDePasse($_POST['confirm-password']);
         $compte->setVille(str_replace(' ', '', $_POST['ville']));
-        $compte->setCodePostal(str_replace(' ', '', $_POST['code-postal']));
+        $compte->setCodePostal($_POST['code-postal']);
         $compte->setNomRue($_POST['rue']);
         $compte->setNumeroRue(str_replace(' ', '', $_POST['numero']));
         $compte->setComplementAdresse($_POST['complement']);
 
+        //Si il y a une nouvelle pp
         if(!empty($_FILES['photo']['name'])){
             $dataJsonImg = $this->uploadImg();
 
@@ -94,6 +95,10 @@ class ModifDataProController extends AbstractController
                 echo json_encode($dataJsonImg);
                 exit;
             }
+        //Si la pp a été supprimée on met la defaut
+        }else if($_POST['delete-picture'] === "1"){
+            $compte->setUrlPhotoProfil('pp_compte_defaut');
+        //Sinon on remet l'ancienne
         }else{
             $compte->setUrlPhotoProfil($this->photo);
         }
@@ -150,6 +155,10 @@ class ModifDataProController extends AbstractController
             $infosPro = ProfessionnelResource::buildAll($proManager->findBy(['code' => $_SESSION['code_pro']]), [
                 'compte' => ['isMultiple' => false]
             ]);
+
+            var_dump($password);
+            var_dump($infosPro[0]['compteData'][0]['mot_de_passe']);
+            var_dump(password_verify($password, $infosPro[0]['compteData'][0]['mot_de_passe']));
 
             if(password_verify($password, $infosPro[0]['compteData'][0]['mot_de_passe'])){
                 return true;

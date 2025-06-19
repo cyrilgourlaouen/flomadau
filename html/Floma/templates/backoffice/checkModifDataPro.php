@@ -25,11 +25,11 @@
         <?php
           if(isset($compte['url_photo_profil'])){
             ?>
-              <img src="/uploads/profilePicture/<?= $compte['url_photo_profil'] ?>.jpg" alt="Photo de profil" title="Photo de profil">
+              <img src="/uploads/profilePicture/<?= $compte['url_photo_profil'] ?>.jpg" alt="Photo de profil" title="Photo de profil" id="photo-profil">
             <?php
           }else{
             ?>
-              <img src="/uploads/profilePicture/pp_compte_defaut.jpg" alt="Photo de profil" title="Photo de profil">
+              <img src="/uploads/profilePicture/pp_compte_defaut.jpg" alt="Photo de profil" title="Photo de profil" id="photo-profil">
             <?php
           }
         ?>
@@ -37,11 +37,13 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
       </article>
+      <input type="hidden" id="delete-picture" name="delete-picture" value="0"></input>
       <button class="hidden btn-modif-pro" id="btn-delete-pp" type="button">Supprimer</button>
       <article id="new-pp" class="hidden-pp">
         <label for="photo">Nouvelle photo de profil :</label>
         <input type="file" id="photo" name="photo" accept="image/png, image/jpeg, image/webp" size="2097152"></input>
       </article>
+<<<<<<< HEAD
       <button class="hidden-pp btn-modif-pro" id="btn-cancel-pp" type="button">Annuler</button>
 =======
 =======
@@ -63,6 +65,9 @@
 =======
       <button class="hidden-pp btn-modif-pro" id="btn-cancel-pp" type="button">Annuler</button>
 >>>>>>> 98826d6 (Avancé la gestiond des btn)
+=======
+      <button class="hidden-pp btn-modif-pro" id="btn-cancel-pp" type="button" >Annuler</button>
+>>>>>>> 88d0798 (correction de bug (non finie))
     </section>
   
     <section class="check-section">
