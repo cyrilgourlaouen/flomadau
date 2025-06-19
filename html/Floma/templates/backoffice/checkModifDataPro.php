@@ -6,7 +6,7 @@
   include 'head_title.php';
 ?>
 <div id="main-check">
-  <form action="?path=/pro/update/account" method="POST" enctype="multipart/form-data" id="form-pro">
+  <form id="form-pro">
     <section class="check-section">
       <h3>Photo de profil</h3>
 <<<<<<< HEAD

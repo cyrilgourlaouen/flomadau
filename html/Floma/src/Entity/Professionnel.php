@@ -10,7 +10,7 @@ class Professionnel
     private string $raison_sociale;
     private int $id_compte;
     private bool $est_prive;
-    private ?string $code_a2f;
+    private ?string $code_a2f = null;
 
     public function getCode(): int
     {

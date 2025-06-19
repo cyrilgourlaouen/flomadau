@@ -205,13 +205,13 @@ const validateurs = {
     /^(0[1-9]|1[0-2])\/(\d{4})$/
     if (!/^(0[1-9]|1[0-2])\/(\d{4})$/.test(valeur)) return "Le format n'est pas valide";
 
-    const [annee, mois] = valeur.split('-').map(Number);
-
+    let dateSplit = valeur.split('/');
+    
     const dateActuelle = new Date();
     const anneeActuelle = dateActuelle.getFullYear();
-    const moisActuel = dateActuelle.getMonth() + 1;
-
-    if (annee < anneeActuelle || (annee === anneeActuelle && mois < moisActuel)) {
+    const moisActuel = dateActuelle.getMonth()+1;
+    
+    if (dateSplit[1] < anneeActuelle || (dateSplit[1] == anneeActuelle && dateSplit[0].substr(1) < moisActuel)) {
         return "Cette carte est expirée";
     }
 
@@ -254,6 +254,12 @@ function validerChampsMotDePasse() {
     if (newPassword.value !== '' && confirmPassword.value !== '' && newPassword.value !== confirmPassword.value) {
       erreurConfirmPassword.textContent = "Les mots de passe ne correspondent pas";
     }
+
+    if(oldPassword.value === '' && newPassword.value === '' && confirmPassword.value === ''){
+      erreurOldPassword.textContent = '';
+      erreurNewPassword.textContent = '';
+      erreurConfirmPassword.textContent = '';
+    }
 }
 
 
@@ -276,7 +282,13 @@ function validerChampsCarte() {
   }
 
   if (cvv.value === '') {
-    erreurCvv.textContent = "le code de sécurité doit être saisi";
+    erreurCvv.textContent = "Le code de sécurité doit être saisi";
+  }
+
+  if(numCarte.value === '' && dateExpiration.value === '' && cvv.value === ''){
+    erreurNumCarte.textContent = '';
+    erreurDateExpiration.textContent = '';
+    erreurCvv.textContent = '';
   }
 }
 
@@ -320,7 +332,9 @@ form.addEventListener('input', function(event) {
   }
 });
 
-/*form.addEventListener('submit', function(event) {
+
+/*Envoi des données au back pour les vérifs*/
+form.addEventListener('submit', function(event) {
     event.preventDefault();
 
     fetch('?path=/pro/update/account', {
@@ -329,9 +343,17 @@ form.addEventListener('input', function(event) {
     })
     .then(reponse => reponse.json())
     .then(data => {
-        console.log("Données reçues :", data);
+      if(data['success'] === true){
+        window.location.href = "?path=/pro/check";
+      }else{
+        document.getElementById(data['span']).textContent = data['erreur'];
+        document.getElementById(data['span']).scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+      }
     })
     .catch(error => {
         console.error('Erreur Fetch :', error);
     });
-});*/
+});
