@@ -372,7 +372,7 @@ $highlightedOffers = array_filter($data["offers"], function($offer) {
                                 <?php } ?>
                             <?php } else { ?>
                                 <div class="offer-card-price-euros">
-                                    <?= str_repeat("<img src='/assets/icons/euro_symbol_primary.svg' alt='Icone d'euro'>", $offer["categoryData"]["gamme_de_prix"]) ?>
+                                    <?= str_repeat("<img src='/assets/icons/paid_primary.svg' alt='Icone d'une pièce de monnaie'>", $offer["categoryData"]["gamme_de_prix"]) ?>
                                 </div>
                             <?php } ?>
                         </div>
