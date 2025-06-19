@@ -12,6 +12,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <article id="check-pp">
 =======
       <article>
@@ -22,6 +23,9 @@
 =======
       <article id="check-pp">
 >>>>>>> d452eb8 (aa)
+=======
+      <article id="check-pp">
+>>>>>>> 085b4a863ce0049c4c9575e529009f5a28e68733
         <?php
           if(isset($compte['url_photo_profil'])){
             ?>
@@ -36,6 +40,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 085b4a863ce0049c4c9575e529009f5a28e68733
       </article>
       <input type="hidden" id="delete-picture" name="delete-picture" value="0"></input>
       <button class="hidden btn-modif-pro" id="btn-delete-pp" type="button">Supprimer</button>
@@ -43,6 +50,7 @@
         <label for="photo">Nouvelle photo de profil :</label>
         <input type="file" id="photo" name="photo" accept="image/png, image/jpeg, image/webp" size="2097152"></input>
       </article>
+<<<<<<< HEAD
 <<<<<<< HEAD
       <button class="hidden-pp btn-modif-pro" id="btn-cancel-pp" type="button">Annuler</button>
 =======
@@ -68,6 +76,9 @@
 =======
       <button class="hidden-pp btn-modif-pro" id="btn-cancel-pp" type="button" >Annuler</button>
 >>>>>>> 88d0798 (correction de bug (non finie))
+=======
+      <button class="hidden-pp btn-modif-pro" id="btn-cancel-pp" type="button" >Annuler</button>
+>>>>>>> 085b4a863ce0049c4c9575e529009f5a28e68733
     </section>
   
     <section class="check-section">
@@ -79,6 +90,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           <span id="erreur-prenom" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
@@ -87,6 +99,9 @@
 =======
           <span id="erreur-prenom" class="erreur"></span>
 >>>>>>> e17c424 (Verif en temps reel finies)
+=======
+          <span id="erreur-prenom" class="erreur"></span>
+>>>>>>> 085b4a863ce0049c4c9575e529009f5a28e68733
         </article>
         
         <article>
@@ -95,6 +110,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           <span id="erreur-nom" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
@@ -103,6 +119,9 @@
 =======
           <span id="erreur-nom" class="erreur"></span>
 >>>>>>> e17c424 (Verif en temps reel finies)
+=======
+          <span id="erreur-nom" class="erreur"></span>
+>>>>>>> 085b4a863ce0049c4c9575e529009f5a28e68733
         </article>
       </div>
 
@@ -118,6 +137,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           <span id="erreur-telephone" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
@@ -126,6 +146,9 @@
 =======
           <span id="erreur-telephone" class="erreur"></span>
 >>>>>>> e17c424 (Verif en temps reel finies)
+=======
+          <span id="erreur-telephone" class="erreur"></span>
+>>>>>>> 085b4a863ce0049c4c9575e529009f5a28e68733
         </article>
 
         <article>
@@ -134,6 +157,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           <span id="erreur-email" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
@@ -142,6 +166,9 @@
 =======
           <span id="erreur-email" class="erreur"></span>
 >>>>>>> e17c424 (Verif en temps reel finies)
+=======
+          <span id="erreur-email" class="erreur"></span>
+>>>>>>> 085b4a863ce0049c4c9575e529009f5a28e68733
         </article>
       </div>
 
@@ -152,6 +179,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           <span id="erreur-denomination" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
@@ -160,6 +188,9 @@
 =======
           <span id="erreur-denomination" class="erreur"></span>
 >>>>>>> e17c424 (Verif en temps reel finies)
+=======
+          <span id="erreur-denomination" class="erreur"></span>
+>>>>>>> 085b4a863ce0049c4c9575e529009f5a28e68733
         </article>
 
         <?php
@@ -174,6 +205,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <span id="erreur-siren" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
@@ -182,6 +214,9 @@
 =======
                 <span id="erreur-siren" class="erreur"></span>
 >>>>>>> e17c424 (Verif en temps reel finies)
+=======
+                <span id="erreur-siren" class="erreur"></span>
+>>>>>>> 085b4a863ce0049c4c9575e529009f5a28e68733
               </article>
             <?php
           }
@@ -198,6 +233,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
           <span id="erreur-rue" class="erreur"></span>
 =======
 >>>>>>> 958593a (aaa)
@@ -206,6 +242,9 @@
 =======
           <span id="erreur-rue" class="erreur"></span>
 >>>>>>> e17c424 (Verif en temps reel finies)
+=======
+          <span id="erreur-rue" class="erreur"></span>
+>>>>>>> 085b4a863ce0049c4c9575e529009f5a28e68733
         </article>
 
         <article>
@@ -214,6 +253,9 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 085b4a863ce0049c4c9575e529009f5a28e68733
           <span id="erreur-numero" class="erreur"></span>
         </article>
       </div>
@@ -255,6 +297,7 @@
       <h3>Mot de passe</h3>
       <article>
         <label for="old-password">Ancien mot de passe</label>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
@@ -337,6 +380,16 @@
         <input type="password" id="new-password" name="new-password" disabled class="not-active"/>
         <span id="erreur-new-password" class="erreur"></span>
 >>>>>>> 08a511b (avnacée)
+=======
+        <input type="password" id="old-password" name="old-password" disabled class="not-active"/>
+        <span id="erreur-old-password" class="erreur"></span>
+      </article>
+
+      <article>
+        <label for="new-password">Nouveau mot de passe</label>
+        <input type="password" id="new-password" name="new-password" disabled class="not-active"/>
+        <span id="erreur-new-password" class="erreur"></span>
+>>>>>>> 085b4a863ce0049c4c9575e529009f5a28e68733
       </article>
 
       <article>
@@ -368,12 +421,18 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 085b4a863ce0049c4c9575e529009f5a28e68733
             <button class="hidden btn-modif-pro" id="btn-delete-credit-card" type="button">Supprimer</button>
             <article id="new-credit-card" class="hidden-credit-card">
               <label for="card-number">Numéro de carte</label>
               <input type="text" id="card-number" name="card-number"></input>
               <span id="erreur-card-number" class="erreur"></span>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 085b4a863ce0049c4c9575e529009f5a28e68733
               
               <label for="expiration-date">Date expiration</label>
               <input type="month" id="expiration-date" name="expiration-date"></input>
@@ -402,6 +461,7 @@
               <label for="cvv">Cryptogramme</label>
               <input type="text" id="cvv" name="cvv"></input>
               <span id="erreur-cvv" class="erreur"></span>
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> c6d5e5a (aaa)
@@ -455,12 +515,15 @@
               <label for="cvv">Cryptogramme</label>
               <input type="text" id="cvv" name="cvv"></input>
               <span id="erreur-cvv" class="erreur"></span>
+=======
+>>>>>>> 085b4a863ce0049c4c9575e529009f5a28e68733
             </article>
           </section>
         <?php
       }
     ?>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -489,12 +552,17 @@
     <button type="button" id="btn-cancel" class="hidden btn-modif-pro">Annuler</button>
 >>>>>>> 98826d6 (Avancé la gestiond des btn)
 =======
+=======
+>>>>>>> 085b4a863ce0049c4c9575e529009f5a28e68733
     <div id="div-btn-modif">
       <button type="button" id="btn-update" class="btn-modif-pro">Modifier</button>
       <button type="button" id="btn-cancel" class="hidden btn-modif-pro">Annuler</button>
       <button type="submit" id="btn-submit" class="hidden btn-modif-pro">Enregistrer</button>
     </div>
+<<<<<<< HEAD
 >>>>>>> 68d8597 (Bien avancé reste à tester le tout)
+=======
+>>>>>>> 085b4a863ce0049c4c9575e529009f5a28e68733
 
   </form>
 </div>
