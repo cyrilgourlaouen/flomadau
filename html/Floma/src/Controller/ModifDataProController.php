@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-//header('Content-Type: application/json');
+header('Content-Type: application/json');
 
 use App\Manager\ProfessionnelManager;
 use App\Manager\CompteManager;
@@ -19,6 +19,7 @@ class ModifDataProController extends AbstractController
 {
     private int $idCompte;
     private string $photo;
+    private string $mdpCompte;
 
     public function updateData() {
         $dataJson = ['success' => true];
@@ -29,6 +30,7 @@ class ModifDataProController extends AbstractController
 
         $this->idCompte = $infosPro[0]['id_compte'];
         $this->photo = $infosPro[0]['compteData'][0]['url_photo_profil'];
+        $this->mdpCompte = $infosPro[0]['compteData'][0]['mot_de_passe'];
 
         //Verif méthode
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -44,7 +46,7 @@ class ModifDataProController extends AbstractController
             $passwordValide = $this->validePassword($password);
     
             if(!$passwordValide){
-                $dataJson = ['success' => false, 'erreur' => ['old-password' => 'Le mot de passe ne correspond pas']];
+                $dataJson = ['success' => false, 'span' => 'erreur-old-password', 'erreur' => 'Mot de passe incorrect'];
                 echo json_encode($dataJson);
                 exit;
             }
@@ -57,7 +59,7 @@ class ModifDataProController extends AbstractController
         $emailValide = $this->valide($email, 'email');
 
         if(!$emailValide){
-            $dataJson = ['success' => false, 'erreur' => ['email' => 'L\'email existe déjà']];
+            $dataJson = ['success' => false, 'span' => 'erreur-email', 'erreur' => 'L\'email existe déjà'];
             echo json_encode($dataJson);
             exit;
         }
@@ -67,7 +69,7 @@ class ModifDataProController extends AbstractController
         $telephoneValide = $this->valide($telephone, 'telephone');
 
         if(!$telephoneValide){
-            $dataJson = ['success' => false, 'erreur' => ['telephone' => 'Le numéro de téléphone existe déjà']];
+            $dataJson = ['success' => false, 'span' => 'erreur-telephone', 'erreur' => 'Le numéro de téléphone existe déjà'];
             echo json_encode($dataJson);
             exit;
         }
@@ -80,7 +82,11 @@ class ModifDataProController extends AbstractController
         $compte->setPrenom(str_replace(' ', '', $_POST['prenom']));
         $compte->setEmail(str_replace(' ', '', $_POST['email']));
         $compte->setTelephone(str_replace(' ', '', $_POST['telephone']));
-        $compte->setMotDePasse($_POST['confirm-password']);
+        if(!empty($_POST['confirm-password'])){
+            $compte->setMotDePasse(password_hash($_POST['confirm-password'], PASSWORD_DEFAULT));
+        }else{
+            $compte->setMotDePasse($this->mdpCompte);
+        }
         $compte->setVille(str_replace(' ', '', $_POST['ville']));
         $compte->setCodePostal($_POST['code-postal']);
         $compte->setNomRue($_POST['rue']);
@@ -118,20 +124,23 @@ class ModifDataProController extends AbstractController
         $proPrive = new ProPrive();
         $proPriveManger = new ProPriveManager();
 
-        $oldDate = explode('/', $_POST['expiration-date']);
-        $newDate = new \DateTime($oldDate[1].'-'.$oldDate[0].'-01');
-        $newDate->format('Y-m-t');
-        var_dump($newDate);
-
-        /*$proPrive->setSiren(str_replace(' ', '', $_POST['siren']));
-        if(!empty($_POST['card-number'])){
-            $proPrive->setNumeroCarte(str_replace(' ', '', $_POST['card-number']));
-            $proPrive->setDateExpiration($_POST['expiration-date']);
+        if(!empty($_POST['expiration-date'])){
+            $oldDate = explode('/', $_POST['expiration-date']);
+            $newDate = new \DateTime($oldDate[1].'-'.$oldDate[0].'-01');
+            $newDate = $newDate->format('Y-m-t');
+        }else{
+            $newDate = null;
         }
 
-        $proPriveManger->updateCompte($proPrive, $_SESSION['code_pro']);*/
+        $proPrive->setSiren(str_replace(' ', '', $_POST['siren']));
+        if(!empty($_POST['card-number'])){
+            $proPrive->setNumeroCarte(str_replace(' ', '', $_POST['card-number']));
+            $proPrive->setDateExpiration($newDate);
+        }
+        
+        $proPriveManger->updateCompte($proPrive, $_SESSION['code_pro']);
 
-        //return $this->redirectToRoute('/pro/check', ["state" => "success"]);
+        echo json_encode($dataJson);
     }
 
 
@@ -155,22 +164,10 @@ class ModifDataProController extends AbstractController
     private function validePassword($password) {
         if (empty($password)) return false;
 
-        $proManager = new ProfessionnelManager();
-
-        if(isset($_SESSION['code_pro'])){
-            $infosPro = ProfessionnelResource::buildAll($proManager->findBy(['code' => $_SESSION['code_pro']]), [
-                'compte' => ['isMultiple' => false]
-            ]);
-
-            var_dump($password);
-            var_dump($infosPro[0]['compteData'][0]['mot_de_passe']);
-            var_dump(password_verify($password, $infosPro[0]['compteData'][0]['mot_de_passe']));
-
-            if(password_verify($password, $infosPro[0]['compteData'][0]['mot_de_passe'])){
-                return true;
-            }else{
-                return false;
-            }
+        if(password_verify($password, $this->mdpCompte)){
+            return true;
+        }else{
+            return false;
         }
     }
 
