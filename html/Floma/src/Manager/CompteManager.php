@@ -83,15 +83,7 @@ class CompteManager extends AbstractManager
         $fields = [
             'nom' => $compte->getNom(),
             'prenom' => $compte->getPrenom(),
-            'email' => $compte->getEmail(),
             'telephone' => $compte->getTelephone(),
-            'mot_de_passe' => $compte->getMotDePasse(),
-            'ville' => $compte->getVille(),
-            'code_postal' => $compte->getCodePostal(), 
-            'nom_rue' => $compte->getNomRue(),
-            'numero_rue' => $compte->getNumeroRue(),
-            'complement_adresse' => $compte->getComplementAdresse(),
-            'url_photo_profil' => $compte->getUrlPhotoProfil()
         ];
 
         return $this->update(Compte::class, $fields, $id);
