@@ -23,6 +23,7 @@ class Offer
     private ?string $site_web = null;
     private bool $en_ligne = true;
     private int $code_professionnel;
+
     private string $date_creation;
 
     public function getId(): int

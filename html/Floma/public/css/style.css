@@ -798,6 +798,61 @@ footer div nav :any-link {
   font-weight: 500;
 }
 
+.inscription header {
+  display: none;
+}
+
+input, label, ul {
+  font-family: var(--noto)
+}
+
+input {
+  border: 0.063rem solid #ccc;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  padding: 0.625rem 0.3125rem;
+}
+
+#photo {
+  height: 6rem;
+}
+
+#signup_button {
+  border-radius: 1.875rem;
+  border-color: black;
+  border-width: 0.125rem;
+  background-color: white;
+  height: 3.375rem;
+  width: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-end;
+}
+
+#signup_button:hover {
+  border-color: white;
+  background-color: black;
+  color: white;
+}
+
+
+h4 {
+  font-family: var(--noto);
+  font-size: var(--text-size);
+}
+
+li {
+  font-family: var(--noto);
+  font-size: var(--small-text-size);
+}
+
+.error-msg {
+  color: red;
+  font-size: var(--small-text-size);
+  font-family: var(--noto);
+}
+
 /* Section à la une offre */
 
 .highlighted-offers-section h2 {
@@ -1464,11 +1519,88 @@ footer div nav :any-link {
     background: #fff !important;
     padding-top: 0 !important;
   }
+
+  #form_main > form > div{
+      padding: 0.9375rem 1.25rem;
+      width: 100%;
+  }
+
+  #inscription_membre {
+      display: flex;
+      flex-direction: column;
+  }
+  
+  #inscription_membre {
+      align-self: flex-start;
+  }
 }
 
 @media (max-width: 62.5rem) {
   .main .right-img {
     display: none;
+  }
+
+  #background_image{
+      display: none;
+  }
+
+  #inscription_membre, #inscription_membre > div {
+      display: flex;
+      flex-direction: column;
+  }
+
+  #inscription_membre {
+      align-self: flex-start;
+  }
+
+  #form_main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.25rem;
+  }
+
+  .groupe > div, .solo{
+    padding: 0.469rem 1.25rem;
+    width: 100%;
+  }
+
+  #form_main > h4 {
+    padding: 0.9375rem 1.25rem;;
+  }
+
+  #liste_mobile {
+      display: block;
+      padding-left: 1rem;
+  }
+
+  #liste_tablette {
+      display: none;
+  }
+
+  .groupe > div {
+      display: flex;
+      flex-direction: column;
+  }
+
+  #logo {
+      width: 13.75rem;
+      height: 3.3125rem;
+  }
+
+  #form_main > h1 {
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      padding-bottom: 0.25rem;
+  }
+
+  #form_main > hr {
+    width: 80%;
+  }
+
+  #photo {
+    width: 150%;
   }
 }
 
@@ -1499,6 +1631,12 @@ footer div nav :any-link {
     --very-small-text-size: 0.75rem;
 
     --page-padding: 2.188rem;
+  }
+
+  #transition_bar {
+    width: 50%;
+    color: black;
+    background-color: black;
   }
 
   header .btnBurger {
@@ -1648,6 +1786,117 @@ footer div nav :any-link {
     gap: 0.625rem;
   }
 
+  .offer-section {
+    align-items: center;
+  }
+
+  .offer-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(0, 27rem));
+    gap: 1.25rem;
+    width: 100%;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  .offer-card {
+    height: 100%;
+  }
+
+  .offer-card-img-badge-pink img,
+  .offer-card-img-badge-green img {
+    height: 18px;
+  }
+  #inscription_main input {
+    width: 100%;
+  }
+  
+  #signup_button {
+    align-self: center;
+  }
+  
+  #liste_mobile {
+      display: none;
+  }
+  
+  #liste_tablette {
+      display: block;
+      padding: 0 2rem;
+  }
+  
+  #inscription_membre {
+      width: 80%;
+      align-self: center;
+  }
+  
+  #inscription_main {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    width: 100%;
+  }
+
+  #form_main {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-wrap: nowrap;
+      align-items: center;
+      padding: 1.5rem 0;
+  }
+  
+  h4 {
+      display: none;
+  }
+
+  .solo {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .align-row {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.5rem;
+  }
+  
+  .groupe {
+      display: flex;
+      flex-direction: row;
+      align-items: end;
+      gap: 1.875rem;
+  }
+  
+  .groupe div{
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      width: 50%;
+  }
+  
+  #background_image_block{
+      position: relative;
+      width: 50%;
+      height: calc(100%-2.5rem);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0;
+  }
+  
+  #background_image{
+      display: block;
+      position: sticky;
+      right: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      padding: 0;
+  }
+
   .highlighted-offers-section {
     align-items: center;
     position: relative;
@@ -1680,6 +1929,64 @@ footer div nav :any-link {
 
   .big-title-avis {
     width: 95%;
+  }
+
+  .avis-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    padding: 1.25rem;
+    width: 100%;
+    align-items: flex-start;
+  }
+  
+  #form_main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.25rem;
+  }
+
+  .groupe > div, .solo{
+    width: 100%;
+  }
+
+  #form_main > h4 {
+    padding: 0.9375rem 1.25rem;;
+  }
+  
+  #liste_mobile {
+      display: block;
+      padding-left: 1rem;
+  }
+  
+  #liste_tablette {
+      display: none;
+  }
+
+  .groupe > div {
+      display: flex;
+      flex-direction: column;
+  }
+  
+  #logo {
+      width: 13.75rem;
+      height: 3.3125rem;
+  }
+  
+  #form_main > h1 {
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      padding-bottom: 0.25rem;
+  }
+  
+  #form_main > hr {
+    width: 80%;
+  }
+
+  #photo {
+    width: 150%;
   }
 
   .contentTab {

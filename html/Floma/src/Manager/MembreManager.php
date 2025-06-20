@@ -1,23 +1,23 @@
 <?php
 namespace App\Manager;
 
-use App\Entity\Membre;
 use Floma\Manager\AbstractManager;
+use App\Entity\Membre;
 
 /**
- * Class ProfessionnelManager
+ * Class MembreManager
  *
  * @package App\Manager
  */
 class MembreManager extends AbstractManager
 {
     /**
-     * @param int $id
+     * @param int $code
      * @return mixed
      */
-    public function find(int $id)
+    public function find(int $code)
     {
-        return $this->readOne(Membre::class, ['code' => $id]);
+        return $this->readOne(Membre::class, ['code' => $code]);
     }
 
     /**
@@ -48,6 +48,15 @@ class MembreManager extends AbstractManager
     {
         return $this->readMany(Membre::class);
     }
+
+	public function add(Membre $membre) {
+		return $this->create(Membre::class, [
+				'pseudo' => $membre->getPseudo(),
+				'id_compte' => $membre->getIdCompte()
+			]
+		);
+	}
+
 
     public function updateMembre(Membre $membre, int $id): \PDOStatement
     {

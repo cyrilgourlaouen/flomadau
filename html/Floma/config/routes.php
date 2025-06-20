@@ -6,6 +6,25 @@ const ROUTES = [
     '/' => [
         'controller' => App\Controller\MainController::class,
         'method' => 'home',
+        'layout' => Layout::FRONT,
+    ],
+
+    '/inscription/membre' => [
+        'controller' => App\Controller\SignupMembreController::class,
+        'method' => 'home',
+        'layout' => Layout::FRONT_INSCRIPTION,
+    ],
+
+    '/inscription/membre/verification' => [
+        'controller' => App\Controller\SignupMembreController::class,
+        'method' => 'verification',
+        'view' => false,
+    ],
+
+    '/inscription/membre/sign-up' => [
+        'controller' => App\Controller\SignupMembreController::class,
+        'method' => 'signUp',
+        'view' => false,
     ],
     '/offer/{id}' => [
         'controller' => App\Controller\OfferController::class,
