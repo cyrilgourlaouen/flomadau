@@ -30,7 +30,7 @@ class SignupMembreController extends AbstractController
             ]);
     }
 
-        private function uploadImg(){
+    private function uploadImg(){
         if ($_FILES['photo']['error'] === UPLOAD_ERR_OK) {
             $cheminTemp = $_FILES['photo']['tmp_name'];
             $AncienNomFichier = $_FILES['photo']['name'];
@@ -43,7 +43,7 @@ class SignupMembreController extends AbstractController
 
             if (!move_uploaded_file($cheminTemp , $cheminDestination)) {
                 return [false];
-            }else{
+            } else {
                 return [true, $nouveauNomFichier];
             }
         }
@@ -56,9 +56,11 @@ class SignupMembreController extends AbstractController
     {
         if (isset($_POST)) {
             
-            $uploaded_image = uploadImg();
-            if ($uploaded_image === false) {
-                return $this->redirectToRoute('/inscription/membre', ['state' => 'failure']);
+            if (isset($_POST['photo'])) {
+                $uploaded_image = uploadImg();
+                if ($uploaded_image[0] === false) {
+                    return $this->redirectToRoute('/inscription/membre', ['state' => 'failure']);
+                }
             }
 
             $compte = new Compte();
@@ -68,7 +70,6 @@ class SignupMembreController extends AbstractController
             $compte->setTelephone($_POST['tel']);
             $hashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $compte->setMotDePasse($hashed);
-            $compte->setUrlPhotoProfil($uploaded_image[1]);
             $compte->setVille($_POST['city']);
             $compte->setCodePostal($_POST['zip_code']);
             $compte->setNomRue($_POST['name_street']);
@@ -76,6 +77,12 @@ class SignupMembreController extends AbstractController
             if (isset($_POST['adress_comp'])){
                 $compte->setComplementAdresse($_POST['adress_comp']);
             }
+            if (isset($_POST['photo'])) {
+                if ($uploaded_image[0] === true){
+                    $compte->setUrlPhotoProfil($uploaded_image[1]);
+                }   
+            }
+           
 
             $compteManager = new CompteManager();
             $temp = $compteManager->addGetId($compte);

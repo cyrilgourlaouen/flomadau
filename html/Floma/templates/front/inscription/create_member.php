@@ -50,7 +50,7 @@
                 
                 <div>
                     <label for="zip_code"> Code postal </label>
-                    <input name="zip_code" id="zip_code" type="number" placeholder="04200" required></input>
+                    <input name="zip_code" id="zip_code" type="text" placeholder="04200" required></input>
                     <span class="error-msg" id="error-zip"></span>
                 </div>
             </div>
@@ -121,7 +121,7 @@
                 { field: 'nom', valid: val => val !== '', message: 'Veuillez entrer un nom.' },
                 { field: 'tel', valid: val => /^(?:(?:\+33|0033)\s?|0)[1-9](?:[\s.-]?\d{2}){4}$/.test(val), message: 'Veuillez entrer un numéro valide.' },
                 { field: 'email', valid: val => /^\S+@\S+\.\S+$/.test(val), message: 'Veuillez entrer une adresse email valide.' },
-                { field: 'pseudo', valid: val => val !== '', message: 'Veuillez entrer le pseudo.' },
+                { field: 'pseudo', valid: val => val !== '', message: 'Veuillez entrer un pseudo.' },
                 { field: 'password', valid: val => val.length >= 6, message: 'Le mot de passe est trop court.' },
                 { field: 'conf_password', valid: val => val === document.getElementById('password').value, message: 'Les mots de passe ne correspondent pas.' },
                 { field: 'name_street', valid: val => val !== '', message: 'Veuillez entrer la rue.' },
@@ -220,8 +220,9 @@
                             const errorEl = document.getElementById('error-pseudo');
                             errorEl.innerText = data.messagePseudo;
                         } else {
-                            form.submit();
-                        }
+                            if (isValid){
+                                    form.submit();
+                            }                        }
                     })
                     .catch(error => {
                         console.error('Error checking datas in db:', error);
