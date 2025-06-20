@@ -136,12 +136,6 @@ class AddCategory
                 $optionSouscrite->setDateDebut($today);
                 $optionSouscrite->setDateFin($nextMonth);
                 $optionSouscriteManager->add($optionSouscrite);
-                $optionSouscrite->setIdOption(1);
-                $optionSouscrite->setIdOffre($id);
-                $optionSouscrite->setNombreJour(0);
-                $optionSouscrite->setDateDebut($today);
-                $optionSouscrite->setDateFin($nextMonth);
-                $optionSouscriteManager->add($optionSouscrite);
             } else {
                 $_POST["a_la_une"] ?? $optionSouscrite->setIdOption(2);
                 $_POST["en_relief"] ?? $optionSouscrite->setIdOption(1);

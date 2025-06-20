@@ -7,11 +7,23 @@ const PRIX_EN_RELIEF = 8.34;
 
 function updatePrice() {
     let total = 0;
-    if (featured.checked) total += PRIX_A_LA_UNE;
-    if (highlighted.checked) total += PRIX_EN_RELIEF;
+
+    if (featured.checked) {
+        total = PRIX_A_LA_UNE;
+    } else if (highlighted.checked) {
+        total = PRIX_EN_RELIEF;
+    }
 
     priceDisplay.textContent = `Prix total : ${total.toFixed(2)} €`;
 }
 
-featured.addEventListener("change", updatePrice);
+featured.addEventListener("change", () => {
+    if (featured.checked) {
+        highlighted.checked = true;
+    }
+    updatePrice();
+});
+
 highlighted.addEventListener("change", updatePrice);
+
+updatePrice(); 
