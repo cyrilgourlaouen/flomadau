@@ -3,9 +3,11 @@
 use App\Manager\LangueGuideManager;
 use App\Manager\TagManager;
 use App\Manager\TypeRepasManager;
+use App\Resource\JourOuvertureResource;
 use App\Resource\LangueGuideResource;
 use App\Resource\TagResource;
 use App\Resource\TypeRepasResource;
+use App\Service\HoraireManage;
 use App\Service\ManageOption;
 use App\Manager\JourOuvertureOffreManager;
 use App\Resource\LangueGuideVisiteResource;
@@ -16,11 +18,7 @@ $head_svg = "/assets/icons/account_white.svg";
 include 'head_title.php';
 include 'black_button.php';
 $offer = $data['offer'];
-print_r($offer);
-//print_r($offer['langueGuideData']);
-
-if (!isset($_SESSION['code_pro'])) {
-    ?>
+if (!isset($_SESSION['code_pro'])) { ?>
     <div id="body_acceuil">
         <div class="msg_offer">
             <p class="text_offer">Vous souhaitez bénéficier des options professionnelles ?</p>
@@ -33,7 +31,7 @@ if (!isset($_SESSION['code_pro'])) {
     <?php
 } else {
     ?>
-    <form action="?path=/offre/creation/new" method="post" enctype="multipart/form-data" class="formContainer">
+    <form action="?path=/offre/updateOffer" method="post" enctype="multipart/form-data" class="formContainer">
         <section class="formSectionContainer">
             <section class="formSectionContainer">
                 <div class="h3-section">
@@ -45,7 +43,7 @@ if (!isset($_SESSION['code_pro'])) {
                     <div class="field">
                         <label for="offer_name">Nom de l'offre *</label>
                         <input name="offer_name" id="offer_name" type="text"
-                            value="<?= htmlspecialchars($offer['titre']) ?>" disabled>
+                            value="<?= htmlspecialchars($offer['titre'] ?? "") ?>" disabled>
 
                     </div>
 
@@ -68,16 +66,17 @@ if (!isset($_SESSION['code_pro'])) {
                         <div class="gap-vsm flex-col">
                             <label for="duree_visite">Duree *</label>
                             <input type="text" name="duree_visite" id="duree_visite"
-                                value="<?= htmlspecialchars($offer['categoryData']['duree']) ?>" disabled>
+                                value="<?= htmlspecialchars($offer['categoryData']['duree'] ?? "") ?>" disabled>
                         </div>
                         <div class="gap-vsm flex-col">
                             <label for="prix_minimal_visite">Prix minimal *</label>
-                            <input type="number" name="prix_minimal_visite" id="prix_minimal_visite" placeholder="15.5"
-                                value="<?= htmlspecialchars($offer['categoryData']['prix_minimal']) ?>" disabled>
+                            <input type="number" name="prix_minimal_visite" id="prix_minimal_visite"
+                                value="<?= htmlspecialchars($offer['categoryData']['prix_minimal'] ?? "") ?>" disabled>
                         </div>
                         <div>
                             <label class="checkbox-item">
-                                <input type="checkbox" id="guideCheckbox" name="guide" id="guide" value="true" checked>
+                                <input type="checkbox" id="guideCheckbox" name="guide" id="guide" value="true" checked
+                                    disabled>
                                 <span>Guide</span>
                             </label>
                         </div>
@@ -95,7 +94,7 @@ if (!isset($_SESSION['code_pro'])) {
                             $guideManager = new LangueGuideManager();
                             $manageOption = new ManageOption();
                             $enrichedOffer = LangueGuideResource::buildAll($guideManager->findAll());
-                            $guide = $offer['langueGuideData'];
+                            $guide = $offer['langueGuideData'] ?? "";
 
                             $usedLangues = is_array($guide) ? array_map(fn($item) => $item['nom_langue'], $guide) : [];
                             $filteredEnrichedOffer = array_filter($enrichedOffer, function ($langue) use ($usedLangues) {
@@ -106,23 +105,28 @@ if (!isset($_SESSION['code_pro'])) {
                             ?>
 
                             <!-- Sélecteur de langues disponibles -->
-                            <select id="guideOptions" style="display:block; margin-top:10px;">
+                            <select id="guideOptions" disabled>
                                 <?= $guides ?>
                             </select>
 
                             <!-- Liste des langues ajoutées -->
-                            <select name="guides[]" id="selectedGuides" multiple style="margin-top:10px; min-height:100px;">
-                                <?php foreach ($guide as $value) { ?>
-                                    <option value="<?= $value['nom_langue'] ?>" selected>
-                                        <?= htmlentities($value['nom_langue']) ?>
-                                    </option>
-                                <?php } ?>
+                            <select name="guides[]" id="selectedGuides" multiple disabled>
+                                <?php if (is_array($guide)) {
+                                    foreach ($guide as $value) { ?>
+                                        <option value="<?= $value['nom_langue'] ?>" selected>
+                                            <?= htmlentities($value['nom_langue'] ?? "") ?>
+                                        </option>
+                                    <?php }
+                                } ?>
                             </select>
+
 
                             <!-- Boutons -->
                             <div class="containerBtnTagGuide">
-                                <button type="button" onclick="addGuide()" class="BtnTagGuide">Ajouter une langue</button>
-                                <button type="button" onclick="removeGuide()" class="BtnTagGuide">Retirer la langue</button>
+                                <button type="button" onclick="addGuide()" class="BtnConsultation" disabled>Ajouter une
+                                    langue</button>
+                                <button type="button" onclick="removeGuide()" class="BtnConsultation" disabled>Retirer la
+                                    langue</button>
                             </div>
                         </div>
                     </div>
@@ -130,17 +134,18 @@ if (!isset($_SESSION['code_pro'])) {
                         <div class="gap-vsm flex-col">
                             <label for="duree_show">Duree *</label>
                             <input type="text" name="duree_show" id="duree_show"
-                                value="<?= htmlspecialchars($offer['categoryData']['duree']) ?>" disabled>
+                                value="<?= htmlspecialchars($offer['categoryData']['duree'] ?? "") ?>" disabled>
                         </div>
 
                         <div class="gap-vsm flex-col">
                             <label for="prix_minimal_show">Prix minimal *</label>
                             <input type="number" name="prix_minimal_show" id="prix_minimal_show"
-                                value="<?= htmlspecialchars($offer['categoryData']['prix_minimal']) ?>" disabled>
+                                value="<?= htmlspecialchars($offer['categoryData']['prix_minimal'] ?? "") ?>" disabled>
                         </div>
                         <div class=" gap-vsm flex-col">
                             <label for="capacite">Capacite *</label>
-                            <input type="number" name="capacite" id="capacite" placeholder="500">
+                            <input type="number" name="capacite" id="capacite"
+                                value="<?= htmlentities($offer['categoryData']['capacite'] ?? "") ?>" disabled>
                         </div>
                     </div>
                     <div id="champs-restaurant" class="hidden formInline">
@@ -163,18 +168,17 @@ if (!isset($_SESSION['code_pro'])) {
                         </div>
                         <div class="gap-vsm flex-col" id="carte-restaurant-container">
                             <label for="url_carte_restaurant">Carte du restaurant *</label>
-
                             <?php if (!empty($dataRestaurant['url_carte_restaurant'])): ?>
                                 <div id="carte-restaurant-preview" style="margin-bottom: 8px;">
                                     <p>Image actuelle :</p>
-                                    <img src="<?= htmlentities($dataRestaurant['url_carte_restaurant']) ?>"
-                                        alt="Carte du restaurant"
-                                        style="max-width: 300px; height: auto; display: block; margin-bottom: 5px;">
-                                    <button type="button" id="btn-supprimer-carte">Supprimer cette image</button>
+                                    <img src="/assets/images/<?= $dataRestaurant['url_carte_restaurant'] ?>"
+                                        alt="Carte du restaurant" class="imagePreview">
+                                    <button class="BtnConsultationSupprimer" type="button" id="btn-supprimer-carte"
+                                        disabled>Supprimer</button>
                                 </div>
                             <?php endif; ?>
-
-                            <input type="file" name="url_carte_restaurant" id="url_carte_restaurant" accept="image/*">
+                            <input type="file" name="url_carte_restaurant" id="url_carte_restaurant" accept="image/*"
+                                disabled>
                         </div>
                         <div class="checkbox-group flex-col" id="types_repas">
                             <label for="checkbox-group" class="text-center">Type de repas *</label>
@@ -182,124 +186,179 @@ if (!isset($_SESSION['code_pro'])) {
                                 <?php
                                 $typeRepasManager = new TypeRepasManager();
                                 $typesRepas = TypeRepasResource::buildAll($typeRepasManager->findAll());
-                                foreach ($typesRepas as $type) { ?>
+
+                                $typesRepasSelectedIds = !empty($offer['typeRepasData']) && is_array($offer['typeRepasData'])
+                                    ? array_map(function ($item) {
+                                        return (int) $item['id'];
+                                    }, $offer['typeRepasData'])
+                                    : [];
+
+
+                                foreach ($typesRepas as $type) {
+                                    $id = (int) $type['id'];
+                                    $isChecked = in_array($id, $typesRepasSelectedIds);
+                                    ?>
                                     <label class="checkbox-item">
-                                        <input type="checkbox" name="types_repas[]" value=<?= $type["id"]; ?>>
-                                        <p><?= $type["nom_type"]; ?></p>
+                                        <input type="checkbox" name="types_repas[]" value="<?= $id ?>" <?= $isChecked ? 'checked' : '' ?> disabled>
+                                        <p><?= htmlspecialchars($type["nom_type"] ?? "") ?></p>
                                     </label>
                                 <?php } ?>
                             </div>
                         </div>
                     </div>
-
                     <div id="champs-activite" class="hidden formInline">
                         <div class="gap-vsm flex-col">
                             <label for="duree_activity">Duree *</label>
                             <input type="text" name="duree_activity" id="duree_activity"
-                                value="<?= htmlspecialchars($offer['categoryData']['duree']) ?>">
+                                value="<?= htmlspecialchars($offer['categoryData']['duree'] ?? "") ?>" disabled>
                         </div>
                         <div class="gap-vsm flex-col">
                             <label for="age_requis_activity">Age requis *</label>
-                            <input type="number" name="age_requis_activity" id="age_requis_activity" placeholder="15">
+                            <input type="number" name="age_requis_activity" id="age_requis_activity"
+                                value="<?= htmlspecialchars($offer['categoryData']['age_requis'] ?? "") ?>" disabled>
                         </div>
                         <div class="gap-vsm flex-col">
                             <label for="prestations_incluses">Prestations incluses *</label>
                             <input type="text" name="prestations_incluses" id="prestations_incluses"
-                                placeholder="palmes, bouteille">
+                                value="<?= htmlspecialchars($offer['categoryData']['prestations_incluses'] ?? "") ?>"
+                                disabled>
                         </div>
                         <div class="gap-vsm flex-col">
                             <label for="prestations_non_incluses">Prestations non incluses *</label>
                             <input type="text" name="prestations_non_incluses" id="prestations_non_incluses"
-                                placeholder="transport, combinaison">
+                                value="<?= htmlspecialchars($offer['categoryData']['prestations_non_incluses'] ?? "") ?>"
+                                disabled>
                         </div>
                         <div class="gap-vsm flex-col">
                             <label for="prix_minimal_activity">Prix minimal *</label>
-                            <input type="number" name="prix_minimal_activity" id="prix_minimal_activity" placeholder="15.5">
+                            <input type="number" name="prix_minimal_activity" id="prix_minimal_activity"
+                                value="<?= htmlspecialchars($offer['categoryData']['prix_minimal'] ?? "") ?>" disabled>
                         </div>
                     </div>
 
                     <div id="champs-parc" class="hidden formInline">
                         <div class="flex-col gap-vsm">
                             <label for="nombre_attractions">Nombre d’attractions *</label>
-                            <input type="number" name="nombre_attractions" id="nombre_attractions" min="1" placeholder="15">
+                            <input type="number" name="nombre_attractions" id="nombre_attractions" min="1"
+                                value="<?= htmlspecialchars($offer['categoryData']['nombre_attraction'] ?? "") ?>" disabled>
                         </div>
                         <div class="flex-col gap-vsm">
                             <label for="prix_minimal_amusement">Prix minimal *</label>
                             <input type="number" name="prix_minimal_amusement" id="prix_minimal_amusement" min="1"
-                                placeholder="15.5">
+                                value="<?= htmlspecialchars($offer['categoryData']['prix_minimal'] ?? "") ?>" disabled>
                         </div>
                         <div class="flex-col gap-vsm">
                             <label for="age_requis_amusement">Âge requis *</label>
-                            <input type="number" name="age_requis_amusement" id="age_requis_amusement" min="1"
-                                placeholder="15">
+                            <input type="number" name="age_requis_amusement" id="age_requis" min="1"
+                                value="<?= htmlspecialchars($offer['categoryData']['age_requis'] ?? "") ?>" disabled>
                         </div>
                         <div class="gap-vsm flex-col">
                             <label for="url_carte_parc">Carte du parc d'attraction *</label>
-                            <input type="file" name="url_carte_parc" id="url_carte_parc">
+
+                            <div class="image-preview-item" data-image-id="<?= htmlspecialchars($img['id'] ?? "") ?>">
+                                <img src="/assets/images/<?= htmlspecialchars($img['url_plan'] ?? "") ?>" alt="Image Parc"
+                                    class="imagePreview">
+                                <button type="button" class="btn-supprimer-img"
+                                    data-image-id="<?= htmlspecialchars($img['id'] ?? "") ?>" disabled>Supprimer</button>
+                            </div>
+
+                            <p>Ajouter de nouvelles images :</p>
+                            <input type="file" name="url_img[]" id="url_img_offre" accept="image/*" multiple disabled>
                         </div>
                     </div>
-                    <div class="formInline">
-                        <div class="field">
-                            <label for="conditions_accesibilite">Conditions d'accessibilité *</label>
-                            <input name="conditions_accesibilite" id="conditions_accesibilite" type="text"
-                                value="<?= htmlentities($offer['conditions_accessibilite']) ?>" disabled>
-                        </div>
-                        <div class="gap-vsm flex-col" id="selectGuides">
-                            <label>Tags *
-                                <span class="tooltip-trigger">
-                                    <img src="./assets/icons/info_black.svg">
-                                    <span class="tooltip-text">
-                                        Maintenez Ctrl (ou Cmd) pour sélectionner plusieurs tags.
-                                    </span>
+                </div>
+                <div class="formInline">
+                    <div class="field">
+                        <label for="conditions_accesibilite">Conditions d'accessibilité *</label>
+                        <input name="conditions_accesibilite" id="conditions_accesibilite" type="text"
+                            value="<?= htmlentities($offer['conditions_accessibilite'] ?? "") ?>" disabled>
+                    </div>
+                    <div class="gap-vsm flex-col" id="selectTags">
+                        <label>Tags *
+                            <span class="tooltip-trigger">
+                                <img src="./assets/icons/info_black.svg">
+                                <span class="tooltip-text">
+                                    Maintenez Ctrl (ou Cmd) pour sélectionner plusieurs tags.
                                 </span>
-                            </label>
-                            <?php
-                            $tagManager = new TagManager();
-                            $manageOptionTag = new ManageOption();
-                            $enrichedTag = TagResource::buildAll($tagManager->findAll());
-                            $tag = $offer['tagData'];
+                            </span>
+                        </label>
+                        <?php
+                        $tagManager = new TagManager();
+                        $manageOption = new ManageOption(); // On peut garder le même objet si même logique
+                        $enrichedTags = TagResource::buildAll($tagManager->findAll());
+                        $tag = $offer['tagData'];
 
-                            $usedTag = is_array($tag) ? array_map(fn($item) => $item['nom_tag'], $tag) : [];
-                            $filteredEnrichedTags = array_filter($enrichedTag, function ($tag) use ($usedTag) {
-                                return !in_array($tag['nom_tag'], $usedTag);
-                            });
+                        $usedTags = is_array($tag) ? array_map(fn($item) => $item['nom_tag'], $tag) : [];
+                        $filteredEnrichedTags = array_filter($enrichedTags, function ($tag) use ($usedTags) {
+                            return !in_array($tag['nom_tag'], $usedTags);
+                        });
 
-                            $tags = $manageOptionTag->getTags($filteredEnrichedTags);
-                            ?>
+                        $tags = $manageOption->getTags($filteredEnrichedTags);
+                        ?>
 
-                            <select id="isNotRestauration" style="display:block;">
-                                <?= $tags['isNotRestauration'] ?>
-                            </select>
-                            <select style="display:block;" id="isRestauration">
-                                <?= $tags['isRestauration'] ?>
-                            </select>
-                            <select name="tag[]" id="selectedTag" multiple style=" min-height:100px;">
-                                <?php foreach ($tag as $value) { ?>
-                                    <option value="<?= $value['nom_tag'] ?>" selected>
-                                        <?= htmlentities($value['nom_tag']) ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
+                        <!-- Sélecteur de tags disponibles -->
+                        <select id="isNotRestauration" disabled>
+                            <?= $tags['isNotRestauration'] ?>
+                        </select>
+                        <select id="isRestauration" disabled>
+                            <?= $tags['isRestauration'] ?>
+                        </select>
 
-                            <!-- Boutons -->
-                            <div class="containerBtnTagGuide">
-                                <button type="button" onclick="addTag()" class="BtnTagGuide">
-                                    Ajouter un tag
-                                </button>
-                                <button type="button" onclick="removeTag()" class="BtnTagGuide">
-                                    Retirer un tag
-                                </button>
-                            </div>
+                        <!-- Liste des tags ajoutés -->
+                        <select name="tags[]" id="selectedTags" multiple disabled>
+                            <?php foreach ($tag as $value) { ?>
+                                <option value="<?= $value['nom_tag'] ?>" selected>
+                                    <?= htmlentities($value['nom_tag'] ?? "") ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+
+                        <!-- Boutons -->
+                        <div class="containerBtnTagGuide">
+                            <button type="button" onclick="addTag()" class="BtnConsultation" disabled>Ajouter un
+                                tag</button>
+                            <button type="button" onclick="removeTag()" class="BtnConsultation" disabled>Retirer un
+                                tag</button>
                         </div>
                     </div>
             </section>
             <section class="formSectionContainer">
-                <div class="h3-section">
-                    <h3>Horaire d'ouverture et fermeture</h3>
-                    <hr>
-                </div>
-                <div class="flex-col" id="horaires">
-                    <div id="horaire-container" class="horaire-container"></div>
+                <div  id="horaire-container" class="horaire-container"></div>
+                <?php
+                $horaireManager = new JourOuvertureOffreManager();
+                $horaires = $horaireManager->findBy(['id_offre' => $offer['id']]);
+
+                $joursParId = [
+                    1 => 'Lundi',
+                    2 => 'Mardi',
+                    3 => 'Mercredi',
+                    4 => 'Jeudi',
+                    5 => 'Vendredi',
+                    6 => 'Samedi',
+                    7 => 'Dimanche',
+                ];
+
+                $horaireData = [];
+                foreach ($joursParId as $jour) {
+                    $horaireData[$jour] = [];
+                }
+
+                foreach ($horaires as $h) {
+                    $idJour = $h->getIdJour(); // ID numérique
+                    if (isset($joursParId[$idJour])) {
+                        $jour = $joursParId[$idJour]; // Nom du jour
+                        $horaireData[$jour][] = [
+                            'ouverture' => substr($h->getHoraireDebut(), 0, 5), // "HH:MM"
+                            'fermeture' => substr($h->getHoraireFin(), 0, 5),
+                        ];
+                    }
+                }
+                ?>
+
+                <script>
+                    const horaireData = <?= json_encode($horaireData, JSON_UNESCAPED_UNICODE) ?>;
+                </script>
+
                 </div>
             </section>
 
@@ -312,7 +371,7 @@ if (!isset($_SESSION['code_pro'])) {
 
                 <div class="field">
                     <label for="nom_rue">Rue *</label>
-                    <input name="nom_rue" id="nom_rue" type="text" value="<?= htmlspecialchars($offer['nom_rue']) ?>"
+                    <input name="nom_rue" id="nom_rue" type="text" value="<?= htmlspecialchars($offer['nom_rue'] ?? "") ?>"
                         disabled>
                 </div>
 
@@ -320,7 +379,7 @@ if (!isset($_SESSION['code_pro'])) {
                     <div class="field">
                         <label for="numero_rue">Numéro *</label>
                         <input name="numero_rue" id="numero_rue" type="number"
-                            value="<?= htmlspecialchars($offer['numero_rue']) ?>" disabled>
+                            value="<?= htmlspecialchars($offer['numero_rue'] ?? "") ?>" disabled>
                     </div>
                     <div class="field">
                         <label for="complement_adresse">Complément adresse</label>
@@ -333,7 +392,7 @@ if (!isset($_SESSION['code_pro'])) {
                 <div class="formInline">
                     <div class="field">
                         <label for="ville">Ville *</label>
-                        <input name="ville" id="ville" type="text" value="<?= htmlspecialchars($offer['ville']) ?>"
+                        <input name="ville" id="ville" type="text" value="<?= htmlspecialchars($offer['ville'] ?? "") ?>"
                             disabled>
                     </div>
 
@@ -353,8 +412,8 @@ if (!isset($_SESSION['code_pro'])) {
 
                 <div class="field">
                     <label for="telephone">Téléphone *</label>
-                    <input name="telephone" id="telephone" type="text" value="<?= htmlspecialchars($offer['telephone']) ?>"
-                        disabled>
+                    <input name="telephone" id="telephone" type="text"
+                        value="<?= htmlspecialchars($offer['telephone'] ?? "") ?>" disabled>
                 </div>
 
                 <div class="field">
@@ -365,40 +424,48 @@ if (!isset($_SESSION['code_pro'])) {
 
                 <div class="field">
                     <label for="resume">Résumé *</label>
-                    <textarea name="resume" id="resume" disabled><?= htmlspecialchars($offer['resume']) ?></textarea>
+                    <textarea name="resume" id="resume" disabled><?= htmlspecialchars($offer['resume'] ?? "") ?></textarea>
 
                 </div>
 
                 <div class="field">
                     <label for="description_detaillee">Description détaillée *</label>
                     <textarea name="description_detaillee" id="description_detaillee" class="bigField" type="text"
-                        disabled><?= htmlspecialchars($offer['description_detaillee']) ?></textarea>
+                        disabled><?= htmlspecialchars($offer['description_detaillee'] ?? "") ?></textarea>
                 </div>
-
-                <div class="field">
-                    <label for="photo"> Photo(s) de l'offre *
-                        <span class="tooltip-trigger"><img src="./assets/icons/info_black.svg">
-                            <span class="tooltip-text">
-                                Maintenez Ctrl (ou Cmd) pour sélectionner plusieurs images.
-                            </span>
-                        </span>
-                    </label>
-                    <label class="custum-file-upload" for="file">
-                        <div class="icon">
-                            <img src="./assets/icons/cloud_primary.svg" class="svg">
-                        </div>
-                        <div class="text">
-                            <span>Click to upload image</span>
-                        </div>
-                        <input type="file" class="bigField" id="photo_offre" name="photo[]" multiple></input>
-                    </label>
+                <div class="gap-vsm flex-col" id="carte-restaurant-container">
+                    <div class="image-upload-section">
+                        <?php $imgOfferArray = $offer['imageData'] ?? []; ?>
+                        <?php if (!empty($imgOfferArray)): ?>
+                            <p>Images actuelles :</p>
+                            <div id="images-offre-preview-container"
+                                style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+                                <?php foreach ($imgOfferArray as $img): ?>
+                                    <div class="image-preview-item" data-image-id="<?= htmlspecialchars($img['id']) ?>">
+                                        <img src="/assets/images/<?= htmlspecialchars($img['url_img']) ?>" alt="Image Offre"
+                                            class="imagePreview">
+                                        <button type="button" class="BtnConsultationSupprimer"
+                                            data-image-id="<?= htmlspecialchars($img['id']) ?>" disabled>Supprimer</button>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+                        <p>Ajouter de nouvelles images :</p>
+                        <input type="file" name="url_img[]" id="url_img_offre" accept="image/*" multiple disabled>
+                    </div>
                 </div>
             </section>
-            <div class="buttonContainer">
-                <?= black_button("Créer l'offre"); ?>
+            <!--<button class="BtnConsultation" id="updateOfferBtn" type="button">Modifier l'offre</button>-->
+            <div class="hidden submitContainer">
+                <button type="button" class="BtnConsultation" id="undoOfferBtn">
+                    Annuler
+                </button>
+                <button class="BtnConsultation" id="SubmitOfferBtn">
+                    <p>Accepter</p>
+                </button>
             </div>
     </form>
-    <script src="./js/CreationOffre/displayForm.js"></script>
-    <script src="./js/CreationOffre/verifFields.js"></script>
+    <script src="./js/UpdateOffre/displayForm.js"></script>
+    <script src="./js/UpdateOffre/verifFields.js"></script>
     <script src="./js/UpdateOffre/_js-UpdateOffer.js"></script>
 <?php } ?>

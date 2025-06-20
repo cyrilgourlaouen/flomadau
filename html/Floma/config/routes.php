@@ -90,6 +90,10 @@ const ROUTES = [
         'controller' => App\Controller\ModificationMembreController::class,
         'method' => 'checkEmail',
     ],
+    '/offre/updateOffer' => [
+        'controller' => App\Controller\ModificationOfferController::class,
+        'method' => 'updateOffer',
+    ]
 ];
 
 ?>

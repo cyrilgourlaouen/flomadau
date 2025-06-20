@@ -6,6 +6,7 @@
 :root {
   /* Colors */
   --primary-color: #005bb5;
+  --dark-blue-color: #1e3a8a;
   --background-color: #fcfcfc;
   --menu-background-color: #f5f6fa;
   --very-light-grey-color : #d0d0d0;
@@ -923,12 +924,24 @@ input.not-active{
 
 .slot {
   margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .slot input {
   margin-right: 5px;
 }
 
+.slot button {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+
+.slot button img {
+  margin: auto;
+}
 .dayLabel {
   cursor: pointer;
   float:right;
@@ -938,6 +951,18 @@ input.not-active{
 .dayLabel > input {
   width: 14px;
   cursor: pointer;
+}
+
+.horaire-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.horaire {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .horaire-container > div > button {
@@ -1049,17 +1074,112 @@ input[type=file] {
   cursor: pointer;
 }
 
+.btn-creation {
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-creation:hover {
+  background-color: var(--dark-blue-color);
+}
+
+.btn_close {
+  background-color: #fcfcfc;
+  border: 0px;
+  cursor: pointer;
+}
+
+.btn_close:hover {
+  transform: scale(1.1);
+}
+
+.toggle-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-family: sans-serif;
+  max-width: 200px;
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+}
+
+.toggle-label input[type="checkbox"] {
+  display: none;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 50px;
+  height: 26px;
+  background-color: #ccc;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+input[type="checkbox"]:checked + .toggle-switch {
+  background-color: var(--dark-blue-color);;
+}
+
+input[type="checkbox"]:checked + .toggle-switch::after {
+  transform: translateX(24px);
+}
+
 .containerBtnTagGuide {
-  display: flex; 
+  display: flex;
   gap: 10px;
 }
 
-.BtnTagGuide {
-  padding:6px 12px; 
-  font-size:14px; 
-  border-radius:4px; 
-  border:1px solid #ccc; 
-  background:#f0f0f0; 
-  cursor:pointer;
-  
+.BtnConsultation {
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #f0f0f0;
+  cursor: pointer;
+}
+
+.BtnConsultationSupprimer  {
+  padding: 6px 8px;
+  font-size: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #f0f0f0;
+  cursor: pointer;
+}
+
+.containerTags {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.image-preview-item {
+  margin-top: 10px;
+}
+.imagePreview {
+  max-width: 50px;
+  height: 50px;
+  display: block;
+  margin-bottom: 5px;
 }

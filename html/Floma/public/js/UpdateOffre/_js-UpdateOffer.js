@@ -94,37 +94,55 @@ function removeGuide() {
 }
 
 function addTag() {
-    const sourceSelects = [
-        document.getElementById('isNotRestauration'),
-        document.getElementById('isRestauration')
-    ];
-    const destination = document.getElementById('selectedTag');
+  const sourceSelects = [
+    document.getElementById("isNotRestauration"),
+    document.getElementById("isRestauration"),
+  ];
+  const destination = document.getElementById("selectedTag");
 
-    sourceSelects.forEach(source => {
-        Array.from(source.selectedOptions).forEach(option => {
-            // Ne pas dupliquer si déjà présent
-            if (!Array.from(destination.options).some(o => o.value === option.value)) {
-                const newOption = new Option(option.text, option.value, true, true);
-                destination.add(newOption);
-            }
-            // Supprimer de la liste source
-            source.removeChild(option);
-        });
+  sourceSelects.forEach((source) => {
+    Array.from(source.selectedOptions).forEach((option) => {
+      // Ne pas dupliquer si déjà présent
+      if (
+        !Array.from(destination.options).some((o) => o.value === option.value)
+      ) {
+        const newOption = new Option(option.text, option.value, true, true);
+        destination.add(newOption);
+      }
+      // Supprimer de la liste source
+      source.removeChild(option);
     });
+  });
 }
 
 function removeTag() {
-    const selected = document.getElementById('selectedTag');
-    const isNotRestauration = document.getElementById('isNotRestauration');
-    const isRestauration = document.getElementById('isRestauration');
+  const selected = document.getElementById("selectedTag");
+  const isNotRestauration = document.getElementById("isNotRestauration");
+  const isRestauration = document.getElementById("isRestauration");
 
-    Array.from(selected.selectedOptions).forEach(option => {
-        // On suppose que le tag supprimé va dans isNotRestauration par défaut.
-        // Si tu as une logique métier pour savoir s’il doit aller dans isRestauration, adapte ici.
-        const target = option.value.toLowerCase().includes('restaurant') ? isRestauration : isNotRestauration;
+  Array.from(selected.selectedOptions).forEach((option) => {
+    // On suppose que le tag supprimé va dans isNotRestauration par défaut.
+    // Si tu as une logique métier pour savoir s’il doit aller dans isRestauration, adapte ici.
+    const target = option.value.toLowerCase().includes("restaurant")
+      ? isRestauration
+      : isNotRestauration;
 
-        const newOption = new Option(option.text, option.value);
-        target.add(newOption);
-        selected.removeChild(option);
-    });
+    const newOption = new Option(option.text, option.value);
+    target.add(newOption);
+    selected.removeChild(option);
+  });
 }
+
+const updateBtn = document.getElementById('updateOfferBtn');
+const submitContainer = document.getElementsByClassName('submitContainer')[0];
+
+updateBtn.addEventListener('click', () => {
+  console.log("bonjour");
+  const elements = document.querySelectorAll(
+    "input:disabled, select:disabled, textarea:disabled, button:disabled, "
+  );
+  elements.forEach((el) => (el.disabled = false));
+  submitContainer.classList.remove('hidden');
+  updateBtn.classList.add('hidden')
+});
+
