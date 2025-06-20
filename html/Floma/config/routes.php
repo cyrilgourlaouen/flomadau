@@ -90,5 +90,10 @@ const ROUTES = [
         'method' => 'newOffer',
         'view' => false,
     ],
+    '/avis/creation/new' => [
+        'controller' => App\Controller\Creation\AvisController::class,
+        'method' => 'newComment',
+        'view' => false,
+    ],
 ];
 ?>

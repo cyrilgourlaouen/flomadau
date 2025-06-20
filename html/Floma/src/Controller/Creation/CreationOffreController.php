@@ -3,16 +3,13 @@
 namespace App\Controller\Creation;
 
 use App\Entity\Image;
-use App\Entity\OptionSouscrite;
 use App\Entity\TagOffre;
 use App\Enum\OfferCategoryEnum;
 use App\Manager\ImageManager;
-use App\Manager\OptionSouscriteManager;
 use App\Manager\TagOffreManager;
 use App\Service\AddCategory;
 use App\Service\HoraireManage;
 use App\Service\UploadsImage;
-use DateTimeImmutable;
 use Floma\Controller\AbstractController;
 
 class CreationOffreController extends AbstractController
@@ -44,7 +41,6 @@ class CreationOffreController extends AbstractController
             $tagOffre = new TagOffre();
             $tagOffreManager = new TagOffreManager();
             $id = $addCategory->setOffer();
-            $addCategory->setReliefOffre($id);
             foreach($_POST["tag"] as $tag) {
                 $tagOffre->setIdTag($tag);
                 $tagOffre->setIdOffre($id);

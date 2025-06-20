@@ -353,7 +353,55 @@ $proManager = new ReponseProManager();
             </div>
         <?php }
         ; ?>
-    
+    </section>
 <?php } ?>
+    <?php if (isset($_SESSION["id"])) {?>
+    <div class="btn_add">
+        <button id="btn_ajouter" class="">Laisser un avis</button>
+    </div>
+    <div id="avisModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal"><img src="./assets/icons/close_black.svg"></span>
+            <h3>Laisser un avis</h3>
+            <hr>
+            <form id="formAvis" method="post" action="?path=/avis/creation/new">
+                <div>
+                    <label>Titre</label>
+                    <input type="text" name="titre_avis" placeholder="Incroyable !" required />
+                </div>
+                <div>
+                    <label>Commentaire</label>
+                    <textarea rows="4" name="commentaire_avis" placeholder="Votre message" required></textarea>
+                </div>
+                <div>
+                    <label>Contexte Visite</label>
+                    <input type="text" name="contexte_visite" placeholder="famille" required />
+                </div>
+                <div>
+                    <label>Date de visite</label>
+                    <input type="date" name="date_visite_avis"></input>
+                </div>
+                <div>
+                    <label>Note</label>
+                    <div class="display-star" id="star-container">
+                        <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="1">
+                        <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="2">
+                        <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="3">
+                        <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="4">
+                        <img src="/assets/icons/star_outline_pink.svg" alt="star icon" data-star-value="5">
+                    </div>
+                </div>
+                <input type="hidden" name="note" id="note-input" value="0">
+                <input type="hidden" name="id" value="<?= $data["id"] ?>">
+                <div class="containerAvisSub">
+                    <button type="submit" class="btn_submit">Envoyer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <?php } ?>
+    
 <script src="./js/MapCalculator.js"></script>
 <script src="/js/highlightedImagesDetailsOffer.js"></script>
+<script src="/js/ajoutAvis.js"></script>
+<script src="/js/StarsCalculator.js"></script>
