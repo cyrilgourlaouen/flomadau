@@ -48,4 +48,15 @@ class ParcAttractionManager extends AbstractManager
     {
         return $this->readMany(ParcAttraction::class);
     }
+
+    public function add(ParcAttraction $amusementParc) {
+		return $this->create(ParcAttraction::class, [
+				'age_requis' => $amusementParc->getAgeRequis(),
+                'nombre_attraction' => $amusementParc->getNombreAttraction(),
+                'url_plan' => $amusementParc->getUrlPlan(),
+                'prix_minimal' => $amusementParc->getPrixMinimal(),
+                'id_offre' => $amusementParc->getIdOffre(),
+			]
+		);
+	}
 }

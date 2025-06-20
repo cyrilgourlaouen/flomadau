@@ -44,6 +44,28 @@ function afficherTag(value)
 const guideCheckbox = document.getElementById('guideCheckbox');
 const selectGuides = document.getElementById('selectGuides');
 
+guideCheckbox.addEventListener('change', () => {
+    selectGuides.classList.toggle('hidden', !guideCheckbox.checked);
+});
+
+const jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+const container = document.getElementById('horaire-container');
+
+jours.forEach(jour => {
+  const jourId = jour.toLowerCase();
+  const row = document.createElement('div');
+  row.innerHTML = `
+    <div><label>${jour}<p class="dayLabel"><input type="checkbox" onchange="toggleJour('${jourId}', this.checked)" checked> Ouvert</p></div>
+    <div id="${jourId}-slots" class="slots">
+      ${createSlotHTML(jourId, 0)}
+    </div>
+    <button type="button" class="btn-creation" onclick="ajouterCreneau('${jourId}')">+ Ajouter un créneau</button>`;
+  if (jour != 'Dimanche') {
+      row.innerHTML += `<hr>`;
+  }
+  container.appendChild(row);
+});
+
 function createSlotHTML(jourId, index) {
   return `
     <div class="slot">

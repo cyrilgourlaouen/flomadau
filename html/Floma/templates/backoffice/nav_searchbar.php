@@ -29,7 +29,9 @@
                 </form>
             </div>
             <div id="blue_btn">
-                <?= button('Ajouter', 'btn_ajouter'); ?>
+                <a href="?path=/offre/creation">
+                    <button id="btn_ajouter">Ajouter</button>
+                </a>
             </div>
         </div>
     </div>

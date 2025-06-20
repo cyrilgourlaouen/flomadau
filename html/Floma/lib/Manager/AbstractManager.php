@@ -187,14 +187,14 @@ abstract class AbstractManager
 		$query .= ')';
 		return $this->executeQuery($query, $fields);
 	}
-
-	/**
-	 * @param string $class
-	 * @param array $fields
-	 * @param int $id
-	 * @return PDOStatement
-	 */
-	protected function update(string $class, array $fields, int $id, bool $pro = false, bool $proPrive = false): PDOStatement
+	/*
+		* @param string $class
+     	* @param array $fields
+     	* @param int $id
+     	* @param string|null $where
+     	* @return PDOStatement
+     */
+    protected function update(string $class, array $fields, int $id, bool $pro = false, bool $proPrive = false): PDOStatement
 	{
 		$query = "UPDATE " . $this->getTableName($class) . " SET ";
 		foreach (array_keys($fields) as $field) {

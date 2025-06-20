@@ -48,4 +48,18 @@ class AvisManager extends AbstractManager
     {
         return $this->readMany(Avis::class, $filters, $order, $limit, $offset);
     }
+
+    public function add(Avis $avis) {
+		return $this->create(Avis::class, [
+				'titre' => $avis->getTitre(),
+                'commentaire' => $avis->getCommentaire(),
+                'date_visite' => $avis->getDateVisite(),
+                'contexte_visite' => $avis->getContexteVisite(),
+                'note' => $avis->getNote(),
+                'code_membre' => $avis->getCodeMembre(),
+                'id_offre' => $avis->getIdOffre(),
+                'date_publication' => $avis->getDatePublication(),
+			]
+		);
+	}
 }
