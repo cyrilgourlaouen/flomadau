@@ -44,10 +44,9 @@ class ModificationMembreController extends AbstractController
                 $membre->setPseudo($_POST['pseudo'] ?? null);
                 $membreManager->updateMembre($membre, $id);
             } else {
-                $compteManager->updateCompte($compte, $id);
+                $compteManager->updateDataCompte($compte, $id);
             }
-
-
+            
             session_unset();
 
             // 🔁 Reconnexion
