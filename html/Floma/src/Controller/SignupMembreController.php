@@ -58,13 +58,6 @@ class SignupMembreController extends AbstractController
     public function signUp()
     {
         if (isset($_POST)) {
-            
-            if (!empty($_FILES['photo']) && $_FILES['photo']['error'] !== UPLOAD_ERR_NO_FILE) {
-                $uploaded_image = $this->uploadImg();
-                if ($uploaded_image[0] === false) {
-                    return $this->redirectToRoute('/inscription/membre', ['state' => 'failure']);
-                }
-            }
 
             $compte = new Compte();
             $compte->setNom($_POST['nom']);
@@ -80,17 +73,22 @@ class SignupMembreController extends AbstractController
             if (isset($_POST['adress_comp'])){
                 $compte->setComplementAdresse($_POST['adress_comp']);
             }
-            if (!empty($_FILES['photo']) && $_FILES['photo']['error'] !== UPLOAD_ERR_NO_FILE) {
-                if ($uploaded_image[0] === true){
-                    $compte->setUrlPhotoProfil($uploaded_image[1]);
-                }   
-            }
            
 
             $compteManager = new CompteManager();
             $temp = $compteManager->addGetId($compte);
             $id_compte = $temp[1];
             $this->idCompte = $id_compte;
+
+            if (!empty($_FILES['photo']) && $_FILES['photo']['error'] !== UPLOAD_ERR_NO_FILE) {
+                $uploaded_image = $this->uploadImg();
+                if ($uploaded_image[0] === false) {
+                    return $this->redirectToRoute('/inscription/membre', ['state' => 'failure']);
+                }
+                if ($uploaded_image[0] === true){
+                    $compte->setUrlPhotoProfil($uploaded_image[1]);
+                }
+            }
             
             $membre = new Membre();
             $membre->setPseudo($_POST['pseudo']);
