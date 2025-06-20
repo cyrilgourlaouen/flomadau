@@ -46,7 +46,7 @@ class ModificationMembreController extends AbstractController
             } else {
                 $compteManager->updateDataCompte($compte, $id);
             }
-
+            
             session_unset();
 
             // 🔁 Reconnexion
