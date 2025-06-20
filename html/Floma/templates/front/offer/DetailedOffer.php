@@ -334,8 +334,10 @@ $proManager = new ReponseProManager();
                                 <?= htmlspecialchars($unAvis->getDatePublication()) ?>
                             </p>
                         </div>
-                        <div class="note">
-                            <?= $stars->calculStars($unAvis->getNote()) ?>
+                        <div>
+                            <div class="note">
+                                <?= $stars->calculStars($unAvis->getNote()) ?>
+                            </div>
                         </div>
                         <p>Contexte de la visite : <?= $unAvis->getContexteVisite() ?></p>
                         <p>Date de participation : <?= $unAvis->getDateVisite() ?></p>
@@ -375,7 +377,7 @@ $proManager = new ReponseProManager();
                 </div>
                 <div>
                     <label>Contexte Visite</label>
-                    <input type="text" name="contexte_visite" placeholder="famille" required />
+                    <input type="text" name="contexte_visite" placeholder="Famille" required />
                 </div>
                 <div>
                     <label>Date de visite</label>

@@ -7,7 +7,7 @@ use App\Resource\LangueGuideResource;
 use App\Resource\TagResource;
 use App\Resource\TypeRepasResource;
 use App\Service\ManageOption;
-
+$compte = $data['infosPro'][0]['compteData'][0];
 $head_title = "Création du compte";
 $head_subtitle = "INFORMATIONS ENTREPRISE";
 $head_svg = "/assets/icons/account_white.svg";
@@ -351,7 +351,30 @@ if(!isset($_SESSION['code_pro'])){
                 Prix total : 0.00 €
             </div>
         </div>
-
+            <?php
+            if(!isset($data['infosPro'][0]['proPriveData'][0]['numero_carte']) && isset($data['infosPro'][0]['proPriveData'][0]['siren'])) {
+            ?>
+            <section class="check-section">
+                <article id="new-credit-card" class="hidden-credit-card">
+                <h3>Carte bancaire</h3>
+                <div class="flex-col">
+                    <label for="card-number">Numéro de carte</label>
+                    <input type="text" id="card-number" name="card-number"></input>
+                </div>
+                <div class="flex-col">
+                    <label for="expiration-date">Date expiration (MM/AAAA)</label>
+                    <input type="text" id="expiration-date" name="expiration-date"></input>
+                </div>  
+                <div class="flex-col">
+                    <label for="cvv">Cryptogramme</label>
+                    <input type="text" id="cvv" name="cvv"></input>
+                </div>
+                <input type="hidden" name="siren" value=<?= $data['infosPro'][0]['proPriveData'][0]['siren'] ?>> 
+                </article>
+            </section>
+            <?php
+            }
+            ?>
     </section>
     <div class="buttonContainer">
         <?= black_button("Créer l'offre"); ?>
@@ -360,4 +383,5 @@ if(!isset($_SESSION['code_pro'])){
 <script src="./js/CreationOffre/displayForm.js"></script>
 <script src="./js/CreationOffre/verifFields.js"></script>
 <script src="./js/CalculateTarif.js"></script>
+<script src="./js/displayCb.js"></script>
 <?php } ?>

@@ -174,23 +174,24 @@ abstract class AbstractManager
      	* @param string|null $where
      	* @return PDOStatement
      */
-    protected function update(string $class, array $fields, int $id, ?string $where = null): PDOStatement
-    {
-        $query = "UPDATE " . $this->getTableName($class) . " SET ";
-        foreach (array_keys($fields) as $field) {
-            $query .= $field . " = :" . $field;
-            if ($field != array_key_last($fields))
-                $query .= ', ';
-        }
-        if (!empty($where)) {
-            $query .= ' WHERE ' . $where . '= :id';
-        }
-        else {
-            $query .= ' WHERE id = :id';
-        }
-        $fields['id'] = $id;
-        return $this->executeQuery($query, $fields);
-    }
+    protected function update(string $class, array $fields, int $id, bool $pro = false, bool $proPrive = false): PDOStatement
+	{
+		$query = "UPDATE " . $this->getTableName($class) . " SET ";
+		foreach (array_keys($fields) as $field) {
+			$query .= $field . " = :" . $field;
+			if ($field != array_key_last($fields))
+				$query .= ', ';
+		}
+		if($pro){
+			$query .= ' WHERE code = :id';
+		}else if($proPrive) {
+			$query .= ' WHERE code_professionnel = :id';
+		}else{
+			$query .= ' WHERE id = :id';
+		}
+		$fields['id'] = $id;
+		return $this->executeQuery($query, $fields);
+	}
 
 	/**
 	 * @param string $class

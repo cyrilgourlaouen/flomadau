@@ -41,7 +41,7 @@ class AvisController extends AbstractController
             $avis->setIdOffre($id);
             $avis->setDatePublication($today);
             $avisManager->add($avis);
-            return $this->redirectToRoute("/?offer/$id");
+            return $this->redirectToRoute("/offer/$id");
         }
         return $this->redirectToRoute("/", ['state' => 'failure']);
     }

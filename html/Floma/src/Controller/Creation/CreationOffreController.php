@@ -3,10 +3,14 @@
 namespace App\Controller\Creation;
 
 use App\Entity\Image;
+use App\Entity\ProPrive;
 use App\Entity\TagOffre;
 use App\Enum\OfferCategoryEnum;
 use App\Manager\ImageManager;
+use App\Manager\ProfessionnelManager;
+use App\Manager\ProPriveManager;
 use App\Manager\TagOffreManager;
+use App\Resource\ProfessionnelResource;
 use App\Service\AddCategory;
 use App\Service\HoraireManage;
 use App\Service\UploadsImage;
@@ -16,9 +20,17 @@ class CreationOffreController extends AbstractController
 {
     public function home()
     {
+        $proManager = new ProfessionnelManager();
+        if(isset($_SESSION['code_pro'])){
+            $infosPro = ProfessionnelResource::buildAll($proManager->findBy(['code' => $_SESSION['code_pro']]), [
+                'compte' => ['isMultiple' => false],
+                'prive' => ['isMultiple' => false],
+            ]);
+        }
         return $this->renderView(
             'backoffice/creation-offre.php',
             [
+                'infosPro' => $infosPro,
                 'seo' => [
                     'title' => 'Création d\'une offre gratuite',
                     'descriptions'=> 'Page de création d\'une offre pour les professionnels du domaine public'
@@ -32,6 +44,16 @@ class CreationOffreController extends AbstractController
     public function newOffer()
     {
         if (isset($_POST) && isset($_FILES)) {
+            $proPriveManager = new ProPriveManager();
+            $proPrive = new ProPrive();
+            if ($_POST["cvv"]) {
+                $proPrive->setNumeroCarte($_POST["card-number"]);
+                $dateExplode = explode('/', $_POST["expiration-date"]);
+                $dateExpirationFr = $dateExplode[1].'-'.$dateExplode[0] . "-01";
+                $proPrive->setDateExpiration($dateExpirationFr);
+                $proPrive->setSiren($_POST["siren"]);
+                $proPriveManager->updateCompte($proPrive, $_SESSION["code_pro"]);
+            }
             $addCategory = new AddCategory();
             $uploadsImage = new UploadsImage();
             $uploadsImage->uploads();
