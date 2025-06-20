@@ -50,6 +50,6 @@ class Professionnel
     }
     public function setCodeA2f(string $code): void
     {
-        $this->code = $code_a2f;
+        $this->code_a2f = $code;
     }
 }

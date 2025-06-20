@@ -55,7 +55,12 @@ class TwoFactorAuthController extends AbstractController
             );
         }
         
-        // Generate new secret and QR code
+        // Generate new secret and QR code (or reuse if in setup mode)
+        if (!$this->twoFactorService->isInSetupMode($userId)) {
+            // Clean up any old setup data and start fresh
+            $this->twoFactorService->cleanupSetup();
+        }
+        
         $twoFactorData = $this->twoFactorService->generateSecret($userId, $compte->getEmail());
         
         return $this->renderView(
@@ -84,12 +89,18 @@ class TwoFactorAuthController extends AbstractController
             return $this->redirectToRoute('/pro/connexion');
         }
         
+        $userId = $_SESSION['code_pro'];
+        
+        // Check if user is in setup mode
+        if (!$this->twoFactorService->isInSetupMode($userId)) {
+            return $this->redirectToRoute('/pro/2fa/setup');
+        }
+        
         if (!empty($_POST['totp_code'])) {
-            $userId = $_SESSION['code_pro'];
             $code = $_POST['totp_code'];
             
             if ($this->twoFactorService->verifyCode($userId, $code)) {
-                // Code is valid, enable 2FA
+                // Code is valid, enable 2FA (move secret from session to database)
                 $this->twoFactorService->enable($userId);
                 
                 return $this->renderView(

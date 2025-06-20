@@ -22,7 +22,7 @@ include 'black_button.php';
                 <div class="button-group">
                     <nav class="submit-container">
                         <div class="buttonContainer danger">
-                            <?= black_button('Oui, désactiver la 2FA'); ?>
+                            <?= black_button('Désactiver'); ?>
                         </div>
                     </nav>
                 </div>

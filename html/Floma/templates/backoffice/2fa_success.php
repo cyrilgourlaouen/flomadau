@@ -18,7 +18,7 @@ include 'black_button.php';
         <nav class="submit-container">
             <div class="buttonContainer">
                 <a href="?path=/pro" class="button-link">
-                    <?= black_button('Continuer vers le tableau de bord'); ?>
+                    <?= black_button('Continuer'); ?>
                 </a>
             </div>
         </nav>

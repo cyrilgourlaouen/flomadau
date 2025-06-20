@@ -6,21 +6,21 @@ namespace App\Service;
 require_once dirname(__DIR__, 3) . '/vendor/autoload.php';
 
 use OTPHP\TOTP;
+use App\Manager\TwoFactorAuthManager;
 
 class TwoFactorAuthService
 {
-    private string $dataFile;
+    private TwoFactorAuthManager $twoFactorManager;
     
     public function __construct()
     {
-        $this->dataFile = dirname(__DIR__, 2) . '/data/2fa_secrets.json';
-        $this->ensureDataFileExists();
+        $this->twoFactorManager = new TwoFactorAuthManager();
     }
     
     /**
      * Generate a new TOTP secret for a user
      */
-    public function generateSecret(int $userId, string $email): array
+    public function generateSecret(int $professionalCode, string $email): array
     {
         // Create TOTP instance
         $totp = TOTP::create();
@@ -29,8 +29,13 @@ class TwoFactorAuthService
         
         $secret = $totp->getSecret();
         
-        // Store the secret
-        $this->storeSecret($userId, $secret);
+        // Store the secret temporarily in session during setup
+        // Will be moved to database only after successful verification
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $_SESSION['2fa_setup_secret'] = $secret;
+        $_SESSION['2fa_setup_user'] = $professionalCode;
         
         // Generate QR code URI
         $qrCodeUri = $totp->getQrCodeUri(
@@ -48,9 +53,23 @@ class TwoFactorAuthService
     /**
      * Verify a TOTP code for a user
      */
-    public function verifyCode(int $userId, string $code): bool
+    public function verifyCode(int $professionalCode, string $code): bool
     {
-        $secret = $this->getSecret($userId);
+        $secret = null;
+        
+        // First check if we're in setup mode (secret in session)
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (isset($_SESSION['2fa_setup_secret']) && 
+            isset($_SESSION['2fa_setup_user']) && 
+            $_SESSION['2fa_setup_user'] == $professionalCode) {
+            $secret = $_SESSION['2fa_setup_secret'];
+        } else {
+            // Check database for existing secret
+            $secret = $this->twoFactorManager->getSecret($professionalCode);
+        }
         
         if (!$secret) {
             return false;
@@ -65,104 +84,74 @@ class TwoFactorAuthService
     /**
      * Check if user has 2FA enabled
      */
-    public function isEnabled(int $userId): bool
+    public function isEnabled(int $professionalCode): bool
     {
-        $data = $this->loadData();
-        return isset($data[$userId]) && ($data[$userId]['enabled'] ?? false);
+        return $this->twoFactorManager->isEnabled($professionalCode);
     }
     
     /**
      * Enable 2FA for a user (after successful verification)
      */
-    public function enable(int $userId): void
+    public function enable(int $professionalCode): void
     {
-        $data = $this->loadData();
-        if (isset($data[$userId])) {
-            $data[$userId]['enabled'] = true;
-            $this->saveData($data);
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        // Move secret from session to database
+        if (isset($_SESSION['2fa_setup_secret']) && 
+            isset($_SESSION['2fa_setup_user']) && 
+            $_SESSION['2fa_setup_user'] == $professionalCode) {
+            
+            $secret = $_SESSION['2fa_setup_secret'];
+            $this->twoFactorManager->setSecret($professionalCode, $secret);
+            
+            // Clean up session
+            unset($_SESSION['2fa_setup_secret']);
+            unset($_SESSION['2fa_setup_user']);
         }
     }
     
     /**
      * Disable 2FA for a user
      */
-    public function disable(int $userId): void
+    public function disable(int $professionalCode): void
     {
-        $data = $this->loadData();
-        if (isset($data[$userId])) {
-            $data[$userId]['enabled'] = false;
-            $this->saveData($data);
-        }
+        $this->twoFactorManager->disable($professionalCode);
     }
     
     /**
-     * Remove 2FA data for a user
+     * Remove 2FA data for a user (same as disable in simple approach)
      */
-    public function remove(int $userId): void
+    public function remove(int $professionalCode): void
     {
-        $data = $this->loadData();
-        if (isset($data[$userId])) {
-            unset($data[$userId]);
-            $this->saveData($data);
-        }
+        $this->disable($professionalCode);
     }
     
     /**
-     * Store secret for a user
+     * Clean up any temporary setup data from session
      */
-    private function storeSecret(int $userId, string $secret): void
+    public function cleanupSetup(): void
     {
-        $data = $this->loadData();
-        $data[$userId] = [
-            'secret' => $secret,
-            'enabled' => false,
-            'created_at' => date('Y-m-d H:i:s')
-        ];
-        $this->saveData($data);
-    }
-    
-    /**
-     * Get secret for a user
-     */
-    private function getSecret(int $userId): ?string
-    {
-        $data = $this->loadData();
-        return $data[$userId]['secret'] ?? null;
-    }
-    
-    /**
-     * Load data from JSON file
-     */
-    private function loadData(): array
-    {
-        if (!file_exists($this->dataFile)) {
-            return [];
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
         }
         
-        $content = file_get_contents($this->dataFile);
-        return json_decode($content, true) ?: [];
+        unset($_SESSION['2fa_setup_secret']);
+        unset($_SESSION['2fa_setup_user']);
     }
     
     /**
-     * Save data to JSON file
+     * Check if user is currently in setup mode
      */
-    private function saveData(array $data): void
+    public function isInSetupMode(int $professionalCode): bool
     {
-        file_put_contents($this->dataFile, json_encode($data, JSON_PRETTY_PRINT));
-    }
-    
-    /**
-     * Ensure the data file exists
-     */
-    private function ensureDataFileExists(): void
-    {
-        $dataDir = dirname($this->dataFile);
-        if (!is_dir($dataDir)) {
-            mkdir($dataDir, 0755, true);
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
         }
         
-        if (!file_exists($this->dataFile)) {
-            file_put_contents($this->dataFile, '{}');
-        }
+        return isset($_SESSION['2fa_setup_secret']) && 
+               isset($_SESSION['2fa_setup_user']) && 
+               $_SESSION['2fa_setup_user'] == $professionalCode;
     }
 }
