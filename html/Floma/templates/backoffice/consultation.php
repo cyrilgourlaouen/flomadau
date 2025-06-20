@@ -469,6 +469,6 @@ if (!isset($_SESSION['code_pro'])) { ?>
             </div>
     </form>
     <script src="./js/UpdateOffre/displayForm.js"></script>
-    <script src="./js/UpdateOffre/verifFields.js"></script>
+    <script src="./js/CreationOffre/verifFields.js"></script>
     <script src="./js/UpdateOffre/_js-UpdateOffer.js"></script>
 <?php } ?>
