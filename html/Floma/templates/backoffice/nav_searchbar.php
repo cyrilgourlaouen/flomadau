@@ -27,8 +27,6 @@
                 <form action="" method="">
                     <input type="search" id="input_search" name="recherche" placeholder="Rechercher">
                 </form>
-                <?= button('Filtrer', 'btn_filtrer'); ?>
-                <?= button('Trier', 'btn_trier'); ?>
             </div>
             <div id="blue_btn">
                 <?= button('Ajouter', 'btn_ajouter'); ?>

@@ -201,8 +201,6 @@ const validateurs = {
 
   'expiration-date': function(valeur) {
     if (!valeur) return null; 
-
-    /^(0[1-9]|1[0-2])\/(\d{4})$/
     if (!/^(0[1-9]|1[0-2])\/(\d{4})$/.test(valeur)) return "Le format n'est pas valide";
 
     let dateSplit = valeur.split('/');

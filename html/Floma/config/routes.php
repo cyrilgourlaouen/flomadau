@@ -42,6 +42,11 @@ const ROUTES = [
         'method' => 'submit',
         'show' => false,
     ],
+    '/pro/signup/verify' => [
+        'controller' => App\Controller\SignupProController::class,
+        'method' => 'verify',
+        'show' => false,
+    ],
     '/pro/check' => [
         'controller' => App\Controller\CheckDataProController::class,
         'method' => 'home',
@@ -52,7 +57,12 @@ const ROUTES = [
         'method' => 'updateData',
         'layout' => Layout::BACK,
     ],
-    '/connexion'=> [
+    '/pro/consultation/offer/{id}' => [
+        'controller' => App\Controller\ConsultationOfferController::class,
+        'method' => 'show',
+        'layout' => Layout::BACK,
+    ],
+    '/connexion' => [
         'controller' => App\Controller\ConnexionController::class,
         'method' => 'connection',
         'layout' => Layout::LOG,
@@ -117,6 +127,10 @@ const ROUTES = [
         'method' => 'ajaxVerify',
         'view' => false,
     ],
+    '/offre/updateOffer' => [
+        'controller' => App\Controller\ModificationOfferController::class,
+        'method' => 'updateOffer',
+    ]
 ];
 
 ?>

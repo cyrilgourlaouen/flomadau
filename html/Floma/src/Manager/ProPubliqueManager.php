@@ -1,23 +1,30 @@
 <?php
 namespace App\Manager;
 
-use App\Entity\Membre;
 use Floma\Manager\AbstractManager;
+use App\Entity\ProPublique;
 
 /**
  * Class ProfessionnelManager
  *
  * @package App\Manager
  */
-class MembreManager extends AbstractManager
+class ProPubliqueManager extends AbstractManager
 {
+    public function add(ProPublique $proPublique)
+    {
+        return $this->create(ProPublique::class, [
+            'code_professionnel' => $proPublique->getCodeProfessionnel(),
+        ]);
+    }
+
     /**
      * @param int $id
      * @return mixed
      */
     public function find(int $id)
     {
-        return $this->readOne(Membre::class, ['code' => $id]);
+        return $this->readOne(ProPublique::class, ['code_professionnel' => $id]);
     }
 
     /**
@@ -26,7 +33,7 @@ class MembreManager extends AbstractManager
      */
     public function findOneBy(array $filters)
     {
-        return $this->readOne(Membre::class, $filters);
+        return $this->readOne(ProPublique::class, $filters);
     }
 
     /**
@@ -38,7 +45,7 @@ class MembreManager extends AbstractManager
      */
     public function findBy(array $filters, array $order = [], ?int $limit = null, ?int $offset = null)
     {
-        return $this->readMany(Membre::class, $filters, $order, $limit, $offset);
+        return $this->readMany(ProPublique::class, $filters, $order, $limit, $offset);
     }
 
     /**
@@ -46,14 +53,6 @@ class MembreManager extends AbstractManager
      */
     public function findAll()
     {
-        return $this->readMany(Membre::class);
-    }
-
-    public function updateMembre(Membre $membre, int $id): \PDOStatement
-    {
-        $fields = [
-            'pseudo' => $membre->getPseudo(), 
-        ];
-        return $this->update(Membre::class, $fields, $id, 'id_compte');
+        return $this->readMany(ProPublique::class);
     }
 }

@@ -203,7 +203,8 @@ $highlightedOffers = array_filter($data["offers"], function ($offer) {
 </div>
 
 <!-- Section Offre -->
-<section class="offer-section" id="offer-section" data-offers='<?= htmlspecialchars(json_encode($data["offers"]), ENT_QUOTES, 'UTF-8') ?>'>
+<section class="offer-section" id="offer-section"
+    data-offers='<?= htmlspecialchars(json_encode($data["offers"]), ENT_QUOTES, 'UTF-8') ?>'>
     <h2>Découvrez nos offres</h2>
 
     <div class="offer-controls">
@@ -326,6 +327,10 @@ $highlightedOffers = array_filter($data["offers"], function ($offer) {
                 <p id="note">Note</p>
             </div>
         </div>
+    </div>
+    
+    <div>
+        <p class="no-offers-message">Aucune offre ne correspond à vos critères de recherche.</p>
     </div>
 
     <div class="offer-list">
