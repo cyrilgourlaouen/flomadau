@@ -1428,11 +1428,88 @@ li {
     background: #ffffff;
     padding-top: 0;
   }
+
+  #form_main > form > div{
+      padding: 0.9375rem 1.25rem;
+      width: 100%;
+  }
+
+  #inscription_membre {
+      display: flex;
+      flex-direction: column;
+  }
+  
+  #inscription_membre {
+      align-self: flex-start;
+  }
 }
 
 @media (max-width: 62.5rem) {
   .main .right-img {
     display: none;
+  }
+
+  #background_image{
+      display: none;
+  }
+
+  #inscription_membre, #inscription_membre > div {
+      display: flex;
+      flex-direction: column;
+  }
+
+  #inscription_membre {
+      align-self: flex-start;
+  }
+
+  #form_main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.25rem;
+  }
+
+  .groupe > div, .solo{
+    padding: 0.469rem 1.25rem;
+    width: 100%;
+  }
+
+  #form_main > h4 {
+    padding: 0.9375rem 1.25rem;;
+  }
+
+  #liste_mobile {
+      display: block;
+      padding-left: 1rem;
+  }
+
+  #liste_tablette {
+      display: none;
+  }
+
+  .groupe > div {
+      display: flex;
+      flex-direction: column;
+  }
+
+  #logo {
+      width: 13.75rem;
+      height: 3.3125rem;
+  }
+
+  #form_main > h1 {
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      padding-bottom: 0.25rem;
+  }
+
+  #form_main > hr {
+    width: 80%;
+  }
+
+  #photo {
+    width: 150%;
   }
 }
 
@@ -1463,12 +1540,6 @@ li {
     --very-small-text-size: 0.75rem;
 
     --page-padding: 2.188rem;
-  }
-
-  #transition_bar {
-    width: 50%;
-    color: black;
-    background-color: black;
   }
 
   #transition_bar {
@@ -1652,10 +1723,6 @@ li {
     align-self: center;
   }
   
-  #inscription_membre, #inscription_membre > #groupe{
-    gap: 1.875rem;
-  }
-  
   #liste_mobile {
       display: none;
   }
@@ -1687,13 +1754,13 @@ li {
       padding: 1.5rem 0;
   }
   
-  #form_main > form > div{
-      padding: 0.9375rem 1.25rem;
-      width: 100%;
-  }
-  
   h4 {
       display: none;
+  }
+
+  .solo {
+      display: flex;
+      flex-direction: column;
   }
 
   .align-row {
@@ -1781,19 +1848,6 @@ li {
     width: 100%;
     align-items: flex-start;
   }
-
-  #inscription_membre, #inscription_membre > div {
-      display: flex;
-      flex-direction: column;
-  }
-  
-  #inscription_membre {
-      align-self: flex-start;
-  }
-  
-  #background_image{
-      display: none;
-  }
   
   #form_main {
       display: flex;
@@ -1803,7 +1857,6 @@ li {
   }
 
   .groupe > div, .solo{
-    padding: 0.469rem 1.25rem;
     width: 100%;
   }
 
