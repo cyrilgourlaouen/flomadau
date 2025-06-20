@@ -97,8 +97,8 @@ class ModifDataProController extends AbstractController
         if(!empty($_FILES['photo']['name'])){
             $reussi = $this->uploadImg();
 
-            if($reussi){
-                $compte->setUrlPhotoProfil(explode('.', $dataJsonImg['name'])[0]);
+            if($reussi[0]){
+                $compte->setUrlPhotoProfil(explode('.', $reussi[1])[0]);
             }
 
         //Si la pp a été supprimée on met la defaut
@@ -183,9 +183,9 @@ class ModifDataProController extends AbstractController
             $cheminDestination = 'uploads/profilePicture/'.$nouveauNomFichier;
 
             if (!move_uploaded_file($cheminTemp , $cheminDestination)) {
-                return false;
+                return [false];
             }else{
-                return true;
+                return [true, $nouveauNomFichier];
             }
         }
     }
