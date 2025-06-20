@@ -35,20 +35,38 @@ class SignupProController extends AbstractController
             $comptePro = new Compte();
             $compteProManager = new CompteProManager();
 
-            $comptePro->setEmail($_POST['mail'] ?? null);
+            $email = $_POST['mail'] ?? null;
+            $telephone = $_POST['num'] ?? null;
+            
+            $errors = [];
 
-            // Check if the email exists
-            if ($compteProManager->checkEmail($comptePro->getEmail())) {
+            // Check email uniqueness if provided
+            if (!empty($email)) {
+                $comptePro->setEmail($email);
+                if ($compteProManager->checkEmail($comptePro->getEmail())) {
+                    $errors['email'] = 'Cet email est déjà utilisé.';
+                }
+            }
+
+            // Check phone number uniqueness if provided
+            if (!empty($telephone)) {
+                $comptePro->setTelephone($telephone);
+                if ($compteProManager->checkTelephone($comptePro->getTelephone())) {
+                    $errors['telephone'] = 'Ce numéro de téléphone est déjà utilisé.';
+                }
+            }
+
+            // Return results
+            if (!empty($errors)) {
                 echo json_encode([
                     'status' => 'error',
-                    'message' => 'Cet email est déjà utilisé.'
+                    'errors' => $errors
                 ]);
                 return;
             } else {
-                // If everything is correct, return success
                 echo json_encode([
                     'status' => 'success',
-                    'message' => 'Email disponible.'
+                    'message' => 'Email et téléphone disponibles.'
                 ]);
                 return;
             }

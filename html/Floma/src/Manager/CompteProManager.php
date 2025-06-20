@@ -32,6 +32,13 @@ class CompteProManager extends AbstractManager
         ]);
     }
 
+    public function checkTelephone($telephone)
+    {
+        return $this->readOne(Compte::class, [
+            'telephone' => $telephone
+        ]);
+    }
+
 
     /**
      * @param array $filters
