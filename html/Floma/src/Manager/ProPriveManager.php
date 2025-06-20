@@ -11,6 +11,14 @@ use App\Entity\ProPrive;
  */
 class ProPriveManager extends AbstractManager
 {
+    public function add (ProPrive $proPrive)
+    {
+        return $this->create(ProPrive::class, [
+            'siren' => $proPrive->getSiren(),
+            'code_professionnel' => $proPrive->getCodeProfessionnel(),
+        ]);
+    }
+
     /**
      * @param int $id
      * @return mixed
@@ -47,5 +55,22 @@ class ProPriveManager extends AbstractManager
     public function findAll()
     {
         return $this->readMany(ProPrive::class);
+    }
+
+    
+    /**
+     * @param ProPrive $proPrive
+     * @param int $id
+     * @return \PDOStatement
+     */
+    public function updateCompte(ProPrive $proPrive, int $id): \PDOStatement
+    {
+        $fields = [
+            'siren' => $proPrive->getSiren(),
+            'numero_carte' => $proPrive->getNumeroCarte(),
+            'date_expiration' => $proPrive->getDateExpiration(),
+        ];
+
+        return $this->update(ProPrive::class, $fields, $id, false, true);
     }
 }

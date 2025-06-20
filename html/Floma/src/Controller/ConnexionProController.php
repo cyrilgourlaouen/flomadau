@@ -5,10 +5,18 @@ namespace App\Controller;
 use App\Manager\CompteManager;
 use App\Resource\CompteResource;
 use App\Service\MetricProAccount;
+use App\Service\TwoFactorAuthService;
 use Floma\Controller\AbstractController;
 
 class ConnexionProController extends AbstractController
 {
+    private TwoFactorAuthService $twoFactorService;
+
+    public function __construct()
+    {
+        $this->twoFactorService = new TwoFactorAuthService();
+    }
+
     public function connexionPro()
     {
         return $this->renderView(
@@ -31,14 +39,28 @@ class ConnexionProController extends AbstractController
                 'gradeUser' => ['isMultiple' => true],
             ]);
             $isProExist = $metricProAccount->isProExist($enrichedAccounts, $_POST["email"], $_POST["password"]);
+            
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }
+            
             if ($isProExist) {
                 $proId = $metricProAccount->getProId($enrichedAccounts, $_POST["email"], $_POST["password"]);
-                $_SESSION['code_pro'] = $proId;
-                session_regenerate_id();
-                return $this->redirectToRoute('/pro');
+                
+                // Check if 2FA is enabled for this user
+                if ($this->twoFactorService->isEnabled($proId)) {
+                    // Store user ID temporarily for 2FA verification
+                    $_SESSION['2fa_user_id'] = $proId;
+                    // Clear any existing full login session
+                    unset($_SESSION['code_pro']);
+                    
+                    return $this->redirectToRoute('/pro/2fa/verify');
+                } else {
+                    // No 2FA, proceed with normal login
+                    $_SESSION['code_pro'] = $proId;
+                    session_regenerate_id();
+                    return $this->redirectToRoute('/pro');
+                }
             } else {
                 return $this->redirectToRoute('/pro/connexion', ["state" => "failure"]);
             }

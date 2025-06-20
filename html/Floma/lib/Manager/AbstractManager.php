@@ -143,6 +143,26 @@ abstract class AbstractManager
 		$stmt = $this->executeQuery($query, $fields);
 		$id = $stmt->fetchColumn();
 		return [$stmt, $id];
+    }
+
+	protected function createGetCode(string $class, array $fields): array
+	{
+		$query = "INSERT INTO " . $this->getTableName($class) . " (";
+		foreach (array_keys($fields) as $field) {
+			$query .= $field;
+			if ($field != array_key_last($fields))
+				$query .= ', ';
+		}
+		$query .= ') VALUES (';
+		foreach (array_keys($fields) as $field) {
+			$query .= ':' . $field;
+			if ($field != array_key_last($fields))
+				$query .= ', ';
+		}
+		$query .= ') RETURNING code';
+		$stmt = $this->executeQuery($query, $fields);
+		$id = $stmt->fetchColumn();
+		return [$stmt, $id];
 	}
 
 	/**
@@ -167,30 +187,31 @@ abstract class AbstractManager
 		$query .= ')';
 		return $this->executeQuery($query, $fields);
 	}
-	/*
-		* @param string $class
-     	* @param array $fields
-     	* @param int $id
-     	* @param string|null $where
-     	* @return PDOStatement
-     */
-    protected function update(string $class, array $fields, int $id, ?string $where = null): PDOStatement
-    {
-        $query = "UPDATE " . $this->getTableName($class) . " SET ";
-        foreach (array_keys($fields) as $field) {
-            $query .= $field . " = :" . $field;
-            if ($field != array_key_last($fields))
-                $query .= ', ';
-        }
-        if (!empty($where)) {
-            $query .= ' WHERE ' . $where . '= :id';
-        }
-        else {
-            $query .= ' WHERE id = :id';
-        }
-        $fields['id'] = $id;
-        return $this->executeQuery($query, $fields);
-    }
+
+	/**
+	 * @param string $class
+	 * @param array $fields
+	 * @param int $id
+	 * @return PDOStatement
+	 */
+	protected function update(string $class, array $fields, int $id, bool $pro = false, bool $proPrive = false): PDOStatement
+	{
+		$query = "UPDATE " . $this->getTableName($class) . " SET ";
+		foreach (array_keys($fields) as $field) {
+			$query .= $field . " = :" . $field;
+			if ($field != array_key_last($fields))
+				$query .= ', ';
+		}
+		if($pro){
+			$query .= ' WHERE code = :id';
+		}else if($proPrive) {
+			$query .= ' WHERE code_professionnel = :id';
+		}else{
+			$query .= ' WHERE id = :id';
+		}
+		$fields['id'] = $id;
+		return $this->executeQuery($query, $fields);
+	}
 
 	/**
 	 * @param string $class

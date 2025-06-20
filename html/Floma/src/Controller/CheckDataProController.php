@@ -21,11 +21,10 @@ class CheckDataProController extends AbstractController
                 'compte' => ['isMultiple' => false],
                 'prive' => ['isMultiple' => false],
             ]);
-
         }
 
         return $this->renderView(
-            'backoffice/CheckDataPro.php',
+            'backoffice/checkModifDataPro.php',
             [
                 'infosPro' => $infosPro,
                 'seo' => [

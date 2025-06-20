@@ -62,9 +62,7 @@ class MembreManager extends AbstractManager
     {
         $fields = [
             'pseudo' => $membre->getPseudo(), 
-
         ];
-
-        return $this->update(Membre::class, $fields, $id , 'id_compte');
+        return $this->update(Membre::class, $fields, $id, 'id_compte');
     }
 }

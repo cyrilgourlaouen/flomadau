@@ -61,12 +61,27 @@ const ROUTES = [
         'method' => 'submit',
         'show' => false,
     ],
+    '/pro/signup/verify' => [
+        'controller' => App\Controller\SignupProController::class,
+        'method' => 'verify',
+        'show' => false,
+    ],
     '/pro/check' => [
         'controller' => App\Controller\CheckDataProController::class,
         'method' => 'home',
         'layout' => Layout::BACK,
     ],
-    '/connexion'=> [
+    '/pro/update/account' => [
+        'controller' => App\Controller\ModifDataProController::class,
+        'method' => 'updateData',
+        'layout' => Layout::BACK,
+    ],
+    '/pro/consultation/offer/{id}' => [
+        'controller' => App\Controller\ConsultationOfferController::class,
+        'method' => 'show',
+        'layout' => Layout::BACK,
+    ],
+    '/connexion' => [
         'controller' => App\Controller\ConnexionController::class,
         'method' => 'connection',
         'layout' => Layout::LOG,
@@ -99,6 +114,42 @@ const ROUTES = [
         'controller' => App\Controller\ModificationMembreController::class,
         'method' => 'checkEmail',
     ],
+    '/pro/2fa/setup' => [
+        'controller' => App\Controller\TwoFactorAuthController::class,
+        'method' => 'setup',
+        'layout' => Layout::BACK,
+    ],
+    '/pro/2fa/setup/verify' => [
+        'controller' => App\Controller\TwoFactorAuthController::class,
+        'method' => 'verifySetup',
+        'layout' => Layout::BACK,
+        'view' => false,
+    ],
+    '/pro/2fa/verify' => [
+        'controller' => App\Controller\TwoFactorAuthController::class,
+        'method' => 'loginVerification',
+        'layout' => Layout::BACK,
+    ],
+    '/pro/2fa/verify/submit' => [
+        'controller' => App\Controller\TwoFactorAuthController::class,
+        'method' => 'verifyLogin',
+        'layout' => Layout::BACK,
+        'view' => false,
+    ],
+    '/pro/2fa/disable' => [
+        'controller' => App\Controller\TwoFactorAuthController::class,
+        'method' => 'disable',
+        'layout' => Layout::BACK,
+    ],
+    '/pro/2fa/ajax/verify' => [
+        'controller' => App\Controller\TwoFactorAuthController::class,
+        'method' => 'ajaxVerify',
+        'view' => false,
+    ],
+    '/offre/updateOffer' => [
+        'controller' => App\Controller\ModificationOfferController::class,
+        'method' => 'updateOffer',
+    ]
 ];
 
 ?>

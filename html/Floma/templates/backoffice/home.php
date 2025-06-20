@@ -46,7 +46,7 @@
                     <p class="text_offer">Vous souhaitez bénéficier des options professionnelles ?</p>
                     <div id="btn_co_inscription">
                         <a href="?path=/pro/connexion"><button id="btn_connexion">Connexion</button></a>
-                        <a href="?path=/pro/inscription"><button id="btn_inscription">Inscription</button></a>
+                        <a href="?path=/pro/signup"><button id="btn_inscription">Inscription</button></a>
                     </div>
                 </div>
             <?php
@@ -200,7 +200,7 @@
                 </div>
                 <!-- Btn voir plus -->
                 <!--TODO le faire pointer vers la page de consultation-->
-                <?= button('Voir plus', 'btn_voir_plus'); ?>
+                <a href="?path=/pro/consultation/offer/<?= $offer['id']?>"><button id="btn_voir_plus">Voir plus</button></a>
             </div>
         </article>
     <?php 
@@ -209,3 +209,5 @@
     ?>
     </div>
 </div>
+
+<script src="/js/backOfficeSearch.js"></script>
