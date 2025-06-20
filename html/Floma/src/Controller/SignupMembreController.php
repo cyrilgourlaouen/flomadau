@@ -86,6 +86,7 @@ class SignupMembreController extends AbstractController
                     return $this->redirectToRoute('/inscription/membre', ['state' => 'failure']);
                 }
                 if ($uploaded_image[0] === true){
+                    console.log('Lien vers l\'image',$uploaded_image[1]);
                     $compte->setUrlPhotoProfil($uploaded_image[1]);
                 }
             }
@@ -97,7 +98,7 @@ class SignupMembreController extends AbstractController
 
             $membreManager = new MembreManager();
             $membreManager->add($membre);
-            return $this->redirectToRoute('/');
+            return $this->redirectToRoute('/connexion');
         }
         return $this->redirectToRoute('/inscription/membre', ['state' => 'failure']);
     }

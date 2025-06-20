@@ -41,13 +41,4 @@ class MainController extends AbstractController
         );
     }
 
-    /**
-     * @return null
-     */
-    public function contact()
-    {
-        // Imaginons ici traiter la soumission d'un formulaire de contact et envoyer un mail...
-        return $this->redirectToRoute('home', ['state' => 'success']);
-    }
-
 }
