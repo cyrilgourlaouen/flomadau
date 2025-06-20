@@ -1533,3 +1533,9 @@ input[type="checkbox"]:checked + .toggle-switch::after {
 .updateBtn {
   width: fit-content;
 }
+
+#offer-online-visibility{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
