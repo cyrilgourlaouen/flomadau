@@ -54,6 +54,11 @@ class CompteManager extends AbstractManager
      * @param int $id
      * @return \PDOStatement
      */
+    /**
+     * @param Compte $compte
+     * @param int $id
+     * @return \PDOStatement
+     */
     public function updateCompte(Compte $compte, int $id): \PDOStatement
     {
         $fields = [
@@ -70,6 +75,41 @@ class CompteManager extends AbstractManager
             'url_photo_profil' => $compte->getUrlPhotoProfil()
         ];
 
+        return $this->update(Compte::class, $fields, $id);
+    }
+    
+    public function updateDataCompte(Compte $compte, int $id): \PDOStatement
+    {
+        $fields = [
+            'nom' => $compte->getNom(),
+            'prenom' => $compte->getPrenom(),
+            'email' => $compte->getEmail(),
+            'telephone' => $compte->getTelephone(),
+            'mot_de_passe' => $compte->getMotDePasse(),
+            'ville' => $compte->getVille(),
+            'code_postal' => $compte->getCodePostal(), 
+            'nom_rue' => $compte->getNomRue(),
+            'numero_rue' => $compte->getNumeroRue(),
+            'complement_adresse' => $compte->getComplementAdresse(),
+            'url_photo_profil' => $compte->getUrlPhotoProfil()
+        ];
+
+        return $this->update(Compte::class, $fields, $id);
+    }
+
+    public function updateEmail(Compte $compte, int $id): \PDOStatement
+    {
+        $fields = [
+            'email'=> $compte->getEmail(),
+        ];
+        return $this->update(Compte::class, $fields, $id);
+    }
+
+    public function updatePassword(Compte $compte, int $id): \PDOStatement
+    {
+        $fields = [
+            'mot_de_passe'=> $compte->getMotDePasse(),
+        ];
         return $this->update(Compte::class, $fields, $id);
     }
 }
