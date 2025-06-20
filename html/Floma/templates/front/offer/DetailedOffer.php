@@ -307,7 +307,7 @@ $proManager = new ReponseProManager();
 </div>
 <?php if (!empty($avis)) { ?>
     <h3 class="big-title-avis">Avis</h3>
-    <section class="avis avis-grid">
+    <section class="avis">
         <?php foreach ($avis as $unAvis) { ?>
             <?php
             $pro = $proManager->findOneBy(['id_avis' => $unAvis->getId()]);

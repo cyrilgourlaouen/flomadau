@@ -11,6 +11,14 @@ use App\Entity\Professionnel;
  */
 class ProfessionnelManager extends AbstractManager
 {
+    public function add(Professionnel $professionnel)
+    {
+        return $this->createGetCode(Professionnel::class, [
+            'id_compte' => $professionnel->getIdCompte(),
+            'raison_sociale' => $professionnel->getRaisonSociale(),
+            'est_prive' => $professionnel->isPrive() ? 'true' : 'false'
+        ]);
+    }
     /**
      * @param int $id
      * @return mixed
@@ -47,5 +55,19 @@ class ProfessionnelManager extends AbstractManager
     public function findAll()
     {
         return $this->readMany(Professionnel::class);
+    }
+
+    /**
+     * @param Professionnel $pro
+     * @param int $id
+     * @return \PDOStatement
+     */
+    public function updateCompte(Professionnel $pro, int $id): \PDOStatement
+    {
+        $fields = [
+            'raison_sociale' => $pro->getRaisonSociale(),
+        ];
+
+        return $this->update(Professionnel::class, $fields, $id, true);
     }
 }

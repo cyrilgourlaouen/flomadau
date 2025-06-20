@@ -2,17 +2,17 @@
 
 namespace App\Resource;
 
-use App\Entity\ProPrive;
+use App\Entity\LangueGuideVisite;
 use Floma\Resource\AbstractResource;
 
-class ProPriveResource extends AbstractResource
+class LangueGuideVisiteResource extends AbstractResource
 {
     /**
      * Constructeur. Si un contexte (managers) est fourni, on enrichit aussitôt.
      */
-    public function __construct(private ProPrive $proPrive, array $context = [])
+    public function __construct(private LangueGuideVisite $tag, array $context = [])
     {
-        parent::__construct($proPrive);
+        parent::__construct($tag);
         $this->hydrate($context);
     }
 
@@ -30,20 +30,17 @@ class ProPriveResource extends AbstractResource
     protected function baseData(): array
     {
         return [
-            'siren'=> $this->proPrive->getSiren(),
-            'numero_carte'=> $this->proPrive->getNumeroCarte(),
-            'date_expiration'=> $this->proPrive->getDateExpiration(),
-            'code_professionnel'=> $this->proPrive->getCodeProfessionnel(),
+            'id_langue' => $this->tag->getIdLangue(),
+            'id_offre'  => $this->tag->getIdOffre(),
         ];
     }
-
 
     /**
      * Construit une ressource enrichie pour UNE offre.
      */
-    public static function build(ProPrive $proPrive, array $context = []): array
+    public static function build(LangueGuideVisite $tag, array $context = []): array
     {
-        return (new self($proPrive, $context))->toArray();
+        return (new self($tag, $context))->toArray();
     }
 
     /**
@@ -51,6 +48,6 @@ class ProPriveResource extends AbstractResource
      */
     public static function buildAll(array $entities, array $context = []): array
     {
-        return array_map(fn($proPrive) => self::build($proPrive, $context), $entities);
+        return array_map(fn($tag) => self::build($tag, $context), $entities);
     }
 }

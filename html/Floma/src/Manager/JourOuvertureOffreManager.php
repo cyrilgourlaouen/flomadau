@@ -1,11 +1,12 @@
 <?php
 namespace App\Manager;
 
-use App\Entity\JourOuvertureOffre;
 use Floma\Manager\AbstractManager;
+use App\Entity\Image;
+use App\Entity\JourOuvertureOffre;
 
 /**
- * Class TagManager
+ * Class JourOuvertureOffre
  *
  * @package App\Manager
  */
@@ -17,7 +18,7 @@ class JourOuvertureOffreManager extends AbstractManager
      */
     public function find(int $id)
     {
-        return $this->readOne(JourOuvertureOffre::class, ['id_jour' => $id]);
+        return $this->readOne(JourOuvertureOffre::class, ['id' => $id]);
     }
 
     /**

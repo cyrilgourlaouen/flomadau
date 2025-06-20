@@ -10,6 +10,7 @@ class Professionnel
     private string $raison_sociale;
     private int $id_compte;
     private bool $est_prive;
+    private ?string $code_a2f = null;
 
     public function getCode(): int
     {
@@ -41,5 +42,20 @@ class Professionnel
     public function isPrive(): bool
     {
         return $this->est_prive;
+    }
+
+        public function setPrive(bool $est_prive): void
+    {
+        $this->est_prive = $est_prive;
+    }
+    
+    public function getCodeA2f(): string|null
+    {
+        return $this->code_a2f;
+    }
+    
+    public function setCodeA2f(string $code): void
+    {
+        $this->code_a2f = $code;
     }
 }

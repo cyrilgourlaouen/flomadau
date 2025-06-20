@@ -1,11 +1,12 @@
 /* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 :root {
@@ -30,8 +31,8 @@
   --semi_bold: 600;
   --normal: normal;
 
-  --raleway: 'Raleway', sans-serif;
-  --noto: 'Noto Sans', sans-serif;
+  --raleway: "Raleway", sans-serif;
+  --noto: "Noto Sans", sans-serif;
 
   --page-padding: 1.563rem;
 }
@@ -454,7 +455,7 @@ footer div nav :any-link {
   height: 2.75rem;
   border-radius: 10px;
   padding: 0 2.5rem 0 1rem;
-  background-image: url('/assets/icons/unfold_more_primary.svg');
+  background-image: url("/assets/icons/unfold_more_primary.svg");
   background-repeat: no-repeat;
   background-position: right 0.5rem center;
   background-size: 1.75rem;
@@ -469,7 +470,7 @@ footer div nav :any-link {
   height: 2.75rem;
   padding: 0 1.5rem 0 2.5rem;
   border-radius: 100px;
-  background-image: url('/assets/icons/search_primary.svg');
+  background-image: url("/assets/icons/search_primary.svg");
   background-repeat: no-repeat;
   background-position: 0.5rem center;
   background-size: 1.75rem;
@@ -533,15 +534,11 @@ footer div nav :any-link {
   background-color: var(--white-color);
   border-radius: 0.938rem;
   word-wrap: break-word;
-  -webkit-box-shadow:
-    0 4px 8px 3px rgba(0, 0, 0, 0.15),
+  -webkit-box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15),
     0 1px 3px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow:
-    0 4px 8px 3px rgba(0, 0, 0, 0.15),
+  -moz-box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15),
     0 1px 3px rgba(0, 0, 0, 0.3);
-  box-shadow:
-    0 4px 8px 3px rgba(0, 0, 0, 0.15),
-    0 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .offer-card-info-layout {
@@ -744,13 +741,13 @@ footer div nav :any-link {
 }
 
 .connection .formBtnEmail {
-  background: url('/assets/icons/login_black.svg') no-repeat 0.5rem center;
+  background: url("/assets/icons/login_black.svg") no-repeat 0.5rem center;
   background-size: 1.25rem;
   font-size: var(--text-size);
 }
 
 .connection .formBtnPassword {
-  background: url('/assets/icons/shield_black.svg') no-repeat 0.5rem center;
+  background: url("/assets/icons/shield_black.svg") no-repeat 0.5rem center;
   background-size: 1.25rem;
 }
 
@@ -878,6 +875,14 @@ footer div nav :any-link {
   display: none;
 }
 
+.highlighted-offers-list-arrows {
+  pointer-events: none;
+}
+
+.highlighted-offers-list-arrows img {
+  pointer-events: auto;
+}
+
 .information-data-container {
   background-color: var(--white-color);
   padding: 1.25rem;
@@ -936,8 +941,7 @@ footer div nav :any-link {
   height: fit-content;
   border: none;
   border-radius: 0.625rem;
-  box-shadow:
-    0 0.25rem 0.5rem 0.188rem rgba(0, 0, 0, 0.15),
+  box-shadow: 0 0.25rem 0.5rem 0.188rem rgba(0, 0, 0, 0.15),
     0 0.063rem 0.188rem rgba(0, 0, 0, 0.3);
 }
 
@@ -1294,7 +1298,6 @@ footer div nav :any-link {
   flex-direction: column;
   padding: 1.25rem;
   gap: 1.25rem;
-  align-items: center;
 }
 
 .big-title-avis {
@@ -1316,8 +1319,7 @@ footer div nav :any-link {
   display: flex;
   flex-direction: column;
   background-color: var(--background-color);
-  box-shadow:
-    0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
     0px 1px 3px rgba(0, 0, 0, 0.3);
   border-radius: 0.938rem;
   margin: 0.313rem;
@@ -1391,8 +1393,7 @@ footer div nav :any-link {
   flex-direction: column;
   gap: 1.563rem;
   background-color: var(--grey);
-  box-shadow:
-    0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
     0px 1px 3px rgba(0, 0, 0, 0.3);
   border-radius: 0.938rem;
   padding: 0.625rem;
@@ -1401,6 +1402,16 @@ footer div nav :any-link {
 
 .avis .ProAvis {
   align-items: flex-end;
+}
+
+.no-offers-message {
+  display: none;
+  font-size: var(--subtitle-size);
+  color: var(--dark-grey-color);
+  text-align: center;
+  padding: 2.5rem;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
 }
 
 @media (width >=65rem) {
@@ -1433,8 +1444,7 @@ footer div nav :any-link {
 
   .infoTab {
     background: #ffffff;
-    box-shadow:
-      0px 8px 12px 6px rgba(0, 0, 0, 0.15),
+    box-shadow: 0px 8px 12px 6px rgba(0, 0, 0, 0.15),
       0px 4px 4px rgba(0, 0, 0, 0.3);
     border-radius: 0.938rem;
     padding: 1.25rem;
@@ -1649,8 +1659,7 @@ footer div nav :any-link {
   }
 
   .information-data-container .personal-data {
-    box-shadow:
-      0 0.25rem 0.5rem 0.188rem rgba(0, 0, 0, 0.15),
+    box-shadow: 0 0.25rem 0.5rem 0.188rem rgba(0, 0, 0, 0.15),
       0 0.063rem 0.188rem rgba(0, 0, 0, 0.3);
     width: 80%;
     padding: 1.875rem;
@@ -1671,15 +1680,6 @@ footer div nav :any-link {
 
   .big-title-avis {
     width: 95%;
-  }
-
-  .avis-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-    padding: 1.25rem;
-    width: 100%;
-    align-items: flex-start;
   }
 
   .contentTab {
@@ -1754,7 +1754,7 @@ footer div nav :any-link {
     cursor: pointer;
     pointer-events: all;
 
-    background-image: url('/assets/icons/keyboard_arrow_down_black.svg');
+    background-image: url("/assets/icons/keyboard_arrow_down_black.svg");
     background-repeat: no-repeat;
     background-position: right 0.5rem center;
     background-size: 1.75rem;
@@ -1822,7 +1822,7 @@ footer div nav :any-link {
     cursor: pointer;
     pointer-events: all;
 
-    background-image: url('/assets/icons/keyboard_arrow_down_black.svg');
+    background-image: url("/assets/icons/keyboard_arrow_down_black.svg");
     background-repeat: no-repeat;
     background-position: right 0.5rem center;
     background-size: 1.75rem;
@@ -1857,6 +1857,26 @@ footer div nav :any-link {
     cursor: pointer;
     background-color: var(--background-color);
   }
+
+  .avis {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.25rem; 
+    justify-content: start; 
+  }
+
+  .container-avis {
+    flex: 0 0 calc(50% - 1.25rem); 
+    box-sizing: border-box;
+  }
+
+  .avis-item {
+    border: 1px solid #ccc;
+    padding: 0.938rem;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
 }
 
 @media (width < 43.75rem) {
@@ -1866,6 +1886,9 @@ footer div nav :any-link {
 
   .information-data-container .lines-container {
     width: 100%;
+  }
+  .avis {
+    flex-direction: column;
   }
 }
 

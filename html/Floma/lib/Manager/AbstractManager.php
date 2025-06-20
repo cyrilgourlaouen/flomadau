@@ -143,6 +143,26 @@ abstract class AbstractManager
 		$stmt = $this->executeQuery($query, $fields);
 		$id = $stmt->fetchColumn();
 		return [$stmt, $id];
+    }
+
+	protected function createGetCode(string $class, array $fields): array
+	{
+		$query = "INSERT INTO " . $this->getTableName($class) . " (";
+		foreach (array_keys($fields) as $field) {
+			$query .= $field;
+			if ($field != array_key_last($fields))
+				$query .= ', ';
+		}
+		$query .= ') VALUES (';
+		foreach (array_keys($fields) as $field) {
+			$query .= ':' . $field;
+			if ($field != array_key_last($fields))
+				$query .= ', ';
+		}
+		$query .= ') RETURNING code';
+		$stmt = $this->executeQuery($query, $fields);
+		$id = $stmt->fetchColumn();
+		return [$stmt, $id];
 	}
 
 	/**
