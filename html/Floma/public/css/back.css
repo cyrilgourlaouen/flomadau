@@ -453,6 +453,20 @@ input {
   color: var(--black-color);
 }
 
+.button-blue {
+  background: var(--primary-color);
+  color: var(--white-color);
+  border: none;
+  border-radius: 0.625rem;
+  font-family: var(--noto);
+  font-size: var(--text-size);
+  cursor: pointer;
+
+  /* M3/Elevation Light/3 */
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+    0px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
 .buttonContainer {
   width: 100%;
   display: flex;
@@ -821,8 +835,6 @@ input {
   font-size: var(--larger-text-size);
 }
 
-<<<<<<< HEAD
-=======
 /* 2FA Component */
 .security-status-card {
     background: white;
@@ -1132,7 +1144,6 @@ input {
     line-height: 1.4;
 }
 
->>>>>>> bedbe221bd91107ee286c35561cd34a70ccb75eb
 input.not-active{
   color: var(--light-grey-color);
 }
@@ -1152,9 +1163,6 @@ input.not-active{
   display: flex;
   gap: 1rem;
   justify-content: end;
-<<<<<<< HEAD
-}
-=======
 }
 .bigField  { /* On an input that take almost all the width like images or big input */
   height: 12.125rem;
@@ -1514,4 +1522,3 @@ input[type="checkbox"]:checked + .toggle-switch::after {
 .updateBtn {
   width: fit-content;
 }
->>>>>>> bedbe221bd91107ee286c35561cd34a70ccb75eb
