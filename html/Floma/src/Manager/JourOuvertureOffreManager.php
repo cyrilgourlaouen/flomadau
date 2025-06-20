@@ -30,14 +30,6 @@ class JourOuvertureOffreManager extends AbstractManager
     }
 
     /**
-     * @return mixed
-     */
-    public function findAll()
-    {
-        return $this->readMany(JourOuvertureOffre::class);
-    }
-
-    /**
      * @param array $filters
      * @param array $order
      * @param int|null $limit
@@ -47,6 +39,14 @@ class JourOuvertureOffreManager extends AbstractManager
     public function findBy(array $filters, array $order = [], ?int $limit = null, ?int $offset = null)
     {
         return $this->readMany(JourOuvertureOffre::class, $filters, $order, $limit, $offset);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function findAll()
+    {
+        return $this->readMany(JourOuvertureOffre::class);
     }
 
     public function add(JourOuvertureOffre $jourOuvertureOffre) {
