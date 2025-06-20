@@ -32,7 +32,6 @@ class ProPriveResource extends AbstractResource
         return [
             'siren'=> $this->proPrive->getSiren(),
             'numero_carte'=> $this->proPrive->getNumeroCarte(),
-            'code_securite'=> $this->proPrive->getCodeSecurite(),
             'date_expiration'=> $this->proPrive->getDateExpiration(),
             'code_professionnel'=> $this->proPrive->getCodeProfessionnel(),
         ];
