@@ -41,7 +41,7 @@
         <div class="logPro">
             <h2 class="pro">Professionnel</h2>
             <hr>
-            <p>Si vous êtes professionnel <a href="http://localhost:8080/?path=/pro/connexion">connectez-vous</a></p>
+            <p>Si vous êtes professionnel <a href="?path=/pro/connexion">connectez-vous</a></p>
         </div>
     </div>
     <img class="right-img" src="/assets/images/monaco.png" alt="monaco">

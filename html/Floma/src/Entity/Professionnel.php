@@ -58,4 +58,19 @@ class Professionnel
     {
         $this->code = $code_a2f;
     }
+
+        public function setPrive(bool $est_prive): void
+    {
+        $this->est_prive = $est_prive;
+    }
+    
+    public function getCodeA2f(): string|null
+    {
+        return $this->code_a2f;
+    }
+    
+    public function setCodeA2f(string $code): void
+    {
+        $this->code_a2f = $code;
+    }
 }

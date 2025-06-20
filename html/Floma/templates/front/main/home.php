@@ -16,7 +16,7 @@ $highlightedOffers = array_filter($data["offers"], function ($offer) {
 
 <!-- Selection du moment -->
 <?php if ($highlightedOffers) { ?>
-    <section class="highlighted-offers-section">
+    <section class="highlighted-offers-section" id="highlighted-offers-section">
         <h2>Sélection du moment</h2>
         <div class="highlighted-offers-list-arrows">
             <img src="/assets/icons/left_square_chevron_black.png" id="highlighted-arrow-left" alt="">
@@ -91,7 +91,7 @@ $highlightedOffers = array_filter($data["offers"], function ($offer) {
                             <?php } ?>
                         <?php } else { ?>
                             <div class="highlighted-card-price-euros">
-                                <?= str_repeat("<img src='/assets/icons/euro_symbol_primary.svg' alt='Icone d'euro'>", $offer["categoryData"]["gamme_de_prix"]) ?>
+                                <?= str_repeat("<img src='/assets/icons/paid_primary.svg' alt='Icone de piece'>", $offer["categoryData"]["gamme_de_prix"]) ?>
                             </div>
                         <?php } ?>
 
@@ -203,7 +203,8 @@ $highlightedOffers = array_filter($data["offers"], function ($offer) {
 </div>
 
 <!-- Section Offre -->
-<section class="offer-section" data-offers='<?= htmlspecialchars(json_encode($data["offers"]), ENT_QUOTES, 'UTF-8') ?>'>
+<section class="offer-section" id="offer-section"
+    data-offers='<?= htmlspecialchars(json_encode($data["offers"]), ENT_QUOTES, 'UTF-8') ?>'>
     <h2>Découvrez nos offres</h2>
 
     <div class="offer-controls">
@@ -326,6 +327,10 @@ $highlightedOffers = array_filter($data["offers"], function ($offer) {
                 <p id="note">Note</p>
             </div>
         </div>
+    </div>
+    
+    <div>
+        <p class="no-offers-message">Aucune offre ne correspond à vos critères de recherche.</p>
     </div>
 
     <div class="offer-list">
