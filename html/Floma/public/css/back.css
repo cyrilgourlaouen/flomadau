@@ -6,6 +6,7 @@
 :root {
   /* Colors */
   --primary-color: #005bb5;
+  --dark-blue-color: #1e3a8a;
   --background-color: #fcfcfc;
   --menu-background-color: #f5f6fa;
   --very-light-grey-color : #d0d0d0;
@@ -100,6 +101,32 @@ h3 {
 
 .form-container {
   margin-top: 0.938rem !important;
+}
+.flex-row { display: flex; flex-direction: row !important;}
+.flex-col { display: flex; flex-direction: column; }
+.align-start { align-items: flex-start; }
+.align-end { align-items: end; }
+.text-center {text-align: center;}
+.gap-vsm { gap: 0.3rem; }
+.gap-sm { gap: 0.625rem; }
+.gap-md { gap: 0.938rem; }
+.gap-lg { gap: 1.563rem; }
+.full-width { width: 100%; }
+.full-height { height: 100%; }
+.no-pad-top { padding-top: 0 !important; }
+.no-pad-side { padding-left: 0 !important; padding-right: 0 !important; }
+.margin-left-md { margin-left:15px ;}
+.fit-content { width: fit-content; }
+
+.hidden {
+  display: none !important;
+}
+
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .h3-section {
@@ -312,7 +339,42 @@ p.placeholder {
 .formInline {
   display: flex;
   flex-direction: row;
-  gap: 3.125rem;
+  flex-wrap: wrap;
+  gap: 1rem 3.125rem;
+}
+
+.formGrid label{
+  display: inline-block;
+  width: 6.9375rem;
+}
+
+.formGrid input{
+  width: 5rem;
+}
+
+.formGrid .debutHoraire{
+  width: 4.3125rem;
+}
+
+.formGrid .finHoraire{
+  width: 2.406rem;
+}
+
+.formGrid label{
+  display: inline-block;
+  width: 6.9375rem;
+}
+
+.formGrid input{
+  width: 5rem;
+}
+
+.formGrid .debutHoraire{
+  width: 4.3125rem;
+}
+
+.formGrid .finHoraire{
+  width: 2.406rem;
 }
 
 form {
@@ -328,12 +390,12 @@ label {
   color: var(--black-color);
 }
 
-input,
-select {
+input, textarea, select{
   width: 18.75rem;
   padding: 0.5em;
   border-radius: 6px;
   border: 1px solid var(--light-grey-color);
+  resize: none;
 }
 
 select {
@@ -377,6 +439,31 @@ input {
   /* M3/Elevation Light/3 */
   box-shadow:
     0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+    0px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.button-black:hover {
+  background-color: var(--background-color);
+  color: var(--black-color);
+  border: 0.125rem var(--black-color) solid; 
+}
+
+.button-black:active{
+  background-color: var(--dark-grey-color);
+  color: var(--black-color);
+}
+
+.button-blue {
+  background: var(--primary-color);
+  color: var(--white-color);
+  border: none;
+  border-radius: 0.625rem;
+  font-family: var(--noto);
+  font-size: var(--text-size);
+  cursor: pointer;
+
+  /* M3/Elevation Light/3 */
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
     0px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
@@ -778,4 +865,362 @@ input.not-active{
   display: flex;
   gap: 1rem;
   justify-content: end;
+}
+.bigField  { /* On an input that take almost all the width like images or big input */
+  height: 12.125rem;
+  width: 95%;
+}
+
+.midField {
+  height: 4.9375rem;
+  width: 60%;
+}
+
+.checkbox-group {
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.select-container {
+  margin-top: 1rem;
+}
+
+.select-container label {
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+  display: block;
+  color: #2c3e50;
+}
+
+.select-container select {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #f8f9fa;
+  color: #2c3e50;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #ecf0f1;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.checkbox-item:hover {
+  background-color: #d0d7de;
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: #3498db;
+}
+
+.slot {
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.slot input {
+  margin-right: 5px;
+}
+
+.slot button {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+
+.slot button img {
+  margin: auto;
+}
+.dayLabel {
+  cursor: pointer;
+  float:right;
+  user-select: none;
+}
+
+.dayLabel > input {
+  width: 14px;
+  cursor: pointer;
+}
+
+.horaire-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.horaire {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.horaire-container > div > button {
+  padding: 5px;
+  margin-bottom:5px;
+}
+
+.tooltip-trigger {
+  position: relative;
+  cursor: help;
+  vertical-align: bottom;
+  color: #555;
+}
+
+.tooltip-trigger img {
+  width: 24px;
+  height: 24px;
+  vertical-align: bottom;
+  cursor: pointer;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  width: 250px;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 4px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  left: 20px;
+  transition: opacity 0.3s;
+  font-size: 13px;
+}
+
+.tooltip-trigger:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+input.bigField[type="file"]{
+    display: block;
+    padding: 12px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+input.bigField[type="file"]:hover {
+    background-color: #eef1f5;
+    border-color: #888;
+}
+
+input.bigField[type="file"]:focus {
+    outline: none;
+    border-color: #3f51b5;
+    background-color: #fff;
+}
+
+.custum-file-upload {
+  height: 200px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  gap: 20px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #cacaca;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 3.125rem 1.5rem 1.5rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
+}
+
+.custum-file-upload .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload .icon .svg {
+  height: 80px;
+  fill: rgba(75, 85, 99, 1);
+}
+
+.custum-file-upload .text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload .text span {
+  font-weight: 400;
+  color: rgba(75, 85, 99, 1);
+}
+
+.custum-file-upload input {
+  display: none;
+}
+
+input[type=file] {
+  cursor: pointer;
+}
+
+.btn-creation {
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-creation:hover {
+  background-color: var(--dark-blue-color);
+}
+
+.btn_close {
+  background-color: #fcfcfc;
+  border: 0px;
+  cursor: pointer;
+}
+
+.btn_close:hover {
+  transform: scale(1.1);
+}
+
+.toggle-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-family: sans-serif;
+  max-width: 200px;
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1rem;
+}
+
+.toggle-label input[type="checkbox"] {
+  display: none;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 50px;
+  height: 26px;
+  background-color: #ccc;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+input[type="checkbox"]:checked + .toggle-switch {
+  background-color: var(--dark-blue-color);;
+}
+
+input[type="checkbox"]:checked + .toggle-switch::after {
+  transform: translateX(24px);
+}
+
+.containerBtnTagGuide {
+  display: flex;
+  gap: 10px;
+}
+
+.BtnConsultation {
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: none;
+  background: var(--primary-color);
+  cursor: pointer;
+  color: var(--white-color);
+}
+
+.BtnConsultationSupprimer {
+  padding: 6px 8px;
+  font-size: 10px;
+  border-radius: 4px;
+  border: none;
+  background: var(--primary-color);
+  color: var(--white-color);
+  cursor: pointer;
+}
+
+.containerTags {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.image-preview-item {
+  margin-top: 10px;
+}
+.imagePreview {
+  max-width: 200px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Masquer l'input natif */
+#url_img_offre {
+    display: none;
+}
+
+/* Bouton personnalisé */
+.btn-file {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    background-color: var(--primary-color); /* bleu */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    user-select: none;
+}
+
+/* Apparence désactivée */
+#url_img_offre:disabled + .btn-file,
+.btn-file:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Hover */
+.btn-file:hover {
+    background-color: #0056b3;
+}
+.updateContainer {
+  display: flex;
+  justify-content: end;
+}
+.updateBtn {
+  width: fit-content;
 }
