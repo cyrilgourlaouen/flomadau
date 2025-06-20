@@ -6,6 +6,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 :root {
@@ -876,6 +877,14 @@ footer div nav :any-link {
 .highlighted-offers-list-arrows,
 .highlighted-offers-list-arrows-detail {
   display: none;
+}
+
+.highlighted-offers-list-arrows {
+  pointer-events: none;
+}
+
+.highlighted-offers-list-arrows img {
+  pointer-events: auto;
 }
 
 .information-data-container {
