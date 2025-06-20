@@ -42,7 +42,7 @@ class Professionnel
     public function isPrive(): bool
     {
         return $this->est_prive;
-    }
+    }    
 
     public function setPrive(bool $est_prive): void
     {

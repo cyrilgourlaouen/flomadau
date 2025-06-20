@@ -105,6 +105,7 @@ class CompteManager extends AbstractManager
         return $this->update(Compte::class, $fields, $id);
     }
 
+    
     public function updateDataCompte(Compte $compte, int $id): \PDOStatement
     {
         $fields = [
