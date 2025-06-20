@@ -222,7 +222,8 @@
                         } else {
                             if (isValid){
                                     form.submit();
-                            }                        }
+                            }                        
+                        }
                     })
                     .catch(error => {
                         console.error('Error checking datas in db:', error);
