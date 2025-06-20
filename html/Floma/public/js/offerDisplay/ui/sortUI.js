@@ -101,8 +101,28 @@ export function setupSortUI(sortManager, displayManager) {
     sortDesktopButton.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
+      
+      // Fermer les autres dropdowns (importer la fonction depuis filterUI ou la redéfinir)
+      if (window.filterManager) {
+        // Fermer tous les autres dropdowns
+        const otherDropdowns = [
+          '#desktop-categorie-options',
+          '#desktop-price-options', 
+          '#desktop-price-range-options',
+          '#desktop-date-options',
+          '#desktop-note-options',
+          '#desktop-status-options'
+        ];
+        
+        otherDropdowns.forEach(selector => {
+          const dropdown = document.querySelector(selector);
+          if (dropdown) dropdown.style.display = 'none';
+        });
+      }
+      
+      // Toggle le dropdown de tri
       sortDesktopOptions.style.display =
-        sortDesktopOptions.style.display === 'none' ? 'block' : 'none';
+        sortDesktopOptions.style.display === 'block' ? 'none' : 'block';
     });
 
     // Fermeture du dropdown si clic ailleurs

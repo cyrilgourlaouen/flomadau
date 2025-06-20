@@ -43,8 +43,10 @@ class CategoryContent
         }
         elseif ($nameCate === OfferCategoryEnum::Visite->value) {
             $content .= "<div class='align'><img src='./assets/icons/schedule_primary.svg' alt='horloge'><p>" . $cate["duree"] .  " heures</p></div>" .
-            "<div class='align'><img src='./assets/icons/accessibility_primary.svg' alt='accessibility'><p>$accessibility</p></div>" .
-            "<div class='align'><img src='./assets/icons/translate_primary.svg' alt='translate'><p>" . $this->getStringLanguages($more) .  " </p></div>";
+            "<div class='align'><img src='./assets/icons/accessibility_primary.svg' alt='accessibility'><p>$accessibility</p></div>";
+            if (isset($more)) {
+                $content .= "<div class='align'><img src='./assets/icons/translate_primary.svg' alt='translate'><p>" . $this->getStringLanguages($more) .  " </p></div>";
+            }
         }
         return $content;
     }

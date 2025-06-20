@@ -4,10 +4,10 @@
 				alt="Icone de menu burger"></a>
 		<a href="/"><img class="logo" src="/assets/images/logo_entier_blanc.svg" alt="logo"></a>
 		<div class="menu_nav">
-			<a href="#" class="postOffer">
+			<a href="?path=/pro/connexion" class="postOffer">
 				<h3 class="txtPostOffer">Publier une offre</h3>
 			</a>
-			<a href="#" class="search"><img src="/assets/icons/search_white.svg" alt="loupe" class="ImgSearch"></a>
+			<a href="/#offer-section" class="search"><img src="/assets/icons/search_white.svg" alt="loupe" class="ImgSearch"></a>
 			<?php if (!isset($_SESSION['email'])) { ?>
 				<img class="imgLog" id="logBtn" src="/assets/icons/login_white.svg" alt="Icon de connexion">
 				<div id="logMenu" class="logMenu hidden">
@@ -35,17 +35,13 @@
 			<a id="BtnClose" href="#" class="close"><img src="/assets/icons/chevron_left_white.svg"
 					alt="Chevron vers la gauche"></a>
 			<h2>Menu</h2>
-			<a href="/" class="action">
+			<a href="/#offer-section" class="action" onClick="closeNav()">
 				<img src="/assets/icons/discover_white.svg" alt="Icone boussole">
 				<h2>Découvrez nos offres</h2>
 			</a>
-			<a href="#" class="action">
+			<a href="/#highlighted-offers-section" class="action" onClick="closeNav()">
 				<img src="/assets/icons/diamond_white.svg" alt="Icone de diamant">
 				<h2>Sélection du moment</h2>
-			</a>
-			<a href="#" class="action">
-				<img src="/assets/icons/recent_search_white.svg" alt="Icone de recherche récente">
-				<h2>Consulté récement</h2>
 			</a>
 			<hr>
 			<?php if (!isset($_SESSION['email'])) { ?>
@@ -61,7 +57,7 @@
 				<a href="?path=/connexion/logOut" class="action">
 					<img src="/assets/icons/login_white.svg" alt="Icone de connexion">
 					<h2>Déconnexion</h2>
-				</a></h3>
+				</a>
 			<?php } ?>
 		</div>
 		<nav>
