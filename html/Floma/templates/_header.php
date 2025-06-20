@@ -17,7 +17,7 @@
 				</div>
 			<?php } else { ?>
 				<img class="imgLogOut imgProfil" id="logBtn"
-					src="uploads/profilePicture/<?= htmlspecialchars($_SESSION['url_photo_profil']) ?>.jpg"
+					src="uploads/profilePicture/<?= htmlspecialchars($_SESSION['url_photo_profil']) ?>"
 					alt="Icon de déconnexion">
 				<div id="logMenu" class="logMenu hidden">
 					<ul>

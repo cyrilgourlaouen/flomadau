@@ -34,7 +34,7 @@ class SignupMembreController extends AbstractController
     }
 
     private function uploadImg(){
-        if ($_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+        if ($_FILES['photo']['error'] === 0) {
             $cheminTemp = $_FILES['photo']['tmp_name'];
             $AncienNomFichier = $_FILES['photo']['name'];
 
@@ -73,7 +73,7 @@ class SignupMembreController extends AbstractController
             if (isset($_POST['adress_comp'])){
                 $compte->setComplementAdresse($_POST['adress_comp']);
             }
-           
+
 
             $compteManager = new CompteManager();
             $temp = $compteManager->addGetId($compte);
@@ -86,7 +86,6 @@ class SignupMembreController extends AbstractController
                     return $this->redirectToRoute('/inscription/membre', ['state' => 'failure']);
                 }
                 if ($uploaded_image[0] === true){
-                    print_r('Lien vers l\'image',$uploaded_image[1]);
                     $compte->setUrlPhotoProfil($uploaded_image[1]);
                 }
             }
