@@ -402,8 +402,7 @@ if (!isset($_SESSION['code_pro'])) { ?>
                             value="<?= htmlspecialchars($offer['code_postal'] ?? "") ?>" disabled>
                     </div>
                 </div>
-            </section>
-
+            </section> 
             <section class="formSectionContainer">
                 <div class="h3-section">
                     <h3>Contact</h3>

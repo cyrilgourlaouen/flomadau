@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
             field: 'photo_offre', valid: () => {
                 const fileInput = document.getElementById('photo_offre');
                 if (!fileInput || fileInput.files.length === 0) return false;
-                return validateFile(fileInput, ['svg', 'pdf', 'jpg', 'jpeg'], 100000);
-            }, message: 'Veuillez sélectionner un ou plusieurs fichier(s) SVG, PDF, JPG ou JPEG de moins de 100 Ko.'
+                return validateFile(fileInput, ['svg', 'jpg', 'jpeg'], 100000);
+            }, message: 'Veuillez sélectionner un ou plusieurs fichier(s) SVG, JPG ou JPEG de moins de 100 Ko.'
         },
         {
             field: 'horaires',

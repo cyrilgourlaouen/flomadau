@@ -6,7 +6,7 @@ use App\Entity\Image;
 use App\Entity\JourOuvertureOffre;
 
 /**
- * Class ImageManager
+ * Class JourOuvertureOffre
  *
  * @package App\Manager
  */
