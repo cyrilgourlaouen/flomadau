@@ -39,21 +39,21 @@ document.getElementById('inscription_membre').addEventListener('submit', async f
         isValid = false;
     }
 
-    // Erreurs côté serveur
-    if (result.pseudoExists === true) {
-        isValid = false;
-        document.getElementById('error-pseudo').textContent = "Pseudo déjà existant";
-    }
+    // // Erreurs côté serveur
+    // if (result.statusPseudo === true) {
+    //     isValid = false;
+    //     document.getElementById('error-pseudo').textContent = "Pseudo déjà existant";
+    // }
 
-    if (tel.length !== 10 || result.telExists === true) {
-        isValid = false;
-        document.getElementById('error-tel').textContent = "Numéro de téléphone non valide ou déjà existant";
-    }
+    // if (tel.length !== 10 || result.statusTel === true) {
+    //     isValid = false;
+    //     document.getElementById('error-tel').textContent = "Numéro de téléphone non valide ou déjà existant";
+    // }
 
-    if (!email.includes('@') || result.emailExists === true) {
-        isValid = false;
-        document.getElementById('error-email').textContent = "Adresse e-mail non valide ou déjà existante";
-    }
+    // if (!email.includes('@') || result.statusEmail === true) {
+    //     isValid = false;
+    //     document.getElementById('error-email').textContent = "Adresse e-mail non valide ou déjà existante";
+    // }
 
     // Mot de passe trop faible
     const passwordValid = (

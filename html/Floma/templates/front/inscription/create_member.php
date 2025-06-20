@@ -122,7 +122,7 @@
                 { field: 'tel', valid: val => /^(?:(?:\+33|0033)\s?|0)[1-9](?:[\s.-]?\d{2}){4}$/.test(val), message: 'Veuillez entrer un numéro valide.' },
                 { field: 'email', valid: val => /^\S+@\S+\.\S+$/.test(val), message: 'Veuillez entrer une adresse email valide.' },
                 { field: 'pseudo', valid: val => val !== '', message: 'Veuillez entrer un pseudo.' },
-                { field: 'password', valid: val => val.length >= 6, message: 'Le mot de passe est trop court.' },
+                { field: 'password', valid: val => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$&+,:;=?@#|'<>.^*()%!-])[A-Za-z\d!@#$%^&*()_+\-=\[\]{}]{12,}$/.test(val), message: 'Au moins une condition n\'est pas respectée'},
                 { field: 'conf_password', valid: val => val === document.getElementById('password').value, message: 'Les mots de passe ne correspondent pas.' },
                 { field: 'name_street', valid: val => val !== '', message: 'Veuillez entrer la rue.' },
                 { field: 'num_street', valid: val => val !== '', message: 'Veuillez entrer le numéro.' },
@@ -221,7 +221,7 @@
                             errorEl.innerText = data.messagePseudo;
                         } else {
                             if (isValid){
-                                    form.submit();
+                                form.submit();
                             }                        
                         }
                     })

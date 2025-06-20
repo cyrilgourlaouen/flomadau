@@ -15,6 +15,9 @@ use Floma\Controller\AbstractController;
  */
 class SignupMembreController extends AbstractController
 {
+
+    private int $idCompte;
+
     /**
      * @return string
      */
@@ -56,8 +59,8 @@ class SignupMembreController extends AbstractController
     {
         if (isset($_POST)) {
             
-            if (isset($_POST['photo'])) {
-                $uploaded_image = uploadImg();
+            if (!empty($_FILES['photo']) && $_FILES['photo']['error'] !== UPLOAD_ERR_NO_FILE) {
+                $uploaded_image = $this->uploadImg();
                 if ($uploaded_image[0] === false) {
                     return $this->redirectToRoute('/inscription/membre', ['state' => 'failure']);
                 }
@@ -77,7 +80,7 @@ class SignupMembreController extends AbstractController
             if (isset($_POST['adress_comp'])){
                 $compte->setComplementAdresse($_POST['adress_comp']);
             }
-            if (isset($_POST['photo'])) {
+            if (!empty($_FILES['photo']) && $_FILES['photo']['error'] !== UPLOAD_ERR_NO_FILE) {
                 if ($uploaded_image[0] === true){
                     $compte->setUrlPhotoProfil($uploaded_image[1]);
                 }   
@@ -87,6 +90,7 @@ class SignupMembreController extends AbstractController
             $compteManager = new CompteManager();
             $temp = $compteManager->addGetId($compte);
             $id_compte = $temp[1];
+            $this->idCompte = $id_compte;
             
             $membre = new Membre();
             $membre->setPseudo($_POST['pseudo']);
