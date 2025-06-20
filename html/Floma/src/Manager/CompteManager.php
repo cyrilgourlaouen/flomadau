@@ -54,11 +54,6 @@ class CompteManager extends AbstractManager
      * @param int $id
      * @return \PDOStatement
      */
-    /**
-     * @param Compte $compte
-     * @param int $id
-     * @return \PDOStatement
-     */
     public function updateCompte(Compte $compte, int $id): \PDOStatement
     {
         $fields = [
@@ -77,7 +72,7 @@ class CompteManager extends AbstractManager
 
         return $this->update(Compte::class, $fields, $id);
     }
-    
+
     public function updateDataCompte(Compte $compte, int $id): \PDOStatement
     {
         $fields = [
@@ -89,6 +84,7 @@ class CompteManager extends AbstractManager
         return $this->update(Compte::class, $fields, $id);
     }
 
+    
     public function updateEmail(Compte $compte, int $id): \PDOStatement
     {
         $fields = [
@@ -97,6 +93,7 @@ class CompteManager extends AbstractManager
         return $this->update(Compte::class, $fields, $id);
     }
 
+    
     public function updatePassword(Compte $compte, int $id): \PDOStatement
     {
         $fields = [

@@ -467,17 +467,6 @@ input {
     0px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.button-black:hover {
-  background-color: var(--background-color);
-  color: var(--black-color);
-  border: 0.125rem var(--black-color) solid; 
-}
-
-.button-black:active{
-  background-color: var(--dark-grey-color);
-  color: var(--black-color);
-}
-
 .buttonContainer {
   width: 100%;
   display: flex;
