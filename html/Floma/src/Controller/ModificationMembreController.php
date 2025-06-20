@@ -37,16 +37,17 @@ class ModificationMembreController extends AbstractController
             $membreManager = new MembreManager();
 
             $id = (int) ($_POST['id_compte'] ?? 0);
+            $previousMembre = $membreManager->findOneBy(['id_compte' => $id]);
 
-            $previousMembre = $membreManager->findOneBy(['id_compte' => $id ?? null]);
-
+            // ✅ Mise à jour du pseudo si nécessaire
             if ($previousMembre->getPseudo() !== $_POST['pseudo']) {
                 $membre->setPseudo($_POST['pseudo'] ?? null);
                 $membreManager->updateMembre($membre, $id);
-            } else {
-                $compteManager->updateDataCompte($compte, $id);
             }
-            
+
+            // ✅ Mise à jour des champs du compte dans tous les cas
+            $compteManager->updateDataCompte($compte, $id);
+
             session_unset();
 
             // 🔁 Reconnexion
@@ -60,13 +61,13 @@ class ModificationMembreController extends AbstractController
                 }
 
                 $_SESSION = $compteMisAJour;
-
                 session_regenerate_id(true);
                 return $this->redirectToRoute('/consultation/membre', ["state" => "success"]);
             } else {
                 return $this->redirectToRoute('/consultation/membre', ["state" => "failure"]);
             }
         }
+
     }
 
     public function checkPassword()
