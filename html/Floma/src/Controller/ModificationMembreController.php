@@ -39,18 +39,15 @@ class ModificationMembreController extends AbstractController
             $id = (int) ($_POST['id_compte'] ?? 0);
             $previousMembre = $membreManager->findOneBy(['id_compte' => $id]);
 
-            // ✅ Mise à jour du pseudo si nécessaire
             if ($previousMembre->getPseudo() !== $_POST['pseudo']) {
                 $membre->setPseudo($_POST['pseudo'] ?? null);
                 $membreManager->updateMembre($membre, $id);
             }
 
-            // ✅ Mise à jour des champs du compte dans tous les cas
             $compteManager->updateDataCompte($compte, $id);
 
             session_unset();
 
-            // 🔁 Reconnexion
             $compteMisAJour = CompteResource::build($compteManager->findOneBy(['id' => $id]), [
                 'userName' => ['isMultiple' => true],
             ]);
