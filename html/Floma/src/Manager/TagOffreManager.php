@@ -49,4 +49,12 @@ class TagOffreManager extends AbstractManager
     {
         return $this->readMany(TagOffre  ::class, $filters, $order, $limit, $offset);
     }
+
+    public function add(TagOffre $offer) {
+		return $this->create(TagOffre::class, [
+				'id_offre' => $offer->getIdOffre(),
+                'id_tag' => $offer->getIdTag(),
+			]
+		);
+	}
 }

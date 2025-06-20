@@ -95,6 +95,21 @@ const ROUTES = [
         'controller' => App\Controller\ModificationMembreController::class,
         'method' => 'checkEmail',
     ],
+    '/offre/creation' => [
+        'controller' => App\Controller\Creation\CreationOffreController::class,
+        'method' => 'home',
+        'layout' => Layout::BACK,
+    ],
+    '/offre/creation/new' => [
+        'controller' => App\Controller\Creation\CreationOffreController::class,
+        'method' => 'newOffer',
+        'view' => false,
+    ],
+    '/avis/creation/new' => [
+        'controller' => App\Controller\Creation\AvisController::class,
+        'method' => 'newComment',
+        'view' => false,
+    ],
     '/pro/2fa/setup' => [
         'controller' => App\Controller\TwoFactorAuthController::class,
         'method' => 'setup',
@@ -126,11 +141,6 @@ const ROUTES = [
         'controller' => App\Controller\TwoFactorAuthController::class,
         'method' => 'ajaxVerify',
         'view' => false,
-    ],
-    '/offre/updateOffer' => [
-        'controller' => App\Controller\ModificationOfferController::class,
-        'method' => 'updateOffer',
     ]
 ];
-
 ?>

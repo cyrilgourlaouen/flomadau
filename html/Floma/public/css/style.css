@@ -1461,8 +1461,8 @@ footer div nav :any-link {
     width: calc(100% + 2.5rem);
     padding: 0.938rem 1.25rem;
     isolation: isolate;
-    background: #ffffff;
-    padding-top: 0;
+    background: #fff !important;
+    padding-top: 0 !important;
   }
 }
 
@@ -1515,6 +1515,7 @@ footer div nav :any-link {
     display: block;
     width: 3.125rem;
     border-radius: 50%;
+    cursor: pointer;
   }
 
   header .top_header {
@@ -1691,8 +1692,7 @@ footer div nav :any-link {
     width: calc(100% + 2.5rem);
     padding: 0.938rem 1.25rem;
     isolation: isolate;
-    background: #ffffff;
-    padding-top: 0;
+    background: #e5eff6;
   }
 
   #offer-sort-desktop-options {
@@ -1934,7 +1934,7 @@ footer div nav :any-link {
   padding: 2px 6px;
   font-size: 13px;
   border-radius: 3px;
-  font-family: sans-serif;
+  font-family: var(--noto);
 }
 
 .slider-item-wrapper {
@@ -2008,4 +2008,105 @@ footer div nav :any-link {
 .tooltip-parent:hover .tooltip {
   visibility: visible;
   opacity: 1;
+}
+
+#btn_ajouter, .btn_submit {
+  width: 8.125rem;
+  height: 2.75rem;
+  background-color: var(--primary-color);
+  font-size: var(--text-size);
+  color: var(--background-color);
+  border-radius: 0.625rem;
+  border: none;
+}
+
+#btn_ajouter:hover, .btn_submit:hover {
+  background-color: var(--background-color);
+  border: 3px solid var(--primary-color);
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+#btn_ajouter:active, .btn_submit:active {
+  background-color: #003e7d;
+  color: var(--black-color);
+  border-color: #003e7d;
+}
+
+.btn_add {
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  min-width: 300px;
+  max-width: 90%;
+}
+
+.close {
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal input, .modal textarea {
+  width: 100%;
+  padding: 5px;
+}
+
+.modal-content hr {
+  width: 75%;
+  margin-bottom: 0.3rem;
+}
+
+.btn_submit {
+  width: 8.125rem;
+  height: 2.75rem;
+  background-color: var(--primary-color);
+  font-size: var(--text-size);
+  color: var(--background-color);
+  border-radius: 0.625rem;
+  border: none;
+}
+
+.containerAvisSub {
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+textarea {
+  resize : none;
+}
+
+#formAvis div input, #formAvis div textarea {
+  border-radius: 10px;
+}
+
+input {
+  font-family: var(--noto);
+}
+
+textarea::placeholder {
+  font-family: var(--noto);
+  font-size: var(--very-small-text-size);
 }

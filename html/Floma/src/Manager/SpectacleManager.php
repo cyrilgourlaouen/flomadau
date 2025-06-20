@@ -48,4 +48,14 @@ class SpectacleManager extends AbstractManager
     {
         return $this->readMany(Spectacle::class);
     }
+
+    public function add(Spectacle $show) {
+		return $this->create(Spectacle::class, [
+				'id_offre' => $show->getIdOffre(),
+                'capacite' => $show->getCapacite(),
+                'duree' => $show->getDuree(),
+                'prix_minimal' => $show->getPrixMinimal(),
+			]
+		);
+	}
 }
