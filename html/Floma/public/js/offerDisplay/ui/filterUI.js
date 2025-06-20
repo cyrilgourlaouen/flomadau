@@ -4,212 +4,235 @@ export function setupFilterUI(filterManager, displayManager) {
 
   // --- VARIABLES GLOBALES ---
   // Texte
-  const searchInput = document.getElementById('offer-search-input');
+  const searchInput = document.getElementById("offer-search-input");
 
   // Catégorie desktop
   const categoryDropdownButton = document.querySelector(
-    '#desktop-categorie-button'
+    "#desktop-categorie-button"
   );
   const categoryDropdownOptions = document.querySelector(
-    '#desktop-categorie-options'
+    "#desktop-categorie-options"
   );
   const desktopCategoryOptions = document.querySelectorAll(
-    '#desktop-categorie-options .desktop-filter-option'
+    "#desktop-categorie-options .desktop-filter-option"
   );
   const selectedCategoryLabel = document.getElementById(
-    'selected-category-label'
+    "selected-category-label"
   );
 
   // Catégorie mobile/modal
   const modalCategoryOptions = document.querySelectorAll(
-    '.filter-modal-category-option'
+    ".filter-modal-category-option"
   );
 
   // Prix modal/mobile
-  const minPriceInput = document.getElementById('min-price');
-  const maxPriceInput = document.getElementById('max-price');
+  const minPriceInput = document.getElementById("min-price");
+  const maxPriceInput = document.getElementById("max-price");
   const priceInputOptions = document.querySelector(
-    '.filter-modal-price-options'
+    ".filter-modal-price-options"
   );
   const priceRangeOptions = document.querySelector(
-    '.filter-modal-price-range-options'
+    ".filter-modal-price-range-options"
   );
   const priceRangeOptionItems = document.querySelectorAll(
-    '.filter-modal-price-range-option'
+    ".filter-modal-price-range-option"
   );
 
   // Prix desktop
   const priceDropdownButton = document.querySelector(
-    '#offer-price-desktop-button'
+    "#offer-price-desktop-button"
   );
-  const priceDropdownOptions = document.querySelector('#desktop-price-options');
-  const selectedPriceLabel = document.getElementById('selected-price-label');
-  const minDesktopPriceInput = document.getElementById('min-price-desktop');
-  const maxDesktopPriceInput = document.getElementById('max-price-desktop');
+  const priceDropdownOptions = document.querySelector("#desktop-price-options");
+  const selectedPriceLabel = document.getElementById("selected-price-label");
+  const minDesktopPriceInput = document.getElementById("min-price-desktop");
+  const maxDesktopPriceInput = document.getElementById("max-price-desktop");
 
   // Gammes de prix desktop
   const desktopPriceRangeOptions = document.querySelector(
-    '#desktop-price-range-options'
+    "#desktop-price-range-options"
   );
   const desktopPriceRangeItems = document.querySelectorAll(
-    '#desktop-price-range-options .desktop-price-range-option'
+    "#desktop-price-range-options .desktop-price-range-option"
   );
 
   // Date modal/mobile
-  const startDateInput = document.getElementById('start-date');
-  const endDateInput = document.getElementById('end-date');
+  const startDateInput = document.getElementById("start-date");
+  const endDateInput = document.getElementById("end-date");
 
   // Date desktop
   const dateDropdownButton = document.querySelector(
-    '#offer-date-desktop-button'
+    "#offer-date-desktop-button"
   );
-  const dateDropdownOptions = document.querySelector('#desktop-date-options');
-  const selectedDateLabel = document.getElementById('selected-date-label');
-  const startDesktopDateInput = document.getElementById('desktop-start-date');
-  const endDesktopDateInput = document.getElementById('desktop-end-date');
+  const dateDropdownOptions = document.querySelector("#desktop-date-options");
+  const selectedDateLabel = document.getElementById("selected-date-label");
+  const startDesktopDateInput = document.getElementById("desktop-start-date");
+  const endDesktopDateInput = document.getElementById("desktop-end-date");
 
   // Note modal/mobile
-  const noteStars = document.querySelectorAll('.filter-modal-note-options img[data-star-value]');
+  const noteStars = document.querySelectorAll(
+    ".filter-modal-note-options img[data-star-value]"
+  );
 
   // Note desktop
-  const noteDropdownButton = document.querySelector('#desktop-note-button');
-  const noteDropdownOptions = document.querySelector('#desktop-note-options');
-  const selectedNoteLabel = document.getElementById('selected-note-label');
-  const desktopNoteStars = document.querySelectorAll('#desktop-note-options img[data-star-value]');
+  const noteDropdownButton = document.querySelector("#desktop-note-button");
+  const noteDropdownOptions = document.querySelector("#desktop-note-options");
+  const selectedNoteLabel = document.getElementById("selected-note-label");
+  const desktopNoteStars = document.querySelectorAll(
+    "#desktop-note-options img[data-star-value]"
+  );
 
   // Statut modal/mobile
   const modalStatusOptions = document.querySelectorAll(
-    '.filter-modal-status-option'
+    ".filter-modal-status-option"
   );
 
   // Statut desktop
-  const statusDropdownButton = document.querySelector('#desktop-status-button');
-  const statusDropdownOptions = document.querySelector('#desktop-status-options');
-  const selectedStatusLabel = document.getElementById('selected-status-label');
-  const desktopStatusOptions = document.querySelectorAll('#desktop-status-options p');
+  const statusDropdownButton = document.querySelector("#desktop-status-button");
+  const statusDropdownOptions = document.querySelector(
+    "#desktop-status-options"
+  );
+  const selectedStatusLabel = document.getElementById("selected-status-label");
+  const desktopStatusOptions = document.querySelectorAll(
+    "#desktop-status-options p"
+  );
 
   // Tri
-  const sortDropdownOptions = document.querySelector('#offer-sort-desktop-options');
-  const sortDropdownButton = document.querySelector('#offer-sort-desktop-button');
+  const sortDropdownOptions = document.querySelector(
+    "#offer-sort-desktop-options"
+  );
+  const sortDropdownButton = document.querySelector(
+    "#offer-sort-desktop-button"
+  );
 
   // --- FONCTIONS DE GESTION DES DROPDOWNS ---
 
   function closeAllDropdowns() {
     if (categoryDropdownOptions) {
-      categoryDropdownOptions.style.display = 'none';
+      categoryDropdownOptions.style.display = "none";
     }
     if (priceDropdownOptions) {
-      priceDropdownOptions.style.display = 'none';
+      priceDropdownOptions.style.display = "none";
     }
     if (desktopPriceRangeOptions) {
-      desktopPriceRangeOptions.style.display = 'none';
+      desktopPriceRangeOptions.style.display = "none";
     }
     if (dateDropdownOptions) {
-      dateDropdownOptions.style.display = 'none';
+      dateDropdownOptions.style.display = "none";
     }
     if (noteDropdownOptions) {
-      noteDropdownOptions.style.display = 'none';
+      noteDropdownOptions.style.display = "none";
     }
     if (statusDropdownOptions) {
-      statusDropdownOptions.style.display = 'none';
+      statusDropdownOptions.style.display = "none";
     }
     if (sortDropdownOptions) {
-      sortDropdownOptions.style.display = 'none';
+      sortDropdownOptions.style.display = "none";
     }
   }
 
   function closeAllDropdownsExcept(exceptElement) {
     if (categoryDropdownOptions && categoryDropdownOptions !== exceptElement) {
-      categoryDropdownOptions.style.display = 'none';
+      categoryDropdownOptions.style.display = "none";
     }
     if (priceDropdownOptions && priceDropdownOptions !== exceptElement) {
-      priceDropdownOptions.style.display = 'none';
+      priceDropdownOptions.style.display = "none";
     }
-    if (desktopPriceRangeOptions && desktopPriceRangeOptions !== exceptElement) {
-      desktopPriceRangeOptions.style.display = 'none';
+    if (
+      desktopPriceRangeOptions &&
+      desktopPriceRangeOptions !== exceptElement
+    ) {
+      desktopPriceRangeOptions.style.display = "none";
     }
     if (dateDropdownOptions && dateDropdownOptions !== exceptElement) {
-      dateDropdownOptions.style.display = 'none';
+      dateDropdownOptions.style.display = "none";
     }
     if (noteDropdownOptions && noteDropdownOptions !== exceptElement) {
-      noteDropdownOptions.style.display = 'none';
+      noteDropdownOptions.style.display = "none";
     }
     if (statusDropdownOptions && statusDropdownOptions !== exceptElement) {
-      statusDropdownOptions.style.display = 'none';
+      statusDropdownOptions.style.display = "none";
     }
     if (sortDropdownOptions && sortDropdownOptions !== exceptElement) {
-      sortDropdownOptions.style.display = 'none';
+      sortDropdownOptions.style.display = "none";
     }
   }
 
   function toggleCategoryDropdown() {
-    const isVisible = categoryDropdownOptions && categoryDropdownOptions.style.display === 'block';
+    const isVisible =
+      categoryDropdownOptions &&
+      categoryDropdownOptions.style.display === "block";
 
     // Fermer tous les autres dropdowns sauf celui-ci
     closeAllDropdownsExcept(categoryDropdownOptions);
 
     // Toggle le dropdown de catégorie
     if (categoryDropdownOptions) {
-      categoryDropdownOptions.style.display = isVisible ? 'none' : 'block';
+      categoryDropdownOptions.style.display = isVisible ? "none" : "block";
     }
   }
 
   function togglePriceDropdown() {
-    const currentCategory = filterManager.getFilter('category');
+    const currentCategory = filterManager.getFilter("category");
 
-    if (currentCategory === 'Restaurant') {
+    if (currentCategory === "Restaurant") {
       // Pour Restaurant : afficher les gammes de prix
-      const isVisible = desktopPriceRangeOptions && desktopPriceRangeOptions.style.display === 'block';
+      const isVisible =
+        desktopPriceRangeOptions &&
+        desktopPriceRangeOptions.style.display === "block";
 
       // Fermer tous les autres dropdowns sauf celui-ci
       closeAllDropdownsExcept(desktopPriceRangeOptions);
 
       if (desktopPriceRangeOptions) {
-        desktopPriceRangeOptions.style.display = isVisible ? 'none' : 'block';
+        desktopPriceRangeOptions.style.display = isVisible ? "none" : "block";
       }
     } else {
       // Pour les autres catégories : afficher les inputs min/max
-      const isVisible = priceDropdownOptions && priceDropdownOptions.style.display === 'flex';
+      const isVisible =
+        priceDropdownOptions && priceDropdownOptions.style.display === "flex";
 
       // Fermer tous les autres dropdowns sauf celui-ci
       closeAllDropdownsExcept(priceDropdownOptions);
 
       if (priceDropdownOptions) {
-        priceDropdownOptions.style.display = isVisible ? 'none' : 'flex';
+        priceDropdownOptions.style.display = isVisible ? "none" : "flex";
       }
     }
   }
 
   function toggleDateDropdown() {
-    const isVisible = dateDropdownOptions && dateDropdownOptions.style.display === 'flex';
+    const isVisible =
+      dateDropdownOptions && dateDropdownOptions.style.display === "flex";
 
     // Fermer tous les autres dropdowns sauf celui-ci
     closeAllDropdownsExcept(dateDropdownOptions);
 
     if (dateDropdownOptions) {
-      dateDropdownOptions.style.display = isVisible ? 'none' : 'flex';
+      dateDropdownOptions.style.display = isVisible ? "none" : "flex";
     }
   }
 
   function toggleNoteDropdown() {
-    const isVisible = noteDropdownOptions && noteDropdownOptions.style.display === 'flex';
+    const isVisible =
+      noteDropdownOptions && noteDropdownOptions.style.display === "flex";
 
     // Fermer tous les autres dropdowns sauf celui-ci
     closeAllDropdownsExcept(noteDropdownOptions);
 
     if (noteDropdownOptions) {
-      noteDropdownOptions.style.display = isVisible ? 'none' : 'flex';
+      noteDropdownOptions.style.display = isVisible ? "none" : "flex";
     }
   }
 
   function toggleStatusDropdown() {
-    const isVisible = statusDropdownOptions && statusDropdownOptions.style.display === 'block';
+    const isVisible =
+      statusDropdownOptions && statusDropdownOptions.style.display === "block";
 
     // Fermer tous les autres dropdowns sauf celui-ci
     closeAllDropdownsExcept(statusDropdownOptions);
 
     if (statusDropdownOptions) {
-      statusDropdownOptions.style.display = isVisible ? 'none' : 'block';
+      statusDropdownOptions.style.display = isVisible ? "none" : "block";
     }
   }
 
@@ -225,25 +248,25 @@ export function setupFilterUI(filterManager, displayManager) {
 
   // Fonction pour gérer la sélection d'une gamme de prix (mobile et desktop)
   function handlePriceRangeSelection(rangeValue, isFromDesktop = false) {
-    const currentFilter = filterManager.getFilter('price');
+    const currentFilter = filterManager.getFilter("price");
     const isCurrentlySelected = currentFilter === rangeValue;
 
     if (isCurrentlySelected) {
       // Désélectionner
-      filterManager.setFilter('price', null);
+      filterManager.setFilter("price", null);
 
       // Réinitialiser les sélections visuelles
       priceRangeOptionItems.forEach((option) => {
-        option.classList.remove('selected-price-range');
+        option.classList.remove("selected-price-range");
       });
       desktopPriceRangeItems.forEach((option) => {
-        option.classList.remove('selected-price-range-desktop');
+        option.classList.remove("selected-price-range-desktop");
       });
 
-      if (selectedPriceLabel) selectedPriceLabel.textContent = '';
+      if (selectedPriceLabel) selectedPriceLabel.textContent = "";
     } else {
       // Sélectionner
-      filterManager.setFilter('price', rangeValue);
+      filterManager.setFilter("price", rangeValue);
 
       // Synchroniser les sélections visuelles
       syncPriceRangeSelections(rangeValue);
@@ -254,7 +277,7 @@ export function setupFilterUI(filterManager, displayManager) {
 
     // Fermer le dropdown desktop si la sélection vient du desktop
     if (isFromDesktop && desktopPriceRangeOptions) {
-      desktopPriceRangeOptions.style.display = 'none';
+      desktopPriceRangeOptions.style.display = "none";
     }
 
     refreshDisplay();
@@ -264,24 +287,24 @@ export function setupFilterUI(filterManager, displayManager) {
   function syncPriceRangeSelections(rangeValue) {
     // Désélectionner tout d'abord
     priceRangeOptionItems.forEach((option) => {
-      option.classList.remove('selected-price-range');
+      option.classList.remove("selected-price-range");
     });
     desktopPriceRangeItems.forEach((option) => {
-      option.classList.remove('selected-price-range-desktop');
+      option.classList.remove("selected-price-range-desktop");
     });
 
     if (rangeValue) {
       // Sélectionner la bonne option mobile
       priceRangeOptionItems.forEach((option) => {
-        if (option.getAttribute('data-price-range') === rangeValue) {
-          option.classList.add('selected-price-range');
+        if (option.getAttribute("data-price-range") === rangeValue) {
+          option.classList.add("selected-price-range");
         }
       });
 
       // Sélectionner la bonne option desktop
       desktopPriceRangeItems.forEach((option) => {
-        if (option.getAttribute('data-price-range') === rangeValue) {
-          option.classList.add('selected-price-range-desktop');
+        if (option.getAttribute("data-price-range") === rangeValue) {
+          option.classList.add("selected-price-range-desktop");
         }
       });
     }
@@ -291,27 +314,27 @@ export function setupFilterUI(filterManager, displayManager) {
   function updatePriceRangeLabel(rangeValue) {
     if (!selectedPriceLabel) return;
 
-    let rangeText = '';
+    let rangeText = "";
     switch (rangeValue) {
-      case '1':
-        rangeText = ': < 25€';
+      case "1":
+        rangeText = ": < 25€";
         break;
-      case '2':
-        rangeText = ': 25-40€';
+      case "2":
+        rangeText = ": 25-40€";
         break;
-      case '3':
-        rangeText = ': > 40€';
+      case "3":
+        rangeText = ": > 40€";
         break;
     }
     selectedPriceLabel.textContent = rangeText;
   }
 
   function updateSelectedPriceLabel(min, max) {
-    const minValid = min !== undefined && min !== '' && !isNaN(Number(min));
-    const maxValid = max !== undefined && max !== '' && !isNaN(Number(max));
+    const minValid = min !== undefined && min !== "" && !isNaN(Number(min));
+    const maxValid = max !== undefined && max !== "" && !isNaN(Number(max));
 
     if (!minValid && !maxValid) {
-      if (selectedPriceLabel) selectedPriceLabel.textContent = '';
+      if (selectedPriceLabel) selectedPriceLabel.textContent = "";
     } else if (minValid && maxValid) {
       if (selectedPriceLabel)
         selectedPriceLabel.textContent = `: ${Number(min)} - ${Number(max)}`;
@@ -325,16 +348,16 @@ export function setupFilterUI(filterManager, displayManager) {
 
     // Synchroniser les inputs
     if (minDesktopPriceInput) {
-      minDesktopPriceInput.value = minValid ? Number(min) : '';
+      minDesktopPriceInput.value = minValid ? Number(min) : "";
     }
     if (maxDesktopPriceInput) {
-      maxDesktopPriceInput.value = maxValid ? Number(max) : '';
+      maxDesktopPriceInput.value = maxValid ? Number(max) : "";
     }
     if (minPriceInput) {
-      minPriceInput.value = minValid ? Number(min) : '';
+      minPriceInput.value = minValid ? Number(min) : "";
     }
     if (maxPriceInput) {
-      maxPriceInput.value = maxValid ? Number(max) : '';
+      maxPriceInput.value = maxValid ? Number(max) : "";
     }
   }
 
@@ -343,53 +366,53 @@ export function setupFilterUI(filterManager, displayManager) {
     const endValid = endDate && !isNaN(new Date(endDate));
 
     if (!startValid && !endValid) {
-      if (selectedDateLabel) selectedDateLabel.textContent = '';
+      if (selectedDateLabel) selectedDateLabel.textContent = "";
     } else if (startValid && endValid) {
-      const start = new Date(startDate).toLocaleDateString('fr-FR');
-      const end = new Date(endDate).toLocaleDateString('fr-FR');
+      const start = new Date(startDate).toLocaleDateString("fr-FR");
+      const end = new Date(endDate).toLocaleDateString("fr-FR");
       if (selectedDateLabel)
         selectedDateLabel.textContent = `: ${start} - ${end}`;
     } else if (startValid) {
-      const start = new Date(startDate).toLocaleDateString('fr-FR');
+      const start = new Date(startDate).toLocaleDateString("fr-FR");
       if (selectedDateLabel) selectedDateLabel.textContent = `: < ${start}`;
     } else if (endValid) {
-      const end = new Date(endDate).toLocaleDateString('fr-FR');
+      const end = new Date(endDate).toLocaleDateString("fr-FR");
       if (selectedDateLabel) selectedDateLabel.textContent = `: > ${end}`;
     }
 
     // Synchroniser les inputs
     if (startDesktopDateInput) {
-      startDesktopDateInput.value = startValid ? startDate : '';
+      startDesktopDateInput.value = startValid ? startDate : "";
     }
     if (endDesktopDateInput) {
-      endDesktopDateInput.value = endValid ? endDate : '';
+      endDesktopDateInput.value = endValid ? endDate : "";
     }
     if (startDateInput) {
-      startDateInput.value = startValid ? startDate : '';
+      startDateInput.value = startValid ? startDate : "";
     }
     if (endDateInput) {
-      endDateInput.value = endValid ? endDate : '';
+      endDateInput.value = endValid ? endDate : "";
     }
   }
 
   function resetPriceFilter() {
-    filterManager.setFilter('price', null);
+    filterManager.setFilter("price", null);
 
     // Reset des inputs
-    if (minPriceInput) minPriceInput.value = '';
-    if (maxPriceInput) maxPriceInput.value = '';
-    if (minDesktopPriceInput) minDesktopPriceInput.value = '';
-    if (maxDesktopPriceInput) maxDesktopPriceInput.value = '';
+    if (minPriceInput) minPriceInput.value = "";
+    if (maxPriceInput) maxPriceInput.value = "";
+    if (minDesktopPriceInput) minDesktopPriceInput.value = "";
+    if (maxDesktopPriceInput) maxDesktopPriceInput.value = "";
 
     // Reset du label
-    if (selectedPriceLabel) selectedPriceLabel.textContent = '';
+    if (selectedPriceLabel) selectedPriceLabel.textContent = "";
 
     // Reset des gammes de prix sélectionnées (mobile et desktop)
     priceRangeOptionItems.forEach((option) => {
-      option.classList.remove('selected-price-range');
+      option.classList.remove("selected-price-range");
     });
     desktopPriceRangeItems.forEach((option) => {
-      option.classList.remove('selected-price-range-desktop');
+      option.classList.remove("selected-price-range-desktop");
     });
 
     // Reset des classes d'erreur
@@ -401,44 +424,44 @@ export function setupFilterUI(filterManager, displayManager) {
     ].forEach((input) => {
       if (input?.parentElement) {
         input.parentElement.classList.remove(
-          'filter-modal-price-icon-wrapper-error'
+          "filter-modal-price-icon-wrapper-error"
         );
       }
     });
   }
 
   function resetDateFilter() {
-    filterManager.setFilter('date', null);
+    filterManager.setFilter("date", null);
 
     // Reset des inputs
-    if (startDateInput) startDateInput.value = '';
-    if (endDateInput) endDateInput.value = '';
-    if (startDesktopDateInput) startDesktopDateInput.value = '';
-    if (endDesktopDateInput) endDesktopDateInput.value = '';
+    if (startDateInput) startDateInput.value = "";
+    if (endDateInput) endDateInput.value = "";
+    if (startDesktopDateInput) startDesktopDateInput.value = "";
+    if (endDesktopDateInput) endDesktopDateInput.value = "";
 
     // Reset du label
-    if (selectedDateLabel) selectedDateLabel.textContent = '';
+    if (selectedDateLabel) selectedDateLabel.textContent = "";
 
     // Reset des classes d'erreur
-    if (startDateInput) startDateInput.classList.remove('date-error');
-    if (endDateInput) endDateInput.classList.remove('date-error');
+    if (startDateInput) startDateInput.classList.remove("date-error");
+    if (endDateInput) endDateInput.classList.remove("date-error");
     if (startDesktopDateInput)
-      startDesktopDateInput.classList.remove('date-error');
-    if (endDesktopDateInput) endDesktopDateInput.classList.remove('date-error');
+      startDesktopDateInput.classList.remove("date-error");
+    if (endDesktopDateInput) endDesktopDateInput.classList.remove("date-error");
   }
 
   // Mettre à jour l'affichage des options de prix selon la catégorie
   function updatePriceFilterDisplay(category) {
-    const isRestaurant = category === 'Restaurant';
+    const isRestaurant = category === "Restaurant";
 
     // Mobile
     if (priceInputOptions && priceRangeOptions) {
       if (isRestaurant) {
-        priceInputOptions.style.display = 'none';
-        priceRangeOptions.style.display = 'flex';
+        priceInputOptions.style.display = "none";
+        priceRangeOptions.style.display = "flex";
       } else {
-        priceInputOptions.style.display = 'flex';
-        priceRangeOptions.style.display = 'none';
+        priceInputOptions.style.display = "flex";
+        priceRangeOptions.style.display = "none";
       }
     }
 
@@ -448,40 +471,40 @@ export function setupFilterUI(filterManager, displayManager) {
 
   function validatePriceRange(min, max) {
     if (
-      (min === undefined || min === '') &&
-      (max === undefined || max === '')
+      (min === undefined || min === "") &&
+      (max === undefined || max === "")
     ) {
-      return { valid: false, min: undefined, max: undefined, reason: 'empty' };
+      return { valid: false, min: undefined, max: undefined, reason: "empty" };
     }
     if (
-      (min !== undefined && min !== '' && isNaN(min)) ||
-      (max !== undefined && max !== '' && isNaN(max))
+      (min !== undefined && min !== "" && isNaN(min)) ||
+      (max !== undefined && max !== "" && isNaN(max))
     ) {
       return {
         valid: false,
         min: undefined,
         max: undefined,
-        reason: 'not_a_number',
+        reason: "not_a_number",
       };
     }
     if (
       min !== undefined &&
-      min !== '' &&
+      min !== "" &&
       max !== undefined &&
-      max !== '' &&
+      max !== "" &&
       Number(max) < Number(min)
     ) {
       return {
         valid: false,
         min: undefined,
         max: undefined,
-        reason: 'max_lt_min',
+        reason: "max_lt_min",
       };
     }
     return {
       valid: true,
-      min: min !== '' ? Number(min) : undefined,
-      max: max !== '' ? Number(max) : undefined,
+      min: min !== "" ? Number(min) : undefined,
+      max: max !== "" ? Number(max) : undefined,
     };
   }
 
@@ -491,7 +514,7 @@ export function setupFilterUI(filterManager, displayManager) {
         valid: false,
         startDate: undefined,
         endDate: undefined,
-        reason: 'empty',
+        reason: "empty",
       };
     }
 
@@ -503,7 +526,7 @@ export function setupFilterUI(filterManager, displayManager) {
         valid: false,
         startDate: undefined,
         endDate: undefined,
-        reason: 'invalid_date',
+        reason: "invalid_date",
       };
     }
 
@@ -512,7 +535,7 @@ export function setupFilterUI(filterManager, displayManager) {
         valid: false,
         startDate: undefined,
         endDate: undefined,
-        reason: 'end_before_start',
+        reason: "end_before_start",
       };
     }
 
@@ -532,38 +555,49 @@ export function setupFilterUI(filterManager, displayManager) {
     syncPriceRangeSelections(null);
 
     minDesktopPriceInput?.parentElement.classList.remove(
-      'filter-modal-price-icon-wrapper-error'
+      "filter-modal-price-icon-wrapper-error"
     );
     maxDesktopPriceInput?.parentElement.classList.remove(
-      'filter-modal-price-icon-wrapper-error'
+      "filter-modal-price-icon-wrapper-error"
     );
 
-    if (!validation.valid) {
-      if (min !== undefined && min !== '' && isNaN(min))
+    if (!validation.valid && validation.reason !== "empty") {
+      if (min !== undefined && min !== "" && isNaN(min))
         minDesktopPriceInput?.parentElement.classList.add(
-          'filter-modal-price-icon-wrapper-error'
+          "filter-modal-price-icon-wrapper-error"
         );
-      if (max !== undefined && max !== '' && isNaN(max))
+      if (max !== undefined && max !== "" && isNaN(max))
         maxDesktopPriceInput?.parentElement.classList.add(
-          'filter-modal-price-icon-wrapper-error'
+          "filter-modal-price-icon-wrapper-error"
         );
-      if (validation.reason === 'max_lt_min') {
+      if (validation.reason === "max_lt_min") {
         minDesktopPriceInput?.parentElement.classList.add(
-          'filter-modal-price-icon-wrapper-error'
+          "filter-modal-price-icon-wrapper-error"
         );
         maxDesktopPriceInput?.parentElement.classList.add(
-          'filter-modal-price-icon-wrapper-error'
+          "filter-modal-price-icon-wrapper-error"
         );
       }
-      if (selectedPriceLabel) selectedPriceLabel.textContent = '';
+      // Si les prix ne sont pas valides, ne pas appliquer le filtre
+      filterManager.setFilter("price", null);
+      updateSelectedPriceLabel("", "");
+      refreshDisplay();
       return;
     }
 
-    filterManager.setFilter('price', {
-      min: validation.min,
-      max: validation.max,
-    });
-    updateSelectedPriceLabel(validation.min, validation.max);
+    // Si les deux champs sont vides, réinitialiser le filtre
+    if (validation.reason === "empty") {
+      filterManager.setFilter("price", null);
+      updateSelectedPriceLabel("", "");
+    } else {
+      // Appliquer le filtre avec les valeurs valides
+      filterManager.setFilter("price", {
+        min: validation.min,
+        max: validation.max,
+      });
+      updateSelectedPriceLabel(validation.min, validation.max);
+    }
+
     refreshDisplay();
   }
 
@@ -576,74 +610,47 @@ export function setupFilterUI(filterManager, displayManager) {
     syncPriceRangeSelections(null);
 
     minPriceInput?.parentElement.classList.remove(
-      'filter-modal-price-icon-wrapper-error'
+      "filter-modal-price-icon-wrapper-error"
     );
     maxPriceInput?.parentElement.classList.remove(
-      'filter-modal-price-icon-wrapper-error'
+      "filter-modal-price-icon-wrapper-error"
     );
 
-    if (!validation.valid) {
-      if (min !== undefined && min !== '' && isNaN(min))
+    if (!validation.valid && validation.reason !== "empty") {
+      if (min !== undefined && min !== "" && isNaN(min))
         minPriceInput?.parentElement.classList.add(
-          'filter-modal-price-icon-wrapper-error'
+          "filter-modal-price-icon-wrapper-error"
         );
-      if (max !== undefined && max !== '' && isNaN(max))
+      if (max !== undefined && max !== "" && isNaN(max))
         maxPriceInput?.parentElement.classList.add(
-          'filter-modal-price-icon-wrapper-error'
+          "filter-modal-price-icon-wrapper-error"
         );
-      if (validation.reason === 'max_lt_min') {
+      if (validation.reason === "max_lt_min") {
         minPriceInput?.parentElement.classList.add(
-          'filter-modal-price-icon-wrapper-error'
+          "filter-modal-price-icon-wrapper-error"
         );
         maxPriceInput?.parentElement.classList.add(
-          'filter-modal-price-icon-wrapper-error'
+          "filter-modal-price-icon-wrapper-error"
         );
       }
-      if (selectedPriceLabel) selectedPriceLabel.textContent = '';
-      return;
-    }
-
-    filterManager.setFilter('price', {
-      min: validation.min,
-      max: validation.max,
-    });
-    updateSelectedPriceLabel(validation.min, validation.max);
-    refreshDisplay();
-  }
-
-  function handleDesktopDateChange() {
-    const startDate = startDesktopDateInput?.value || undefined;
-    const endDate = endDesktopDateInput?.value || undefined;
-    const validation = validateDateRange(startDate, endDate);
-
-    // Reset des classes d'erreur
-    if (startDesktopDateInput)
-      startDesktopDateInput.classList.remove('date-error');
-    if (endDesktopDateInput) endDesktopDateInput.classList.remove('date-error');
-
-    if (!validation.valid) {
-      if (validation.reason === 'end_before_start') {
-        if (startDesktopDateInput)
-          startDesktopDateInput.classList.add('date-error');
-        if (endDesktopDateInput)
-          endDesktopDateInput.classList.add('date-error');
-      }
-      if (selectedDateLabel) selectedDateLabel.textContent = '';
-      // Si les dates ne sont pas valides, on ignore le filtre (affiche toutes les offres)
-      filterManager.setFilter('date', null);
+      // Si les prix ne sont pas valides, ne pas appliquer le filtre
+      filterManager.setFilter("price", null);
+      updateSelectedPriceLabel("", "");
       refreshDisplay();
       return;
     }
 
-    if (validation.reason === 'empty') {
-      filterManager.setFilter('date', null);
-      updateSelectedDateLabel(undefined, undefined);
+    // Si les deux champs sont vides, réinitialiser le filtre
+    if (validation.reason === "empty") {
+      filterManager.setFilter("price", null);
+      updateSelectedPriceLabel("", "");
     } else {
-      filterManager.setFilter('date', {
-        startDate: validation.startDate,
-        endDate: validation.endDate,
+      // Appliquer le filtre avec les valeurs valides
+      filterManager.setFilter("price", {
+        min: validation.min,
+        max: validation.max,
       });
-      updateSelectedDateLabel(startDate, endDate);
+      updateSelectedPriceLabel(validation.min, validation.max);
     }
 
     refreshDisplay();
@@ -655,26 +662,61 @@ export function setupFilterUI(filterManager, displayManager) {
     const validation = validateDateRange(startDate, endDate);
 
     // Reset des classes d'erreur
-    if (startDateInput) startDateInput.classList.remove('date-error');
-    if (endDateInput) endDateInput.classList.remove('date-error');
+    if (startDateInput) startDateInput.classList.remove("date-error");
+    if (endDateInput) endDateInput.classList.remove("date-error");
 
     if (!validation.valid) {
-      if (validation.reason === 'end_before_start') {
-        if (startDateInput) startDateInput.classList.add('date-error');
-        if (endDateInput) endDateInput.classList.add('date-error');
+      if (validation.reason === "end_before_start") {
+        if (startDateInput) startDateInput.classList.add("date-error");
+        if (endDateInput) endDateInput.classList.add("date-error");
       }
-      if (selectedDateLabel) selectedDateLabel.textContent = '';
+      if (selectedDateLabel) selectedDateLabel.textContent = "";
       // Si les dates ne sont pas valides, on ignore le filtre (affiche toutes les offres)
-      filterManager.setFilter('date', null);
+      filterManager.setFilter("date", null);
       refreshDisplay();
       return;
     }
 
-    if (validation.reason === 'empty') {
-      filterManager.setFilter('date', null);
+    if (validation.reason === "empty") {
+      filterManager.setFilter("date", null);
       updateSelectedDateLabel(undefined, undefined);
     } else {
-      filterManager.setFilter('date', {
+      filterManager.setFilter("date", {
+        startDate: validation.startDate,
+        endDate: validation.endDate,
+      });
+      updateSelectedDateLabel(startDate, endDate);
+    }
+
+    refreshDisplay();
+  }
+
+  function handleDesktopDateChange() {
+    const startDate = startDesktopDateInput?.value || undefined;
+    const endDate = endDesktopDateInput?.value || undefined;
+    const validation = validateDateRange(startDate, endDate);
+
+    // Reset des classes d'erreur
+    if (startDesktopDateInput) startDesktopDateInput.classList.remove("date-error");
+    if (endDesktopDateInput) endDesktopDateInput.classList.remove("date-error");
+
+    if (!validation.valid) {
+      if (validation.reason === "end_before_start") {
+        if (startDesktopDateInput) startDesktopDateInput.classList.add("date-error");
+        if (endDesktopDateInput) endDesktopDateInput.classList.add("date-error");
+      }
+      if (selectedDateLabel) selectedDateLabel.textContent = "";
+      // Si les dates ne sont pas valides, on ignore le filtre (affiche toutes les offres)
+      filterManager.setFilter("date", null);
+      refreshDisplay();
+      return;
+    }
+
+    if (validation.reason === "empty") {
+      filterManager.setFilter("date", null);
+      updateSelectedDateLabel(undefined, undefined);
+    } else {
+      filterManager.setFilter("date", {
         startDate: validation.startDate,
         endDate: validation.endDate,
       });
@@ -686,22 +728,22 @@ export function setupFilterUI(filterManager, displayManager) {
 
   // Fonction pour gérer la sélection des étoiles (mobile et desktop)
   function handleStarSelection(selectedValue, isFromDesktop = false) {
-    const currentNote = filterManager.getFilter('note');
+    const currentNote = filterManager.getFilter("note");
 
     // Si on clique sur la même note, on désélectionne
     if (currentNote === selectedValue) {
-      filterManager.setFilter('note', null);
+      filterManager.setFilter("note", null);
       updateStarDisplay(0);
       updateSelectedNoteLabel(null);
     } else {
-      filterManager.setFilter('note', selectedValue);
+      filterManager.setFilter("note", selectedValue);
       updateStarDisplay(selectedValue);
       updateSelectedNoteLabel(selectedValue);
     }
 
     // Fermer le dropdown desktop si la sélection vient du desktop
     if (isFromDesktop && noteDropdownOptions) {
-      noteDropdownOptions.style.display = 'none';
+      noteDropdownOptions.style.display = "none";
     }
 
     refreshDisplay();
@@ -716,16 +758,19 @@ export function setupFilterUI(filterManager, displayManager) {
 
       if (selectedNote === 0) {
         // Aucune sélection - toutes les étoiles en outline
-        starImg.src = '/assets/icons/star_outline_pink.svg';
+        starImg.src = "/assets/icons/star_outline_pink.svg";
       } else if (starValue <= Math.floor(selectedNote)) {
         // Étoiles pleines
-        starImg.src = '/assets/icons/star_pink.svg';
-      } else if (starValue === Math.ceil(selectedNote) && selectedNote % 1 !== 0) {
+        starImg.src = "/assets/icons/star_pink.svg";
+      } else if (
+        starValue === Math.ceil(selectedNote) &&
+        selectedNote % 1 !== 0
+      ) {
         // Demi-étoile
-        starImg.src = '/assets/icons/star_half_pink.svg';
+        starImg.src = "/assets/icons/star_half_pink.svg";
       } else {
         // Étoiles vides
-        starImg.src = '/assets/icons/star_outline_pink.svg';
+        starImg.src = "/assets/icons/star_outline_pink.svg";
       }
     });
 
@@ -736,16 +781,19 @@ export function setupFilterUI(filterManager, displayManager) {
 
       if (selectedNote === 0) {
         // Aucune sélection - toutes les étoiles en outline
-        starImg.src = '/assets/icons/star_outline_pink.svg';
+        starImg.src = "/assets/icons/star_outline_pink.svg";
       } else if (starValue <= Math.floor(selectedNote)) {
         // Étoiles pleines
-        starImg.src = '/assets/icons/star_pink.svg';
-      } else if (starValue === Math.ceil(selectedNote) && selectedNote % 1 !== 0) {
+        starImg.src = "/assets/icons/star_pink.svg";
+      } else if (
+        starValue === Math.ceil(selectedNote) &&
+        selectedNote % 1 !== 0
+      ) {
         // Demi-étoile
-        starImg.src = '/assets/icons/star_half_pink.svg';
+        starImg.src = "/assets/icons/star_half_pink.svg";
       } else {
         // Étoiles vides
-        starImg.src = '/assets/icons/star_outline_pink.svg';
+        starImg.src = "/assets/icons/star_outline_pink.svg";
       }
     });
   }
@@ -759,16 +807,16 @@ export function setupFilterUI(filterManager, displayManager) {
       const starImg = star;
 
       if (starValue <= hoveredValue) {
-        starImg.src = '/assets/icons/star_pink.svg';
+        starImg.src = "/assets/icons/star_pink.svg";
       } else {
-        starImg.src = '/assets/icons/star_outline_pink.svg';
+        starImg.src = "/assets/icons/star_outline_pink.svg";
       }
     });
   }
 
   // Fonction pour restaurer l'affichage après le survol
   function restoreStarDisplay() {
-    const currentNote = filterManager.getFilter('note') || 0;
+    const currentNote = filterManager.getFilter("note") || 0;
     updateStarDisplay(currentNote);
   }
 
@@ -777,46 +825,52 @@ export function setupFilterUI(filterManager, displayManager) {
     if (!selectedNoteLabel) return;
 
     if (!noteValue || noteValue === 0) {
-      selectedNoteLabel.textContent = '';
+      selectedNoteLabel.textContent = "";
     } else {
-      const starText = noteValue === 1 ? 'étoile' : 'étoiles';
+      const starText = noteValue === 1 ? "étoile" : "étoiles";
       selectedNoteLabel.textContent = `: ≥ ${noteValue} ${starText}`;
     }
   }
 
   function handleStatusSelection(status, isFromDesktop = true) {
-    const isCurrentlySelected = filterManager.getFilter('status') === status;
+    const isCurrentlySelected = filterManager.getFilter("status") === status;
 
-    filterManager.setFilter('status', isCurrentlySelected ? null : status);
+    filterManager.setFilter("status", isCurrentlySelected ? null : status);
     const selectedStatus = isCurrentlySelected ? null : status;
 
     // Synchroniser les sélections de statut entre desktop et mobile
     desktopStatusOptions.forEach((opt) => {
-      opt.classList.remove('selected-status-desktop');
-      if (!isCurrentlySelected && opt.getAttribute('data-status-value') === status) {
-        opt.classList.add('selected-status-desktop');
+      opt.classList.remove("selected-status-desktop");
+      if (
+        !isCurrentlySelected &&
+        opt.getAttribute("data-status-value") === status
+      ) {
+        opt.classList.add("selected-status-desktop");
       }
     });
 
     modalStatusOptions.forEach((opt) => {
-      opt.classList.remove('selected-status');
-      if (!isCurrentlySelected && opt.getAttribute('data-status-value') === status) {
-        opt.classList.add('selected-status');
+      opt.classList.remove("selected-status");
+      if (
+        !isCurrentlySelected &&
+        opt.getAttribute("data-status-value") === status
+      ) {
+        opt.classList.add("selected-status");
       }
     });
 
     // Mettre à jour le label
     if (selectedStatusLabel) {
-      let statusText = '';
+      let statusText = "";
       if (!isCurrentlySelected && status) {
-        statusText = status === 'open' ? ': Ouvert' : ': Fermé';
+        statusText = status === "open" ? ": Ouvert" : ": Fermé";
       }
       selectedStatusLabel.textContent = statusText;
     }
 
     // Fermer le dropdown desktop si la sélection vient du desktop
     if (isFromDesktop && statusDropdownOptions) {
-      statusDropdownOptions.style.display = 'none';
+      statusDropdownOptions.style.display = "none";
     }
 
     refreshDisplay();
@@ -825,8 +879,8 @@ export function setupFilterUI(filterManager, displayManager) {
   // --- FONCTION CATÉGORIE ---
   function handleCategorySelection(category, isFromDesktop = true) {
     const isCurrentlySelected =
-      filterManager.getFilter('category') === category;
-    const previousCategory = filterManager.getFilter('category');
+      filterManager.getFilter("category") === category;
+    const previousCategory = filterManager.getFilter("category");
 
     // RESET UNIQUEMENT lors du passage Restaurant ↔ autre catégorie
     if (
@@ -834,8 +888,8 @@ export function setupFilterUI(filterManager, displayManager) {
       previousCategory &&
       previousCategory !== category
     ) {
-      const wasRestaurant = previousCategory === 'Restaurant';
-      const isRestaurant = category === 'Restaurant';
+      const wasRestaurant = previousCategory === "Restaurant";
+      const isRestaurant = category === "Restaurant";
 
       // Reset seulement si on change entre Restaurant et non-Restaurant
       if (wasRestaurant !== isRestaurant) {
@@ -847,33 +901,33 @@ export function setupFilterUI(filterManager, displayManager) {
     }
 
     // Reset si on désélectionne Restaurant pour aller vers "aucune catégorie"
-    if (isCurrentlySelected && previousCategory === 'Restaurant') {
+    if (isCurrentlySelected && previousCategory === "Restaurant") {
       resetPriceFilter();
       closeAllDropdowns();
     }
 
-    filterManager.setFilter('category', isCurrentlySelected ? null : category);
+    filterManager.setFilter("category", isCurrentlySelected ? null : category);
     const selectedCategory = isCurrentlySelected ? null : category;
     updatePriceFilterDisplay(selectedCategory);
 
     // Synchroniser les sélections de catégorie entre desktop et mobile
     desktopCategoryOptions.forEach((opt) => {
-      opt.classList.remove('selected-category-desktop');
+      opt.classList.remove("selected-category-desktop");
       if (!isCurrentlySelected && opt.dataset.category === category) {
-        opt.classList.add('selected-category-desktop');
+        opt.classList.add("selected-category-desktop");
       }
     });
 
     modalCategoryOptions.forEach((opt) => {
-      opt.classList.remove('selected-category');
+      opt.classList.remove("selected-category");
       if (!isCurrentlySelected && opt.dataset.category === category) {
-        opt.classList.add('selected-category');
+        opt.classList.add("selected-category");
       }
     });
 
     if (selectedCategoryLabel) {
       selectedCategoryLabel.textContent =
-        !isCurrentlySelected && category ? `: ${category}` : '';
+        !isCurrentlySelected && category ? `: ${category}` : "";
     }
 
     refreshDisplay();
@@ -883,8 +937,8 @@ export function setupFilterUI(filterManager, displayManager) {
 
   // Texte
   if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
-      filterManager.setFilter('search', e.target.value);
+    searchInput.addEventListener("input", (e) => {
+      filterManager.setFilter("search", e.target.value);
       refreshDisplay();
     });
   }
@@ -892,10 +946,10 @@ export function setupFilterUI(filterManager, displayManager) {
   // Gammes de prix mobile
   if (priceRangeOptionItems && priceRangeOptionItems.length > 0) {
     priceRangeOptionItems.forEach((option) => {
-      option.addEventListener('click', (e) => {
+      option.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-        const rangeValue = option.getAttribute('data-price-range');
+        const rangeValue = option.getAttribute("data-price-range");
         handlePriceRangeSelection(rangeValue, false);
       });
     });
@@ -904,10 +958,10 @@ export function setupFilterUI(filterManager, displayManager) {
   // Gammes de prix desktop
   if (desktopPriceRangeItems && desktopPriceRangeItems.length > 0) {
     desktopPriceRangeItems.forEach((option) => {
-      option.addEventListener('click', (e) => {
+      option.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-        const rangeValue = option.getAttribute('data-price-range');
+        const rangeValue = option.getAttribute("data-price-range");
         handlePriceRangeSelection(rangeValue, true);
       });
     });
@@ -915,7 +969,7 @@ export function setupFilterUI(filterManager, displayManager) {
 
   // Catégorie desktop
   if (categoryDropdownButton) {
-    categoryDropdownButton.addEventListener('click', (e) => {
+    categoryDropdownButton.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
       toggleCategoryDropdown();
@@ -924,7 +978,7 @@ export function setupFilterUI(filterManager, displayManager) {
 
   // Catégorie desktop options
   desktopCategoryOptions.forEach((option) => {
-    option.addEventListener('click', (e) => {
+    option.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
       const category = option.dataset.category;
@@ -935,7 +989,7 @@ export function setupFilterUI(filterManager, displayManager) {
 
   // Catégorie mobile/modal options
   modalCategoryOptions.forEach((option) => {
-    option.addEventListener('click', (e) => {
+    option.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
       const category = option.dataset.category;
@@ -946,9 +1000,9 @@ export function setupFilterUI(filterManager, displayManager) {
   // Prix modal/mobile inputs
   const debouncedHandlePriceChange = debounce(handlePriceChange, 500);
   if (minPriceInput)
-    minPriceInput.addEventListener('input', debouncedHandlePriceChange);
+    minPriceInput.addEventListener("input", debouncedHandlePriceChange);
   if (maxPriceInput)
-    maxPriceInput.addEventListener('input', debouncedHandlePriceChange);
+    maxPriceInput.addEventListener("input", debouncedHandlePriceChange);
 
   // Prix desktop inputs
   const debouncedHandleDesktopPriceChange = debounce(
@@ -957,21 +1011,21 @@ export function setupFilterUI(filterManager, displayManager) {
   );
   if (minDesktopPriceInput)
     minDesktopPriceInput.addEventListener(
-      'input',
+      "input",
       debouncedHandleDesktopPriceChange
     );
   if (maxDesktopPriceInput)
     maxDesktopPriceInput.addEventListener(
-      'input',
+      "input",
       debouncedHandleDesktopPriceChange
     );
 
   // Date modal/mobile inputs
   const debouncedHandleDateChange = debounce(handleDateChange, 500);
   if (startDateInput)
-    startDateInput.addEventListener('input', debouncedHandleDateChange);
+    startDateInput.addEventListener("input", debouncedHandleDateChange);
   if (endDateInput)
-    endDateInput.addEventListener('input', debouncedHandleDateChange);
+    endDateInput.addEventListener("input", debouncedHandleDateChange);
 
   // Date desktop inputs
   const debouncedHandleDesktopDateChange = debounce(
@@ -980,18 +1034,18 @@ export function setupFilterUI(filterManager, displayManager) {
   );
   if (startDesktopDateInput)
     startDesktopDateInput.addEventListener(
-      'input',
+      "input",
       debouncedHandleDesktopDateChange
     );
   if (endDesktopDateInput)
     endDesktopDateInput.addEventListener(
-      'input',
+      "input",
       debouncedHandleDesktopDateChange
     );
 
   // Toggle du dropdown prix desktop
   if (priceDropdownButton) {
-    priceDropdownButton.addEventListener('click', (e) => {
+    priceDropdownButton.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
       togglePriceDropdown();
@@ -1000,7 +1054,7 @@ export function setupFilterUI(filterManager, displayManager) {
 
   // Toggle du dropdown date desktop
   if (dateDropdownButton) {
-    dateDropdownButton.addEventListener('click', (e) => {
+    dateDropdownButton.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
       toggleDateDropdown();
@@ -1009,7 +1063,7 @@ export function setupFilterUI(filterManager, displayManager) {
 
   // Toggle du dropdown note desktop
   if (noteDropdownButton) {
-    noteDropdownButton.addEventListener('click', (e) => {
+    noteDropdownButton.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
       toggleNoteDropdown();
@@ -1018,7 +1072,7 @@ export function setupFilterUI(filterManager, displayManager) {
 
   // Statut desktop
   if (statusDropdownButton) {
-    statusDropdownButton.addEventListener('click', (e) => {
+    statusDropdownButton.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
       toggleStatusDropdown();
@@ -1027,20 +1081,20 @@ export function setupFilterUI(filterManager, displayManager) {
 
   // Statut desktop options
   desktopStatusOptions.forEach((option) => {
-    option.addEventListener('click', (e) => {
+    option.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      const status = option.getAttribute('data-status-value');
+      const status = option.getAttribute("data-status-value");
       handleStatusSelection(status, true);
     });
   });
 
   // Statut mobile/modal options
   modalStatusOptions.forEach((option) => {
-    option.addEventListener('click', (e) => {
+    option.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      const status = option.getAttribute('data-status-value');
+      const status = option.getAttribute("data-status-value");
       handleStatusSelection(status, false);
     });
   });
@@ -1051,24 +1105,24 @@ export function setupFilterUI(filterManager, displayManager) {
       const starValue = index + 1;
 
       // Gestion du clic
-      star.addEventListener('click', (e) => {
+      star.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
         handleStarSelection(starValue, false);
       });
 
       // Gestion du survol
-      star.addEventListener('mouseenter', () => {
+      star.addEventListener("mouseenter", () => {
         handleStarHover(starValue, false);
       });
 
       // Restaurer l'affichage quand on quitte la zone des étoiles
-      star.addEventListener('mouseleave', () => {
+      star.addEventListener("mouseleave", () => {
         restoreStarDisplay();
       });
 
       // Ajouter un style de curseur pointer
-      star.style.cursor = 'pointer';
+      star.style.cursor = "pointer";
     });
   }
 
@@ -1078,29 +1132,29 @@ export function setupFilterUI(filterManager, displayManager) {
       const starValue = index + 1;
 
       // Gestion du clic
-      star.addEventListener('click', (e) => {
+      star.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
         handleStarSelection(starValue, true);
       });
 
       // Gestion du survol
-      star.addEventListener('mouseenter', () => {
+      star.addEventListener("mouseenter", () => {
         handleStarHover(starValue, true);
       });
 
       // Restaurer l'affichage quand on quitte la zone des étoiles
-      star.addEventListener('mouseleave', () => {
+      star.addEventListener("mouseleave", () => {
         restoreStarDisplay();
       });
 
       // Ajouter un style de curseur pointer
-      star.style.cursor = 'pointer';
+      star.style.cursor = "pointer";
     });
   }
 
   // Fermer les dropdowns quand on clique ailleurs
-  document.addEventListener('click', (e) => {
+  document.addEventListener("click", (e) => {
     // Dropdown catégorie
     if (
       categoryDropdownButton &&
@@ -1108,7 +1162,7 @@ export function setupFilterUI(filterManager, displayManager) {
       !categoryDropdownButton.contains(e.target) &&
       !categoryDropdownOptions.contains(e.target)
     ) {
-      categoryDropdownOptions.style.display = 'none';
+      categoryDropdownOptions.style.display = "none";
     }
 
     // Dropdown prix
@@ -1118,7 +1172,7 @@ export function setupFilterUI(filterManager, displayManager) {
       !priceDropdownButton.contains(e.target) &&
       !priceDropdownOptions.contains(e.target)
     ) {
-      priceDropdownOptions.style.display = 'none';
+      priceDropdownOptions.style.display = "none";
     }
 
     // Dropdown prix range
@@ -1128,7 +1182,7 @@ export function setupFilterUI(filterManager, displayManager) {
       !priceDropdownButton.contains(e.target) &&
       !desktopPriceRangeOptions.contains(e.target)
     ) {
-      desktopPriceRangeOptions.style.display = 'none';
+      desktopPriceRangeOptions.style.display = "none";
     }
 
     // Dropdown date
@@ -1138,7 +1192,7 @@ export function setupFilterUI(filterManager, displayManager) {
       !dateDropdownButton.contains(e.target) &&
       !dateDropdownOptions.contains(e.target)
     ) {
-      dateDropdownOptions.style.display = 'none';
+      dateDropdownOptions.style.display = "none";
     }
 
     // Dropdown note
@@ -1148,7 +1202,7 @@ export function setupFilterUI(filterManager, displayManager) {
       !noteDropdownButton.contains(e.target) &&
       !noteDropdownOptions.contains(e.target)
     ) {
-      noteDropdownOptions.style.display = 'none';
+      noteDropdownOptions.style.display = "none";
     }
 
     // Dropdown statut
@@ -1158,7 +1212,7 @@ export function setupFilterUI(filterManager, displayManager) {
       !statusDropdownButton.contains(e.target) &&
       !statusDropdownOptions.contains(e.target)
     ) {
-      statusDropdownOptions.style.display = 'none';
+      statusDropdownOptions.style.display = "none";
     }
     if (
       sortDropdownButton &&
@@ -1166,7 +1220,7 @@ export function setupFilterUI(filterManager, displayManager) {
       !sortDropdownButton.contains(e.target) &&
       !sortDropdownOptions.contains(e.target)
     ) {
-      sortDropdownOptions.style.display = 'none';
+      sortDropdownOptions.style.display = "none";
     }
   });
 
@@ -1189,22 +1243,22 @@ export function setupFilterUI(filterManager, displayManager) {
 
   // Initialiser tous les dropdowns comme fermés
   if (categoryDropdownOptions) {
-    categoryDropdownOptions.style.display = 'none';
+    categoryDropdownOptions.style.display = "none";
   }
   if (priceDropdownOptions) {
-    priceDropdownOptions.style.display = 'none';
+    priceDropdownOptions.style.display = "none";
   }
   if (desktopPriceRangeOptions) {
-    desktopPriceRangeOptions.style.display = 'none';
+    desktopPriceRangeOptions.style.display = "none";
   }
   if (dateDropdownOptions) {
-    dateDropdownOptions.style.display = 'none';
+    dateDropdownOptions.style.display = "none";
   }
   if (noteDropdownOptions) {
-    noteDropdownOptions.style.display = 'none';
+    noteDropdownOptions.style.display = "none";
   }
   if (statusDropdownOptions) {
-    statusDropdownOptions.style.display = 'none';
+    statusDropdownOptions.style.display = "none";
   }
 
   // Initialiser l'affichage des étoiles

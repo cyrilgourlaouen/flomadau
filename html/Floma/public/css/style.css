@@ -1404,6 +1404,16 @@ footer div nav :any-link {
   align-items: flex-end;
 }
 
+.no-offers-message {
+  display: none;
+  font-size: var(--subtitle-size);
+  color: var(--dark-grey-color);
+  text-align: center;
+  padding: 2.5rem;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
 @media (width >=65rem) {
 
   .calendar {
