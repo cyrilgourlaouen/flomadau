@@ -52,7 +52,12 @@ const ROUTES = [
         'method' => 'updateData',
         'layout' => Layout::BACK,
     ],
-    '/connexion'=> [
+    '/pro/consultation/offer/{id}' => [
+        'controller' => App\Controller\ConsultationOfferController::class,
+        'method' => 'show',
+        'layout' => Layout::BACK,
+    ],
+    '/connexion' => [
         'controller' => App\Controller\ConnexionController::class,
         'method' => 'connection',
         'layout' => Layout::LOG,
@@ -85,6 +90,10 @@ const ROUTES = [
         'controller' => App\Controller\ModificationMembreController::class,
         'method' => 'checkEmail',
     ],
+    '/offre/updateOffer' => [
+        'controller' => App\Controller\ModificationOfferController::class,
+        'method' => 'updateOffer',
+    ]
 ];
 
 ?>
