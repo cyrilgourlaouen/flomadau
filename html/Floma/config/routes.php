@@ -141,10 +141,6 @@ const ROUTES = [
         'controller' => App\Controller\TwoFactorAuthController::class,
         'method' => 'ajaxVerify',
         'view' => false,
-    ],
-    '/offre/updateOffer' => [
-        'controller' => App\Controller\ModificationOfferController::class,
-        'method' => 'updateOffer',
-    ],
+    ]
 ];
 ?>
