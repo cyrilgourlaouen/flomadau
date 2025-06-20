@@ -24,6 +24,34 @@ document.addEventListener('DOMContentLoaded', function () {
         { field: 'numero_rue', valid: val => val !== '', message: 'Veuillez entrer un numero de rue.' },
         { field: 'ville', valid: val => val !== '', message: 'Veuillez entrer une ville.' },
         { field: 'telephone', valid: val => /^(?:(?:\+33|0033)\s?|0)[1-9](?:[\s.-]?\d{2}){4}$/.test(val), message: 'Veuillez entrer un numéro valide.' },
+        { 
+            field: 'card-number', 
+            valid: val => {
+                const field = document.getElementById('card-number');
+                if (!field || !isVisible(field)) return true;
+                return /^\d{13,19}$/.test(val);
+            }, 
+            message: 'Numéro de carte invalide.'
+        },
+        { 
+            field: 'expiration-date', 
+            valid: val => {
+                const field = document.getElementById('expiration-date');
+                if (!field || !isVisible(field)) return true;
+                return /^(0[1-9]|1[0-2])\/(\d{4})$/.test(val);
+            }, 
+            message: "Le format n'est pas valide (MM/AAAA)."
+        },
+        { 
+            field: 'cvv', 
+            valid: val => {
+                const field = document.getElementById('cvv');
+                if (!field || !isVisible(field)) return true;
+                return /^\d{3,4}$/.test(val);
+            }, 
+            message: "Le CVV doit avoir 3 ou 4 chiffres."
+        },
+
         {
             field: 'resume',
             valid: val => val.trim() !== '' && val.trim().length <= 155,
@@ -38,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
             field: 'photo_offre', valid: () => {
                 const fileInput = document.getElementById('photo_offre');
                 if (!fileInput || fileInput.files.length === 0) return false;
-                return validateFile(fileInput, ['svg', 'pdf', 'jpg', 'jpeg'], 100000);
+                return validateFile(fileInput, ['svg', 'pdf', 'jpg', 'jpeg'], 2000000);
             }, message: 'Veuillez sélectionner un ou plusieurs fichier(s) SVG, PDF, JPG ou JPEG de moins de 100 Ko.'
         },
         {
@@ -130,7 +158,7 @@ document.addEventListener('DOMContentLoaded', function () {
             valid: () => {
                 const fileInput = document.getElementById('url_carte_restaurant');
                 if (!fileInput || fileInput.files.length === 0) return false;
-                return validateFile(fileInput, ['svg', 'pdf', 'jpg', 'jpeg'], 100000);
+                return validateFile(fileInput, ['svg', 'pdf', 'jpg', 'jpeg'], 2000000);
             },
             message: 'Veuillez sélectionner une carte au format SVG, PDF, JPG ou JPEG (moins de 100 Ko).'
         },
@@ -148,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
             valid: () => {
                 const fileInput = document.getElementById('url_carte_parc');
                 if (!fileInput || fileInput.files.length === 0) return false;
-                return validateFile(fileInput, ['svg', 'pdf', 'jpg', 'jpeg'], 100000);
+                return validateFile(fileInput, ['svg', 'pdf', 'jpg', 'jpeg'], 2000000);
             },
             message: "Veuillez sélectionner une carte au format SVG, PDF, JPG ou JPEG (moins de 100 Ko)."
         },

@@ -1911,7 +1911,7 @@ footer div nav :any-link {
   padding: 2px 6px;
   font-size: 13px;
   border-radius: 3px;
-  font-family: sans-serif;
+  font-family: var(--noto);
 }
 
 .slider-item-wrapper {
@@ -2077,4 +2077,13 @@ textarea {
 
 #formAvis div input, #formAvis div textarea {
   border-radius: 10px;
+}
+
+input {
+  font-family: var(--noto);
+}
+
+textarea::placeholder {
+  font-family: var(--noto);
+  font-size: var(--very-small-text-size);
 }
