@@ -47,6 +47,11 @@ const ROUTES = [
         'method' => 'home',
         'layout' => Layout::BACK,
     ],
+    '/pro/update/account' => [
+        'controller' => App\Controller\ModifDataProController::class,
+        'method' => 'updateData',
+        'layout' => Layout::BACK,
+    ],
     '/connexion'=> [
         'controller' => App\Controller\ConnexionController::class,
         'method' => 'connection',

@@ -48,4 +48,18 @@ class ProfessionnelManager extends AbstractManager
     {
         return $this->readMany(Professionnel::class);
     }
+
+    /**
+     * @param Professionnel $pro
+     * @param int $id
+     * @return \PDOStatement
+     */
+    public function updateCompte(Professionnel $pro, int $id): \PDOStatement
+    {
+        $fields = [
+            'raison_sociale' => $pro->getRaisonSociale(),
+        ];
+
+        return $this->update(Professionnel::class, $fields, $id, true);
+    }
 }
