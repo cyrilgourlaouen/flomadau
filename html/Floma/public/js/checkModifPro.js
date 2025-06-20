@@ -345,6 +345,7 @@ form.addEventListener('submit', function(event) {
     .then(reponse => reponse.json())
     .then(data => {
       if(data['success'] === true){
+        alert('Vos modifications ont bien été enregistrées');
         window.location.href = "?path=/pro/check";
       }else{
         document.getElementById(data['span']).textContent = data['erreur'];

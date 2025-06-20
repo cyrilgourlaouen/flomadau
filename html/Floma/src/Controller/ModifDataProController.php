@@ -95,10 +95,10 @@ class ModifDataProController extends AbstractController
 
         //Si il y a une nouvelle pp
         if(!empty($_FILES['photo']['name'])){
-            $reussi = $this->uploadImg();
+            $upload = $this->uploadImg();
 
-            if($reussi[0]){
-                $compte->setUrlPhotoProfil(explode('.', $reussi[1])[0]);
+            if($upload['success']){
+                $compte->setUrlPhotoProfil(explode('.', $upload['nom'])[0]);
             }
 
         //Si la pp a été supprimée on met la defaut
@@ -183,9 +183,9 @@ class ModifDataProController extends AbstractController
             $cheminDestination = 'uploads/profilePicture/'.$nouveauNomFichier;
 
             if (!move_uploaded_file($cheminTemp , $cheminDestination)) {
-                return [false];
+                return ['success'=> false];
             }else{
-                return [true, $nouveauNomFichier];
+                return ['success' => true, 'nom' => $nouveauNomFichier];
             }
         }
     }

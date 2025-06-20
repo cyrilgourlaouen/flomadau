@@ -185,7 +185,7 @@
               <span id="erreur-card-number" class="erreur"></span>
 
               <label for="expiration-date">Date expiration</label>
-              <input type="month" id="expiration-date" name="expiration-date"></input>
+              <input type="text" id="expiration-date" name="expiration-date"></input>
               <span id="erreur-expiration-date" class="erreur"></span>
               
               <label for="cvv">Cryptogramme</label>
@@ -206,7 +206,7 @@
               <span id="erreur-card-number" class="erreur"></span>
 
               <label for="expiration-date">Date expiration (MM/AAAA)</label>
-              <input type="month" id="expiration-date" name="expiration-date"></input>
+              <input type="text" id="expiration-date" name="expiration-date"></input>
               <span id="erreur-expiration-date" class="erreur"></span>
 
               <label for="cvv">Cryptogramme</label>
