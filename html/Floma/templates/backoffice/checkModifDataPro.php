@@ -184,7 +184,7 @@
               <input type="text" id="card-number" name="card-number"></input>
               <span id="erreur-card-number" class="erreur"></span>
 
-              <label for="expiration-date">Date expiration</label>
+              <label for="expiration-date">Date expiration (MM/AAAA)</label>
               <input type="text" id="expiration-date" name="expiration-date"></input>
               <span id="erreur-expiration-date" class="erreur"></span>
               
