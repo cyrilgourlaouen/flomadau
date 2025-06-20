@@ -1451,8 +1451,8 @@ footer div nav :any-link {
     width: calc(100% + 2.5rem);
     padding: 0.938rem 1.25rem;
     isolation: isolate;
-    background: #ffffff;
-    padding-top: 0;
+    background: #fff !important;
+    padding-top: 0 !important;
   }
 }
 
@@ -1691,8 +1691,7 @@ footer div nav :any-link {
     width: calc(100% + 2.5rem);
     padding: 0.938rem 1.25rem;
     isolation: isolate;
-    background: #ffffff;
-    padding-top: 0;
+    background: #e5eff6;
   }
 
   #offer-sort-desktop-options {
