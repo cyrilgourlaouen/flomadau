@@ -1154,17 +1154,19 @@ input[type="checkbox"]:checked + .toggle-switch::after {
   padding: 6px 12px;
   font-size: 14px;
   border-radius: 4px;
-  border: 1px solid #ccc;
-  background: #f0f0f0;
+  border: none;
+  background: var(--primary-color);
   cursor: pointer;
+  color: var(--white-color);
 }
 
-.BtnConsultationSupprimer  {
+.BtnConsultationSupprimer {
   padding: 6px 8px;
   font-size: 10px;
   border-radius: 4px;
-  border: 1px solid #ccc;
-  background: #f0f0f0;
+  border: none;
+  background: var(--primary-color);
+  color: var(--white-color);
   cursor: pointer;
 }
 
@@ -1178,8 +1180,47 @@ input[type="checkbox"]:checked + .toggle-switch::after {
   margin-top: 10px;
 }
 .imagePreview {
-  max-width: 50px;
-  height: 50px;
+  max-width: 200px;
   display: block;
   margin-bottom: 5px;
+}
+
+/* Masquer l'input natif */
+#url_img_offre {
+    display: none;
+}
+
+/* Bouton personnalisé */
+.btn-file {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    background-color: var(--primary-color); /* bleu */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    user-select: none;
+}
+
+/* Apparence désactivée */
+#url_img_offre:disabled + .btn-file,
+.btn-file:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Hover */
+.btn-file:hover {
+    background-color: #0056b3;
+}
+.updateContainer {
+  display: flex;
+  justify-content: end;
+}
+.updateBtn {
+  width: fit-content;
 }

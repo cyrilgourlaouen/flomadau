@@ -258,7 +258,7 @@ if (!isset($_SESSION['code_pro'])) { ?>
                             <div class="image-preview-item" data-image-id="<?= htmlspecialchars($img['id'] ?? "") ?>">
                                 <img src="/assets/images/<?= htmlspecialchars($img['url_plan'] ?? "") ?>" alt="Image Parc"
                                     class="imagePreview">
-                                <button type="button" class="btn-supprimer-img"
+                                <button type="button" class="BtnConsultationSupprimer"
                                     data-image-id="<?= htmlspecialchars($img['id'] ?? "") ?>" disabled>Supprimer</button>
                             </div>
 
@@ -323,7 +323,7 @@ if (!isset($_SESSION['code_pro'])) { ?>
                     </div>
             </section>
             <section class="formSectionContainer">
-                <div  id="horaire-container" class="horaire-container"></div>
+                <div id="horaire-container" class="horaire-container"></div>
                 <?php
                 $horaireManager = new JourOuvertureOffreManager();
                 $horaires = $horaireManager->findBy(['id_offre' => $offer['id']]);
@@ -450,12 +450,15 @@ if (!isset($_SESSION['code_pro'])) { ?>
                                 <?php endforeach; ?>
                             </div>
                         <?php endif; ?>
-                        <p>Ajouter de nouvelles images :</p>
+                        <label for="url_img_offre" class="btn-file">Choisir des images</label>
                         <input type="file" name="url_img[]" id="url_img_offre" accept="image/*" multiple disabled>
+
                     </div>
                 </div>
             </section>
-            <!--<button class="BtnConsultation" id="updateOfferBtn" type="button">Modifier l'offre</button>-->
+            <div class="updateContainer">
+                <button class="BtnConsultation updateBtn" id="updateOfferBtn" type="button" disabled>Modifier l'offre</button>
+            </div>
             <div class="hidden submitContainer">
                 <button type="button" class="BtnConsultation" id="undoOfferBtn">
                     Annuler
