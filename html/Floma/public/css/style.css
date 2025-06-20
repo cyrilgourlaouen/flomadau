@@ -1,12 +1,12 @@
 /* Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 :root {
@@ -31,8 +31,8 @@
   --semi_bold: 600;
   --normal: normal;
 
-  --raleway: "Raleway", sans-serif;
-  --noto: "Noto Sans", sans-serif;
+  --raleway: 'Raleway', sans-serif;
+  --noto: 'Noto Sans', sans-serif;
 
   --page-padding: 1.563rem;
 }
@@ -100,41 +100,61 @@ p {
   display: flex;
   flex-direction: row !important;
 }
+
 .flex-col {
   display: flex;
   flex-direction: column;
 }
+
 .align-start {
   align-items: flex-start;
 }
+
 .align-center {
   align-items: center;
 }
+
 .gap-sm {
   gap: 0.625rem;
 }
+
 .gap-md {
   gap: 0.938rem;
 }
+
 .gap-lg {
   gap: 1.563rem;
 }
+
+.flex-1 {
+  flex: 1 1 0%;
+}
+
+.margin-left-auto {
+  margin-left: auto;
+}
+
 .full-width {
   width: 100%;
 }
+
 .full-height {
   height: 100%;
 }
+
 .no-pad-top {
   padding-top: 0 !important;
 }
+
 .no-pad-side {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
+
 .margin-left-md {
   margin-left: 15px;
 }
+
 .fit-content {
   width: fit-content;
 }
@@ -158,11 +178,6 @@ p {
   background: #005bb5;
   border-radius: 0.313rem;
   color: #ffffff;
-}
-
-body {
-  background-color: var(--background-color);
-  font-family: var(--noto);
 }
 
 .chevronLeft {
@@ -301,10 +316,7 @@ header .nav-hover:hover {
   text-decoration: underline var(--white-color);
 }
 
-header .imgLog {
-  display: none;
-}
-
+header .imgLog,
 header .imgLogOut {
   display: none;
 }
@@ -372,20 +384,21 @@ footer div nav :any-link {
   flex-direction: row;
   align-items: self-start;
   justify-items: center;
+  align-items: center;
   width: 100%;
   gap: 0.625rem;
   flex-wrap: nowrap;
 }
 
 .offer-search-bar {
-  flex-grow: 1
+  flex-grow: 1;
 }
 
 .offer-search-filters {
   flex-shrink: 1;
 }
 
-.offer-sort-mobile{
+.offer-sort-mobile {
   position: relative;
   display: flex;
   flex-direction: row;
@@ -394,9 +407,12 @@ footer div nav :any-link {
   width: fit-content;
 }
 
-#offer-sort-mobile-options, #offer-sort-desktop-options {
+#offer-sort-mobile-options,
+#offer-sort-desktop-options,
+#desktop-price-range-options,
+#desktop-status-options {
   z-index: 5;
-  top: 3rem;
+  top: 2.5rem;
   position: absolute;
   display: flex;
   width: 100%;
@@ -409,8 +425,14 @@ footer div nav :any-link {
   border-radius: 10px;
 }
 
+#desktop-price-range-options {
+  width: max-content;
+}
 
-#offer-sort-mobile-options p , #offer-sort-desktop-options p {
+#offer-sort-mobile-options p,
+#offer-sort-desktop-options p,
+#desktop-price-range-options p,
+#desktop-status-options p {
   width: 100%;
   padding: 0.625rem;
   text-align: center;
@@ -419,7 +441,10 @@ footer div nav :any-link {
   cursor: pointer;
 }
 
-#offer-sort-mobile-options p:hover, #offer-sort-desktop-options p:hover {
+#offer-sort-mobile-options p:hover,
+#offer-sort-desktop-options p:hover,
+#desktop-price-range-options p:hover,
+#desktop-status-options p:hover {
   cursor: pointer;
   background-color: var(--background-color);
 }
@@ -493,8 +518,10 @@ footer div nav :any-link {
 .offer-list {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem;
   padding: 0.5rem;
+  width: 100%;
+  align-items: center;
 }
 
 .offer-card {
@@ -507,9 +534,15 @@ footer div nav :any-link {
   background-color: var(--white-color);
   border-radius: 0.938rem;
   word-wrap: break-word;
-  -webkit-box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow:
+    0 4px 8px 3px rgba(0, 0, 0, 0.15),
+    0 1px 3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow:
+    0 4px 8px 3px rgba(0, 0, 0, 0.15),
+    0 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 4px 8px 3px rgba(0, 0, 0, 0.15),
+    0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .offer-card-info-layout {
@@ -612,6 +645,7 @@ footer div nav :any-link {
   justify-content: space-between;
   align-items: center;
 }
+
 .highlighted-card-city,
 .offer-card-city,
 .offer-card-note,
@@ -711,13 +745,13 @@ footer div nav :any-link {
 }
 
 .connection .formBtnEmail {
-  background: url("/assets/icons/login_black.svg") no-repeat 0.5rem center;
+  background: url('/assets/icons/login_black.svg') no-repeat 0.5rem center;
   background-size: 1.25rem;
   font-size: var(--text-size);
 }
 
 .connection .formBtnPassword {
-  background: url("/assets/icons/shield_black.svg") no-repeat 0.5rem center;
+  background: url('/assets/icons/shield_black.svg') no-repeat 0.5rem center;
   background-size: 1.25rem;
 }
 
@@ -840,8 +874,17 @@ footer div nav :any-link {
   justify-content: center;
 }
 
-.highlighted-offers-list-arrows {
+.highlighted-offers-list-arrows,
+.highlighted-offers-list-arrows-detail {
   display: none;
+}
+
+.highlighted-offers-list-arrows {
+  pointer-events: none;
+}
+
+.highlighted-offers-list-arrows img {
+  pointer-events: auto;
 }
 
 .information-data-container {
@@ -902,7 +945,8 @@ footer div nav :any-link {
   height: fit-content;
   border: none;
   border-radius: 0.625rem;
-  box-shadow: 0 0.25rem 0.5rem 0.188rem rgba(0, 0, 0, 0.15),
+  box-shadow:
+    0 0.25rem 0.5rem 0.188rem rgba(0, 0, 0, 0.15),
     0 0.063rem 0.188rem rgba(0, 0, 0, 0.3);
 }
 
@@ -1014,7 +1058,8 @@ footer div nav :any-link {
   background-color: var(--background-color);
 }
 
-.selected-category {
+.selected-category,
+.selected-status {
   border: #000 solid 2px;
   background-color: var(--background-color);
 }
@@ -1023,14 +1068,17 @@ footer div nav :any-link {
   display: none;
 }
 
-.filter-modal-price-options {
+.filter-modal-price-options,
+.filter-modal-date-options {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   gap: 0.625rem;
 }
 
-.filter-modal-price-minimum, .filter-modal-price-maximum {
+.filter-modal-price-minimum,
+.filter-modal-price-maximum,
+.filter-modal-date-option {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -1040,7 +1088,8 @@ footer div nav :any-link {
 .filter-modal-price-icon-wrapper {
   display: flex;
   width: 8.188rem;
-  height: 35px; /* force une hauteur fixe */
+  height: 35px;
+  /* force une hauteur fixe */
   border: 1px solid #000;
   border-radius: 8px;
   overflow: hidden;
@@ -1073,20 +1122,20 @@ footer div nav :any-link {
 }
 
 #desktop-price-options {
-    z-index: 5;
-    top: 3rem;
-    position: absolute;
-    display: none;
-    width: max-content;
-    flex-direction: column;
-    justify-items: center;
-    align-items: center;
-    gap: 0.325rem;
-    background-color: var(--white-color);
-    border: #000 solid 1px;
-    border-radius: 10px;
-    top: 2.5rem;
-    padding: 0.625rem;
+  z-index: 5;
+  top: 3rem;
+  position: absolute;
+  display: none;
+  width: max-content;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  gap: 0.325rem;
+  background-color: var(--white-color);
+  border: #000 solid 1px;
+  border-radius: 10px;
+  top: 2.5rem;
+  padding: 0.625rem;
 }
 
 .filter-modal-price-icon-wrapper-error {
@@ -1097,6 +1146,148 @@ footer div nav :any-link {
   background-color: red;
 }
 
+.filter-modal-price-range-options {
+  display: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.filter-modal-status-options {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.filter-modal-price-range-option,
+.filter-modal-status-option {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-items: center;
+  align-items: center;
+  border: #000 solid 1px;
+  border-radius: 100px;
+  gap: 0.313rem;
+  padding: 0.313rem 0.625rem;
+  cursor: pointer;
+}
+
+.filter-modal-price-range-option:hover,
+.filter-modal-status-option:hover {
+  background-color: var(--background-color);
+}
+
+.selected-price-range {
+  border: #000 solid 2px;
+  background-color: var(--background-color);
+}
+
+.filter-modal-date-option input {
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 0.5rem;
+  border-radius: 8px;
+  background-size: 1.75rem;
+  background-color: var(--white-color);
+  font-size: var(--text-size);
+  font-family: var(--noto);
+  border: #000 solid 1px;
+  color: var(--black-color);
+}
+
+.filter-modal-date-option input:hover {
+  cursor: pointer;
+}
+
+#desktop-date-options {
+  z-index: 5;
+  top: 3rem;
+  position: absolute;
+  display: flex;
+  width: max-content;
+  flex-direction: column;
+  justify-items: center;
+  align-items: baseline;
+  gap: 0.325rem;
+  background-color: var(--white-color);
+  border: #000 solid 1px;
+  border-radius: 10px;
+  top: 2.5rem;
+  padding: 0.625rem;
+}
+
+.desktop-date-option {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  gap: 0.313rem;
+}
+
+.desktop-date-option input {
+  width: 100%;
+  height: 35px;
+  padding: 0 1rem;
+  border-radius: 8px;
+  background-size: 1.75rem;
+  background-color: var(--white-color);
+  font-size: var(--text-size);
+  border: #000 solid 1px;
+  color: var(--black-color);
+  font-family: var(--noto);
+}
+
+.date-error {
+  border: red solid 2px !important;
+}
+
+.filter-modal-note-options {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.filter-modal-note-options img {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#desktop-note-options {
+  z-index: 5;
+  top: 3rem;
+  position: absolute;
+  display: flex;
+  width: max-content;
+  flex-direction: row;
+  justify-items: center;
+  align-items: baseline;
+  background-color: var(--white-color);
+  border: #000 solid 1px;
+  border-radius: 10px;
+  top: 2.5rem;
+  padding: 0.625rem;
+  overflow: hidden;
+}
+
+#desktop-note-options img {
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.filter-modal-note-options img:hover,
+#desktop-note-options img:hover {
+  transform: scale(1.1);
+}
+
+#filter-note-text {
+  font-size: var(--very-small-text-size);
+  color: var(--dark-grey-color);
+}
 
 .avis .imgProfil {
   border-radius: 50%;
@@ -1134,7 +1325,8 @@ footer div nav :any-link {
   display: flex;
   flex-direction: column;
   background-color: var(--background-color);
-  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+  box-shadow:
+    0px 4px 8px 3px rgba(0, 0, 0, 0.15),
     0px 1px 3px rgba(0, 0, 0, 0.3);
   border-radius: 0.938rem;
   margin: 0.313rem;
@@ -1148,6 +1340,7 @@ footer div nav :any-link {
   border-radius: 0.313rem;
   margin: 1.25rem;
 }
+
 .avis .description-avis {
   display: flex;
   flex-direction: column;
@@ -1201,12 +1394,14 @@ footer div nav :any-link {
   justify-content: center;
   align-items: center;
 }
+
 .avis .container-reponse {
   display: flex;
   flex-direction: column;
   gap: 1.563rem;
   background-color: var(--grey);
-  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+  box-shadow:
+    0px 4px 8px 3px rgba(0, 0, 0, 0.15),
     0px 1px 3px rgba(0, 0, 0, 0.3);
   border-radius: 0.938rem;
   padding: 0.625rem;
@@ -1217,7 +1412,12 @@ footer div nav :any-link {
   align-items: flex-end;
 }
 
-@media (width >= 65rem) {
+@media (width >=65rem) {
+
+  .calendar {
+    width: 30% !important;
+  }
+
   .hideTab {
     display: block;
   }
@@ -1242,7 +1442,8 @@ footer div nav :any-link {
 
   .infoTab {
     background: #ffffff;
-    box-shadow: 0px 8px 12px 6px rgba(0, 0, 0, 0.15),
+    box-shadow:
+      0px 8px 12px 6px rgba(0, 0, 0, 0.15),
       0px 4px 4px rgba(0, 0, 0, 0.3);
     border-radius: 0.938rem;
     padding: 1.25rem;
@@ -1281,6 +1482,7 @@ footer div nav :any-link {
   .information-data-container .lines-container {
     flex-direction: column;
   }
+
   .information-data-container .lines-container {
     width: 100%;
   }
@@ -1350,16 +1552,6 @@ footer div nav :any-link {
     color: var(--white-color);
   }
 
-  header .txtPostOffer:hover {
-    background-color: var(--white-color);
-    color: var(--primary-color);
-  }
-
-  header .txtPostOffer:active {
-    background-color: #334f9f;
-    color: var(--white-color);
-  }
-
   header .ImgBtn,
   header .ImgSearch {
     width: 3.125rem;
@@ -1387,7 +1579,6 @@ footer div nav :any-link {
   .offer-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(0, 27rem));
-    gap: 1.25rem;
     width: 100%;
     justify-content: center;
     align-items: stretch;
@@ -1401,50 +1592,6 @@ footer div nav :any-link {
   .offer-card-img-badge-pink img,
   .offer-card-img-badge-green img {
     height: 18px;
-  }
-
-  .main {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .main .right-img {
-    display: block;
-    flex: 1;
-  }
-
-  .connection {
-    display: flex;
-    justify-content: center;
-    flex: 1;
-  }
-
-  .connection .title-connexion {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    gap: 0.313rem;
-  }
-
-  .connection .title-connexion hr {
-    max-width: 28.125rem;
-  }
-
-  .connection .submit-container {
-    width: 100%;
-    display: flex;
-    justify-content: end;
-    padding: 1.25rem 0 1.25rem 1.25rem;
-  }
-
-  .connection button:hover {
-    background-color: #000;
-    color: var(--white-color);
-  }
-
-  .connection-page footer {
-    display: none;
   }
 
   .main {
@@ -1488,6 +1635,10 @@ footer div nav :any-link {
     color: var(--white-color);
   }
 
+  .connection-page footer {
+    display: none;
+  }
+
   .connection .logPro {
     display: flex;
     flex-direction: column;
@@ -1495,30 +1646,9 @@ footer div nav :any-link {
     gap: 0.625rem;
   }
 
-  .offer-section {
-    align-items: center;
-  }
-
-  .offer-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(0, 27rem));
-    gap: 1.25rem;
-    width: 100%;
-    justify-content: center;
-    align-items: stretch;
-  }
-
-  .offer-card {
-    height: 100%;
-  }
-
-  .offer-card-img-badge-pink img,
-  .offer-card-img-badge-green img {
-    height: 18px;
-  }
-
   .highlighted-offers-section {
     align-items: center;
+    position: relative;
   }
 
   .information-data-container {
@@ -1527,7 +1657,8 @@ footer div nav :any-link {
   }
 
   .information-data-container .personal-data {
-    box-shadow: 0 0.25rem 0.5rem 0.188rem rgba(0, 0, 0, 0.15),
+    box-shadow:
+      0 0.25rem 0.5rem 0.188rem rgba(0, 0, 0, 0.15),
       0 0.063rem 0.188rem rgba(0, 0, 0, 0.3);
     width: 80%;
     padding: 1.875rem;
@@ -1541,6 +1672,7 @@ footer div nav :any-link {
   .information-data-container .lines {
     width: 100%;
   }
+
   .information-data-container .inputPassword {
     width: 80%;
   }
@@ -1555,6 +1687,7 @@ footer div nav :any-link {
     gap: 1.25rem;
     padding: 1.25rem;
     width: 100%;
+    align-items: flex-start;
   }
 
   .contentTab {
@@ -1567,25 +1700,12 @@ footer div nav :any-link {
     width: calc(100% + 2.5rem);
     padding: 0.938rem 1.25rem;
     isolation: isolate;
-    background: #FFFFFF;
+    background: #ffffff;
     padding-top: 0;
-  }
-
-  .avis-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-    padding: 1.25rem;
-    align-items: flex-start;
   }
 
   #offer-sort-desktop-options {
     top: 2.5rem;
-  }
-
-  .offer-search-filters {
-    position: relative;
-    overflow: visible;
   }
 
   .offer-sort-desktop {
@@ -1620,12 +1740,16 @@ footer div nav :any-link {
   .offer-search-filters {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: 0.625rem;
     width: fit-content;
+    overflow: visible;
   }
 
-  .offer-search-filters select, #offer-sort-desktop-button {
+  .offer-search-filters select,
+  #offer-sort-desktop-button {
     display: block;
     appearance: none;
     -moz-appearance: none;
@@ -1645,10 +1769,6 @@ footer div nav :any-link {
     background-size: 1.75rem;
   }
 
-  .highlighted-offers-section {
-    position: relative;
-  }
-
   .highlighted-card-img {
     aspect-ratio: 1/1;
     width: 21.75rem;
@@ -1658,7 +1778,12 @@ footer div nav :any-link {
     width: 21.75rem;
   }
 
-  .highlighted-offers-list-arrows {
+  .highlighted-offers-list-arrows-detail {
+    top: 55% !important;
+  }
+
+  .highlighted-offers-list-arrows,
+  .highlighted-offers-list-arrows-detail {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1671,14 +1796,17 @@ footer div nav :any-link {
     padding-inline: var(--page-padding);
   }
 
-  .highlighted-offers-list-arrows img {
+  .highlighted-offers-list-arrows img,
+  .highlighted-offers-list-arrows-detail img {
     width: 2.5rem;
     height: 2.5rem;
     cursor: pointer;
     pointer-events: auto;
   }
 
-  .selected-category-desktop {
+  .selected-category-desktop,
+  .selected-price-range-desktop,
+  .selected-status-desktop {
     background-color: var(--background-color);
   }
 
@@ -1690,23 +1818,23 @@ footer div nav :any-link {
   }
 
   .desktop-filter-button {
-      display: block;
-      appearance: none;
-      -moz-appearance: none;
-      -webkit-appearance: none;
-      height: 2.188rem;
-      padding: 0 2.5rem 0 1rem;
-      border-radius: 100px;
-      background-color: var(--white-color);
-      border: #000 solid 1px;
-      font-size: var(--text-size);
-      cursor: pointer;
-      pointer-events: all;
+    display: block;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    height: 2.188rem;
+    padding: 0 2.5rem 0 1rem;
+    border-radius: 100px;
+    background-color: var(--white-color);
+    border: #000 solid 1px;
+    font-size: var(--text-size);
+    cursor: pointer;
+    pointer-events: all;
 
-      background-image: url('/assets/icons/keyboard_arrow_down_black.svg');
-      background-repeat: no-repeat;
-      background-position: right 0.5rem center;
-      background-size: 1.75rem;
+    background-image: url('/assets/icons/keyboard_arrow_down_black.svg');
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1.75rem;
   }
 
   .desktop-filter-options {
@@ -1744,6 +1872,7 @@ footer div nav :any-link {
   .information-data-container .lines-container {
     flex-direction: column;
   }
+
   .information-data-container .lines-container {
     width: 100%;
   }
@@ -1751,14 +1880,118 @@ footer div nav :any-link {
 
 @media (width < 56.25rem) {
   .information .UpdateBtn {
-      position: relative;
-      left: 0%;
+    position: relative;
+    left: 0%;
   }
-
-
 }
 
+.horizontal-slider {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  scrollbar-width: none;
+}
 
+.slider-item {
+  flex: 0 0 100%;
+  object-fit: cover;
+  scroll-snap-align: center;
+  border-radius: 5px;
+}
 
+.slider-item-mob {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  height: 300px;
+}
 
+.image-counter {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 2px 6px;
+  font-size: 13px;
+  border-radius: 3px;
+  font-family: sans-serif;
+}
 
+.slider-item-wrapper {
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  scroll-snap-align: start;
+}
+
+.horizontal-slider-mob {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  width: 100%;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+#map {
+  margin: 1rem 0 0.4rem 0;
+  border-radius: 0.625rem;
+  width: 100%;
+  height: 18.75rem;
+}
+
+#mapTab {
+  border-radius: 0.625rem !important;
+  width: 70% !important;
+  height: 18.75rem !important;
+  margin: 0 !important;
+}
+
+.calendar {
+  background: #ffffff;
+  box-shadow: 0px 8px 12px 6px rgba(0, 0, 0, 0.15), 0px 4px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 0.938rem;
+  padding: 1.25rem;
+  width: 100%;
+  height: 18.75rem;
+  padding: auto;
+}
+
+.container-map {
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.tooltip-parent {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltip {
+  visibility: hidden;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  position: absolute;
+  z-index: 100;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.tooltip-parent:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}

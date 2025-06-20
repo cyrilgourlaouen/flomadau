@@ -26,6 +26,7 @@ class MainController extends AbstractController
             'professionnel' => ['isMultiple' => false],
             'option' => ['isMultiple' => true],
             'image' => ['isMultiple' => true],
+            'calendar' => ['isMultiple' => true],
         ]);
         
         return $this->renderView(
