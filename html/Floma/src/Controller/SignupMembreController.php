@@ -86,7 +86,7 @@ class SignupMembreController extends AbstractController
                     return $this->redirectToRoute('/inscription/membre', ['state' => 'failure']);
                 }
                 if ($uploaded_image[0] === true){
-                    console.log('Lien vers l\'image',$uploaded_image[1]);
+                    print_r('Lien vers l\'image',$uploaded_image[1]);
                     $compte->setUrlPhotoProfil($uploaded_image[1]);
                 }
             }
