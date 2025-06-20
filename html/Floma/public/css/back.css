@@ -849,6 +849,7 @@ input {
     margin: 0 0 1rem 0;
     color: #333;
     font-size: 1.2em;
+    font-family: var(--noto);
 }
 
 .alert {
@@ -872,6 +873,7 @@ input {
 .status-text {
     font-weight: bold;
     font-size: 1.1em;
+    font-family: var(--noto);
 }
 
 .status-enabled .status-text {
@@ -900,6 +902,7 @@ input {
     text-decoration: none;
     display: inline-block;
     font-weight: bold;
+    font-family: var(--noto);
     transition: background-color 0.2s;
 }
 
@@ -913,6 +916,7 @@ input {
     color: #dc3545;
     text-decoration: none;
     font-size: 0.9em;
+    font-family: var(--noto);
 }
 
 .disable-2fa-link:hover {
@@ -960,7 +964,7 @@ input {
     padding: 0.5rem;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-family: monospace;
+    font-family: var(--noto);
     font-size: 1.1em;
     word-break: break-all;
     margin: 0.5rem 0;
@@ -974,6 +978,7 @@ input {
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.9em;
+    font-family: var(--noto);
 }
 
 .copy-btn:hover {
@@ -982,6 +987,7 @@ input {
 
 .code-feedback {
     font-size: 0.9em;
+    font-family: var(--noto);
     margin-top: 0.5rem;
 }
 
@@ -997,7 +1003,7 @@ input {
     text-align: center;
     font-size: 1.2em;
     letter-spacing: 0.2em;
-    font-family: monospace;
+    font-family: var(--noto);
 }
 
 /* 2FA Verif */
@@ -1010,13 +1016,14 @@ input {
 .twofa-verification p {
     margin-bottom: 1.5rem;
     font-size: 1.1em;
+    font-family: var(--noto);
 }
 
 #totp_code {
     text-align: center;
     font-size: 1.5em;
     letter-spacing: 0.3em;
-    font-family: monospace;
+    font-family: var(--noto);
     width: 100%;
     padding: 1rem;
     border: 2px solid #ddd;
@@ -1031,6 +1038,7 @@ input {
 
 .code-feedback {
     font-size: 1em;
+    font-family: var(--noto);
     margin-top: 0.5rem;
     margin-bottom: 1rem;
 }
@@ -1038,6 +1046,7 @@ input {
 .code-feedback.valid {
     color: green;
     font-weight: bold;
+    font-family: var(--noto);
 }
 
 .code-feedback.invalid {
@@ -1049,6 +1058,7 @@ input {
     padding-top: 1rem;
     border-top: 1px solid #eee;
     font-size: 0.9em;
+    font-family: var(--noto);
     color: #666;
 }
 
@@ -1116,6 +1126,7 @@ input {
     color: #007cba;
     text-decoration: none;
     font-weight: bold;
+    font-family: var(--noto);
 }
 
 .cancel-link:hover {
