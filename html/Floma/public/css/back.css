@@ -754,6 +754,7 @@ input::placeholder, textarea::placeholder, textarea::content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
 }
 
 #offer-card-right-layout {
@@ -1201,6 +1202,10 @@ input.not-active{
   width: 95%;
 }
 
+#resume{
+  width: 95%;
+}
+
 .midField {
   height: 4.9375rem;
   width: 60%;
@@ -1477,11 +1482,11 @@ input[type="checkbox"]:checked + .toggle-switch::after {
 
 input::placeholder, textarea::placeholder {
   font-family: var(--noto);
-  font-size: var(--very-small-text-size) !important;
+  font-size: var(--text-size) !important;
 }
 
 textarea {
-  font-size: var(--very-small-text-size) !important;
+  font-size: var(--text-size) !important;
 }
 
 .containerBtnTagGuide {
