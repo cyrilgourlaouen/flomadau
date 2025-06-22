@@ -24,6 +24,7 @@
 
   --text-size: 1rem;
   --larger-text-size: 1.25rem;
+  --very-small-text-size: 0.75rem;
 
   /* Fonts */
   --raleway: 'Raleway', sans-serif;
@@ -1482,11 +1483,11 @@ input[type="checkbox"]:checked + .toggle-switch::after {
 
 input::placeholder, textarea::placeholder {
   font-family: var(--noto);
-  font-size: var(--text-size) !important;
+  font-size: var(--very-small-text-size) !important;
 }
 
 textarea {
-  font-size: var(--text-size) !important;
+  font-size: var(--very-small-text-size) !important;
 }
 
 .containerBtnTagGuide {
