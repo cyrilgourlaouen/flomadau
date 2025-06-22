@@ -113,6 +113,7 @@ class OfferManager extends AbstractManager
 
         $fields = [
             'note_moyenne' => $notes / $total,
+            'nombre_avis' => $total,
         ];
 
         return $this->update(Offer::class, $fields, $id);
