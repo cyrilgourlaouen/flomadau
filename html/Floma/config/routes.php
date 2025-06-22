@@ -6,6 +6,25 @@ const ROUTES = [
     '/' => [
         'controller' => App\Controller\MainController::class,
         'method' => 'home',
+        'layout' => Layout::FRONT,
+    ],
+
+    '/inscription/membre' => [
+        'controller' => App\Controller\SignupMembreController::class,
+        'method' => 'home',
+        'layout' => Layout::FRONT_INSCRIPTION,
+    ],
+
+    '/inscription/membre/verification' => [
+        'controller' => App\Controller\SignupMembreController::class,
+        'method' => 'verification',
+        'view' => false,
+    ],
+
+    '/inscription/membre/sign-up' => [
+        'controller' => App\Controller\SignupMembreController::class,
+        'method' => 'signUp',
+        'view' => false,
     ],
     '/offer/{id}' => [
         'controller' => App\Controller\OfferController::class,
@@ -95,6 +114,21 @@ const ROUTES = [
         'controller' => App\Controller\ModificationMembreController::class,
         'method' => 'checkEmail',
     ],
+    '/offre/creation' => [
+        'controller' => App\Controller\Creation\CreationOffreController::class,
+        'method' => 'home',
+        'layout' => Layout::BACK,
+    ],
+    '/offre/creation/new' => [
+        'controller' => App\Controller\Creation\CreationOffreController::class,
+        'method' => 'newOffer',
+        'view' => false,
+    ],
+    '/avis/creation/new' => [
+        'controller' => App\Controller\Creation\AvisController::class,
+        'method' => 'newComment',
+        'view' => false,
+    ],
     '/pro/2fa/setup' => [
         'controller' => App\Controller\TwoFactorAuthController::class,
         'method' => 'setup',
@@ -126,11 +160,6 @@ const ROUTES = [
         'controller' => App\Controller\TwoFactorAuthController::class,
         'method' => 'ajaxVerify',
         'view' => false,
-    ],
-    '/offre/updateOffer' => [
-        'controller' => App\Controller\ModificationOfferController::class,
-        'method' => 'updateOffer',
     ]
 ];
-
 ?>

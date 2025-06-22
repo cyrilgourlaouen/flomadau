@@ -26,20 +26,6 @@ class VisiteResource extends AbstractResource
     }
 
     /**
-     * Données de base extraites de l'entité Offer.
-     */
-    protected function baseData(): array
-    {
-        return [
-            'id_offre' => $this->visite->getIdOffre(),
-            'prix_minimal' => $this->visite->getPrixMinimal(),
-            'duree' => $this->visite->getDuree(),
-            'guidee' => $this->visite->isGuidee(),
-        ];
-    }
-
-
-    /**
      * Construit une ressource enrichie pour UNE offre.
      */
     public static function build(Visite $visite, array $context = []): array
@@ -53,5 +39,18 @@ class VisiteResource extends AbstractResource
     public static function buildAll(array $entities, array $context = []): array
     {
         return array_map(fn($visite) => self::build($visite, $context), $entities);
+    }
+
+    /**
+     * Données de base extraites de l'entité Offer.
+     */
+    protected function baseData(): array
+    {
+        return [
+            'id_offre' => $this->visite->getIdOffre(),
+            'prix_minimal' => $this->visite->getPrixMinimal(),
+            'duree' => $this->visite->getDuree(),
+            'guidee' => $this->visite->isGuidee(),
+        ];
     }
 }

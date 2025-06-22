@@ -48,4 +48,15 @@ class OptionSouscriteManager extends AbstractManager
     {
         return $this->readMany(OptionSouscrite::class);
     }
+
+    public function add(OptionSouscrite $optionSouscrite) {
+		return $this->create(OptionSouscrite::class, [
+				'id_offre' => $optionSouscrite->getIdOffre(),
+                'id_option' => $optionSouscrite->getIdOption(),
+                'nombre_jour' => $optionSouscrite->getNombreJour(),
+                'date_debut' => $optionSouscrite->getDateDebut(),
+                'date_fin' => $optionSouscrite->getDateFin(),
+			]
+		);
+	}
 }

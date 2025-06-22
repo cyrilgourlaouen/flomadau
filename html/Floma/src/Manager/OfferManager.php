@@ -49,4 +49,41 @@ class OfferManager extends AbstractManager
     {
         return $this->readMany(Offer::class, $filters, $order, $limit, $offset);
     }
+
+    public function add(Offer $offer) {
+		return $this->create(Offer::class, [
+				'titre' => $offer->getTitre(),
+                'resume' => $offer->getResume(),
+                'ville' => $offer->getVille(),
+                'code_postal' => $offer->getCodePostal(),
+                'categorie' => $offer->getCategorie(),
+                'conditions_accessibilite' => $offer->getConditionsAccessibilite(),
+                'telephone' => $offer->getTelephone(),
+                'site_web' => $offer->getSiteWeb(),
+                'description_detaillee' => $offer->getDescriptionDetaillee(),
+                'nom_rue' => $offer->getNomRue(),
+                'numero_rue' => $offer->getNumeroRue(),
+                'code_professionnel' => $offer->getCodeProfessionnel(),
+			]
+		);
+	}
+
+    public function addGetId(Offer $offer) {
+		return $this->createGetId(Offer::class, [
+				'titre' => $offer->getTitre(),
+                'resume' => $offer->getResume(),
+                'ville' => $offer->getVille(),
+                'code_postal' => $offer->getCodePostal(),
+                'categorie' => $offer->getCategorie(),
+                'conditions_accessibilite' => $offer->getConditionsAccessibilite(),
+                'telephone' => $offer->getTelephone(),
+                'site_web' => $offer->getSiteWeb(),
+                'description_detaillee' => $offer->getDescriptionDetaillee(),
+                'nom_rue' => $offer->getNomRue(),
+                'numero_rue' => $offer->getNumeroRue(),
+                'code_professionnel' => $offer->getCodeProfessionnel(),
+                'complement_adresse' => $offer->getComplementAdresse() ?? $offer->getComplementAdresse(),
+			]
+		);
+	}
 }

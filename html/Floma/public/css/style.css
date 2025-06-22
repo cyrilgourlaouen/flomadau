@@ -798,6 +798,61 @@ footer div nav :any-link {
   font-weight: 500;
 }
 
+.inscription header {
+  display: none;
+}
+
+input, label, ul {
+  font-family: var(--noto)
+}
+
+input {
+  border: 0.063rem solid #ccc;
+  border-radius: 0.25rem;
+  box-sizing: border-box;
+  padding: 0.625rem 0.3125rem;
+}
+
+#photo {
+  height: 6rem;
+}
+
+#signup_button {
+  border-radius: 1.875rem;
+  border-color: black;
+  border-width: 0.125rem;
+  background-color: white;
+  height: 3.375rem;
+  width: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-end;
+}
+
+#signup_button:hover {
+  border-color: white;
+  background-color: black;
+  color: white;
+}
+
+
+h4 {
+  font-family: var(--noto);
+  font-size: var(--text-size);
+}
+
+li {
+  font-family: var(--noto);
+  font-size: var(--small-text-size);
+}
+
+.error-msg {
+  color: red;
+  font-size: var(--small-text-size);
+  font-family: var(--noto);
+}
+
 /* Section à la une offre */
 
 .highlighted-offers-section h2 {
@@ -1461,14 +1516,91 @@ footer div nav :any-link {
     width: calc(100% + 2.5rem);
     padding: 0.938rem 1.25rem;
     isolation: isolate;
-    background: #ffffff;
-    padding-top: 0;
+    background: #fff !important;
+    padding-top: 0 !important;
+  }
+
+  #form_main > form > div{
+      padding: 0.9375rem 1.25rem;
+      width: 100%;
+  }
+
+  #inscription_membre {
+      display: flex;
+      flex-direction: column;
+  }
+  
+  #inscription_membre {
+      align-self: flex-start;
   }
 }
 
 @media (max-width: 62.5rem) {
   .main .right-img {
     display: none;
+  }
+
+  #background_image{
+      display: none;
+  }
+
+  #inscription_membre, #inscription_membre > div {
+      display: flex;
+      flex-direction: column;
+  }
+
+  #inscription_membre {
+      align-self: flex-start;
+  }
+
+  #form_main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.25rem;
+  }
+
+  .groupe > div, .solo{
+    padding: 0.469rem 1.25rem;
+    width: 100%;
+  }
+
+  #form_main > h4 {
+    padding: 0.9375rem 1.25rem;;
+  }
+
+  #liste_mobile {
+      display: block;
+      padding-left: 1rem;
+  }
+
+  #liste_tablette {
+      display: none;
+  }
+
+  .groupe > div {
+      display: flex;
+      flex-direction: column;
+  }
+
+  #logo {
+      width: 13.75rem;
+      height: 3.3125rem;
+  }
+
+  #form_main > h1 {
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      padding-bottom: 0.25rem;
+  }
+
+  #form_main > hr {
+    width: 80%;
+  }
+
+  #photo {
+    width: 150%;
   }
 }
 
@@ -1501,6 +1633,12 @@ footer div nav :any-link {
     --page-padding: 2.188rem;
   }
 
+  #transition_bar {
+    width: 50%;
+    color: black;
+    background-color: black;
+  }
+
   header .btnBurger {
     display: none;
   }
@@ -1515,6 +1653,7 @@ footer div nav :any-link {
     display: block;
     width: 3.125rem;
     border-radius: 50%;
+    cursor: pointer;
   }
 
   header .top_header {
@@ -1647,6 +1786,117 @@ footer div nav :any-link {
     gap: 0.625rem;
   }
 
+  .offer-section {
+    align-items: center;
+  }
+
+  .offer-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(0, 27rem));
+    gap: 1.25rem;
+    width: 100%;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  .offer-card {
+    height: 100%;
+  }
+
+  .offer-card-img-badge-pink img,
+  .offer-card-img-badge-green img {
+    height: 18px;
+  }
+  #inscription_main input {
+    width: 100%;
+  }
+  
+  #signup_button {
+    align-self: center;
+  }
+  
+  #liste_mobile {
+      display: none;
+  }
+  
+  #liste_tablette {
+      display: block;
+      padding: 0 2rem;
+  }
+  
+  #inscription_membre {
+      width: 80%;
+      align-self: center;
+  }
+  
+  #inscription_main {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    width: 100%;
+  }
+
+  #form_main {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-wrap: nowrap;
+      align-items: center;
+      padding: 1.5rem 0;
+  }
+  
+  h4 {
+      display: none;
+  }
+
+  .solo {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .align-row {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.5rem;
+  }
+  
+  .groupe {
+      display: flex;
+      flex-direction: row;
+      align-items: end;
+      gap: 1.875rem;
+  }
+  
+  .groupe div{
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      width: 50%;
+  }
+  
+  #background_image_block{
+      position: relative;
+      width: 50%;
+      height: calc(100%-2.5rem);
+      top: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0;
+  }
+  
+  #background_image{
+      display: block;
+      position: sticky;
+      right: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      padding: 0;
+  }
+
   .highlighted-offers-section {
     align-items: center;
     position: relative;
@@ -1681,6 +1931,64 @@ footer div nav :any-link {
     width: 95%;
   }
 
+  .avis-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    padding: 1.25rem;
+    width: 100%;
+    align-items: flex-start;
+  }
+  
+  #form_main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.25rem;
+  }
+
+  .groupe > div, .solo{
+    width: 100%;
+  }
+
+  #form_main > h4 {
+    padding: 0.9375rem 1.25rem;;
+  }
+  
+  #liste_mobile {
+      display: block;
+      padding-left: 1rem;
+  }
+  
+  #liste_tablette {
+      display: none;
+  }
+
+  .groupe > div {
+      display: flex;
+      flex-direction: column;
+  }
+  
+  #logo {
+      width: 13.75rem;
+      height: 3.3125rem;
+  }
+  
+  #form_main > h1 {
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      padding-bottom: 0.25rem;
+  }
+  
+  #form_main > hr {
+    width: 80%;
+  }
+
+  #photo {
+    width: 150%;
+  }
+
   .contentTab {
     padding: 2.188rem;
   }
@@ -1691,8 +1999,7 @@ footer div nav :any-link {
     width: calc(100% + 2.5rem);
     padding: 0.938rem 1.25rem;
     isolation: isolate;
-    background: #ffffff;
-    padding-top: 0;
+    background: #e5eff6;
   }
 
   #offer-sort-desktop-options {
@@ -1934,7 +2241,7 @@ footer div nav :any-link {
   padding: 2px 6px;
   font-size: 13px;
   border-radius: 3px;
-  font-family: sans-serif;
+  font-family: var(--noto);
 }
 
 .slider-item-wrapper {
@@ -2008,4 +2315,105 @@ footer div nav :any-link {
 .tooltip-parent:hover .tooltip {
   visibility: visible;
   opacity: 1;
+}
+
+#btn_ajouter, .btn_submit {
+  width: 8.125rem;
+  height: 2.75rem;
+  background-color: var(--primary-color);
+  font-size: var(--text-size);
+  color: var(--background-color);
+  border-radius: 0.625rem;
+  border: none;
+}
+
+#btn_ajouter:hover, .btn_submit:hover {
+  background-color: var(--background-color);
+  border: 3px solid var(--primary-color);
+  color: var(--primary-color);
+  cursor: pointer;
+}
+
+#btn_ajouter:active, .btn_submit:active {
+  background-color: #003e7d;
+  color: var(--black-color);
+  border-color: #003e7d;
+}
+
+.btn_add {
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  min-width: 300px;
+  max-width: 90%;
+}
+
+.close {
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal input, .modal textarea {
+  width: 100%;
+  padding: 5px;
+}
+
+.modal-content hr {
+  width: 75%;
+  margin-bottom: 0.3rem;
+}
+
+.btn_submit {
+  width: 8.125rem;
+  height: 2.75rem;
+  background-color: var(--primary-color);
+  font-size: var(--text-size);
+  color: var(--background-color);
+  border-radius: 0.625rem;
+  border: none;
+}
+
+.containerAvisSub {
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+textarea {
+  resize : none;
+}
+
+#formAvis div input, #formAvis div textarea {
+  border-radius: 10px;
+}
+
+input {
+  font-family: var(--noto);
+}
+
+textarea::placeholder {
+  font-family: var(--noto);
+  font-size: var(--very-small-text-size);
 }

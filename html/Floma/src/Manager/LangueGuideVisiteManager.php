@@ -48,4 +48,12 @@ class LangueGuideVisiteManager extends AbstractManager
     {
         return $this->readMany(LangueGuideVisite  ::class, $filters, $order, $limit, $offset);
     }
+
+    public function add(LangueGuideVisite $langueGuideVisite) {
+		return $this->create(LangueGuideVisite::class, [
+				'id_langue' => $langueGuideVisite->getIdLangue(),
+                'id_offre' => $langueGuideVisite->getIdOffre(),
+			]
+		);
+	}
 }
