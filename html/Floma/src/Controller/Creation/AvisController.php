@@ -3,6 +3,7 @@
 namespace App\Controller\Creation;
 
 use App\Entity\Avis;
+use App\Manager\OfferManager;
 use App\Manager\AvisManager;
 use DateTimeImmutable;
 use Floma\Controller\AbstractController;
@@ -30,6 +31,7 @@ class AvisController extends AbstractController
             $id = $_POST["id"];
             $avisManager = new AvisManager();
             $avis = new Avis();
+            $offerManager = new OfferManager;
             $date = new DateTimeImmutable();
             $today = $date->format('Y-m-d');
             $avis->setTitre($_POST['titre_avis']);
@@ -41,6 +43,7 @@ class AvisController extends AbstractController
             $avis->setIdOffre($id);
             $avis->setDatePublication($today);
             $avisManager->add($avis);
+            $offerManager->updateNoteMoy($id);
             return $this->redirectToRoute("/offer/$id");
         }
         return $this->redirectToRoute("/", ['state' => 'failure']);

@@ -24,6 +24,7 @@
 
   --text-size: 1rem;
   --larger-text-size: 1.25rem;
+  --very-small-text-size: 0.75rem;
 
   /* Fonts */
   --raleway: 'Raleway', sans-serif;
@@ -754,6 +755,7 @@ input::placeholder, textarea::placeholder, textarea::content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
 }
 
 #offer-card-right-layout {
@@ -1201,6 +1203,10 @@ input.not-active{
   width: 95%;
 }
 
+#resume{
+  width: 95%;
+}
+
 .midField {
   height: 4.9375rem;
   width: 60%;
@@ -1562,4 +1568,10 @@ textarea {
 }
 .updateBtn {
   width: fit-content;
+}
+
+#offer-online-visibility{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }

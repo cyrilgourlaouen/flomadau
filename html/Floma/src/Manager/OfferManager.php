@@ -3,7 +3,9 @@ namespace App\Manager;
 
 use Floma\Manager\AbstractManager;
 use App\Entity\Offer;
+use App\Manager\AvisManager;
 use App\Enum\OfferCategoryEnum;
+use App\Resource\AvisResource;
 
 /**
  * Class OfferManager
@@ -69,6 +71,7 @@ class OfferManager extends AbstractManager
 	}
 
     public function addGetId(Offer $offer) {
+        
 		return $this->createGetId(Offer::class, [
 				'titre' => $offer->getTitre(),
                 'resume' => $offer->getResume(),
@@ -86,4 +89,32 @@ class OfferManager extends AbstractManager
 			]
 		);
 	}
+
+    /**
+     * @param int $id
+     * @return \PDOStatement
+     */
+    public function updateNoteMoy(int $id): \PDOStatement
+    {
+        $offre = $this->find($id);
+        $noteMoy = $offre->getNoteMoyenne();
+
+        $avisManager = new AvisManager();
+
+        $avis = AvisResource::buildAll($avisManager->findBy(['id_offre' => $id]));
+        
+        $notes = 0;
+        $total = 0;
+
+        foreach($avis as $un_avis){
+            $notes += $un_avis['note'];
+            $total ++;
+        }
+
+        $fields = [
+            'note_moyenne' => $notes / $total,
+        ];
+
+        return $this->update(Offer::class, $fields, $id);
+    }
 }
