@@ -18,7 +18,7 @@ use Floma\View\Layout;
 class ModifDataProController extends AbstractController
 {
     private int $idCompte;
-    private string $photo;
+    private ?string $photo = null;
     private string $mdpCompte;
 
     public function updateData() {
@@ -180,11 +180,11 @@ class ModifDataProController extends AbstractController
             $extensionFichier = strtolower($infosFichier['extension']);
 
             $nouveauNomFichier = 'pp_compte'.'_'.$this->idCompte.'.'. $extensionFichier;
-            $cheminDestination = 'uploads/profilePicture/'.$nouveauNomFichier;
+            $cheminDestination = './uploads/profilePicture/'.$nouveauNomFichier;
 
             if (!move_uploaded_file($cheminTemp , $cheminDestination)) {
                 return ['success'=> false];
-            }else{
+            } else {
                 return ['success' => true, 'nom' => $nouveauNomFichier];
             }
         }

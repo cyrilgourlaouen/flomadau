@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const fileInput = document.getElementById('photo_offre');
                 if (!fileInput || fileInput.files.length === 0) return false;
                 return validateFile(fileInput, ['svg', 'pdf', 'jpg', 'jpeg'], 2000000);
-            }, message: 'Veuillez sélectionner un ou plusieurs fichier(s) SVG, PDF, JPG ou JPEG de moins de 100 Ko.'
+            }, message: 'Veuillez sélectionner un ou plusieurs fichier(s) SVG, PDF, JPG, PNG ou JPEG de moins de 2000 Ko.'
         },
         {
             field: 'horaires',
@@ -176,9 +176,9 @@ document.addEventListener('DOMContentLoaded', function () {
             valid: () => {
                 const fileInput = document.getElementById('url_carte_parc');
                 if (!fileInput || fileInput.files.length === 0) return false;
-                return validateFile(fileInput, ['svg', 'pdf', 'jpg', 'jpeg'], 2000000);
+                return validateFile(fileInput, ['svg', 'pdf', 'jpg', 'jpeg', 'png'], 2000000);
             },
-            message: "Veuillez sélectionner une carte au format SVG, PDF, JPG ou JPEG (moins de 100 Ko)."
+            message: "Veuillez sélectionner une carte au format SVG, PDF, JPG, PNG ou JPEG (moins de 2000 Ko)."
         },
         {
             field: 'types_repas',

@@ -46,8 +46,8 @@ class CreationOffreController extends AbstractController
         if (isset($_POST) && isset($_FILES)) {
             $proPriveManager = new ProPriveManager();
             $proPrive = new ProPrive();
-            if ($_POST["cvv"]) {
-                $proPrive->setNumeroCarte($_POST["card-number"]);
+            if (isset($_POST["cvv"])) {
+                $proPrive->setNumeroCarte((int) $_POST["card-number"]);
                 $dateExplode = explode('/', $_POST["expiration-date"]);
                 $dateExpirationFr = $dateExplode[1].'-'.$dateExplode[0] . "-01";
                 $proPrive->setDateExpiration($dateExpirationFr);
