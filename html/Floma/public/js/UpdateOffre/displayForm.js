@@ -1,14 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
   afficherChamps();
 
-  // Initialisation du toggle guides
   const guideCheckbox = document.getElementById('guideCheckbox');
   const selectGuides = document.getElementById('selectGuides');
   guideCheckbox.addEventListener('change', () => {
     selectGuides.classList.toggle('hidden', !guideCheckbox.checked);
   });
 
-  // Charger les horaires avec la donnée PHP injectée `horaireData`
   chargerHoraires(horaireData);
 });
 
@@ -57,7 +55,7 @@ const jours = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dim
 
 function chargerHoraires(horaireData) {
   const container = document.getElementById('horaire-container');
-  container.innerHTML = ''; // on vide avant de générer
+  container.innerHTML = ''; 
 
   jours.forEach(jour => {
     const jourId = jour.toLowerCase().replace(/\s/g, '-');

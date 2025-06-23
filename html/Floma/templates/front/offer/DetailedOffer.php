@@ -322,9 +322,9 @@ $proManager = new ReponseProManager();
                             <div class="profil">
                                 <?php
                                 $photo = $compte[0]->getUrlPhotoProfil();
-                                $photo = empty($photo) ? 'pp_compte_defaut' : $photo;
+                                $photo = empty($photo) ? 'pp_compte_defaut.jpg' : $photo;
                                 ?>
-                                <img class="imgProfil" src="uploads/profilePicture/<?= htmlspecialchars($photo) ?>.jpg"
+                                <img class="imgProfil" src="./uploads/profilePicture/<?= htmlspecialchars($photo) ?>"
                                     alt="Photo de profil">
                                 <p>
                                     <?= htmlspecialchars($membre[0]->getPseudo()) ?>
